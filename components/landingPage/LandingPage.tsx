@@ -7,6 +7,14 @@ function LandingPage(): JSX.Element {
 
   const weAreLaunchingSoonText = `<We are Launching Soon>`;
 
+  const handleTechBlogClick = () => {
+    window.open('https://www.google.com.hk');
+  };
+
+  const handleBecomeAStudentTechAmbassadorClick = () => {
+    window.open(`https://forms.gle/gCJGap2dpENuwhYi8`);
+  };
+
   const handleEmailInputChange = (e: any) => {
     if (e.target.value) {
       setEmail(e.target.value);
@@ -38,8 +46,12 @@ function LandingPage(): JSX.Element {
           <img src="https://reactnative.dev/img/tiny_logo.png" width="80" height="80" alt="" loading="lazy" />
         </a>
         <div className="d-flex justify-content-end">
-          <div className="mx-5">Tech Blog</div>
-          <div>Become a Student Tech Ambassador</div>
+          <div onClick={() => handleTechBlogClick()} className="mx-5 pointer">
+            Tech Blog
+          </div>
+          <div onClick={() => handleBecomeAStudentTechAmbassadorClick()} className="pointer">
+            Become a Student Tech Ambassador
+          </div>
         </div>
       </nav>
 
@@ -52,7 +64,7 @@ function LandingPage(): JSX.Element {
       </h1>
 
       <div className="text-center font-weight-bold" style={{ marginTop: '5em' }}>
-        Girls, let’s break the tech glass ceiling. Subscribe/ Join us for updates
+        Girls, let’s break the tech glass ceiling. Subscribe / Join us for updates
       </div>
 
       <div className="mt-5 d-flex justify-content-center">
