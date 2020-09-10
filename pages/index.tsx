@@ -20,6 +20,8 @@ function MainPage(): JSX.Element {
   return (
     <MuiThemeProvider theme={theme}>
       <Head>
+        <title>Codersmojo</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <script
           src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
           integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
