@@ -7,11 +7,16 @@ const ROOT_URL = getRootUrl();
 
 export default async (_req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const result = await axios.get(`${ROOT_URL}/user`);
-
-    res.status(200).json({
-      result: result.data,
+    const reqBody = JSON.parse(_req.body);
+    const response = await axios.post(`${ROOT_URL}/mailchimp/add-contact-to-audience`, {
+      email: reqBody.email,
     });
+    if (response) {
+      const responseData = response.data;
+      res.status(200).json({
+        result: responseData,
+      });
+    }
   } catch (e) {
     res.status(400).json({
       message: e.message,

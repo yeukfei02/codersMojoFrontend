@@ -1,12 +1,24 @@
 import React from 'react';
 import Head from 'next/head';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import LandingPage from '../components/landingPage/LandingPage';
 // import MainView from '../components/mainView/MainView';
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#059BE5',
+    },
+    secondary: {
+      main: '#F6820D',
+    },
+  },
+});
+
 function MainPage(): JSX.Element {
   return (
-    <div>
+    <MuiThemeProvider theme={theme}>
       <Head>
         <script
           src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -25,7 +37,7 @@ function MainPage(): JSX.Element {
         ></script>
       </Head>
       <LandingPage />
-    </div>
+    </MuiThemeProvider>
   );
 }
 
