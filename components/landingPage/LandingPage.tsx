@@ -104,9 +104,9 @@ function LandingPage(): JSX.Element {
         </div>
       </nav>
 
-      <h3 className="text-center font-weight-bold" style={{ marginTop: '3em' }}>
+      <h4 className="text-center font-weight-bold" style={{ marginTop: '3em' }}>
         CodersMojo is an AI-based Peer-to-Peer Interactive Tech Interview Platform for Women
-      </h3>
+      </h4>
 
       <h1 className="text-center font-weight-bold weAreLaunchingSoonText" style={{ marginTop: '2em' }}>
         {weAreLaunchingSoonText}
@@ -132,7 +132,7 @@ function LandingPage(): JSX.Element {
         />
       </div>
 
-      <div className="my-3 d-flex justify-content-center">
+      <div className="my-4 d-flex justify-content-center">
         <Button variant="contained" color="primary" size="large" onClick={() => handleSubscribeButtonClick()}>
           Subscribe
         </Button>
