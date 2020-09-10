@@ -1,9 +1,30 @@
 import React, { useState } from 'react';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faTwitter, faMedium } from '@fortawesome/free-brands-svg-icons';
 
+import CustomSnackBar from '../customSnackBar/CustomSnackBar';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      '& > *': {
+        margin: theme.spacing(1),
+      },
+    },
+  }),
+);
+
 function LandingPage(): JSX.Element {
+  const classes = useStyles();
+
   const [email, setEmail] = useState('');
+
+  const [snackBarStatus, setSnackBarStatus] = useState(false);
+  const [snackBarType, setSnackBarType] = useState('success');
+  const [snackBarMessage, setSnackBarMessage] = useState('');
 
   const weAreLaunchingSoonText = `<We are Launching Soon>`;
 
@@ -22,7 +43,35 @@ function LandingPage(): JSX.Element {
   };
 
   const handleSubscribeButtonClick = () => {
-    console.log('email = ', email);
+    if (email) {
+      subscribeContactInMailchimp(email);
+    }
+  };
+
+  const subscribeContactInMailchimp = async (email: string) => {
+    const response = await fetch('/api/mailchimp/add-contact-to-audience', {
+      method: 'POST',
+      body: JSON.stringify({ email: email }),
+    });
+    if (response) {
+      const responseData = await response.json();
+      console.log('response status = ', response.status);
+      console.log('responseData = ', responseData);
+
+      if (response.status === 200) {
+        setSnackBarStatus(true);
+        setSnackBarType('success');
+        setSnackBarMessage('Already subscribe');
+      } else {
+        setSnackBarStatus(true);
+        setSnackBarType('error');
+        setSnackBarMessage('Subscribe error');
+      }
+    }
+  };
+
+  const handleCloseSnackBar = () => {
+    setSnackBarStatus(false);
   };
 
   const handleInstagramClick = () => {
@@ -55,9 +104,9 @@ function LandingPage(): JSX.Element {
         </div>
       </nav>
 
-      <h3 className="text-center font-weight-bold" style={{ marginTop: '3em' }}>
+      <h4 className="text-center font-weight-bold" style={{ marginTop: '3em' }}>
         CodersMojo is an AI-based Peer-to-Peer Interactive Tech Interview Platform for Women
-      </h3>
+      </h4>
 
       <h1 className="text-center font-weight-bold weAreLaunchingSoonText" style={{ marginTop: '2em' }}>
         {weAreLaunchingSoonText}
@@ -68,21 +117,25 @@ function LandingPage(): JSX.Element {
       </div>
 
       <div className="mt-5 d-flex justify-content-center">
-        <div className="form-group w-50">
-          <input
-            type="text"
-            className="form-control"
-            id=""
-            placeholder="Email"
-            onChange={(e) => handleEmailInputChange(e)}
-          />
-        </div>
+        <TextField
+          id=""
+          className={classes.root}
+          style={{ width: '50%' }}
+          label="Email"
+          placeholder="Email"
+          fullWidth
+          InputLabelProps={{
+            shrink: true,
+          }}
+          variant="filled"
+          onChange={(e) => handleEmailInputChange(e)}
+        />
       </div>
 
-      <div className="my-3 d-flex justify-content-center">
-        <button type="button" className="btn btn-primary btn-lg" onClick={() => handleSubscribeButtonClick()}>
+      <div className="my-4 d-flex justify-content-center">
+        <Button variant="contained" color="primary" size="large" onClick={() => handleSubscribeButtonClick()}>
           Subscribe
-        </button>
+        </Button>
       </div>
 
       <h5
@@ -94,6 +147,13 @@ function LandingPage(): JSX.Element {
         <FontAwesomeIcon icon={faTwitter} className="mx-2 pointer" onClick={() => handleTwitterClick()} />{' '}
         <FontAwesomeIcon icon={faMedium} className="mx-2 pointer" onClick={() => handleMediumClick()} />
       </h5>
+
+      <CustomSnackBar
+        snackBarStatus={snackBarStatus}
+        snackBarType={snackBarType}
+        snackBarMessage={snackBarMessage}
+        closeSnackBar={() => handleCloseSnackBar()}
+      />
     </div>
   );
 }
