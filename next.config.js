@@ -1,6 +1,3 @@
 module.exports = {
-    env: {
-        
-    },
-    target: "serverless",
-}
+    target: 'serverless',
+};
