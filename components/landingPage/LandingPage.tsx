@@ -90,37 +90,42 @@ function LandingPage(): JSX.Element {
     <div>
       <div className="text-center">Student Tech Ambassdor Applications are now open. Apply here</div>
 
-      <nav className="navbar navbar-light mx-5 my-3">
+      <nav className="navbar navbar-light mx-5 my-5">
         <a className="navbar-brand" href="#">
           <img src="https://reactnative.dev/img/tiny_logo.png" width="80" height="80" alt="" loading="lazy" />
         </a>
         <div className="d-flex justify-content-end">
-          <div onClick={() => handleTechBlogClick()} className="mx-5 pointer">
-            Tech Blog
+          <div onClick={() => handleTechBlogClick()} className="mx-5 pointer tech-blog">
+            <small>Tech Blog</small>
           </div>
-          <div onClick={() => handleBecomeAStudentTechAmbassadorClick()} className="pointer">
-            Become a Student Tech Ambassador
+          <div
+            onClick={() => handleBecomeAStudentTechAmbassadorClick()}
+            className="pointer become-a-student-tech-ambassador"
+          >
+            <small>Become a Student Tech Ambassador</small>
           </div>
         </div>
       </nav>
 
-      <h4 className="text-center font-weight-bold" style={{ marginTop: '3em' }}>
-        CodersMojo is an AI-based Peer-to-Peer Interactive Tech Interview Platform for Women
-      </h4>
+      <div style={{ margin: '5em 0' }}>
+        <h4 className="text-center font-weight-bold">
+          CodersMojo is an AI-based Peer-to-Peer Interactive Tech Interview Platform for Women
+        </h4>
+      </div>
 
-      <h1 className="text-center font-weight-bold weAreLaunchingSoonText" style={{ marginTop: '2em' }}>
-        {weAreLaunchingSoonText}
-      </h1>
+      <div style={{ margin: '5em 0' }}>
+        <h1 className="text-center font-weight-bold quantico display-3">{weAreLaunchingSoonText}</h1>
+      </div>
 
-      <div className="text-center font-weight-bold" style={{ marginTop: '5em' }}>
+      <div className="text-center font-weight-bold" style={{ margin: '3em 0' }}>
         Girls, let’s break the tech glass ceiling. Subscribe / Join us for updates
       </div>
 
-      <div className="mt-5 d-flex justify-content-center">
+      <div className="d-flex justify-content-center" style={{ margin: '3em 0' }}>
         <TextField
           id=""
           className={classes.root}
-          style={{ width: '50%' }}
+          style={{ width: '25%' }}
           label="Email"
           placeholder="Email"
           fullWidth
@@ -132,21 +137,18 @@ function LandingPage(): JSX.Element {
         />
       </div>
 
-      <div className="my-4 d-flex justify-content-center">
+      <div className="d-flex justify-content-center" style={{ margin: '3em 0' }}>
         <Button variant="contained" color="primary" size="large" onClick={() => handleSubscribeButtonClick()}>
           Subscribe
         </Button>
       </div>
 
-      <h5
-        className="d-flex justify-content-center"
-        style={{ position: 'absolute', bottom: 0, display: 'block', width: '100%' }}
-      >
-        Follow us :{' '}
-        <FontAwesomeIcon icon={faInstagram} className="mx-2 pointer" onClick={() => handleInstagramClick()} />{' '}
-        <FontAwesomeIcon icon={faTwitter} className="mx-2 pointer" onClick={() => handleTwitterClick()} />{' '}
+      <div className="d-flex justify-content-center" style={{ position: 'absolute', bottom: 0, width: '100%' }}>
+        <div>Follow us :</div>
+        <FontAwesomeIcon icon={faInstagram} className="mx-2 pointer" onClick={() => handleInstagramClick()} />
+        <FontAwesomeIcon icon={faTwitter} className="mx-2 pointer" onClick={() => handleTwitterClick()} />
         <FontAwesomeIcon icon={faMedium} className="mx-2 pointer" onClick={() => handleMediumClick()} />
-      </h5>
+      </div>
 
       <CustomSnackBar
         snackBarStatus={snackBarStatus}
