@@ -4,13 +4,25 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 body {
-    background: #FFCB2B;
     height: 100%;
-
     font-family: 'Roboto Mono', monospace;
 }
 
-.weAreLaunchingSoonText {
+div#__next {
+    background: linear-gradient(135deg, rgba(255,137,100,1) 0%, rgba(246,130,13,1) 35%, rgba(255,203,43,1) 70%, rgba(255,166,17,1) 100%);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.tech-blog:hover, .become-a-student-tech-ambassador:hover {
+    background-color: #059BE5;
+    padding: 0.1em;
+}
+
+.quantico {
     font-family: 'Quantico', sans-serif;
 }
 
