@@ -84,9 +84,9 @@ function LandingPage(): JSX.Element {
     window.open('https://www.google.com.hk');
   };
 
-  const handleMediumClick = () => {
-    window.open('https://www.google.com.hk');
-  };
+  // const handleMediumClick = () => {
+  //   window.open('https://www.google.com.hk');
+  // };
 
   return (
     <div className="landing-page">
