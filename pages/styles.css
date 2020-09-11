@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 body {
-    background: white;
+    background: #fdbdb8;
     height: 100%;
     font-family: 'Roboto Mono', monospace;
 }
@@ -18,7 +18,7 @@ body {
     right: 0;
 }
 
-.header-item:hover {
+.hover-item:hover {
     background-color: lightblue;
     padding: 0.1em;
 }

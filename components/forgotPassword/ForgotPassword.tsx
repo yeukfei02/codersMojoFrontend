@@ -1,0 +1,116 @@
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+
+import CustomSnackBar from '../customSnackBar/CustomSnackBar';
+import { validateEmail } from '../../common/common';
+
+const useStyles = makeStyles({
+  root: {
+    width: 600,
+    padding: 35,
+  },
+});
+
+function ForgotPassword(): JSX.Element {
+  const classes = useStyles();
+  const router = useRouter();
+
+  const [email, setEmail] = useState('');
+
+  const [snackBarStatus, setSnackBarStatus] = useState(false);
+  const [snackBarType, setSnackBarType] = useState('success');
+  const [snackBarMessage, setSnackBarMessage] = useState('');
+
+  const handleEmailInputChange = (e: any) => {
+    if (e.target.value) {
+      setEmail(e.target.value);
+    }
+  };
+
+  const handleSubmitButtonClick = (email: string) => {
+    if (email) {
+      const isEmail = validateEmail(email);
+      if (isEmail) {
+        forgotPassword(email);
+      } else {
+        setSnackBarStatus(true);
+        setSnackBarType('error');
+        setSnackBarMessage('Wrong email format');
+      }
+    }
+  };
+
+  const forgotPassword = async (email: string) => {
+    const response = await fetch(`/api/user/forgot-password`, {
+      method: 'POST',
+      body: JSON.stringify({ email: email }),
+    });
+    if (response) {
+      const responseData = await response.json();
+      console.log('response status = ', response.status);
+      console.log('responseData = ', responseData);
+
+      if (response.status === 200) {
+        if (responseData && responseData.result) {
+          const token = responseData.result.token;
+          localStorage.setItem('token', token);
+        }
+
+        setSnackBarStatus(true);
+        setSnackBarType('success');
+        setSnackBarMessage('forgot password success');
+      } else {
+        setSnackBarStatus(true);
+        setSnackBarType('error');
+        setSnackBarMessage('forgot password error');
+      }
+    }
+  };
+
+  const handleCloseSnackBar = () => {
+    setSnackBarStatus(false);
+  };
+
+  const handleBackClick = () => {
+    router.push(`/login`);
+  };
+
+  return (
+    <div style={{ margin: '5em' }}>
+      <div className="container d-flex justify-content-center">
+        <Card className={classes.root} variant="outlined">
+          <h4 className="text-center mb-5 font-weight-bold">Forgot Password</h4>
+          <div className="form-group">
+            <label htmlFor="exampleInputEmail1">Email</label>
+            <input
+              type="email"
+              className="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              onChange={(e) => handleEmailInputChange(e)}
+            />
+          </div>
+          <button type="submit" className="btn btn-success w-100 my-3" onClick={() => handleSubmitButtonClick(email)}>
+            Submit
+          </button>
+          <div className="d-flex justify-content-center mt-5">
+            <span className="pointer hover-item" onClick={() => handleBackClick()}>
+              Back
+            </span>
+          </div>
+        </Card>
+      </div>
+
+      <CustomSnackBar
+        snackBarStatus={snackBarStatus}
+        snackBarType={snackBarType}
+        snackBarMessage={snackBarMessage}
+        closeSnackBar={() => handleCloseSnackBar()}
+      />
+    </div>
+  );
+}
+
+export default ForgotPassword;

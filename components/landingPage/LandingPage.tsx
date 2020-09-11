@@ -83,7 +83,7 @@ function LandingPage(): JSX.Element {
 
       <nav className="navbar navbar-expand-lg navbar-light mx-3 my-3">
         <a className="navbar-brand" href="/">
-          <img src="/logo_transparent.png" width="150" height="150" alt="" loading="lazy" />
+          <img src="/logo_transparent.png" width="180" height="180" alt="" loading="lazy" />
         </a>
         <button
           className="navbar-toggler"
@@ -101,15 +101,15 @@ function LandingPage(): JSX.Element {
           <ul className="navbar-nav mr-auto"></ul>
           <form className="form-inline my-2 my-lg-0">
             <div className="d-flex justify-content-end">
-              <div onClick={() => handleTechBlogClick()} className="mx-5 pointer header-item">
+              <div onClick={() => handleTechBlogClick()} className="mx-5 pointer hover-item">
                 <small>Tech Blog</small>
               </div>
-              <div onClick={() => handleBecomeAStudentTechAmbassadorClick()} className="pointer header-item">
+              <div onClick={() => handleBecomeAStudentTechAmbassadorClick()} className="pointer hover-item">
                 <span style={{ background: 'lightblue' }}>
                   <small>Become a Student Tech Ambassador</small>
                 </span>
               </div>
-              <div onClick={() => handleLoginOrSignupClick()} className="mx-5 pointer header-item">
+              <div onClick={() => handleLoginOrSignupClick()} className="mx-5 pointer hover-item">
                 <small>Login/Signup</small>
               </div>
             </div>
@@ -117,21 +117,21 @@ function LandingPage(): JSX.Element {
         </div>
       </nav>
 
-      <div style={{ margin: '2em 0' }}>
+      <div style={{ margin: '2em auto' }}>
         <h4 className="text-center font-weight-bold">
           CodersMojo is an AI-based Peer-to-Peer Interactive Tech Interview Platform for Women
         </h4>
       </div>
 
-      <div style={{ margin: '4em 0' }}>
+      <div style={{ margin: '4em auto' }}>
         <h1 className="text-center font-weight-bold quantico display-3">{weAreLaunchingSoonText}</h1>
       </div>
 
-      <div className="text-center font-weight-bold" style={{ margin: '1em 0' }}>
+      <div className="text-center font-weight-bold" style={{ margin: '1em auto' }}>
         Girls, let’s break the tech glass ceiling.
       </div>
 
-      <div className="text-center font-weight-bold" style={{ margin: '1em 0' }}>
+      <div className="text-center font-weight-bold" style={{ margin: '1em auto' }}>
         Subscribe / Join us for updates
       </div>
 
