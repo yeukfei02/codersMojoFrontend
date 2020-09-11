@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import TwitterIcon from '@material-ui/icons/Twitter';
@@ -85,6 +86,12 @@ function LandingPage(): JSX.Element {
 
   return (
     <div className="landing-page">
+      <Head>
+        <title>CodersMojo</title>
+        <link rel="shortcut icon" href="/favicon.png" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+
       <div className="text-center">
         <span style={{ background: 'lightblue' }}>Student Tech Ambassdor Applications are now open. Apply here</span>
       </div>

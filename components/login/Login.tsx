@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -94,6 +95,12 @@ function Login(): JSX.Element {
 
   return (
     <div style={{ margin: '5em 3em' }}>
+      <Head>
+        <title>CodersMojo</title>
+        <link rel="shortcut icon" href="/favicon.png" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+
       <Card className={classes.root} variant="outlined">
         <div className="row">
           <div className="col-sm p-5">

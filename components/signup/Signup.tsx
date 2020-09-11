@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -85,6 +86,12 @@ function Signup(): JSX.Element {
 
   return (
     <div style={{ margin: '5em' }}>
+      <Head>
+        <title>CodersMojo</title>
+        <link rel="shortcut icon" href="/favicon.png" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+
       <div className="container d-flex justify-content-center">
         <Card className={classes.root} variant="outlined">
           <h4 className="text-center mb-5 font-weight-bold">Create Account</h4>
