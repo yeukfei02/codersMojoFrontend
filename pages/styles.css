@@ -18,8 +18,8 @@ body {
     right: 0;
 }
 
-.tech-blog:hover, .become-a-student-tech-ambassador:hover {
-    background-color: #059BE5;
+.header-item:hover {
+    background-color: lightblue;
     padding: 0.1em;
 }
 
