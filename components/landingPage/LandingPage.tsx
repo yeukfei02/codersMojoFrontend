@@ -85,7 +85,7 @@ function LandingPage(): JSX.Element {
   };
 
   return (
-    <div className="landing-page">
+    <div>
       <Head>
         <title>CodersMojo</title>
         <link rel="shortcut icon" href="/favicon.png" />
@@ -96,7 +96,7 @@ function LandingPage(): JSX.Element {
         <span style={{ background: 'lightblue' }}>Student Tech Ambassdor Applications are now open. Apply here</span>
       </div>
 
-      <nav className="navbar navbar-expand-lg navbar-light mx-3 my-3">
+      <nav className="navbar navbar-expand-lg navbar-light my-3">
         <a className="navbar-brand" href="/">
           <img src="/logo_transparent.png" width="180" height="180" alt="" loading="lazy" />
         </a>
@@ -151,7 +151,7 @@ function LandingPage(): JSX.Element {
       </div>
 
       <div className="d-flex justify-content-center" style={{ marginTop: '3em' }}>
-        <div className="w-25">
+        <div className="w-50">
           <div className="form-group">
             <input
               type="email"
@@ -166,12 +166,12 @@ function LandingPage(): JSX.Element {
       </div>
 
       <div className="d-flex justify-content-center" style={{ marginTop: '2em' }}>
-        <button type="submit" className="btn btn-primary" onClick={() => handleSubscribeButtonClick()}>
+        <button type="submit" className="btn btn-primary btn-lg" onClick={() => handleSubscribeButtonClick()}>
           Subscribe
         </button>
       </div>
 
-      <div className="d-flex justify-content-center" style={{ position: 'fixed', bottom: 0, width: '100%' }}>
+      <div className="d-flex justify-content-center" style={{ marginTop: '5em' }}>
         <div className="mb-3" style={{ display: 'flex', flexDirection: 'row' }}>
           <span>Follow us :</span>
           <div style={{ display: 'flex', flexDirection: 'row' }}>

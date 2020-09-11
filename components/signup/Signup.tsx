@@ -85,7 +85,7 @@ function Signup(): JSX.Element {
   };
 
   return (
-    <div style={{ margin: '5em' }}>
+    <div style={{ margin: '5em auto' }}>
       <Head>
         <title>CodersMojo</title>
         <link rel="shortcut icon" href="/favicon.png" />
@@ -116,7 +116,7 @@ function Signup(): JSX.Element {
           </div>
           <button
             type="submit"
-            className="btn btn-success w-100 my-3"
+            className="btn btn-success btn-lg w-100 my-3"
             onClick={() => handleSignupButtonClick(email, password)}
           >
             Signup

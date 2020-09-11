@@ -93,62 +93,75 @@ function Login(): JSX.Element {
     router.push(`/signup`);
   };
 
+  const handleBackClick = () => {
+    router.push(`/`);
+  };
+
   return (
-    <div style={{ margin: '5em 3em' }}>
+    <div style={{ margin: '5em auto' }}>
       <Head>
         <title>CodersMojo</title>
         <link rel="shortcut icon" href="/favicon.png" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
 
-      <Card className={classes.root} variant="outlined">
-        <div className="row">
-          <div className="col-sm p-5">
-            <div className="d-flex justify-content-center">
-              <img src="/login-image.jpg" width="500" height="500" alt="" />
+      <div className="container">
+        <Card className={classes.root} variant="outlined">
+          <div className="row">
+            <div className="col-sm p-3">
+              <div className="d-flex justify-content-center">
+                <img src="/login-image.jpg" width="500" height="500" alt="" />
+              </div>
+            </div>
+            <div className="col-sm p-3">
+              <h4 className="text-center mb-5 font-weight-bold">Member Login</h4>
+              <div className="form-group">
+                <label htmlFor="exampleInputEmail1">Email</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  onChange={(e) => handleEmailInputChange(e)}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="exampleInputPassword1">Password</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="exampleInputPassword1"
+                  onChange={(e) => handlePasswordInputChange(e)}
+                />
+              </div>
+              <button
+                type="submit"
+                className="btn btn-success btn-lg w-100 my-3"
+                onClick={() => handleLoginButtonClick(email, password)}
+              >
+                Login
+              </button>
+              <div className="d-flex justify-content-center my-3">
+                <span className="pointer hover-item" onClick={() => handleForgotPasswordClick()}>
+                  Forgot Password?
+                </span>
+              </div>
+              <div className="d-flex justify-content-center" style={{ marginTop: '5em' }}>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <span className="pointer hover-item" onClick={() => handleCreateYourAccountClick()}>
+                    Create your account &rarr;
+                  </span>
+                  <div className="d-flex justify-content-center my-3">
+                    <span className="pointer hover-item" onClick={() => handleBackClick()}>
+                      Back
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="col-sm p-5">
-            <h4 className="text-center mb-5 font-weight-bold">Member Login</h4>
-            <div className="form-group">
-              <label htmlFor="exampleInputEmail1">Email</label>
-              <input
-                type="email"
-                className="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                onChange={(e) => handleEmailInputChange(e)}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="exampleInputPassword1">Password</label>
-              <input
-                type="password"
-                className="form-control"
-                id="exampleInputPassword1"
-                onChange={(e) => handlePasswordInputChange(e)}
-              />
-            </div>
-            <button
-              type="submit"
-              className="btn btn-success w-100 my-3"
-              onClick={() => handleLoginButtonClick(email, password)}
-            >
-              Login
-            </button>
-            <div className="d-flex justify-content-center my-3">
-              <span className="pointer hover-item" onClick={() => handleForgotPasswordClick()}>
-                Forgot Password?
-              </span>
-            </div>
-            <div className="d-flex justify-content-center" style={{ marginTop: '7em' }}>
-              <span className="pointer hover-item" onClick={() => handleCreateYourAccountClick()}>
-                Create your account &rarr;
-              </span>
-            </div>
-          </div>
-        </div>
-      </Card>
+        </Card>
+      </div>
 
       <CustomSnackBar
         snackBarStatus={snackBarStatus}

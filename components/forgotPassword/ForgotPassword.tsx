@@ -74,7 +74,7 @@ function ForgotPassword(): JSX.Element {
   };
 
   return (
-    <div style={{ margin: '5em' }}>
+    <div style={{ margin: '5em auto' }}>
       <Head>
         <title>CodersMojo</title>
         <link rel="shortcut icon" href="/favicon.png" />
@@ -94,7 +94,11 @@ function ForgotPassword(): JSX.Element {
               onChange={(e) => handleEmailInputChange(e)}
             />
           </div>
-          <button type="submit" className="btn btn-success w-100 my-3" onClick={() => handleSubmitButtonClick(email)}>
+          <button
+            type="submit"
+            className="btn btn-success btn-lg w-100 my-3"
+            onClick={() => handleSubmitButtonClick(email)}
+          >
             Submit
           </button>
           <div className="d-flex justify-content-center mt-5">
