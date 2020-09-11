@@ -5,6 +5,7 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import { pink, blue } from '@material-ui/core/colors';
 
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
+import { validateEmail } from '../../common/common';
 
 function LandingPage(): JSX.Element {
   const router = useRouter();
@@ -37,7 +38,14 @@ function LandingPage(): JSX.Element {
 
   const handleSubscribeButtonClick = () => {
     if (email) {
-      subscribeContactInMailchimp(email);
+      const isEmail = validateEmail(email);
+      if (isEmail) {
+        subscribeContactInMailchimp(email);
+      } else {
+        setSnackBarStatus(true);
+        setSnackBarType('error');
+        setSnackBarMessage('Wrong email format');
+      }
     }
   };
 
