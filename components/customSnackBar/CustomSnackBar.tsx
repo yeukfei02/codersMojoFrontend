@@ -21,7 +21,12 @@ function CustomSnackBar(props: any): JSX.Element {
 
   return (
     <div className={classes.root}>
-      <Snackbar open={props.snackBarStatus} autoHideDuration={6000} onClose={props.closeSnackBar}>
+      <Snackbar
+        open={props.snackBarStatus}
+        autoHideDuration={6000}
+        onClose={props.closeSnackBar}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
         <Alert onClose={props.closeSnackBar} severity={props.snackBarType}>
           {props.snackBarMessage}
         </Alert>

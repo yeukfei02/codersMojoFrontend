@@ -1,25 +1,12 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import TwitterIcon from '@material-ui/icons/Twitter';
+import { pink, blue } from '@material-ui/core/colors';
 
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-      },
-    },
-  }),
-);
-
 function LandingPage(): JSX.Element {
-  const classes = useStyles();
   const router = useRouter();
 
   const [email, setEmail] = useState('');
@@ -36,6 +23,10 @@ function LandingPage(): JSX.Element {
 
   const handleBecomeAStudentTechAmbassadorClick = () => {
     window.open(`https://forms.gle/gCJGap2dpENuwhYi8`);
+  };
+
+  const handleLoginOrSignupClick = () => {
+    router.push(`/login`);
   };
 
   const handleEmailInputChange = (e: any) => {
@@ -84,15 +75,13 @@ function LandingPage(): JSX.Element {
     window.open('https://www.google.com.hk');
   };
 
-  // const handleMediumClick = () => {
-  //   window.open('https://www.google.com.hk');
-  // };
-
   return (
     <div className="landing-page">
-      <div className="text-center">Student Tech Ambassdor Applications are now open. Apply here</div>
+      <div className="text-center">
+        <span style={{ background: 'lightblue' }}>Student Tech Ambassdor Applications are now open. Apply here</span>
+      </div>
 
-      <nav className="navbar navbar-expand-lg navbar-light mx-5 my-4">
+      <nav className="navbar navbar-expand-lg navbar-light mx-3 my-3">
         <a className="navbar-brand" href="/">
           <img src="/logo_transparent.png" width="150" height="150" alt="" loading="lazy" />
         </a>
@@ -112,60 +101,77 @@ function LandingPage(): JSX.Element {
           <ul className="navbar-nav mr-auto"></ul>
           <form className="form-inline my-2 my-lg-0">
             <div className="d-flex justify-content-end">
-              <div onClick={() => handleTechBlogClick()} className="mx-5 pointer tech-blog">
+              <div onClick={() => handleTechBlogClick()} className="mx-5 pointer header-item">
                 <small>Tech Blog</small>
               </div>
-              <div
-                onClick={() => handleBecomeAStudentTechAmbassadorClick()}
-                className="pointer become-a-student-tech-ambassador"
-              >
-                <small>Become a Student Tech Ambassador</small>
+              <div onClick={() => handleBecomeAStudentTechAmbassadorClick()} className="pointer header-item">
+                <span style={{ background: 'lightblue' }}>
+                  <small>Become a Student Tech Ambassador</small>
+                </span>
+              </div>
+              <div onClick={() => handleLoginOrSignupClick()} className="mx-5 pointer header-item">
+                <small>Login/Signup</small>
               </div>
             </div>
           </form>
         </div>
       </nav>
 
-      <div style={{ margin: '4em 0' }}>
+      <div style={{ margin: '2em 0' }}>
         <h4 className="text-center font-weight-bold">
           CodersMojo is an AI-based Peer-to-Peer Interactive Tech Interview Platform for Women
         </h4>
       </div>
 
-      <div style={{ margin: '5em 0' }}>
+      <div style={{ margin: '4em 0' }}>
         <h1 className="text-center font-weight-bold quantico display-3">{weAreLaunchingSoonText}</h1>
       </div>
 
-      <div className="text-center font-weight-bold" style={{ margin: '3em 0' }}>
-        Girls, let’s break the tech glass ceiling. Subscribe / Join us for updates
+      <div className="text-center font-weight-bold" style={{ margin: '1em 0' }}>
+        Girls, let’s break the tech glass ceiling.
       </div>
 
-      <div className="d-flex justify-content-center" style={{ margin: '3em 0' }}>
-        <TextField
-          id=""
-          className={classes.root}
-          style={{ width: '25%' }}
-          label="Email"
-          placeholder="Email"
-          fullWidth
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="filled"
-          onChange={(e) => handleEmailInputChange(e)}
-        />
+      <div className="text-center font-weight-bold" style={{ margin: '1em 0' }}>
+        Subscribe / Join us for updates
       </div>
 
-      <div className="d-flex justify-content-center" style={{ margin: '3em 0' }}>
-        <Button variant="contained" color="primary" size="large" onClick={() => handleSubscribeButtonClick()}>
+      <div className="d-flex justify-content-center" style={{ marginTop: '3em' }}>
+        <div className="w-25">
+          <div className="form-group">
+            <input
+              type="email"
+              className="form-control"
+              id="exampleInputEmail1"
+              placeholder="Email"
+              aria-describedby="emailHelp"
+              onChange={(e) => handleEmailInputChange(e)}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="d-flex justify-content-center" style={{ marginTop: '2em' }}>
+        <button type="submit" className="btn btn-primary" onClick={() => handleSubscribeButtonClick()}>
           Subscribe
-        </Button>
+        </button>
       </div>
 
       <div className="d-flex justify-content-center" style={{ position: 'fixed', bottom: 0, width: '100%' }}>
-        <div>Follow us :</div>
-        <InstagramIcon className="mx-2 pointer" onClick={() => handleInstagramClick()} />
-        <TwitterIcon className="mx-2 pointer" onClick={() => handleTwitterClick()} />
+        <div className="mb-3" style={{ display: 'flex', flexDirection: 'row' }}>
+          <span>Follow us :</span>
+          <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <InstagramIcon
+              className="mx-2 pointer"
+              style={{ fontSize: 25, color: pink[500] }}
+              onClick={() => handleInstagramClick()}
+            />
+            <TwitterIcon
+              className="mx-2 pointer"
+              style={{ fontSize: 25, color: blue[500] }}
+              onClick={() => handleTwitterClick()}
+            />
+          </div>
+        </div>
       </div>
 
       <CustomSnackBar
