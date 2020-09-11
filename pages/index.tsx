@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import LandingPage from '../components/landingPage/LandingPage';
+import MainView from '../components/mainView/MainView';
 
 const theme = createMuiTheme({
   palette: {
@@ -16,10 +17,33 @@ const theme = createMuiTheme({
 });
 
 function MainPage(): JSX.Element {
+  const [token, setToken] = useState('');
+
+  useEffect(() => {
+    getToken();
+  }, []);
+
+  const getToken = () => {
+    const token = localStorage.getItem('token');
+    if (token && token !== 'undefined') {
+      setToken(token);
+    }
+  };
+
+  const renderDiv = (token: string) => {
+    let resultDiv = <LandingPage />;
+
+    if (token) {
+      resultDiv = <MainView />;
+    }
+
+    return resultDiv;
+  };
+
   return (
     <MuiThemeProvider theme={theme}>
       <Head>
-        <title>Codersmojo</title>
+        <title>CodersMojo</title>
         <link rel="shortcut icon" href="/favicon.png" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <script
@@ -38,7 +62,7 @@ function MainPage(): JSX.Element {
           crossOrigin="anonymous"
         ></script>
       </Head>
-      <LandingPage />
+      {renderDiv(token)}
     </MuiThemeProvider>
   );
 }
