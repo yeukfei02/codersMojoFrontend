@@ -55,7 +55,7 @@ function NavBar(): JSX.Element {
     setAnchorEl(null);
 
     localStorage.clear();
-    window.location.reload();
+    window.location.href = '/';
   };
 
   return (
