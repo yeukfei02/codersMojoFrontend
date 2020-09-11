@@ -54,11 +54,6 @@ function ForgotPassword(): JSX.Element {
       console.log('responseData = ', responseData);
 
       if (response.status === 200) {
-        if (responseData && responseData.result) {
-          const token = responseData.result.token;
-          localStorage.setItem('token', token);
-        }
-
         setSnackBarStatus(true);
         setSnackBarType('success');
         setSnackBarMessage('forgot password success');
