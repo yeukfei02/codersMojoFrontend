@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram, faTwitter, faMedium } from '@fortawesome/free-brands-svg-icons';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import TwitterIcon from '@material-ui/icons/Twitter';
 
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
 
@@ -19,6 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function LandingPage(): JSX.Element {
   const classes = useStyles();
+  const router = useRouter();
 
   const [email, setEmail] = useState('');
 
@@ -29,7 +31,7 @@ function LandingPage(): JSX.Element {
   const weAreLaunchingSoonText = `<We are Launching Soon>`;
 
   const handleTechBlogClick = () => {
-    window.open('https://www.google.com.hk');
+    router.push(`/tech-blog`);
   };
 
   const handleBecomeAStudentTechAmbassadorClick = () => {
@@ -82,32 +84,49 @@ function LandingPage(): JSX.Element {
     window.open('https://www.google.com.hk');
   };
 
-  const handleMediumClick = () => {
-    window.open('https://www.google.com.hk');
-  };
+  // const handleMediumClick = () => {
+  //   window.open('https://www.google.com.hk');
+  // };
 
   return (
-    <div>
+    <div className="landing-page">
       <div className="text-center">Student Tech Ambassdor Applications are now open. Apply here</div>
 
-      <nav className="navbar navbar-light mx-5 my-5">
-        <a className="navbar-brand" href="#">
-          <img src="https://reactnative.dev/img/tiny_logo.png" width="80" height="80" alt="" loading="lazy" />
+      <nav className="navbar navbar-expand-lg navbar-light mx-5 my-4">
+        <a className="navbar-brand" href="/">
+          <img src="/logo_transparent.png" width="150" height="150" alt="" loading="lazy" />
         </a>
-        <div className="d-flex justify-content-end">
-          <div onClick={() => handleTechBlogClick()} className="mx-5 pointer tech-blog">
-            <small>Tech Blog</small>
-          </div>
-          <div
-            onClick={() => handleBecomeAStudentTechAmbassadorClick()}
-            className="pointer become-a-student-tech-ambassador"
-          >
-            <small>Become a Student Tech Ambassador</small>
-          </div>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav mr-auto"></ul>
+          <form className="form-inline my-2 my-lg-0">
+            <div className="d-flex justify-content-end">
+              <div onClick={() => handleTechBlogClick()} className="mx-5 pointer tech-blog">
+                <small>Tech Blog</small>
+              </div>
+              <div
+                onClick={() => handleBecomeAStudentTechAmbassadorClick()}
+                className="pointer become-a-student-tech-ambassador"
+              >
+                <small>Become a Student Tech Ambassador</small>
+              </div>
+            </div>
+          </form>
         </div>
       </nav>
 
-      <div style={{ margin: '5em 0' }}>
+      <div style={{ margin: '4em 0' }}>
         <h4 className="text-center font-weight-bold">
           CodersMojo is an AI-based Peer-to-Peer Interactive Tech Interview Platform for Women
         </h4>
@@ -143,11 +162,10 @@ function LandingPage(): JSX.Element {
         </Button>
       </div>
 
-      <div className="d-flex justify-content-center" style={{ position: 'absolute', bottom: 0, width: '100%' }}>
+      <div className="d-flex justify-content-center" style={{ position: 'fixed', bottom: 0, width: '100%' }}>
         <div>Follow us :</div>
-        <FontAwesomeIcon icon={faInstagram} className="mx-2 pointer" onClick={() => handleInstagramClick()} />
-        <FontAwesomeIcon icon={faTwitter} className="mx-2 pointer" onClick={() => handleTwitterClick()} />
-        <FontAwesomeIcon icon={faMedium} className="mx-2 pointer" onClick={() => handleMediumClick()} />
+        <InstagramIcon className="mx-2 pointer" onClick={() => handleInstagramClick()} />
+        <TwitterIcon className="mx-2 pointer" onClick={() => handleTwitterClick()} />
       </div>
 
       <CustomSnackBar

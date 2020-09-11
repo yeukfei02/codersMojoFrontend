@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import LandingPage from '../components/landingPage/LandingPage';
-// import MainView from '../components/mainView/MainView';
 
 const theme = createMuiTheme({
   palette: {
@@ -21,6 +20,7 @@ function MainPage(): JSX.Element {
     <MuiThemeProvider theme={theme}>
       <Head>
         <title>Codersmojo</title>
+        <link rel="shortcut icon" href="/favicon.png" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <script
           src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

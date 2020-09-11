@@ -4,12 +4,13 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 body {
+    background: white;
     height: 100%;
     font-family: 'Roboto Mono', monospace;
 }
 
-div#__next {
-    background: linear-gradient(135deg, rgba(255,137,100,1) 0%, rgba(246,130,13,1) 35%, rgba(255,203,43,1) 70%, rgba(255,166,17,1) 100%);
+.landing-page {
+    background: #f2d5d3;
     position: absolute;
     top: 0;
     bottom: 0;
