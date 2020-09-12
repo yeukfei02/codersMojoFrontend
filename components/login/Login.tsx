@@ -65,6 +65,12 @@ function Login(): JSX.Element {
           const usersId = responseData.result.user.users_id;
           localStorage.setItem('usersId', usersId);
 
+          const firstName = responseData.result.user.firstName;
+          localStorage.setItem('firstName', firstName);
+
+          const lastName = responseData.result.user.lastName;
+          localStorage.setItem('lastName', lastName);
+
           const email = responseData.result.user.email;
           localStorage.setItem('email', email);
 

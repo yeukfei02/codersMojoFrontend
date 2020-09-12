@@ -35,9 +35,9 @@ function NavBar(): JSX.Element {
   }, []);
 
   const getAvatarText = () => {
-    const email = localStorage.getItem('email');
-    if (email) {
-      const avatarText = email.substring(0, 1).toUpperCase();
+    const firstName = localStorage.getItem('firstName');
+    if (firstName) {
+      const avatarText = firstName.substring(0, 1).toUpperCase();
       setAvatarText(avatarText);
     }
   };
