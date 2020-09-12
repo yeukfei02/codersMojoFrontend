@@ -87,6 +87,7 @@ function NavBar(): JSX.Element {
                 <img src="/logo_transparent.png" width="80" height="80" alt="" loading="lazy" />
               </a>
             </Typography>
+
             <Avatar
               className={`${classes.pink} pointer`}
               aria-controls="menu-appbar"
