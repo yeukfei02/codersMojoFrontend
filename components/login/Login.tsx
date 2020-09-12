@@ -62,6 +62,12 @@ function Login(): JSX.Element {
 
       if (response.status === 200) {
         if (responseData && responseData.result) {
+          const usersId = responseData.result.user.users_id;
+          localStorage.setItem('usersId', usersId);
+
+          const email = responseData.result.user.email;
+          localStorage.setItem('email', email);
+
           const token = responseData.result.token;
           localStorage.setItem('token', token);
         }
