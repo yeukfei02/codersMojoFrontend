@@ -78,12 +78,17 @@ function ForgotPassword(): JSX.Element {
       <Head>
         <title>CodersMojo</title>
         <link rel="shortcut icon" href="/favicon.png" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       </Head>
 
       <div className="container d-flex justify-content-center">
         <Card className={classes.root} variant="outlined">
-          <h4 className="text-center mb-5 font-weight-bold">Forgot Password</h4>
+          <div className="d-flex justify-content-center">
+            <img src="/logo_transparent.png" width="180" height="180" alt="" loading="lazy" />
+          </div>
+
+          <h4 className="text-center mt-3 mb-5 font-weight-bold">Forgot Password</h4>
+
           <div className="form-group">
             <label htmlFor="exampleInputEmail1">Email</label>
             <input
@@ -101,6 +106,7 @@ function ForgotPassword(): JSX.Element {
           >
             Submit
           </button>
+
           <div className="d-flex justify-content-center mt-5">
             <span className="pointer hover-item" onClick={() => handleBackClick()}>
               Back

@@ -1,8 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
-import CustomDrawer from '../customDrawer/CustomDrawer';
 
-function MainView(): JSX.Element {
+function WriteTechBlog(): JSX.Element {
   return (
     <div>
       <Head>
@@ -10,10 +9,9 @@ function MainView(): JSX.Element {
         <link rel="shortcut icon" href="/favicon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       </Head>
-
-      <CustomDrawer />
+      WriteTechBlog
     </div>
   );
 }
 
-export default MainView;
+export default WriteTechBlog;
