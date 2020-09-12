@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -28,6 +28,19 @@ function NavBar(): JSX.Element {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [avatarText, setAvatarText] = useState('');
+
+  useEffect(() => {
+    getAvatarText();
+  }, []);
+
+  const getAvatarText = () => {
+    const email = localStorage.getItem('email');
+    if (email) {
+      const avatarText = email.substring(0, 1).toUpperCase();
+      setAvatarText(avatarText);
+    }
+  };
 
   const open = Boolean(anchorEl);
 
@@ -80,7 +93,7 @@ function NavBar(): JSX.Element {
               aria-haspopup="true"
               onClick={handleMenu}
             >
-              N
+              {avatarText}
             </Avatar>
             <Menu
               id="menu-appbar"
