@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import { pink, blue } from '@material-ui/core/colors';
@@ -76,6 +77,10 @@ function LandingPage(): JSX.Element {
     setSnackBarStatus(false);
   };
 
+  const handleFacebookClick = () => {
+    window.open('https://www.google.com.hk');
+  };
+
   const handleInstagramClick = () => {
     window.open('https://www.instagram.com/codersmojo');
   };
@@ -89,14 +94,14 @@ function LandingPage(): JSX.Element {
       <Head>
         <title>CodersMojo</title>
         <link rel="shortcut icon" href="/favicon.png" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       </Head>
 
       <div className="text-center">
         <span style={{ background: 'lightblue' }}>Student Tech Ambassdor Applications are now open. Apply here</span>
       </div>
 
-      <nav className="navbar navbar-expand-lg navbar-light my-3">
+      <nav className="navbar navbar-expand-lg navbar-light">
         <a className="navbar-brand" href="/">
           <img src="/logo_transparent.png" width="180" height="180" alt="" loading="lazy" />
         </a>
@@ -115,18 +120,16 @@ function LandingPage(): JSX.Element {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto"></ul>
           <form className="form-inline my-2 my-lg-0">
-            <div className="d-flex justify-content-end">
-              <div onClick={() => handleTechBlogClick()} className="mx-5 pointer hover-item">
-                <small>Tech Blog</small>
-              </div>
-              <div onClick={() => handleBecomeAStudentTechAmbassadorClick()} className="pointer hover-item">
-                <span style={{ background: 'lightblue' }}>
-                  <small>Become a Student Tech Ambassador</small>
-                </span>
-              </div>
-              <div onClick={() => handleLoginOrSignupClick()} className="mx-5 pointer hover-item">
-                <small>Login/Signup</small>
-              </div>
+            <div onClick={() => handleTechBlogClick()} className="mx-3 pointer hover-item">
+              <small>Tech Blog</small>
+            </div>
+            <div onClick={() => handleBecomeAStudentTechAmbassadorClick()} className="mx-3 pointer hover-item">
+              <span style={{ background: 'lightblue' }}>
+                <small>Become a Student Tech Ambassador</small>
+              </span>
+            </div>
+            <div onClick={() => handleLoginOrSignupClick()} className="mx-3 pointer hover-item">
+              <small>Login/Signup</small>
             </div>
           </form>
         </div>
@@ -175,6 +178,11 @@ function LandingPage(): JSX.Element {
         <div className="mb-3" style={{ display: 'flex', flexDirection: 'row' }}>
           <span>Follow us :</span>
           <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <FacebookIcon
+              className="mx-2 pointer"
+              style={{ fontSize: 25, color: blue[700] }}
+              onClick={() => handleFacebookClick()}
+            />
             <InstagramIcon
               className="mx-2 pointer"
               style={{ fontSize: 25, color: pink[500] }}
