@@ -25,7 +25,7 @@ function MainPage(): JSX.Element {
 
   const getToken = () => {
     const token = localStorage.getItem('token');
-    if (token && token !== 'undefined') {
+    if (token) {
       setToken(token);
     }
   };
