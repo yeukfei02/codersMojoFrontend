@@ -165,13 +165,13 @@ function CreateTechBlog(props: any): JSX.Element {
           </div>
 
           <div className="form-group">
-            <label htmlFor="description">Description</label>
-            <input
-              type="text"
+            <label htmlFor="exampleFormControlTextarea1">Description</label>
+            <textarea
               className="form-control"
-              id="description"
+              id="exampleFormControlTextarea1"
+              rows={5}
               onChange={(e) => handleDescriptionInputChange(e)}
-            />
+            ></textarea>
           </div>
 
           <label>Tag</label>
