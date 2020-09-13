@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import { pink, blue } from '@material-ui/core/colors';
 
+import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
 import { validateEmail } from '../../common/common';
 
@@ -91,11 +91,7 @@ function LandingPage(): JSX.Element {
 
   return (
     <div>
-      <Head>
-        <title>CodersMojo</title>
-        <link rel="shortcut icon" href="/favicon.png" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-      </Head>
+      <NextHead />
 
       <div className="text-center">
         <span style={{ background: 'lightblue' }}>Student Tech Ambassdor Applications are now open. Apply here</span>

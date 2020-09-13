@@ -1,12 +1,14 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
+
+import NextHead from '../nextHead/NextHead';
+import TechBlogListView from '../techBlogListView/TechBlogListView';
 
 function TechBlog(): JSX.Element {
   const router = useRouter();
 
   const handleWriteATechBlogClick = () => {
-    router.push(`/write-tech-blog`);
+    router.push(`/login`);
   };
 
   const handleLoginOrSignupClick = () => {
@@ -15,11 +17,7 @@ function TechBlog(): JSX.Element {
 
   return (
     <div>
-      <Head>
-        <title>CodersMojo</title>
-        <link rel="shortcut icon" href="/favicon.png" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-      </Head>
+      <NextHead />
 
       <nav className="navbar navbar-expand-lg navbar-light">
         <a className="navbar-brand" href="/">
@@ -49,6 +47,8 @@ function TechBlog(): JSX.Element {
           </form>
         </div>
       </nav>
+
+      <TechBlogListView />
     </div>
   );
 }
