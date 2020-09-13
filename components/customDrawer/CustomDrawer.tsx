@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
+import PostAddIcon from '@material-ui/icons/PostAdd';
+import WorkIcon from '@material-ui/icons/Work';
+import ChatIcon from '@material-ui/icons/Chat';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -20,6 +20,10 @@ import { pink } from '@material-ui/core/colors';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
+
+import NextHead from '../nextHead/NextHead';
+import TechBlogListView from '../techBlogListView/TechBlogListView';
+import CreateTechBlog from '../createTechBlog/CreateTechBlog';
 
 const drawerWidth = 240;
 
@@ -54,6 +58,7 @@ const useStyles = makeStyles((theme: Theme) =>
     content: {
       flexGrow: 1,
       padding: theme.spacing(3),
+      fontFamily: 'Roboto Mono, monospace',
     },
     title: {
       flexGrow: 1,
@@ -83,6 +88,45 @@ function CustomDrawer(props: Props): JSX.Element {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [avatarText, setAvatarText] = useState('');
 
+  const [currentPageValue, setCurrentPageValue] = useState('techBlog');
+
+  const open = Boolean(anchorEl);
+
+  const drawer = (
+    <div>
+      <div className={classes.toolbar} />
+      <Divider className="mt-4" />
+      <List>
+        <div onClick={() => handleTechBlogClick()}>
+          <ListItem button>
+            <ListItemIcon>
+              <PostAddIcon />
+            </ListItemIcon>
+            <ListItemText primary="Tech blog" />
+          </ListItem>
+        </div>
+        <div onClick={() => handleJobBoardClick()}>
+          <ListItem button>
+            <ListItemIcon>
+              <WorkIcon />
+            </ListItemIcon>
+            <ListItemText primary="Job board" />
+          </ListItem>
+        </div>
+        <div onClick={() => handleDiscussionBoardClick()}>
+          <ListItem button>
+            <ListItemIcon>
+              <ChatIcon />
+            </ListItemIcon>
+            <ListItemText primary="Discussion board" />
+          </ListItem>
+        </div>
+      </List>
+    </div>
+  );
+
+  const container = window !== undefined ? () => window().document.body : undefined;
+
   useEffect(() => {
     getAvatarText();
   }, []);
@@ -95,8 +139,6 @@ function CustomDrawer(props: Props): JSX.Element {
     }
   };
 
-  const open = Boolean(anchorEl);
-
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -107,14 +149,20 @@ function CustomDrawer(props: Props): JSX.Element {
 
   const handleSettings = () => {
     setAnchorEl(null);
+
+    setCurrentPageValue('settings');
   };
 
   const handleReportABug = () => {
     setAnchorEl(null);
+
+    setCurrentPageValue('reportABug');
   };
 
   const handleYourAccount = () => {
     setAnchorEl(null);
+
+    setCurrentPageValue('yourAccount');
   };
 
   const handleLogout = () => {
@@ -128,47 +176,66 @@ function CustomDrawer(props: Props): JSX.Element {
     setMobileOpen(!mobileOpen);
   };
 
-  const handleListItemClick = () => {
-    console.log(123123);
+  const handleTechBlogClick = () => {
+    setCurrentPageValue('techBlog');
   };
 
-  const drawer = (
-    <div>
-      <div className={classes.toolbar} />
-      <Divider className="mt-4" />
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <div key={index} onClick={() => handleListItemClick()}>
-            <ListItem button>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          </div>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <div key={index} onClick={() => handleListItemClick()}>
-            <ListItem button>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          </div>
-        ))}
-      </List>
-    </div>
-  );
+  const handleJobBoardClick = () => {
+    setCurrentPageValue('jobBoard');
+  };
 
-  const container = window !== undefined ? () => window().document.body : undefined;
+  const handleDiscussionBoardClick = () => {
+    setCurrentPageValue('discussionBoard');
+  };
+
+  const handleCreateTechBlog = () => {
+    setCurrentPageValue('createTechBlog');
+  };
+
+  const renderCurrentPage = (currentPageValue: string) => {
+    let currentPage = null;
+
+    switch (currentPageValue) {
+      case 'techBlog':
+        currentPage = (
+          <div>
+            <div className="d-flex justify-content-end mx-5 mb-4">
+              <button type="button" className="btn btn-primary btn-lg" onClick={() => handleCreateTechBlog()}>
+                Create tech blog
+              </button>
+            </div>
+            <TechBlogListView />
+          </div>
+        );
+        break;
+      case 'createTechBlog':
+        currentPage = <CreateTechBlog techBlogClick={() => handleTechBlogClick()} />;
+        break;
+      case 'jobBoard':
+        currentPage = <div>jobBoard</div>;
+        break;
+      case 'discussionBoard':
+        currentPage = <div>discussionBoard</div>;
+        break;
+      case 'settings':
+        currentPage = <div>settings</div>;
+        break;
+      case 'reportABug':
+        currentPage = <div>reportABug</div>;
+        break;
+      case 'yourAccount':
+        currentPage = <div>yourAccount</div>;
+        break;
+      default:
+        break;
+    }
+
+    return currentPage;
+  };
 
   return (
     <div>
-      <Head>
-        <title>CodersMojo</title>
-        <link rel="shortcut icon" href="/favicon.png" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-      </Head>
+      <NextHead />
 
       <div className={classes.root}>
         <CssBaseline />
@@ -254,31 +321,7 @@ function CustomDrawer(props: Props): JSX.Element {
 
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <div className="mx-3 my-5">
-            <Typography paragraph>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum facilisis leo vel. Risus at ultrices
-              mi tempus imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus. Convallis convallis
-              tellus id interdum velit laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing.
-              Amet nisl suscipit adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-              Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis imperdiet massa
-              tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-              consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien faucibus et molestie
-              ac.
-            </Typography>
-
-            <Typography paragraph>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum facilisis leo vel. Risus at ultrices
-              mi tempus imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus. Convallis convallis
-              tellus id interdum velit laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing.
-              Amet nisl suscipit adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-              Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis imperdiet massa
-              tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-              consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien faucibus et molestie
-              ac.
-            </Typography>
-          </div>
+          <div className="mx-3 my-5">{renderCurrentPage(currentPageValue)}</div>
         </main>
       </div>
     </div>

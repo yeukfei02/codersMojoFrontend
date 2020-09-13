@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 
+import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
 import { validateEmail } from '../../common/common';
 
@@ -111,11 +111,7 @@ function Login(): JSX.Element {
 
   return (
     <div style={{ margin: '5em auto' }}>
-      <Head>
-        <title>CodersMojo</title>
-        <link rel="shortcut icon" href="/favicon.png" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-      </Head>
+      <NextHead />
 
       <div className="container">
         <Card className={classes.root} variant="outlined">
