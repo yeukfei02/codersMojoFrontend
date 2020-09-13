@@ -97,7 +97,7 @@ function TechBlogListView(): JSX.Element {
     let techBlogListView = null;
 
     if (techBlogList) {
-      const filteredTechBlogList = techBlogList.filter((item: any, i: number) => {
+      const filteredTechBlogList = techBlogList.filter((_: any, i: number) => {
         return i % 5 == 0;
       });
       techBlogListView = filteredTechBlogList.map((item: any, i: number) => {
