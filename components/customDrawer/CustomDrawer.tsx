@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import PostAddIcon from '@material-ui/icons/PostAdd';
@@ -172,20 +172,27 @@ function CustomDrawer(props: Props): JSX.Element {
     location.href = '/';
   };
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+  const handleDrawerClose = () => {
+    setMobileOpen(false);
+  };
+
+  const handleDrawerOpen = () => {
+    setMobileOpen(true);
   };
 
   const handleTechBlogClick = () => {
     setCurrentPageValue('techBlog');
+    setMobileOpen(false);
   };
 
   const handleJobBoardClick = () => {
     setCurrentPageValue('jobBoard');
+    setMobileOpen(false);
   };
 
   const handleDiscussionBoardClick = () => {
     setCurrentPageValue('discussionBoard');
+    setMobileOpen(false);
   };
 
   const handleCreateTechBlog = () => {
@@ -199,7 +206,7 @@ function CustomDrawer(props: Props): JSX.Element {
       case 'techBlog':
         currentPage = (
           <div>
-            <div className="d-flex justify-content-end mx-5 mb-4">
+            <div className="d-flex justify-content-end mx-3 mb-4">
               <button type="button" className="btn btn-primary btn-lg" onClick={() => handleCreateTechBlog()}>
                 Create tech blog
               </button>
@@ -245,7 +252,7 @@ function CustomDrawer(props: Props): JSX.Element {
               color="inherit"
               aria-label="open drawer"
               edge="start"
-              onClick={handleDrawerToggle}
+              onClick={handleDrawerOpen}
               className={classes.menuButton}
             >
               <MenuIcon />
@@ -290,12 +297,13 @@ function CustomDrawer(props: Props): JSX.Element {
         <nav className={classes.drawer} aria-label="mailbox folders">
           {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
           <Hidden smUp implementation="css">
-            <Drawer
+            <SwipeableDrawer
               container={container}
               variant="temporary"
               anchor={theme.direction === 'rtl' ? 'right' : 'left'}
               open={mobileOpen}
-              onClose={handleDrawerToggle}
+              onClose={handleDrawerClose}
+              onOpen={handleDrawerOpen}
               classes={{
                 paper: classes.drawerPaper,
               }}
@@ -304,18 +312,20 @@ function CustomDrawer(props: Props): JSX.Element {
               }}
             >
               {drawer}
-            </Drawer>
+            </SwipeableDrawer>
           </Hidden>
           <Hidden xsDown implementation="css">
-            <Drawer
+            <SwipeableDrawer
               classes={{
                 paper: classes.drawerPaper,
               }}
+              onClose={handleDrawerClose}
+              onOpen={handleDrawerOpen}
               variant="permanent"
-              open
+              open={mobileOpen}
             >
               {drawer}
-            </Drawer>
+            </SwipeableDrawer>
           </Hidden>
         </nav>
 

@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+// import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Select from 'react-select';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
 
-const useStyles = makeStyles({
-  root: {
-    width: 600,
-    padding: 35,
-  },
-});
+// const useStyles = makeStyles({
+//   root: {
+//     width: 600,
+//     padding: 35,
+//   },
+// });
 
 const selectStyles = {
   container: (base: any, state: any) => ({
@@ -23,7 +23,7 @@ const selectStyles = {
 };
 
 function CreateTechBlog(props: any): JSX.Element {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   const [selectedTagList, setSelectedTagList] = useState<any[]>([]);
   const [selectedTag, setSelectedTag] = useState<any>(null);
@@ -152,7 +152,7 @@ function CreateTechBlog(props: any): JSX.Element {
       <NextHead />
 
       <div className="container d-flex justify-content-center">
-        <Card className={classes.root} variant="outlined">
+        <Card style={{ width: window.innerWidth > 600 ? 600 : 370, padding: '3em' }} variant="outlined">
           <div className="d-flex justify-content-center">
             <img src="/logo_transparent.png" width="180" height="180" alt="" loading="lazy" />
           </div>
