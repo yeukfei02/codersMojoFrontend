@@ -24,6 +24,7 @@ import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/sty
 import NextHead from '../nextHead/NextHead';
 import TechBlogListView from '../techBlogListView/TechBlogListView';
 import CreateTechBlog from '../createTechBlog/CreateTechBlog';
+import JobBlog from '../jobBlog/JobBlog';
 
 const drawerWidth = 240;
 
@@ -58,7 +59,7 @@ const useStyles = makeStyles((theme: Theme) =>
     content: {
       flexGrow: 1,
       padding: theme.spacing(3),
-      fontFamily: 'Roboto Mono, monospace',
+      fontFamily: 'Inter, sans-serif',
     },
     title: {
       flexGrow: 1,
@@ -147,22 +148,16 @@ function CustomDrawer(props: Props): JSX.Element {
     setAnchorEl(null);
   };
 
-  const handleSettings = () => {
+  const handleAccountSettings = () => {
     setAnchorEl(null);
 
-    setCurrentPageValue('settings');
+    setCurrentPageValue('accountSettings');
   };
 
   const handleReportABug = () => {
     setAnchorEl(null);
 
     setCurrentPageValue('reportABug');
-  };
-
-  const handleYourAccount = () => {
-    setAnchorEl(null);
-
-    setCurrentPageValue('yourAccount');
   };
 
   const handleLogout = () => {
@@ -207,7 +202,7 @@ function CustomDrawer(props: Props): JSX.Element {
         currentPage = (
           <div>
             <div className="d-flex justify-content-end mx-3 mb-4">
-              <button type="button" className="btn btn-primary btn-lg" onClick={() => handleCreateTechBlog()}>
+              <button type="button" className="btn btn-primary btn" onClick={() => handleCreateTechBlog()}>
                 Create tech blog
               </button>
             </div>
@@ -219,13 +214,13 @@ function CustomDrawer(props: Props): JSX.Element {
         currentPage = <CreateTechBlog techBlogClick={() => handleTechBlogClick()} />;
         break;
       case 'jobBoard':
-        currentPage = <div>jobBoard</div>;
+        currentPage = <JobBlog />;
         break;
       case 'discussionBoard':
         currentPage = <div>discussionBoard</div>;
         break;
-      case 'settings':
-        currentPage = <div>settings</div>;
+      case 'accountSettings':
+        currentPage = <div>accountSettings</div>;
         break;
       case 'reportABug':
         currentPage = <div>reportABug</div>;
@@ -286,9 +281,8 @@ function CustomDrawer(props: Props): JSX.Element {
               open={open}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleSettings}>Settings</MenuItem>
+              <MenuItem onClick={handleAccountSettings}>Account Settings</MenuItem>
               <MenuItem onClick={handleReportABug}>Report a Bug</MenuItem>
-              <MenuItem onClick={handleYourAccount}>Your Account</MenuItem>
               <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
           </Toolbar>

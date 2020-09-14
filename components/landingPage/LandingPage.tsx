@@ -117,15 +117,13 @@ function LandingPage(): JSX.Element {
           <ul className="navbar-nav mr-auto"></ul>
           <form className="form-inline my-2 my-lg-0">
             <div onClick={() => handleTechBlogClick()} className="mx-3 pointer hover-item">
-              <small>Tech Blog</small>
+              Tech Blog
             </div>
             <div onClick={() => handleBecomeAStudentTechAmbassadorClick()} className="mx-3 pointer hover-item">
-              <span style={{ background: 'lightblue' }}>
-                <small>Become a Student Tech Ambassador</small>
-              </span>
+              <span style={{ background: 'lightblue' }}>Become a Student Tech Ambassador</span>
             </div>
             <div onClick={() => handleLoginOrSignupClick()} className="mx-3 pointer hover-item">
-              <small>Login/Signup</small>
+              Login/Signup
             </div>
           </form>
         </div>

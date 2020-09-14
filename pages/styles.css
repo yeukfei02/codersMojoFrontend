@@ -1,12 +1,12 @@
 @import url('https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Quantico&display=swap');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 body {
     background: #f2d5d3;
     height: 100%;
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Inter', sans-serif;
 }
 
 .hover-item:hover {

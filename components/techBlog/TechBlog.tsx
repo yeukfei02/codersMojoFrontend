@@ -39,10 +39,10 @@ function TechBlog(): JSX.Element {
           <ul className="navbar-nav mr-auto"></ul>
           <form className="form-inline my-2 my-lg-0">
             <div onClick={() => handleWriteATechBlogClick()} className="mx-3 pointer hover-item">
-              <small>Write a Tech Blog</small>
+              Write a Tech Blog
             </div>
             <div onClick={() => handleLoginOrSignupClick()} className="mx-3 pointer hover-item">
-              <small>Login/Signup</small>
+              Login/Signup
             </div>
           </form>
         </div>
