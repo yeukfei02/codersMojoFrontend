@@ -100,6 +100,9 @@ function CreateTechBlog(props: any): JSX.Element {
     if (selectedTag) {
       setSelectedTag(selectedTag);
       setTag(selectedTag.value);
+    } else {
+      setSelectedTag(null);
+      setTag('');
     }
   };
 
