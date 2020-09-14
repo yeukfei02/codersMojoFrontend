@@ -99,7 +99,7 @@ function LandingPage(): JSX.Element {
 
       <nav className="navbar navbar-expand-lg navbar-light">
         <a className="navbar-brand" href="/">
-          <img src="/logo_transparent.png" width="180" height="180" alt="" loading="lazy" />
+          <img src="/logo.png" width="150" height="150" alt="" loading="lazy" />
         </a>
         <button
           className="navbar-toggler"

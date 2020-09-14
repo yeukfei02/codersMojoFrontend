@@ -110,7 +110,7 @@ function Signup(): JSX.Element {
       <div className="container d-flex justify-content-center">
         <Card className={classes.root} variant="outlined">
           <div className="d-flex justify-content-center">
-            <img src="/logo_transparent.png" width="180" height="180" alt="" loading="lazy" />
+            <img src="/logo.png" width="150" height="150" alt="" loading="lazy" />
           </div>
 
           <h4 className="text-center mt-3 mb-5 font-weight-bold">Create Account</h4>

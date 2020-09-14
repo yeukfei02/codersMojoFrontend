@@ -254,7 +254,7 @@ function CustomDrawer(props: Props): JSX.Element {
             </IconButton>
             <Typography variant="h6" className={classes.title}>
               <a className="navbar-brand" href="/">
-                <img src="/logo_transparent.png" width="80" height="80" alt="" loading="lazy" />
+                <img src="/logo.png" width="80" height="80" alt="" loading="lazy" />
               </a>
             </Typography>
 
