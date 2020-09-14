@@ -181,7 +181,7 @@ function TechBlogListView(): JSX.Element {
     <div>
       <NextHead />
 
-      <div className="mx-5">
+      <div className="mx-3">
         <div className="card">
           <div className="card-body">
             <div>
