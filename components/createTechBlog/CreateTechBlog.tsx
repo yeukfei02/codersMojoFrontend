@@ -152,7 +152,7 @@ function CreateTechBlog(props: any): JSX.Element {
       <NextHead />
 
       <div className="container d-flex justify-content-center">
-        <Card style={{ width: window.innerWidth > 600 ? 600 : 370, padding: '3em' }} variant="outlined">
+        <Card style={{ width: window.innerWidth > 500 ? 600 : 370, padding: '3em' }} variant="outlined">
           <div className="d-flex justify-content-center">
             <img src="/logo_transparent.png" width="180" height="180" alt="" loading="lazy" />
           </div>
