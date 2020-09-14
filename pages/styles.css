@@ -9,14 +9,6 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
-.bg {
-    background-image: url('/background-image.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
-}
-
 .hover-item:hover {
     background-color: lightblue;
     padding: 0.1em;
