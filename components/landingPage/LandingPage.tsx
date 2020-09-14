@@ -90,7 +90,7 @@ function LandingPage(): JSX.Element {
   };
 
   return (
-    <div>
+    <div className="bg">
       <NextHead />
 
       <div className="text-center">

@@ -44,7 +44,7 @@ function MainPage(): JSX.Element {
     <MuiThemeProvider theme={theme}>
       <Head>
         <title>CodersMojo</title>
-        <link rel="shortcut icon" href="/favicon.png" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <script
           src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
