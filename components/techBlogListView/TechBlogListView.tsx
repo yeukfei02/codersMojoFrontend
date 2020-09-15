@@ -149,32 +149,8 @@ function TechBlogListView(): JSX.Element {
     return tagView;
   };
 
-  const handleMachineLearningClick = () => {
-    setFilterText('Machine Learning');
-  };
-
-  const handleDataScienceClick = () => {
-    setFilterText('Data Science');
-  };
-
-  const handleProgrammingClick = () => {
-    setFilterText('Programming');
-  };
-
-  const handleWebDevelopmentClick = () => {
-    setFilterText('Web Development');
-  };
-
-  const handleCloudAWSAndGCPClick = () => {
-    setFilterText('Cloud - AWS and GCP');
-  };
-
-  const handleDataVisualizationClick = () => {
-    setFilterText('Data Visualization');
-  };
-
-  const handleTechInterviewExperiencesClick = () => {
-    setFilterText('Tech Interview Experiences');
+  const handleFilterTextClick = (filterText: string) => {
+    setFilterText(filterText);
   };
 
   return (
@@ -187,37 +163,40 @@ function TechBlogListView(): JSX.Element {
             <div>
               <div className="row">
                 <div className="col-sm d-flex justify-content-center">
-                  <span className="pointer hover-item" onClick={() => handleMachineLearningClick()}>
+                  <span className="pointer hover-item" onClick={() => handleFilterTextClick('Machine Learning')}>
                     Machine Learning
                   </span>
                 </div>
                 <div className="col-sm d-flex justify-content-center">
-                  <span className="pointer hover-item" onClick={() => handleDataScienceClick()}>
+                  <span className="pointer hover-item" onClick={() => handleFilterTextClick('Data Science')}>
                     Data Science
                   </span>
                 </div>
                 <div className="col-sm d-flex justify-content-center">
-                  <span className="pointer hover-item" onClick={() => handleProgrammingClick()}>
+                  <span className="pointer hover-item" onClick={() => handleFilterTextClick('Programming')}>
                     Programming
                   </span>
                 </div>
                 <div className="col-sm d-flex justify-content-center">
-                  <span className="pointer hover-item" onClick={() => handleWebDevelopmentClick()}>
+                  <span className="pointer hover-item" onClick={() => handleFilterTextClick('Web Development')}>
                     Web Development
                   </span>
                 </div>
                 <div className="col-sm d-flex justify-content-center">
-                  <span className="pointer hover-item" onClick={() => handleCloudAWSAndGCPClick()}>
+                  <span className="pointer hover-item" onClick={() => handleFilterTextClick('Cloud - AWS and GCP')}>
                     Cloud - AWS and GCP
                   </span>
                 </div>
                 <div className="col-sm d-flex justify-content-center">
-                  <span className="pointer hover-item" onClick={() => handleDataVisualizationClick()}>
+                  <span className="pointer hover-item" onClick={() => handleFilterTextClick('Data Visualization')}>
                     Data Visualization
                   </span>
                 </div>
                 <div className="col-sm d-flex justify-content-center">
-                  <span className="pointer hover-item" onClick={() => handleTechInterviewExperiencesClick()}>
+                  <span
+                    className="pointer hover-item"
+                    onClick={() => handleFilterTextClick('Tech Interview Experiences')}
+                  >
                     Tech Interview Experiences
                   </span>
                 </div>

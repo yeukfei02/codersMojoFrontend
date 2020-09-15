@@ -26,6 +26,7 @@ import TechBlogListView from '../techBlogListView/TechBlogListView';
 import CreateTechBlog from '../createTechBlog/CreateTechBlog';
 import JobBoard from '../jobBoard/JobBoard';
 import DiscussionBoard from '../discussionBoard/DiscussionBoard';
+import CreatePosts from '../createPosts/CreatePosts';
 import AccountSettings from '../accountSettings/AccountSettings';
 
 const drawerWidth = 240;
@@ -196,6 +197,10 @@ function CustomDrawer(props: Props): JSX.Element {
     setCurrentPageValue('createTechBlog');
   };
 
+  const handleCreatePostButtonClick = () => {
+    setCurrentPageValue('createPosts');
+  };
+
   const renderCurrentPage = (currentPageValue: string) => {
     let currentPage = null;
 
@@ -219,7 +224,10 @@ function CustomDrawer(props: Props): JSX.Element {
         currentPage = <JobBoard />;
         break;
       case 'discussionBoard':
-        currentPage = <DiscussionBoard />;
+        currentPage = <DiscussionBoard postsClick={() => handleCreatePostButtonClick()} />;
+        break;
+      case 'createPosts':
+        currentPage = <CreatePosts discussionBoardClick={() => handleDiscussionBoardClick()} />;
         break;
       case 'accountSettings':
         currentPage = <AccountSettings />;
