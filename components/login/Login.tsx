@@ -25,13 +25,13 @@ function Login(): JSX.Element {
   const [snackBarType, setSnackBarType] = useState('success');
   const [snackBarMessage, setSnackBarMessage] = useState('');
 
-  const handleEmailInputChange = (e: any) => {
+  const handleEmailInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) {
       setEmail(e.target.value);
     }
   };
 
-  const handlePasswordInputChange = (e: any) => {
+  const handlePasswordInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) {
       setPassword(e.target.value);
     }

@@ -32,7 +32,7 @@ function LandingPage(): JSX.Element {
     router.push(`/login`);
   };
 
-  const handleEmailInputChange = (e: any) => {
+  const handleEmailInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) {
       setEmail(e.target.value);
     }

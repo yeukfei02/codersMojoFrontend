@@ -12,7 +12,7 @@ const selectStyles = {
   }),
 };
 
-function JobBlog(): JSX.Element {
+function JobBoard(): JSX.Element {
   const [countryList, setCountryList] = useState<any[]>([]);
 
   const [selectedTypeList, setSelectedTypeList] = useState<any[]>([]);
@@ -303,4 +303,4 @@ function JobBlog(): JSX.Element {
   );
 }
 
-export default JobBlog;
+export default JobBoard;
