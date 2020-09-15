@@ -84,13 +84,13 @@ function CreateTechBlog(props: any): JSX.Element {
     }
   };
 
-  const handleTitleInputChange = (e: any) => {
+  const handleTitleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) {
       setTitle(e.target.value);
     }
   };
 
-  const handleDescriptionInputChange = (e: any) => {
+  const handleDescriptionInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (e.target.value) {
       setDescription(e.target.value);
     }
@@ -134,6 +134,10 @@ function CreateTechBlog(props: any): JSX.Element {
         setSnackBarStatus(true);
         setSnackBarType('success');
         setSnackBarMessage('create tech blog success');
+
+        setTimeout(() => {
+          props.techBlogClick();
+        }, 1000);
       } else {
         setSnackBarStatus(true);
         setSnackBarType('error');

@@ -24,7 +24,9 @@ import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/sty
 import NextHead from '../nextHead/NextHead';
 import TechBlogListView from '../techBlogListView/TechBlogListView';
 import CreateTechBlog from '../createTechBlog/CreateTechBlog';
-import JobBlog from '../jobBlog/JobBlog';
+import JobBoard from '../jobBoard/JobBoard';
+import DiscussionBoard from '../discussionBoard/DiscussionBoard';
+import AccountSettings from '../accountSettings/AccountSettings';
 
 const drawerWidth = 240;
 
@@ -214,19 +216,16 @@ function CustomDrawer(props: Props): JSX.Element {
         currentPage = <CreateTechBlog techBlogClick={() => handleTechBlogClick()} />;
         break;
       case 'jobBoard':
-        currentPage = <JobBlog />;
+        currentPage = <JobBoard />;
         break;
       case 'discussionBoard':
-        currentPage = <div>discussionBoard</div>;
+        currentPage = <DiscussionBoard />;
         break;
       case 'accountSettings':
-        currentPage = <div>accountSettings</div>;
+        currentPage = <AccountSettings />;
         break;
       case 'reportABug':
         currentPage = <div>reportABug</div>;
-        break;
-      case 'yourAccount':
-        currentPage = <div>yourAccount</div>;
         break;
       default:
         break;

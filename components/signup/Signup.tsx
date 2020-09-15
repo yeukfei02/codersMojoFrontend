@@ -27,25 +27,25 @@ function Signup(): JSX.Element {
   const [snackBarType, setSnackBarType] = useState('success');
   const [snackBarMessage, setSnackBarMessage] = useState('');
 
-  const handleFirstNameInputChange = (e: any) => {
+  const handleFirstNameInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) {
       setFirstName(e.target.value);
     }
   };
 
-  const handleLastNameInputChange = (e: any) => {
+  const handleLastNameInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) {
       setLastName(e.target.value);
     }
   };
 
-  const handleEmailInputChange = (e: any) => {
+  const handleEmailInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) {
       setEmail(e.target.value);
     }
   };
 
-  const handlePasswordInputChange = (e: any) => {
+  const handlePasswordInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) {
       setPassword(e.target.value);
     }
