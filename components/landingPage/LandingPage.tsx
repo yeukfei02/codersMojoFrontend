@@ -86,7 +86,7 @@ function LandingPage(): JSX.Element {
   };
 
   const handleTwitterClick = () => {
-    window.open('https://www.google.com.hk');
+    window.open('https://twitter.com/CodersMojo');
   };
 
   return (
