@@ -79,11 +79,11 @@ function ForgotPassword(): JSX.Element {
 
       <div className="container d-flex justify-content-center">
         <Card className={classes.root} variant="outlined">
-          <div className="d-flex justify-content-center">
-            <img src="/logo.png" width="150" height="150" alt="" loading="lazy" />
+          <div className="my-2 d-flex justify-content-center">
+            <img src="/logo.png" width="200" height="65" alt="" loading="lazy" />
           </div>
 
-          <h4 className="text-center mt-3 mb-5 font-weight-bold">Forgot Password</h4>
+          <h4 className="text-center my-5 font-weight-bold">Forgot Password</h4>
 
           <div className="form-group">
             <label htmlFor="exampleInputEmail1">Email</label>

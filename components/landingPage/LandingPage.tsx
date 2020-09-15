@@ -97,9 +97,9 @@ function LandingPage(): JSX.Element {
         <span style={{ background: 'lightblue' }}>Student Tech Ambassdor Applications are now open. Apply here</span>
       </div>
 
-      <nav className="navbar navbar-expand-lg navbar-light">
+      <nav className="my-4 navbar navbar-expand-lg navbar-light">
         <a className="navbar-brand" href="/">
-          <img src="/logo.png" width="150" height="150" alt="" loading="lazy" />
+          <img src="/logo.png" width="200" height="65" alt="" loading="lazy" />
         </a>
         <button
           className="navbar-toggler"
@@ -129,7 +129,7 @@ function LandingPage(): JSX.Element {
         </div>
       </nav>
 
-      <div style={{ margin: '2em auto' }}>
+      <div style={{ margin: '4em auto' }}>
         <h4 className="text-center font-weight-bold">
           CodersMojo is an AI-based Peer-to-Peer Interactive Tech Interview Platform for Women
         </h4>

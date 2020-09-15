@@ -96,7 +96,7 @@ function CustomDrawer(props: Props): JSX.Element {
   const drawer = (
     <div>
       <div className={classes.toolbar} />
-      <Divider className="mt-4" />
+      <Divider style={{ marginTop: '0.8em' }} />
       <List>
         <div onClick={() => handleTechBlogClick()}>
           <ListItem button>
@@ -254,7 +254,7 @@ function CustomDrawer(props: Props): JSX.Element {
             </IconButton>
             <Typography variant="h6" className={classes.title}>
               <a className="navbar-brand" href="/">
-                <img src="/logo.png" width="80" height="80" alt="" loading="lazy" />
+                <img src="/logo.png" width="200" height="65" alt="" loading="lazy" />
               </a>
             </Typography>
 
@@ -325,7 +325,7 @@ function CustomDrawer(props: Props): JSX.Element {
 
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <div className="mx-3 my-5">{renderCurrentPage(currentPageValue)}</div>
+          <div className="mx-3 my-4">{renderCurrentPage(currentPageValue)}</div>
         </main>
       </div>
     </div>
