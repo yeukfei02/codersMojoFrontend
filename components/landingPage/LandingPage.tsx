@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import TwitterIcon from '@material-ui/icons/Twitter';
-import { pink, blue } from '@material-ui/core/colors';
+import YouTubeIcon from '@material-ui/icons/YouTube';
+import { pink, blue, red } from '@material-ui/core/colors';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
@@ -87,6 +88,10 @@ function LandingPage(): JSX.Element {
 
   const handleTwitterClick = () => {
     window.open('https://twitter.com/CodersMojo');
+  };
+
+  const handleYoutubeClick = () => {
+    window.open('https://www.youtube.com/channel/UCgz0D7C3yuueyeNxTLXWF9Q');
   };
 
   return (
@@ -186,6 +191,11 @@ function LandingPage(): JSX.Element {
               className="mx-2 pointer"
               style={{ fontSize: 25, color: blue[500] }}
               onClick={() => handleTwitterClick()}
+            />
+            <YouTubeIcon
+              className="mx-2 pointer"
+              style={{ fontSize: 25, color: red[500] }}
+              onClick={() => handleYoutubeClick()}
             />
           </div>
         </div>
