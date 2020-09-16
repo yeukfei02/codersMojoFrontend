@@ -28,6 +28,7 @@ import JobBoard from '../jobBoard/JobBoard';
 import DiscussionBoard from '../discussionBoard/DiscussionBoard';
 import CreatePosts from '../createPosts/CreatePosts';
 import AccountSettings from '../accountSettings/AccountSettings';
+import ReportABug from '../reportABug/ReportABug';
 
 const drawerWidth = 240;
 
@@ -233,7 +234,7 @@ function CustomDrawer(props: Props): JSX.Element {
         currentPage = <AccountSettings />;
         break;
       case 'reportABug':
-        currentPage = <div>reportABug</div>;
+        currentPage = <ReportABug />;
         break;
       default:
         break;
