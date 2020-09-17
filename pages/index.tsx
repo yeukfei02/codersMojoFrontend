@@ -23,12 +23,14 @@ const theme = createMuiTheme({
 
 // firebase
 let messaging: any = null;
-if (!firebase.apps.length) {
-  const firebaseConfig = getFirebaseConfig();
-  firebase.initializeApp(firebaseConfig);
+if (typeof self !== 'undefined' && typeof window !== 'undefined') {
+  if (!firebase.apps.length) {
+    const firebaseConfig = getFirebaseConfig();
+    firebase.initializeApp(firebaseConfig);
 
-  messaging = firebase.messaging();
-  messaging.usePublicVapidKey(process.env.NEXT_PUBLIC_FIREBASE_PUBLIC_VAPID_KEY as string);
+    messaging = firebase.messaging();
+    messaging.usePublicVapidKey(process.env.NEXT_PUBLIC_FIREBASE_PUBLIC_VAPID_KEY as string);
+  }
 }
 
 function MainPage(): JSX.Element {
