@@ -27,11 +27,11 @@ import Menu from '@material-ui/core/Menu';
 import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
 
 import NextHead from '../nextHead/NextHead';
-import TechBlogListView from '../techBlogListView/TechBlogListView';
-import CreateTechBlog from '../createTechBlog/CreateTechBlog';
-import ApplyForJobs from '../applyForJobs/ApplyForJobs';
 import DiscussionBoard from '../discussionBoard/DiscussionBoard';
 import CreatePosts from '../createPosts/CreatePosts';
+import ApplyForJobs from '../applyForJobs/ApplyForJobs';
+import TechBlogListView from '../techBlogListView/TechBlogListView';
+import CreateTechBlog from '../createTechBlog/CreateTechBlog';
 import AccountSettings from '../accountSettings/AccountSettings';
 import ReportABug from '../reportABug/ReportABug';
 
