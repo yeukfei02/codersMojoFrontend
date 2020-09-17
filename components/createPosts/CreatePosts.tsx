@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from 'react';
-// import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Select from 'react-select';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
-
-// const useStyles = makeStyles({
-//   root: {
-//     width: 600,
-//     padding: 35,
-//   },
-// });
 
 const selectStyles = {
   container: (base: any, state: any) => ({
@@ -23,8 +15,6 @@ const selectStyles = {
 };
 
 function CreatePosts(props: any): JSX.Element {
-  // const classes = useStyles();
-
   const [selectedTagList, setSelectedTagList] = useState<any[]>([]);
   const [selectedTag, setSelectedTag] = useState<any>(null);
 
