@@ -35,7 +35,7 @@ import CreateTechBlog from '../createTechBlog/CreateTechBlog';
 import AccountSettings from '../accountSettings/AccountSettings';
 import ReportABug from '../reportABug/ReportABug';
 
-const drawerWidth = 260;
+const drawerWidth = 280;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -112,7 +112,7 @@ function CustomDrawer(props: Props): JSX.Element {
             <ListItemIcon>
               <ImportContactsIcon />
             </ListItemIcon>
-            <ListItemText primary="Study for interview" />
+            <ListItemText primary="Study for Interview" />
           </ListItem>
         </div>
         <div onClick={() => handleLeftSideMenuItemClick('takeAMockInterview')}>
