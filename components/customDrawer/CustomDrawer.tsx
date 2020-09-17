@@ -27,9 +27,15 @@ import Menu from '@material-ui/core/Menu';
 import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
 
 import NextHead from '../nextHead/NextHead';
+import StudyForInterview from '../studyForInterview/StudyForInterview';
+import TakeAMockInterview from '../takeAMockInterview/TakeAMockInterview';
+import InterviewOthers from '../interviewOthers/InterviewOthers';
 import DiscussionBoard from '../discussionBoard/DiscussionBoard';
 import CreatePosts from '../createPosts/CreatePosts';
 import ApplyForJobs from '../applyForJobs/ApplyForJobs';
+import ParticipateInHackathons from '../participateInHackathons/ParticipateInHackathons';
+import InviteYourFriends from '../inviteYourFriends/InviteYourFriends';
+import BecomeAStudentTechAmbassador from '../becomeAStudentTechAmbassador/BecomeAStudentTechAmbassador';
 import TechBlogListView from '../techBlogListView/TechBlogListView';
 import CreateTechBlog from '../createTechBlog/CreateTechBlog';
 import AccountSettings from '../accountSettings/AccountSettings';
@@ -250,28 +256,31 @@ function CustomDrawer(props: Props): JSX.Element {
 
     switch (currentPageValue) {
       case 'studyForInterview':
-        currentPage = <div>studyForInterview</div>;
+        currentPage = <StudyForInterview />;
         break;
       case 'takeAMockInterview':
-        currentPage = <div>takeAMockInterview</div>;
+        currentPage = <TakeAMockInterview />;
         break;
       case 'interviewOthers':
-        currentPage = <div>interviewOthers</div>;
+        currentPage = <InterviewOthers />;
         break;
       case 'discussionBoard':
         currentPage = <DiscussionBoard postsClick={() => handleCreatePostButtonClick()} />;
+        break;
+      case 'createPosts':
+        currentPage = <CreatePosts discussionBoardClick={() => handleLeftSideMenuItemClick('discussionBoard')} />;
         break;
       case 'applyForJobs':
         currentPage = <ApplyForJobs />;
         break;
       case 'participateInHackathons':
-        currentPage = <div>participateInHackathons</div>;
+        currentPage = <ParticipateInHackathons />;
         break;
       case 'inviteYourFriends':
-        currentPage = <div>inviteYourFriends</div>;
+        currentPage = <InviteYourFriends />;
         break;
       case 'becomeAStudentTechAmbassador':
-        currentPage = <div>becomeAStudentTechAmbassador</div>;
+        currentPage = <BecomeAStudentTechAmbassador />;
         break;
       case 'techBlog':
         currentPage = (
@@ -287,9 +296,6 @@ function CustomDrawer(props: Props): JSX.Element {
         break;
       case 'createTechBlog':
         currentPage = <CreateTechBlog techBlogClick={() => handleLeftSideMenuItemClick('techBlog')} />;
-        break;
-      case 'createPosts':
-        currentPage = <CreatePosts discussionBoardClick={() => handleLeftSideMenuItemClick('discussionBoard')} />;
         break;
       case 'accountSettings':
         currentPage = <AccountSettings />;
