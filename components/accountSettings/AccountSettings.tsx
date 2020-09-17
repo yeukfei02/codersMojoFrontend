@@ -1,16 +1,52 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from '@material-ui/core/Card';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
 
 function AccountSettings(): JSX.Element {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
+  const [notificationStatus, setNotificationStatus] = useState(true);
+
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
 
   const [snackBarStatus, setSnackBarStatus] = useState(false);
   const [snackBarType, setSnackBarType] = useState('success');
   const [snackBarMessage, setSnackBarMessage] = useState('');
+
+  useEffect(() => {
+    setDefaultUserCredentials();
+  }, []);
+
+  const setDefaultUserCredentials = () => {
+    const firstName = localStorage.getItem('firstName');
+    if (firstName) {
+      setFirstName(firstName);
+    }
+
+    const lastName = localStorage.getItem('lastName');
+    if (lastName) {
+      setLastName(lastName);
+    }
+  };
+
+  const handleFirstNameInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value) {
+      setFirstName(e.target.value);
+    }
+  };
+
+  const handleLastNameInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value) {
+      setLastName(e.target.value);
+    }
+  };
 
   const handleOldPasswordInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) {
@@ -24,7 +60,39 @@ function AccountSettings(): JSX.Element {
     }
   };
 
-  const handleSubmitButtonClick = async (oldPassword: string, newPassword: string) => {
+  const handleChangeUserCredentialsButtonClick = async (firstName: string, lastName: string) => {
+    if (firstName && lastName) {
+      const usersId = localStorage.getItem('usersId');
+      const token = localStorage.getItem('token');
+
+      const response = await fetch(`/api/user/change-user-credentials`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          firstName: firstName,
+          lastName: lastName,
+          usersId: usersId,
+          token: token,
+        }),
+      });
+      if (response) {
+        const responseData = await response.json();
+        console.log('response.status = ', response.status);
+        console.log('responseData = ', responseData);
+
+        if (response.status === 200) {
+          setSnackBarStatus(true);
+          setSnackBarType('success');
+          setSnackBarMessage('change user credentials success');
+        } else {
+          setSnackBarStatus(true);
+          setSnackBarType('error');
+          setSnackBarMessage('change user credentials error');
+        }
+      }
+    }
+  };
+
+  const handleChangePasswordButtonClick = async (oldPassword: string, newPassword: string) => {
     if (oldPassword && newPassword) {
       const usersId = localStorage.getItem('usersId');
       const token = localStorage.getItem('token');
@@ -60,6 +128,10 @@ function AccountSettings(): JSX.Element {
     setSnackBarStatus(false);
   };
 
+  const handleSwitchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNotificationStatus(e.target.checked);
+  };
+
   return (
     <div style={{ margin: '3em auto' }}>
       <NextHead />
@@ -70,7 +142,89 @@ function AccountSettings(): JSX.Element {
             <img src="/logo.png" width="200" height="65" alt="" loading="lazy" />
           </div>
 
-          <h4 className="text-center my-5 font-weight-bold">Change password</h4>
+          <h4 className="text-center my-5 font-weight-bold">Change user credientials</h4>
+
+          <div className="form-group">
+            <label htmlFor="firstName">First Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="firstName"
+              value={firstName}
+              onChange={(e) => handleFirstNameInputChange(e)}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="lastName">Last Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="lastName"
+              value={lastName}
+              onChange={(e) => handleLastNameInputChange(e)}
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="btn btn-success btn-lg w-100 my-3"
+            onClick={() => handleChangeUserCredentialsButtonClick(firstName, lastName)}
+          >
+            Change User Credentials
+          </button>
+        </Card>
+      </div>
+
+      <div className="my-5 container d-flex justify-content-center">
+        <Card style={{ width: window.innerWidth > 600 ? 600 : 370, padding: '3em' }} variant="outlined">
+          <h4 className="text-center mt-3 mb-5 font-weight-bold">Integrations</h4>
+
+          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+            <div className="mx-2">
+              <button type="button" className="btn btn-outline-primary">
+                Google Calendar
+              </button>
+            </div>
+            <div className="mx-2">
+              <button type="button" className="btn btn-outline-secondary">
+                Apple Calendar
+              </button>
+            </div>
+            <div className="mx-2">
+              <button type="button" className="btn btn-outline-success">
+                Outlook Calendar
+              </button>
+            </div>
+          </div>
+        </Card>
+      </div>
+
+      <div className="my-5 container d-flex justify-content-center">
+        <Card style={{ width: window.innerWidth > 600 ? 600 : 370, padding: '3em' }} variant="outlined">
+          <h4 className="text-center mt-3 mb-5 font-weight-bold">Notifications</h4>
+
+          <div className="d-flex justify-content-center">
+            <FormGroup row>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={notificationStatus}
+                    onChange={handleSwitchChange}
+                    name="Notifications"
+                    color="primary"
+                  />
+                }
+                label={notificationStatus ? 'Notifications (on)' : 'Notifications (off)'}
+              />
+            </FormGroup>
+          </div>
+        </Card>
+      </div>
+
+      <div className="my-5 container d-flex justify-content-center">
+        <Card style={{ width: window.innerWidth > 600 ? 600 : 370, padding: '3em' }} variant="outlined">
+          <h4 className="text-center mt-3 mb-5 font-weight-bold">Change password</h4>
 
           <div className="form-group">
             <label htmlFor="oldPassword">Old Password</label>
@@ -95,9 +249,9 @@ function AccountSettings(): JSX.Element {
           <button
             type="submit"
             className="btn btn-success btn-lg w-100 my-3"
-            onClick={() => handleSubmitButtonClick(oldPassword, newPassword)}
+            onClick={() => handleChangePasswordButtonClick(oldPassword, newPassword)}
           >
-            Submit
+            Change Password
           </button>
         </Card>
       </div>

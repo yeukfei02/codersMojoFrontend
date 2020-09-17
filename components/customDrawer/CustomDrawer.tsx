@@ -5,7 +5,12 @@ import Divider from '@material-ui/core/Divider';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
+import ImportContactsIcon from '@material-ui/icons/ImportContacts';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import PostAddIcon from '@material-ui/icons/PostAdd';
+import ComputerIcon from '@material-ui/icons/Computer';
+import PeopleIcon from '@material-ui/icons/People';
+import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import WorkIcon from '@material-ui/icons/Work';
 import ChatIcon from '@material-ui/icons/Chat';
 import List from '@material-ui/core/List';
@@ -22,15 +27,15 @@ import Menu from '@material-ui/core/Menu';
 import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
 
 import NextHead from '../nextHead/NextHead';
-import TechBlogListView from '../techBlogListView/TechBlogListView';
-import CreateTechBlog from '../createTechBlog/CreateTechBlog';
-import JobBoard from '../jobBoard/JobBoard';
 import DiscussionBoard from '../discussionBoard/DiscussionBoard';
 import CreatePosts from '../createPosts/CreatePosts';
+import ApplyForJobs from '../applyForJobs/ApplyForJobs';
+import TechBlogListView from '../techBlogListView/TechBlogListView';
+import CreateTechBlog from '../createTechBlog/CreateTechBlog';
 import AccountSettings from '../accountSettings/AccountSettings';
 import ReportABug from '../reportABug/ReportABug';
 
-const drawerWidth = 240;
+const drawerWidth = 260;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -93,7 +98,7 @@ function CustomDrawer(props: Props): JSX.Element {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [avatarText, setAvatarText] = useState('');
 
-  const [currentPageValue, setCurrentPageValue] = useState('techBlog');
+  const [currentPageValue, setCurrentPageValue] = useState('studyForInterview');
 
   const open = Boolean(anchorEl);
 
@@ -102,28 +107,76 @@ function CustomDrawer(props: Props): JSX.Element {
       <div className={classes.toolbar} />
       <Divider style={{ marginTop: '0.8em' }} />
       <List>
-        <div onClick={() => handleTechBlogClick()}>
+        <div onClick={() => handleLeftSideMenuItemClick('studyForInterview')}>
           <ListItem button>
             <ListItemIcon>
-              <PostAddIcon />
+              <ImportContactsIcon />
             </ListItemIcon>
-            <ListItemText primary="Tech blog" />
+            <ListItemText primary="Study for interview" />
           </ListItem>
         </div>
-        <div onClick={() => handleJobBoardClick()}>
+        <div onClick={() => handleLeftSideMenuItemClick('takeAMockInterview')}>
           <ListItem button>
             <ListItemIcon>
-              <WorkIcon />
+              <LibraryBooksIcon />
             </ListItemIcon>
-            <ListItemText primary="Job board" />
+            <ListItemText primary="Take a Mock Interview" />
           </ListItem>
         </div>
-        <div onClick={() => handleDiscussionBoardClick()}>
+        <div onClick={() => handleLeftSideMenuItemClick('interviewOthers')}>
+          <ListItem button>
+            <ListItemIcon>
+              <ChatIcon />
+            </ListItemIcon>
+            <ListItemText primary="Interview Others" />
+          </ListItem>
+        </div>
+        <div onClick={() => handleLeftSideMenuItemClick('discussionBoard')}>
           <ListItem button>
             <ListItemIcon>
               <ChatIcon />
             </ListItemIcon>
             <ListItemText primary="Discussion board" />
+          </ListItem>
+        </div>
+        <div onClick={() => handleLeftSideMenuItemClick('applyForJobs')}>
+          <ListItem button>
+            <ListItemIcon>
+              <WorkIcon />
+            </ListItemIcon>
+            <ListItemText primary="Apply for Jobs" />
+          </ListItem>
+        </div>
+        <div onClick={() => handleLeftSideMenuItemClick('participateInHackathons')}>
+          <ListItem button>
+            <ListItemIcon>
+              <ComputerIcon />
+            </ListItemIcon>
+            <ListItemText primary="Participate in Hackathons" />
+          </ListItem>
+        </div>
+        <div onClick={() => handleLeftSideMenuItemClick('inviteYourFriends')}>
+          <ListItem button>
+            <ListItemIcon>
+              <PeopleIcon />
+            </ListItemIcon>
+            <ListItemText primary="Invite your friends" />
+          </ListItem>
+        </div>
+        <div onClick={() => handleLeftSideMenuItemClick('becomeAStudentTechAmbassador')}>
+          <ListItem button>
+            <ListItemIcon>
+              <EmojiPeopleIcon />
+            </ListItemIcon>
+            <ListItemText primary="Become a Student Tech Ambassador" />
+          </ListItem>
+        </div>
+        <div onClick={() => handleLeftSideMenuItemClick('techBlog')}>
+          <ListItem button>
+            <ListItemIcon>
+              <PostAddIcon />
+            </ListItemIcon>
+            <ListItemText primary="Tech blog" />
           </ListItem>
         </div>
       </List>
@@ -179,18 +232,8 @@ function CustomDrawer(props: Props): JSX.Element {
     setMobileOpen(true);
   };
 
-  const handleTechBlogClick = () => {
-    setCurrentPageValue('techBlog');
-    setMobileOpen(false);
-  };
-
-  const handleJobBoardClick = () => {
-    setCurrentPageValue('jobBoard');
-    setMobileOpen(false);
-  };
-
-  const handleDiscussionBoardClick = () => {
-    setCurrentPageValue('discussionBoard');
+  const handleLeftSideMenuItemClick = (currentPageValue: string) => {
+    setCurrentPageValue(currentPageValue);
     setMobileOpen(false);
   };
 
@@ -206,6 +249,30 @@ function CustomDrawer(props: Props): JSX.Element {
     let currentPage = null;
 
     switch (currentPageValue) {
+      case 'studyForInterview':
+        currentPage = <div>studyForInterview</div>;
+        break;
+      case 'takeAMockInterview':
+        currentPage = <div>takeAMockInterview</div>;
+        break;
+      case 'interviewOthers':
+        currentPage = <div>interviewOthers</div>;
+        break;
+      case 'discussionBoard':
+        currentPage = <DiscussionBoard postsClick={() => handleCreatePostButtonClick()} />;
+        break;
+      case 'applyForJobs':
+        currentPage = <ApplyForJobs />;
+        break;
+      case 'participateInHackathons':
+        currentPage = <div>participateInHackathons</div>;
+        break;
+      case 'inviteYourFriends':
+        currentPage = <div>inviteYourFriends</div>;
+        break;
+      case 'becomeAStudentTechAmbassador':
+        currentPage = <div>becomeAStudentTechAmbassador</div>;
+        break;
       case 'techBlog':
         currentPage = (
           <div>
@@ -219,16 +286,10 @@ function CustomDrawer(props: Props): JSX.Element {
         );
         break;
       case 'createTechBlog':
-        currentPage = <CreateTechBlog techBlogClick={() => handleTechBlogClick()} />;
-        break;
-      case 'jobBoard':
-        currentPage = <JobBoard />;
-        break;
-      case 'discussionBoard':
-        currentPage = <DiscussionBoard postsClick={() => handleCreatePostButtonClick()} />;
+        currentPage = <CreateTechBlog techBlogClick={() => handleLeftSideMenuItemClick('techBlog')} />;
         break;
       case 'createPosts':
-        currentPage = <CreatePosts discussionBoardClick={() => handleDiscussionBoardClick()} />;
+        currentPage = <CreatePosts discussionBoardClick={() => handleLeftSideMenuItemClick('discussionBoard')} />;
         break;
       case 'accountSettings':
         currentPage = <AccountSettings />;
