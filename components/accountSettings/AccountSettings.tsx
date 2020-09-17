@@ -36,6 +36,68 @@ function AccountSettings(): JSX.Element {
     }
   };
 
+  const subscribeTopic = async () => {
+    const firebaseCurrentToken = localStorage.getItem('firebaseCurrentToken');
+    const users_id = localStorage.getItem('usersId');
+
+    if (users_id) {
+      const response = await fetch(`/api/firebase/subscribe-topic`, {
+        method: 'POST',
+        body: JSON.stringify({
+          registrationTokenList: [firebaseCurrentToken],
+          topic: 'all',
+          users_id: users_id,
+        }),
+      });
+      if (response) {
+        const responseData = await response.json();
+        console.log('response.status = ', response.status);
+        console.log('responseData = ', responseData);
+
+        if (response.status === 200) {
+          setSnackBarStatus(true);
+          setSnackBarType('success');
+          setSnackBarMessage('subscribe topic success');
+        } else {
+          setSnackBarStatus(true);
+          setSnackBarType('error');
+          setSnackBarMessage('subscribe topic error');
+        }
+      }
+    }
+  };
+
+  const unsubscribeTopic = async () => {
+    const firebaseCurrentToken = localStorage.getItem('firebaseCurrentToken');
+    const users_id = localStorage.getItem('usersId');
+
+    if (users_id) {
+      const response = await fetch(`/api/firebase/unsubscribe-topic`, {
+        method: 'POST',
+        body: JSON.stringify({
+          registrationTokenList: [firebaseCurrentToken],
+          topic: 'all',
+          users_id: users_id,
+        }),
+      });
+      if (response) {
+        const responseData = await response.json();
+        console.log('response.status = ', response.status);
+        console.log('responseData = ', responseData);
+
+        if (response.status === 200) {
+          setSnackBarStatus(true);
+          setSnackBarType('success');
+          setSnackBarMessage('unsubscribe topic success');
+        } else {
+          setSnackBarStatus(true);
+          setSnackBarType('error');
+          setSnackBarMessage('unsubscribe topic error');
+        }
+      }
+    }
+  };
+
   const handleFirstNameInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) {
       setFirstName(e.target.value);
@@ -130,6 +192,12 @@ function AccountSettings(): JSX.Element {
 
   const handleSwitchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNotificationStatus(e.target.checked);
+
+    if (e.target.checked) {
+      subscribeTopic();
+    } else {
+      unsubscribeTopic();
+    }
   };
 
   return (
