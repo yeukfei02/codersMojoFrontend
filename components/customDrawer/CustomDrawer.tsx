@@ -21,7 +21,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
-import { pink } from '@material-ui/core/colors';
+import { purple } from '@material-ui/core/colors';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
@@ -80,9 +80,9 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       flexGrow: 1,
     },
-    pink: {
-      color: theme.palette.getContrastText(pink[500]),
-      backgroundColor: pink[500],
+    purple: {
+      color: theme.palette.getContrastText(purple[500]),
+      backgroundColor: purple[500],
     },
   }),
 );
@@ -335,7 +335,7 @@ function CustomDrawer(props: Props): JSX.Element {
             </Typography>
 
             <Avatar
-              className={`${classes.pink} pointer`}
+              className={`${classes.purple} pointer`}
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleMenu}
