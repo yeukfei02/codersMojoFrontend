@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Card from '@material-ui/core/Card';
 import Select from 'react-select';
+import Button from '@material-ui/core/Button';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
@@ -203,13 +204,14 @@ function CreatePosts(props: any): JSX.Element {
             />
           </div>
 
-          <button
-            type="submit"
-            className="btn btn-success btn-lg w-100 my-3"
+          <Button
+            className="w-100 my-3"
+            variant="contained"
+            color="secondary"
             onClick={() => handleSubmitButtonClick(title, description, tag, users_id)}
           >
             Submit
-          </button>
+          </Button>
 
           <div className="d-flex justify-content-center mt-5">
             <span className="pointer hover-item" onClick={() => handleBackClick()}>

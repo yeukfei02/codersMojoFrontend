@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Card from '@material-ui/core/Card';
 import Select from 'react-select';
+import Button from '@material-ui/core/Button';
+import { DropzoneArea } from 'material-ui-dropzone';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
@@ -71,6 +73,12 @@ function CreateTechBlog(props: any): JSX.Element {
     if (users_id) {
       const userIdInt = parseInt(users_id, 10);
       setUsers_id(userIdInt);
+    }
+  };
+
+  const handleFilesUpload = (files: any[]) => {
+    if (files && files.length === 1) {
+      console.log('files = ', files);
     }
   };
 
@@ -156,6 +164,21 @@ function CreateTechBlog(props: any): JSX.Element {
 
           <h4 className="text-center my-5 font-weight-bold">Create tech blog</h4>
 
+          <div className="my-4">
+            <DropzoneArea
+              acceptedFiles={['image/*']}
+              dropzoneText={'Drag and drop an image here or click'}
+              filesLimit={1}
+              onChange={handleFilesUpload}
+              alertSnackbarProps={{
+                anchorOrigin: {
+                  horizontal: 'center',
+                  vertical: 'top',
+                },
+              }}
+            />
+          </div>
+
           <div className="form-group">
             <label htmlFor="title">Title</label>
             <input type="text" className="form-control" id="title" onChange={(e) => handleTitleInputChange(e)} />
@@ -183,13 +206,14 @@ function CreateTechBlog(props: any): JSX.Element {
             />
           </div>
 
-          <button
-            type="submit"
-            className="btn btn-success btn-lg w-100 my-3"
+          <Button
+            className="w-100 my-3"
+            variant="contained"
+            color="secondary"
             onClick={() => handleSubmitButtonClick(title, description, tag, users_id)}
           >
             Submit
-          </button>
+          </Button>
 
           <div className="d-flex justify-content-center mt-5">
             <span className="pointer hover-item" onClick={() => handleBackClick()}>

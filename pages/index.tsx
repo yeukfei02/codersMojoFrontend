@@ -13,10 +13,10 @@ import MainView from '../components/mainView/MainView';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#fdbdb8',
+      main: '#eaeff5',
     },
     secondary: {
-      main: '#F6820D',
+      main: '#6f42c1',
     },
   },
 });

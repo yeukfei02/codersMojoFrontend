@@ -1,11 +1,23 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
+import Button from '@material-ui/core/Button';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
 import { validateEmail } from '../../common/common';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#eaeff5',
+    },
+    secondary: {
+      main: '#6f42c1',
+    },
+  },
+});
 
 const useStyles = makeStyles({
   root: {
@@ -74,50 +86,53 @@ function ForgotPassword(): JSX.Element {
   };
 
   return (
-    <div style={{ margin: '5em auto' }}>
-      <NextHead />
+    <MuiThemeProvider theme={theme}>
+      <div style={{ margin: '5em auto' }}>
+        <NextHead />
 
-      <div className="container d-flex justify-content-center">
-        <Card className={classes.root} variant="outlined">
-          <div className="my-2 d-flex justify-content-center">
-            <img src="/logo.png" width="200" height="65" alt="" loading="lazy" />
-          </div>
+        <div className="container d-flex justify-content-center">
+          <Card className={classes.root} variant="outlined">
+            <div className="my-2 d-flex justify-content-center">
+              <img src="/logo.png" width="200" height="65" alt="" loading="lazy" />
+            </div>
 
-          <h4 className="text-center my-5 font-weight-bold">Forgot Password</h4>
+            <h4 className="text-center my-5 font-weight-bold">Forgot Password</h4>
 
-          <div className="form-group">
-            <label htmlFor="exampleInputEmail1">Email</label>
-            <input
-              type="email"
-              className="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              onChange={(e) => handleEmailInputChange(e)}
-            />
-          </div>
-          <button
-            type="submit"
-            className="btn btn-success btn-lg w-100 my-3"
-            onClick={() => handleSubmitButtonClick(email)}
-          >
-            Submit
-          </button>
+            <div className="form-group">
+              <label htmlFor="exampleInputEmail1">Email</label>
+              <input
+                type="email"
+                className="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                onChange={(e) => handleEmailInputChange(e)}
+              />
+            </div>
+            <Button
+              className="w-100 my-3"
+              variant="contained"
+              color="secondary"
+              onClick={() => handleSubmitButtonClick(email)}
+            >
+              Submit
+            </Button>
 
-          <div className="d-flex justify-content-center mt-5">
-            <span className="pointer hover-item" onClick={() => handleBackClick()}>
-              Back
-            </span>
-          </div>
-        </Card>
+            <div className="d-flex justify-content-center mt-5">
+              <span className="pointer hover-item" onClick={() => handleBackClick()}>
+                Back
+              </span>
+            </div>
+          </Card>
+        </div>
+
+        <CustomSnackBar
+          snackBarStatus={snackBarStatus}
+          snackBarType={snackBarType}
+          snackBarMessage={snackBarMessage}
+          closeSnackBar={() => handleCloseSnackBar()}
+        />
       </div>
-
-      <CustomSnackBar
-        snackBarStatus={snackBarStatus}
-        snackBarType={snackBarType}
-        snackBarMessage={snackBarMessage}
-        closeSnackBar={() => handleCloseSnackBar()}
-      />
-    </div>
+    </MuiThemeProvider>
   );
 }
 
