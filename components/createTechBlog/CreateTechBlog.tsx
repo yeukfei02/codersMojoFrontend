@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Card from '@material-ui/core/Card';
 import Select from 'react-select';
+import { DropzoneArea } from 'material-ui-dropzone';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
@@ -71,6 +72,12 @@ function CreateTechBlog(props: any): JSX.Element {
     if (users_id) {
       const userIdInt = parseInt(users_id, 10);
       setUsers_id(userIdInt);
+    }
+  };
+
+  const handleFilesUpload = (files: any[]) => {
+    if (files && files.length === 1) {
+      console.log('files = ', files);
     }
   };
 
@@ -155,6 +162,21 @@ function CreateTechBlog(props: any): JSX.Element {
           </div>
 
           <h4 className="text-center my-5 font-weight-bold">Create tech blog</h4>
+
+          <div className="my-4">
+            <DropzoneArea
+              acceptedFiles={['image/*']}
+              dropzoneText={'Drag and drop an image here or click'}
+              filesLimit={1}
+              onChange={handleFilesUpload}
+              alertSnackbarProps={{
+                anchorOrigin: {
+                  horizontal: 'center',
+                  vertical: 'top',
+                },
+              }}
+            />
+          </div>
 
           <div className="form-group">
             <label htmlFor="title">Title</label>

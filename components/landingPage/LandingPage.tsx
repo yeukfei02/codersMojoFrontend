@@ -98,11 +98,9 @@ function LandingPage(): JSX.Element {
     <div>
       <NextHead />
 
-      <div className="text-center">
-        <span style={{ background: 'lightblue' }}>Student Tech Ambassdor Applications are now open. Apply here</span>
-      </div>
+      <div className="text-center font-weight-bold">Student Tech Ambassdor Applications are now open. Apply here</div>
 
-      <nav className="my-4 navbar navbar-expand-lg navbar-light">
+      <nav className="my-3 navbar navbar-expand-lg navbar-light">
         <a className="navbar-brand" href="/">
           <img src="/logo.png" width="200" height="65" alt="" loading="lazy" />
         </a>
@@ -125,7 +123,7 @@ function LandingPage(): JSX.Element {
               Tech Blog
             </div>
             <div onClick={() => handleBecomeAStudentTechAmbassadorClick()} className="mx-3 pointer hover-item">
-              <span style={{ background: 'lightblue' }}>Become a Student Tech Ambassador</span>
+              Become a Student Tech Ambassador
             </div>
             <div onClick={() => handleLoginOrSignupClick()} className="mx-3 pointer hover-item">
               Login/Signup
@@ -134,7 +132,7 @@ function LandingPage(): JSX.Element {
         </div>
       </nav>
 
-      <div style={{ margin: '4em auto' }}>
+      <div style={{ margin: '5em auto' }}>
         <h4 className="text-center font-weight-bold">
           CodersMojo is an AI-based Peer-to-Peer Interactive Tech Interview Platform for Women
         </h4>

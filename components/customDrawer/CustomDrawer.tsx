@@ -109,7 +109,7 @@ function CustomDrawer(props: Props): JSX.Element {
   const open = Boolean(anchorEl);
 
   const drawer = (
-    <div>
+    <div style={{ background: '#eaeff5', minHeight: '100vh' }}>
       <div className={classes.toolbar} />
       <Divider style={{ marginTop: '0.8em' }} />
       <List>
