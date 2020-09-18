@@ -106,7 +106,7 @@ function CreateTechBlog(props: any): JSX.Element {
   };
 
   const handleSubmitButtonClick = async (title: string, description: string, tag: string, users_id: number) => {
-    if (title && description && tag && users_id) {
+    if (imageFile && title && description && tag && users_id) {
       await uploadTechBlogFile(imageFile);
       await createTechBlog(title, description, tag, users_id);
     }
