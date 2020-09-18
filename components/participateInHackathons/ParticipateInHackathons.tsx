@@ -131,7 +131,7 @@ function ParticipateInHackathons(): JSX.Element {
 
   const handleParticipateOrEnrollClick = () => {
     console.log(123123);
-  }
+  };
 
   return (
     <div>
