@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Select from 'react-select';
 
@@ -13,7 +14,16 @@ const selectStyles = {
   }),
 };
 
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    padding: theme.spacing(3, 2),
+    flexGrow: 1,
+  },
+}));
+
 function ParticipateInHackathons(): JSX.Element {
+  const classes = useStyles();
+
   const [selectedHackathonList, setSelectedHackathonList] = useState<any[]>([]);
   const [selectedHackathon, setSelectedHackathon] = useState<any>(null);
 
@@ -90,14 +100,14 @@ function ParticipateInHackathons(): JSX.Element {
     }
   };
 
-  const renderFirstColumnHackathonsDiv = (hackathonsList: any[]) => {
+  const renderHackathonsDiv = (hackathonsList: any[]) => {
     let hackathonsDiv = null;
 
     if (hackathonsList) {
       hackathonsDiv = hackathonsList.map((item: any, i: number) => {
         return (
-          <Grid key={i} item xs={4}>
-            <div className="card w-100">
+          <Grid key={i} item xs={12} sm={4}>
+            <div className="card">
               <div className="card-body">
                 <img src={item.image} className="card-img-top" alt="" />
 
@@ -151,9 +161,11 @@ function ParticipateInHackathons(): JSX.Element {
           />
         </div>
 
-        <Grid container spacing={3}>
-          {renderFirstColumnHackathonsDiv(hackathonsList)}
-        </Grid>
+        <div className={classes.root}>
+          <Grid container spacing={3}>
+            {renderHackathonsDiv(hackathonsList)}
+          </Grid>
+        </div>
       </div>
     </div>
   );
