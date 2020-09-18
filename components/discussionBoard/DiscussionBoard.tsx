@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Button from '@material-ui/core/Button';
 
 import NextHead from '../nextHead/NextHead';
 
@@ -199,9 +200,9 @@ function DiscussionBoard(props: any): JSX.Element {
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                   <h5 className="my-2">CodersMojo Discussion Board</h5>
                   <div style={{ marginLeft: 'auto' }}>
-                    <button type="submit" className="btn btn-primary" onClick={() => props.postsClick()}>
+                    <Button variant="contained" color="secondary" onClick={() => props.postsClick()}>
                       Create post
-                    </button>
+                    </Button>
                   </div>
                 </div>
 

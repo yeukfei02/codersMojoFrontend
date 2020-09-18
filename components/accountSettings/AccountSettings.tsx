@@ -3,6 +3,7 @@ import Card from '@material-ui/core/Card';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import Button from '@material-ui/core/Button';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
@@ -234,13 +235,14 @@ function AccountSettings(): JSX.Element {
             />
           </div>
 
-          <button
-            type="submit"
-            className="btn btn-success btn-lg w-100 my-3"
+          <Button
+            className="w-100 my-3"
+            variant="contained"
+            color="secondary"
             onClick={() => handleChangeUserCredentialsButtonClick(firstName, lastName)}
           >
             Change User Credentials
-          </button>
+          </Button>
         </Card>
       </div>
 
@@ -314,13 +316,14 @@ function AccountSettings(): JSX.Element {
             />
           </div>
 
-          <button
-            type="submit"
-            className="btn btn-success btn-lg w-100 my-3"
+          <Button
+            className="w-100 my-3"
+            variant="contained"
+            color="secondary"
             onClick={() => handleChangePasswordButtonClick(oldPassword, newPassword)}
           >
             Change Password
-          </button>
+          </Button>
         </Card>
       </div>
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
+import Button from '@material-ui/core/Button';
 
 import NextHead from '../nextHead/NextHead';
 
@@ -277,13 +278,14 @@ function ApplyForJobs(): JSX.Element {
               />
             </div>
             <div className="col-sm">
-              <button
-                type="submit"
-                className="btn btn-success btn w-100 my-3"
+              <Button
+                className="w-100 my-3"
+                variant="contained"
+                color="secondary"
                 onClick={() => handleSearchButtonClick(type, department, location)}
               >
                 Search
-              </button>
+              </Button>
             </div>
           </div>
         </div>

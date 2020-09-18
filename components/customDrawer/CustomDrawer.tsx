@@ -25,6 +25,7 @@ import { pink } from '@material-ui/core/colors';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
 import NextHead from '../nextHead/NextHead';
 import StudyForInterview from '../studyForInterview/StudyForInterview';
@@ -286,9 +287,9 @@ function CustomDrawer(props: Props): JSX.Element {
         currentPage = (
           <div>
             <div className="d-flex justify-content-end mx-3 mb-4">
-              <button type="button" className="btn btn-primary btn" onClick={() => handleCreateTechBlog()}>
+              <Button variant="contained" color="secondary" onClick={() => handleCreateTechBlog()}>
                 Create tech blog
-              </button>
+              </Button>
             </div>
             <TechBlogListView />
           </div>

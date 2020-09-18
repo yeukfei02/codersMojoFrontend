@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Select from 'react-select';
+import Button from '@material-ui/core/Button';
 
 import NextHead from '../nextHead/NextHead';
 
@@ -125,9 +126,9 @@ function ParticipateInHackathons(): JSX.Element {
                 </h6>
 
                 <div className="d-flex justify-content-end">
-                  <button type="button" className="btn btn-primary" onClick={() => handleParticipateOrEnrollClick()}>
+                  <Button variant="contained" color="secondary" onClick={() => handleParticipateOrEnrollClick()}>
                     Participate/enroll
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>

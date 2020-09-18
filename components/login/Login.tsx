@@ -1,11 +1,23 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
+import Button from '@material-ui/core/Button';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
 import { validateEmail } from '../../common/common';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#eaeff5',
+    },
+    secondary: {
+      main: '#6f42c1',
+    },
+  },
+});
 
 const useStyles = makeStyles({
   root: {
@@ -110,74 +122,77 @@ function Login(): JSX.Element {
   };
 
   return (
-    <div style={{ margin: '5em auto' }}>
-      <NextHead />
+    <MuiThemeProvider theme={theme}>
+      <div style={{ margin: '5em auto' }}>
+        <NextHead />
 
-      <div className="container">
-        <Card className={classes.root} variant="outlined">
-          <div className="row">
-            <div className="col-sm p-3">
-              <div className="d-flex justify-content-center">
-                <img src="/login-image.jpg" width="500" height="500" alt="" />
+        <div className="container">
+          <Card className={classes.root} variant="outlined">
+            <div className="row">
+              <div className="col-sm p-3">
+                <div className="d-flex justify-content-center">
+                  <img src="/login-image.jpg" width="500" height="500" alt="" />
+                </div>
               </div>
-            </div>
-            <div className="col-sm p-3">
-              <h4 className="text-center mb-5 font-weight-bold">Member Login</h4>
-              <div className="form-group">
-                <label htmlFor="exampleInputEmail1">Email</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                  onChange={(e) => handleEmailInputChange(e)}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="exampleInputPassword1">Password</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="exampleInputPassword1"
-                  onChange={(e) => handlePasswordInputChange(e)}
-                />
-              </div>
-              <button
-                type="submit"
-                className="btn btn-success btn-lg w-100 my-3"
-                onClick={() => handleLoginButtonClick(email, password)}
-              >
-                Login
-              </button>
-              <div className="d-flex justify-content-center my-3">
-                <span className="pointer hover-item" onClick={() => handleForgotPasswordClick()}>
-                  Forgot Password?
-                </span>
-              </div>
-              <div className="d-flex justify-content-center" style={{ marginTop: '5em' }}>
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                  <span className="pointer hover-item" onClick={() => handleCreateYourAccountClick()}>
-                    Create your account &rarr;
+              <div className="col-sm p-3">
+                <h4 className="text-center mb-5 font-weight-bold">Member Login</h4>
+                <div className="form-group">
+                  <label htmlFor="exampleInputEmail1">Email</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    onChange={(e) => handleEmailInputChange(e)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="exampleInputPassword1">Password</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="exampleInputPassword1"
+                    onChange={(e) => handlePasswordInputChange(e)}
+                  />
+                </div>
+                <Button
+                  className="w-100 my-3"
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => handleLoginButtonClick(email, password)}
+                >
+                  Login
+                </Button>
+                <div className="d-flex justify-content-center my-3">
+                  <span className="pointer hover-item" onClick={() => handleForgotPasswordClick()}>
+                    Forgot Password?
                   </span>
-                  <div className="d-flex justify-content-center my-3">
-                    <span className="pointer hover-item" onClick={() => handleBackClick()}>
-                      Back
+                </div>
+                <div className="d-flex justify-content-center" style={{ marginTop: '5em' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <span className="pointer hover-item" onClick={() => handleCreateYourAccountClick()}>
+                      Create your account &rarr;
                     </span>
+                    <div className="d-flex justify-content-center my-3">
+                      <span className="pointer hover-item" onClick={() => handleBackClick()}>
+                        Back
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </Card>
-      </div>
+          </Card>
+        </div>
 
-      <CustomSnackBar
-        snackBarStatus={snackBarStatus}
-        snackBarType={snackBarType}
-        snackBarMessage={snackBarMessage}
-        closeSnackBar={() => handleCloseSnackBar()}
-      />
-    </div>
+        <CustomSnackBar
+          snackBarStatus={snackBarStatus}
+          snackBarType={snackBarType}
+          snackBarMessage={snackBarMessage}
+          closeSnackBar={() => handleCloseSnackBar()}
+        />
+      </div>
+    </MuiThemeProvider>
   );
 }
 

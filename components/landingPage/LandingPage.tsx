@@ -5,6 +5,7 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import { pink, blue, red } from '@material-ui/core/colors';
+import Button from '@material-ui/core/Button';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
@@ -166,9 +167,9 @@ function LandingPage(): JSX.Element {
       </div>
 
       <div className="d-flex justify-content-center" style={{ marginTop: '2em' }}>
-        <button type="submit" className="btn btn-primary btn-lg" onClick={() => handleSubscribeButtonClick()}>
+        <Button variant="contained" color="secondary" onClick={() => handleSubscribeButtonClick()}>
           Subscribe
-        </button>
+        </Button>
       </div>
 
       <div className="d-flex justify-content-center" style={{ marginTop: '5em' }}>
