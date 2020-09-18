@@ -22,6 +22,8 @@ export default async (_req: NextApiRequest, res: NextApiResponse) => {
       });
     }
   } catch (e) {
+    console.log('error = ', e);
+
     res.status(400).json({
       message: e.message,
     });
