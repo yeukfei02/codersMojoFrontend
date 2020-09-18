@@ -257,11 +257,6 @@ function AccountSettings(): JSX.Element {
               </button>
             </div>
             <div className="mx-2">
-              <button type="button" className="btn btn-outline-secondary">
-                Apple Calendar
-              </button>
-            </div>
-            <div className="mx-2">
               <button type="button" className="btn btn-outline-success">
                 Outlook Calendar
               </button>

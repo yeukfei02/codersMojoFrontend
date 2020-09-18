@@ -20,6 +20,7 @@ function CreateTechBlog(props: any): JSX.Element {
   const [selectedTagList, setSelectedTagList] = useState<any[]>([]);
   const [selectedTag, setSelectedTag] = useState<any>(null);
 
+  const [imageFile, setImageFile] = useState(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [tag, setTag] = useState('');
@@ -78,7 +79,7 @@ function CreateTechBlog(props: any): JSX.Element {
 
   const handleFilesUpload = (files: any[]) => {
     if (files && files.length === 1) {
-      console.log('files = ', files);
+      setImageFile(files[0]);
     }
   };
 
@@ -104,9 +105,31 @@ function CreateTechBlog(props: any): JSX.Element {
     }
   };
 
-  const handleSubmitButtonClick = (title: string, description: string, tag: string, users_id: number) => {
-    if (title && description && tag && users_id) {
-      createTechBlog(title, description, tag, users_id);
+  const handleSubmitButtonClick = async (title: string, description: string, tag: string, users_id: number) => {
+    if (imageFile && title && description && tag && users_id) {
+      await uploadTechBlogFile(imageFile);
+      await createTechBlog(title, description, tag, users_id);
+    }
+  };
+
+  const uploadTechBlogFile = async (imageFile: any) => {
+    const token = localStorage.getItem('token');
+    const imageFileBlob = new Blob([JSON.stringify(imageFile)], { type: 'application/json' });
+
+    const bodyFormData = new FormData();
+    bodyFormData.append('file', imageFileBlob);
+
+    const response = await fetch(`/api/tech-blog/upload-file`, {
+      method: 'POST',
+      body: JSON.stringify({
+        bodyFormData: bodyFormData,
+        token: token,
+      }),
+    });
+    if (response) {
+      const responseData = await response.json();
+      console.log('response status = ', response.status);
+      console.log('responseData = ', responseData);
     }
   };
 
