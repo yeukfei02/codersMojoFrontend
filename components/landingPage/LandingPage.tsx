@@ -140,7 +140,9 @@ function LandingPage(): JSX.Element {
       </div>
 
       <div style={{ margin: '4em auto' }}>
-        <h1 className="text-center font-weight-bold quantico display-3">{weAreLaunchingSoonText}</h1>
+        <h1 className="text-center font-weight-bold quantico display-3" style={{ color: '#28ACEA' }}>
+          {weAreLaunchingSoonText}
+        </h1>
       </div>
 
       <div className="text-center font-weight-bold" style={{ margin: '1em auto' }}>
