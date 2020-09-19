@@ -74,13 +74,15 @@ function InviteYourFriends(): JSX.Element {
   };
 
   const handleSendButtonClick = (inviteYourFriendsEmail: string) => {
-    const isEmail = validateEmail(inviteYourFriendsEmail);
-    if (isEmail) {
-      console.log(123);
-    } else {
-      setSnackBarStatus(true);
-      setSnackBarType('error');
-      setSnackBarMessage('Wrong email format');
+    if (inviteYourFriendsEmail) {
+      const isEmail = validateEmail(inviteYourFriendsEmail);
+      if (isEmail) {
+        console.log(123);
+      } else {
+        setSnackBarStatus(true);
+        setSnackBarType('error');
+        setSnackBarMessage('Wrong email format');
+      }
     }
   };
 
