@@ -3,9 +3,14 @@ import Card from '@material-ui/core/Card';
 import Select from 'react-select';
 import Button from '@material-ui/core/Button';
 import { DropzoneArea } from 'material-ui-dropzone';
+import axios from 'axios';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
+
+import { getRootUrl } from '../../common/common';
+
+const ROOT_URL = getRootUrl();
 
 const selectStyles = {
   container: (base: any, state: any) => ({
@@ -107,38 +112,40 @@ function CreateTechBlog(props: any): JSX.Element {
 
   const handleSubmitButtonClick = async (title: string, description: string, tag: string, users_id: number) => {
     if (imageFile && title && description && tag && users_id) {
-      await uploadTechBlogFile(imageFile);
-      await createTechBlog(title, description, tag, users_id);
+      const imageUrl = await uploadTechBlogFile(imageFile);
+      await createTechBlog(imageUrl, title, description, tag, users_id);
     }
   };
 
   const uploadTechBlogFile = async (imageFile: any) => {
     const token = localStorage.getItem('token');
-    const imageFileBlob = new Blob([JSON.stringify(imageFile)], { type: 'application/json' });
 
     const bodyFormData = new FormData();
-    bodyFormData.append('file', imageFileBlob);
+    bodyFormData.append('file', imageFile);
 
-    const response = await fetch(`/api/tech-blog/upload-file`, {
-      method: 'POST',
-      body: JSON.stringify({
-        bodyFormData: bodyFormData,
-        token: token,
-      }),
+    const response = await axios({
+      method: 'post',
+      url: `${ROOT_URL}/tech-blog/upload-file`,
+      data: bodyFormData,
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' },
     });
-    if (response) {
-      const responseData = await response.json();
-      console.log('response status = ', response.status);
-      console.log('responseData = ', responseData);
+
+    let imageUrl = '';
+    if (response.status === 201) {
+      const responseData = response.data;
+      imageUrl = responseData.imageUrl;
     }
+
+    return imageUrl;
   };
 
-  const createTechBlog = async (title: string, description: string, tag: string, users_id: number) => {
+  const createTechBlog = async (image: string, title: string, description: string, tag: string, users_id: number) => {
     const token = localStorage.getItem('token');
 
     const response = await fetch(`/api/tech-blog/create-tech-blog`, {
       method: 'POST',
       body: JSON.stringify({
+        image: image,
         title: title,
         description: description,
         tag: tag,
