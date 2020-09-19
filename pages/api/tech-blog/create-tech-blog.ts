@@ -11,6 +11,7 @@ export default async (_req: NextApiRequest, res: NextApiResponse) => {
     const response = await axios.post(
       `${ROOT_URL}/tech-blog`,
       {
+        image: reqBody.image,
         title: reqBody.title,
         description: reqBody.description,
         tag: reqBody.tag,
