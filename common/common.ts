@@ -5,7 +5,7 @@ export const getRootUrl = (): string => {
   if (environment === 'development') {
     result = 'http://localhost:3000/api';
   } else {
-    result = 'https://coders-mojo-backend.herokuapp.com/api';
+    result = 'http://coders-mojo-backend-staging-env.ap-southeast-1.elasticbeanstalk.com/api';
   }
 
   return result;
