@@ -112,7 +112,7 @@ function CustomDrawer(props: Props): JSX.Element {
   const drawer = (
     <div style={{ background: '#eaeff5', minHeight: '100vh' }}>
       <div className={classes.toolbar} />
-      <Divider style={{ marginTop: '0.8em' }} />
+      <Divider />
       <List>
         <div onClick={() => handleLeftSideMenuItemClick('studyForInterview')}>
           <ListItem button>
@@ -193,8 +193,32 @@ function CustomDrawer(props: Props): JSX.Element {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   useEffect(() => {
+    setIcon();
     getAvatarText();
   }, []);
+
+  const setIcon = () => {
+    const div = document.querySelector('.MuiPaper-root.MuiDrawer-paper > div > div');
+    if (div) {
+      const divChild = document.querySelector('.MuiPaper-root.MuiDrawer-paper > div > div')?.childNodes;
+
+      if (divChild && divChild.length === 0) {
+        const divContainer = document.createElement('div');
+        divContainer.setAttribute('class', 'd-flex justify-content-center');
+
+        const img = document.createElement('img');
+        img.setAttribute('src', 'logo.png');
+        img.setAttribute('width', '200');
+        img.setAttribute('height', '65');
+
+        divContainer.appendChild(img);
+
+        if (div != null) {
+          div.appendChild(divContainer);
+        }
+      }
+    }
+  };
 
   const getAvatarText = () => {
     const firstName = localStorage.getItem('firstName');
@@ -329,9 +353,9 @@ function CustomDrawer(props: Props): JSX.Element {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              <a className="navbar-brand" href="/">
+              {/* <a className="navbar-brand" href="/">
                 <img src="/logo.png" width="200" height="65" alt="" loading="lazy" />
-              </a>
+              </a> */}
             </Typography>
 
             <Avatar
