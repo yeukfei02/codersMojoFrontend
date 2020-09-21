@@ -277,7 +277,7 @@ function AccountSettings(): JSX.Element {
                     checked={notificationStatus}
                     onChange={handleSwitchChange}
                     name="Notifications"
-                    color="primary"
+                    color="secondary"
                   />
                 }
                 label={notificationStatus ? 'Notifications (on)' : 'Notifications (off)'}
