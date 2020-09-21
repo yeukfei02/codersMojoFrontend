@@ -124,9 +124,16 @@ function ParticipateInHackathons(): JSX.Element {
                 <h6 className="my-4">
                   <b>Details:</b> {item.details}
                 </h6>
+                <h6 className="my-4">
+                  <b>Date:</b> {item.date_time}
+                </h6>
 
                 <div className="d-flex justify-content-end">
-                  <Button variant="contained" color="secondary" onClick={() => handleParticipateOrEnrollClick()}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => handleParticipateOrEnrollClick(item.link)}
+                  >
                     Participate/enroll
                   </Button>
                 </div>
@@ -140,8 +147,8 @@ function ParticipateInHackathons(): JSX.Element {
     return hackathonsDiv;
   };
 
-  const handleParticipateOrEnrollClick = () => {
-    console.log(123123);
+  const handleParticipateOrEnrollClick = (link: string) => {
+    window.open(link);
   };
 
   return (
