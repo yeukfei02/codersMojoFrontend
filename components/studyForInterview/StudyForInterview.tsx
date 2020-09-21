@@ -29,7 +29,7 @@ function StudyForInterview(): JSX.Element {
                   borderRight: '0.1em lightgray solid',
                 }}
               >
-                <img src="/python.png" className="img-thumbnail" width="100" height="100" alt="" />
+                <img src="/python.png" className="rounded" width="100" height="100" alt="" />
                 <div className="ml-4" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                   <div className="mb-2" style={{ fontWeight: 'bold' }}>
                     Python
@@ -48,7 +48,7 @@ function StudyForInterview(): JSX.Element {
                   borderRight: '0.1em lightgray solid',
                 }}
               >
-                <img src="/machine-learning.png" className="img-thumbnail" width="100" height="100" alt="" />
+                <img src="/machine-learning.png" className="rounded" width="100" height="100" alt="" />
                 <div className="ml-4" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                   <div className="mb-2" style={{ fontWeight: 'bold' }}>
                     Intro to Machine Learning
@@ -67,13 +67,7 @@ function StudyForInterview(): JSX.Element {
                   borderRight: '0.1em lightgray solid',
                 }}
               >
-                <img
-                  src="/intermediate-machine-learning.png"
-                  className="img-thumbnail"
-                  width="100"
-                  height="100"
-                  alt=""
-                />
+                <img src="/intermediate-machine-learning.png" className="rounded" width="100" height="100" alt="" />
                 <div className="ml-4" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                   <div className="mb-2" style={{ fontWeight: 'bold' }}>
                     Intermidate Machine Learning
@@ -95,7 +89,7 @@ function StudyForInterview(): JSX.Element {
                   borderRight: '0.1em lightgray solid',
                 }}
               >
-                <img src="/data-visualization.png" className="img-thumbnail" width="100" height="100" alt="" />
+                <img src="/data-visualization.png" className="rounded" width="100" height="100" alt="" />
                 <div className="ml-4" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                   <div className="mb-2" style={{ fontWeight: 'bold' }}>
                     Data Visualization
@@ -114,7 +108,7 @@ function StudyForInterview(): JSX.Element {
                   borderRight: '0.1em lightgray solid',
                 }}
               >
-                <img src="/pandas.png" className="img-thumbnail" width="100" height="100" alt="" />
+                <img src="/pandas.png" className="rounded" width="100" height="100" alt="" />
                 <div className="ml-4" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                   <div className="mb-2" style={{ fontWeight: 'bold' }}>
                     Pandas
@@ -133,7 +127,7 @@ function StudyForInterview(): JSX.Element {
                   borderRight: '0.1em lightgray solid',
                 }}
               >
-                <img src="/feature-engineering.png" className="img-thumbnail" width="100" height="100" alt="" />
+                <img src="/feature-engineering.png" className="rounded" width="100" height="100" alt="" />
                 <div className="ml-4" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                   <div className="mb-2" style={{ fontWeight: 'bold' }}>
                     Feature Engineering
@@ -150,7 +144,7 @@ function StudyForInterview(): JSX.Element {
                   border: '0.1em lightgray solid',
                 }}
               >
-                <img src="/deep-learning.png" className="img-thumbnail" width="100" height="100" alt="" />
+                <img src="/deep-learning.png" className="rounded" width="100" height="100" alt="" />
                 <div className="ml-4" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                   <div className="mb-2" style={{ fontWeight: 'bold' }}>
                     Deep Learning
