@@ -4,6 +4,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import * as firebase from 'firebase/app';
 import 'firebase/analytics';
 import 'firebase/messaging';
+import is from 'is_js';
 
 import { getFirebaseConfig } from '../common/common';
 
@@ -23,13 +24,21 @@ const theme = createMuiTheme({
 
 // firebase
 let messaging: any = null;
-if (typeof self !== 'undefined' && typeof window !== 'undefined') {
-  if (!firebase.apps.length) {
-    const firebaseConfig = getFirebaseConfig();
-    firebase.initializeApp(firebaseConfig);
+const isDesktop = is.desktop();
+const isAndroid = is.android();
+if (isDesktop || isAndroid) {
+  // chrome or firefox
+  const isNotSafari = is.not.safari();
+  if (isNotSafari) {
+    if (typeof self !== 'undefined' && typeof window !== 'undefined') {
+      if (!firebase.apps.length) {
+        const firebaseConfig = getFirebaseConfig();
+        firebase.initializeApp(firebaseConfig);
 
-    messaging = firebase.messaging();
-    messaging.usePublicVapidKey(process.env.NEXT_PUBLIC_FIREBASE_PUBLIC_VAPID_KEY as string);
+        messaging = firebase.messaging();
+        messaging.usePublicVapidKey(process.env.NEXT_PUBLIC_FIREBASE_PUBLIC_VAPID_KEY as string);
+      }
+    }
   }
 }
 
