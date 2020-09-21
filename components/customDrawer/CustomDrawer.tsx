@@ -335,6 +335,20 @@ function CustomDrawer(props: Props): JSX.Element {
     return currentPage;
   };
 
+  const renderAppBarIcon = () => {
+    let appBarIcon = null;
+
+    if (document.documentElement.clientWidth < 600) {
+      appBarIcon = (
+        <a className="navbar-brand" href="/">
+          <img src="/logo.png" width="200" height="65" alt="" loading="lazy" />
+        </a>
+      );
+    }
+
+    return appBarIcon;
+  };
+
   return (
     <div>
       <NextHead />
@@ -353,9 +367,7 @@ function CustomDrawer(props: Props): JSX.Element {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              {/* <a className="navbar-brand" href="/">
-                <img src="/logo.png" width="200" height="65" alt="" loading="lazy" />
-              </a> */}
+              {renderAppBarIcon()}
             </Typography>
 
             <Avatar
