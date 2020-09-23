@@ -1,6 +1,6 @@
 {
   "name": "with-typescript",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
@@ -34,7 +34,8 @@
     "prettier": "^2.1.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-select": "^3.1.0"
+    "react-select": "^3.1.0",
+    "standard-version": "^9.0.0"
   },
   "devDependencies": {
     "@types/node": "^12.12.21",
@@ -52,7 +53,8 @@
     "heroku-start": "next start -p $PORT",
     "type-check": "tsc",
     "lint": "eslint '*/**/*.{ts,tsx}' --quiet --fix",
-    "commit": "npx git-cz"
+    "commit": "npx git-cz",
+    "release": "standard-version"
   },
   "husky": {
     "hooks": {
