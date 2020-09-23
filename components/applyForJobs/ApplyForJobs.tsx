@@ -60,12 +60,16 @@ function ApplyForJobs(): JSX.Element {
   const getSelectedTypeList = () => {
     const typeList = [
       {
-        label: 'Full time',
-        value: 'Full time',
+        label: 'Full Time',
+        value: 'Full Time',
       },
       {
-        label: 'Part time',
-        value: 'Part time',
+        label: 'Part Time',
+        value: 'Part Time',
+      },
+      {
+        label: 'Contract',
+        value: 'Contract',
       },
       {
         label: 'Remote',
@@ -207,18 +211,16 @@ function ApplyForJobs(): JSX.Element {
 
     if (jobsList) {
       jobsListView = jobsList.map((item: any, i: number) => {
+        const companyUrl = item.company_url;
         return (
           <tr key={i}>
             <td>
-              <div className="my-2">
-                <b>Title:</b> {item.title}
+              <div className="my-2 hover-item pointer" onClick={() => handleCompanyNameClick(companyUrl)}>
+                <b>{item.company}</b>
               </div>
-              <div className="my-2">
-                <b>Description:</b> {item.description}
-              </div>
-              <div className="my-2">
-                <b>Department:</b> {item.department}
-              </div>
+            </td>
+            <td>
+              <div className="my-2">{item.title}</div>
             </td>
             <td>
               <div className="my-2">{item.type}</div>
@@ -232,6 +234,10 @@ function ApplyForJobs(): JSX.Element {
     }
 
     return jobsListView;
+  };
+
+  const handleCompanyNameClick = (companyUrl: string) => {
+    window.open(companyUrl);
   };
 
   return (
@@ -290,10 +296,11 @@ function ApplyForJobs(): JSX.Element {
           </div>
         </div>
 
-        <table className="table table-hover text-center">
+        <table className="table table-bordered text-center">
           <thead>
             <tr>
-              <th scope="col">Jobs</th>
+              <th scope="col">Company</th>
+              <th scope="col">Title</th>
               <th scope="col">Type</th>
               <th scope="col">Location</th>
             </tr>
