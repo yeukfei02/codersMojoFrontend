@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.2...v0.0.3) (2020-09-23)
+
+
+### Features
+
+* 🎸 add standard-version lib ([8b66668](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/8b6666816d02ee33d347998a9977d9815cdeeea9))
+
 ### 0.0.2 (2020-09-23)
 
 
