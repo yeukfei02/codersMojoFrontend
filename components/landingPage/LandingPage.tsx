@@ -152,11 +152,11 @@ function LandingPage(): JSX.Element {
               <div className="my-4" style={{ display: 'flex', flexDirection: 'row' }}>
                 <div className="row">
                   <div className="col-sm-4">
-                    <div className="card">
+                    <div className="card p-3">
                       <div className="card-body">
-                        <h4>For Developers</h4>
+                        <h5>For Developers</h5>
 
-                        <h5 className="my-4">Community</h5>
+                        <h6 className="my-4">Community</h6>
                         <div className="my-3">
                           Practice programming, prepare for interviews, and level up your coding skills with a community
                           of 4M+ developers
@@ -173,13 +173,13 @@ function LandingPage(): JSX.Element {
                     </div>
                   </div>
                   <div className="col-sm-8">
-                    <div className="card">
+                    <div className="card p-3">
                       <div className="card-body">
-                        <h4>For Businesses</h4>
+                        <h5>For Businesses</h5>
 
                         <div className="row">
                           <div className="col-sm">
-                            <h5 className="my-4">Assessments</h5>
+                            <h6 className="my-4">Assessments</h6>
                             <div className="my-3">
                               Remotely assess, interview, and hire developers across all roles based on skills and
                               nothing else
@@ -194,7 +194,7 @@ function LandingPage(): JSX.Element {
                             </Button>
                           </div>
                           <div className="col-sm">
-                            <h5 className="my-4">Hackathons</h5>
+                            <h6 className="my-4">Hackathons</h6>
                             <div className="my-3">
                               Host virtual hackathons and bring together people with diverse skills and solve business
                               challenges
