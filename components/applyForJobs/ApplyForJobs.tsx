@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import Button from '@material-ui/core/Button';
+import _ from 'lodash';
 
 import NextHead from '../nextHead/NextHead';
 
@@ -14,7 +15,7 @@ const selectStyles = {
 };
 
 function ApplyForJobs(): JSX.Element {
-  const [countryList, setCountryList] = useState<any[]>([]);
+  // const [countryList, setCountryList] = useState<any[]>([]);
 
   const [selectedTypeList, setSelectedTypeList] = useState<any[]>([]);
   const [selectedType, setSelectedType] = useState<any>(null);
@@ -32,7 +33,7 @@ function ApplyForJobs(): JSX.Element {
   const [jobsList, setJobsList] = useState<any[]>([]);
 
   useEffect(() => {
-    getCountryList();
+    // getCountryList();
 
     getSelectedTypeList();
     getSelectedDepartmentList();
@@ -41,21 +42,21 @@ function ApplyForJobs(): JSX.Element {
   }, []);
 
   useEffect(() => {
-    getSelectedLocationList(countryList);
-  }, [countryList]);
+    getSelectedLocationList(jobsList);
+  }, [jobsList]);
 
-  const getCountryList = async () => {
-    const response = await fetch(`/api/country`);
-    if (response) {
-      const responseData = await response.json();
-      console.log('response.status = ', response.status);
-      console.log('responseData = ', responseData);
+  // const getCountryList = async () => {
+  //   const response = await fetch(`/api/country`);
+  //   if (response) {
+  //     const responseData = await response.json();
+  //     console.log('response.status = ', response.status);
+  //     console.log('responseData = ', responseData);
 
-      if (responseData) {
-        setCountryList(responseData.result.result);
-      }
-    }
-  };
+  //     if (responseData) {
+  //       setCountryList(responseData.result.result);
+  //     }
+  //   }
+  // };
 
   const getSelectedTypeList = () => {
     const typeList = [
@@ -125,16 +126,17 @@ function ApplyForJobs(): JSX.Element {
     setSelectedDepartmentList(departmentList);
   };
 
-  const getSelectedLocationList = (countryList: any[]) => {
-    if (countryList) {
-      const formateedLocationList = countryList.map((item: any, _: number) => {
+  const getSelectedLocationList = (jobsList: any[]) => {
+    if (jobsList) {
+      const formateedLocationList = jobsList.map((item: any, _: number) => {
         const obj = {
-          label: item.nicename,
-          value: item.nicename,
+          label: item.location,
+          value: item.location,
         };
         return obj;
       });
-      setSelectedLocationList(formateedLocationList);
+      const filteredLocationList = _.uniqBy(formateedLocationList, 'label');
+      setSelectedLocationList(filteredLocationList);
     }
   };
 
