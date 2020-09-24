@@ -131,11 +131,12 @@ function Login(): JSX.Element {
             <div className="row">
               <div className="col-sm p-3">
                 <div className="d-flex justify-content-center">
-                  <img src="/login-image.jpg" width="500" height="500" alt="" />
+                  <img src="/login-image.jpg" style={{ width: '100%' }} alt="" />
                 </div>
               </div>
               <div className="col-sm p-3">
-                <h4 className="text-center mb-5 font-weight-bold">Member Login</h4>
+                <h4 className="text-center mb-5 font-weight-bold">Welcome to Coders Mojo</h4>
+
                 <div className="form-group">
                   <label htmlFor="exampleInputEmail1">Email</label>
                   <input
@@ -146,6 +147,7 @@ function Login(): JSX.Element {
                     onChange={(e) => handleEmailInputChange(e)}
                   />
                 </div>
+
                 <div className="form-group">
                   <label htmlFor="exampleInputPassword1">Password</label>
                   <input
@@ -155,23 +157,28 @@ function Login(): JSX.Element {
                     onChange={(e) => handlePasswordInputChange(e)}
                   />
                 </div>
-                <Button
-                  className="w-100 my-3"
-                  variant="contained"
-                  color="secondary"
-                  onClick={() => handleLoginButtonClick(email, password)}
-                >
-                  Login
-                </Button>
+
+                <div className="d-flex justify-content-center">
+                  <Button
+                    className="w-100 my-3"
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => handleLoginButtonClick(email, password)}
+                  >
+                    Login
+                  </Button>
+                </div>
+
                 <div className="d-flex justify-content-center my-3">
                   <span className="pointer hover-item" onClick={() => handleForgotPasswordClick()}>
                     Forgot Password?
                   </span>
                 </div>
+
                 <div className="d-flex justify-content-center" style={{ marginTop: '5em' }}>
                   <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <span className="pointer hover-item" onClick={() => handleCreateYourAccountClick()}>
-                      Create your account &rarr;
+                      Don’t have an account? Sign up
                     </span>
                     <div className="d-flex justify-content-center my-3">
                       <span className="pointer hover-item" onClick={() => handleBackClick()}>
