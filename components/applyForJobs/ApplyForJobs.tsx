@@ -36,13 +36,15 @@ function ApplyForJobs(): JSX.Element {
     // getCountryList();
 
     getSelectedTypeList();
-    getSelectedDepartmentList();
 
     getJobsList(type, department, location);
   }, []);
 
   useEffect(() => {
-    getSelectedLocationList(jobsList);
+    if (jobsList) {
+      getSelectedDepartmentList(jobsList);
+      getSelectedLocationList(jobsList);
+    }
   }, [jobsList]);
 
   // const getCountryList = async () => {
@@ -80,50 +82,17 @@ function ApplyForJobs(): JSX.Element {
     setSelectedTypeList(typeList);
   };
 
-  const getSelectedDepartmentList = () => {
-    const departmentList = [
-      {
-        label: 'Frontend Developer',
-        value: 'Frontend Developer',
-      },
-      {
-        label: 'Backend Developer',
-        value: 'Backend Developer',
-      },
-      {
-        label: 'Full Stack Developer',
-        value: 'Full Stack Developer',
-      },
-      {
-        label: 'Mobile Developer',
-        value: 'Mobile Developer',
-      },
-      {
-        label: 'iOS Developer',
-        value: 'iOS Developer',
-      },
-      {
-        label: 'Android Developer',
-        value: 'Android Developer',
-      },
-      {
-        label: 'Data Engineer',
-        value: 'Data Engineer',
-      },
-      {
-        label: 'Data Scientist',
-        value: 'Data Scientist',
-      },
-      {
-        label: 'DevOps Engineer',
-        value: 'DevOps Engineer',
-      },
-      {
-        label: 'QA Engineer',
-        value: 'QA Engineer',
-      },
-    ];
-    setSelectedDepartmentList(departmentList);
+  const getSelectedDepartmentList = (jobsList: any[]) => {
+    if (jobsList) {
+      const departmentList = jobsList.map((item: any, _: number) => {
+        const obj = {
+          label: item.title,
+          value: item.title,
+        };
+        return obj;
+      });
+      setSelectedDepartmentList(departmentList);
+    }
   };
 
   const getSelectedLocationList = (jobsList: any[]) => {
