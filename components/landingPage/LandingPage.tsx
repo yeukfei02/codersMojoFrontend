@@ -40,6 +40,10 @@ function LandingPage(): JSX.Element {
     }
   };
 
+  const handleLearnMoreButtonClick = () => {
+    console.log(123);
+  };
+
   const handleSubscribeButtonClick = () => {
     if (email) {
       const isEmail = validateEmail(email);
@@ -133,24 +137,89 @@ function LandingPage(): JSX.Element {
         </div>
       </nav>
 
-      <div style={{ margin: '5em auto' }}>
-        <h4 className="text-center font-weight-bold">
-          CodersMojo is an AI-based Peer-to-Peer Interactive Tech Interview Platform for Women
-        </h4>
-      </div>
+      <div style={{ margin: '2em 4em' }}>
+        <div className="row">
+          <div className="col-sm-8 d-flex justify-content-center">
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <h4 className="text-center font-weight-bold my-3">
+                CodersMojo is an AI-based Peer-to-Peer Interactive Tech Interview Platform for Women
+              </h4>
 
-      <div style={{ margin: '4em auto' }}>
-        <h1 className="text-center font-weight-bold quantico display-3" style={{ color: '#28ACEA' }}>
-          {weAreLaunchingSoonText}
-        </h1>
-      </div>
+              <div className="text-center font-weight-bold quantico display-4" style={{ color: '#28ACEA' }}>
+                {weAreLaunchingSoonText}
+              </div>
 
-      <div className="text-center font-weight-bold" style={{ margin: '1em auto' }}>
-        Girls, let’s break the tech glass ceiling.
-      </div>
+              <div className="my-4" style={{ display: 'flex', flexDirection: 'row' }}>
+                <div className="row">
+                  <div className="col-sm-4">
+                    <div className="card">
+                      <div className="card-body">
+                        <h4>For Developers</h4>
 
-      <div className="text-center font-weight-bold" style={{ margin: '1em auto' }}>
-        Subscribe / Join us for updates
+                        <h5 className="my-4">Community</h5>
+                        <div className="my-3">
+                          Practice programming, prepare for interviews, and level up your coding skills with a community
+                          of 4M+ developers
+                        </div>
+                        <Button
+                          className="my-3"
+                          variant="contained"
+                          color="secondary"
+                          onClick={() => handleLearnMoreButtonClick()}
+                        >
+                          Learn more
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-sm-8">
+                    <div className="card">
+                      <div className="card-body">
+                        <h4>For Businesses</h4>
+
+                        <div className="row">
+                          <div className="col-sm">
+                            <h5 className="my-4">Assessments</h5>
+                            <div className="my-3">
+                              Remotely assess, interview, and hire developers across all roles based on skills and
+                              nothing else
+                            </div>
+                            <Button
+                              className="my-3"
+                              variant="contained"
+                              color="secondary"
+                              onClick={() => handleLearnMoreButtonClick()}
+                            >
+                              Learn more
+                            </Button>
+                          </div>
+                          <div className="col-sm">
+                            <h5 className="my-4">Hackathons</h5>
+                            <div className="my-3">
+                              Host virtual hackathons and bring together people with diverse skills and solve business
+                              challenges
+                            </div>
+                            <Button
+                              className="my-3"
+                              variant="contained"
+                              color="secondary"
+                              onClick={() => handleLearnMoreButtonClick()}
+                            >
+                              Learn more
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-sm-4 d-flex justify-content-center align-items-center">
+            <img src="/landing-page-image.png" style={{ width: '100%', borderRadius: '0.5em' }} alt="" />
+          </div>
+        </div>
       </div>
 
       <div className="d-flex justify-content-center" style={{ marginTop: '3em' }}>
