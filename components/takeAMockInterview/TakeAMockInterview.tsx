@@ -1,31 +1,41 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import moment from 'moment';
+import momenttz from 'moment-timezone';
 
 import NextHead from '../nextHead/NextHead';
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-  }),
-);
-
 function TakeAMockInterview(): JSX.Element {
-  const classes = useStyles();
+  const [currentTimezone, setCurrentTimezone] = useState('');
+  const [currentTime, setCurrentTime] = useState('');
 
   const [weekDaysList, setWeekDaysList] = useState<any[]>([]);
 
   useEffect(() => {
-    getWeekDaysList();
+    getCurrentTimezone();
+    getCurrentTime();
   }, []);
 
-  const getWeekDaysList = () => {
-    const startOfWeekDay = moment().startOf('week').format('YYYY-MM-DD');
-    const endOfWeekDay = moment().endOf('week').format('YYYY-MM-DD');
+  useEffect(() => {
+    if (currentTime) getWeekDaysList(currentTime);
+  }, [currentTime]);
+
+  const getCurrentTimezone = () => {
+    const userTimezone = momenttz.tz.guess();
+    setCurrentTimezone(userTimezone);
+  };
+
+  const getCurrentTime = () => {
+    const currentTime = moment().format('YYYY-MM-DD HH:mm:ss');
+    setCurrentTime(currentTime);
+  };
+
+  const getWeekDaysList = (currentTime: string) => {
+    const startOfWeekDay = moment(currentTime).subtract(2, 'day').format('YYYY-MM-DD');
+    const endOfWeekDay = moment(currentTime).add(2, 'day').format('YYYY-MM-DD');
     const weekDayList = enumerateDaysBetweenDates(startOfWeekDay, endOfWeekDay);
 
     let resultList: any[] = [];
@@ -93,21 +103,41 @@ function TakeAMockInterview(): JSX.Element {
     if (weekDaysList) {
       weekDayListDiv = weekDaysList.map((item: any, i: number) => {
         return (
-          <Grid key={i} item xs={12} sm={2}>
+          <div key={i} className="col-sm d-flex justify-content-center">
             <div className="text-center">
-              <div>
-                <b>{item.isoWeekDayStr}</b>
-              </div>
-              <div>{item.dateStr}</div>
-
+              {renderWeekDayDiv(item, i)}
               <div className="my-2">{getAllAvailableTime('00:00', '23:59')}</div>
             </div>
-          </Grid>
+          </div>
         );
       });
     }
 
     return weekDayListDiv;
+  };
+
+  const renderWeekDayDiv = (item: any, i: number) => {
+    let weekDayDiv = (
+      <div>
+        <div>
+          <b>{item.isoWeekDayStr}</b>
+        </div>
+        <div>{item.dateStr}</div>
+      </div>
+    );
+
+    if (i === 2) {
+      weekDayDiv = (
+        <div>
+          <div style={{ color: 'red' }}>
+            <b>{item.isoWeekDayStr}</b>
+          </div>
+          <div style={{ color: 'red' }}>{item.dateStr}</div>
+        </div>
+      );
+    }
+
+    return weekDayDiv;
   };
 
   const getAllAvailableTime = (start: string, end: string) => {
@@ -141,6 +171,16 @@ function TakeAMockInterview(): JSX.Element {
     }
 
     return allAvailableTimeDiv;
+  };
+
+  const handlePreviousButtonClick = () => {
+    const previousCurrentTime = moment(currentTime).subtract(1, 'day').format('YYYY-MM-DD HH:mm:ss');
+    setCurrentTime(previousCurrentTime);
+  };
+
+  const handleNextButtonClick = () => {
+    const previousCurrentTime = moment(currentTime).add(1, 'day').format('YYYY-MM-DD HH:mm:ss');
+    setCurrentTime(previousCurrentTime);
   };
 
   const handleTimeButtonClick = (timeStr: string) => {
@@ -188,11 +228,28 @@ function TakeAMockInterview(): JSX.Element {
           <div className="col-sm-8">
             <div className="card">
               <div className="card-body">
-                <div className={classes.root}>
-                  <Grid container spacing={3}>
-                    {renderWeekDaysList(weekDaysList)}
-                  </Grid>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}
+                >
+                  <IconButton color="secondary" aria-label="previous" onClick={() => handlePreviousButtonClick()}>
+                    <ArrowBackIcon />
+                  </IconButton>
+
+                  <div className="d-flex justify-content-center font-weight-bold" style={{ fontSize: 15 }}>
+                    Current timezone: {currentTimezone}, Current time: {currentTime}
+                  </div>
+
+                  <IconButton color="secondary" aria-label="previous" onClick={() => handleNextButtonClick()}>
+                    <ArrowForwardIcon />
+                  </IconButton>
                 </div>
+
+                <div className="row mt-3">{renderWeekDaysList(weekDaysList)}</div>
               </div>
             </div>
           </div>
