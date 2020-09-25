@@ -110,11 +110,11 @@ function ParticipateInHackathons(): JSX.Element {
           <Grid key={i} item xs={12} sm={4}>
             <div className="card">
               <div className="card-body">
-                <img src={item.image} className="card-img-top" alt="" />
+                {/* <img src={item.image} className="card-img-top" alt="" /> */}
 
-                <h6 className="my-4">
-                  <b>Name:</b> {item.name}
-                </h6>
+                <h5 className="mt-2 mb-4">
+                  <b>{item.name}</b>
+                </h5>
                 <h6 className="my-4">
                   <b>Mode:</b> {item.mode}
                 </h6>

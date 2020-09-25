@@ -217,7 +217,7 @@ function LandingPage(): JSX.Element {
             </div>
           </div>
           <div className="col-sm-4 d-flex justify-content-center align-items-center">
-            <img src="/landing-page-image.png" style={{ width: '100%', borderRadius: '0.5em' }} alt="" />
+            <img src="/landing-page-image.jpg" style={{ width: '100%', borderRadius: '0.5em' }} alt="" />
           </div>
         </div>
       </div>
