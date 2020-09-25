@@ -63,8 +63,24 @@ function InviteYourFriends(): JSX.Element {
     getInviteLink();
   }, []);
 
-  const getInviteLink = () => {
-    setInviteLink('https://codersmojo.com/test123');
+  const getInviteLink = async () => {
+    const token = localStorage.getItem('token');
+    const usersId = localStorage.getItem('usersId');
+
+    if (token && usersId) {
+      const queryString = new URLSearchParams({
+        token: token,
+        users_id: usersId,
+      });
+      const response = await fetch(`/api/invite-friends/get-share-your-invite-link?${queryString}`);
+      if (response) {
+        const responseData = await response.json();
+        console.log('response.status = ', response.status);
+        console.log('responseData = ', responseData);
+
+        setInviteLink(responseData.result.inviteLink);
+      }
+    }
   };
 
   const handleInviteYourFriendsEmailInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,11 +93,39 @@ function InviteYourFriends(): JSX.Element {
     if (inviteYourFriendsEmail) {
       const isEmail = validateEmail(inviteYourFriendsEmail);
       if (isEmail) {
-        console.log(123);
+        const usersId = localStorage.getItem('usersId');
+        const token = localStorage.getItem('token');
+        if (usersId && token) sendInviteFriendsEmail(inviteYourFriendsEmail, usersId, token);
       } else {
         setSnackBarStatus(true);
         setSnackBarType('error');
         setSnackBarMessage('Wrong email format');
+      }
+    }
+  };
+
+  const sendInviteFriendsEmail = async (inviteYourFriendsEmail: string, usersId: string, token: string) => {
+    const response = await fetch(`/api/invite-friends/send-invite-friends-email`, {
+      method: 'POST',
+      body: JSON.stringify({
+        email: inviteYourFriendsEmail,
+        users_id: usersId,
+        token: token,
+      }),
+    });
+    if (response) {
+      const responseData = await response.json();
+      console.log('response.status = ', response.status);
+      console.log('responseData = ', responseData);
+
+      if (response.status === 200) {
+        setSnackBarStatus(true);
+        setSnackBarType('success');
+        setSnackBarMessage('Invite your friends success');
+      } else {
+        setSnackBarStatus(true);
+        setSnackBarType('error');
+        setSnackBarMessage('Invite your friends error');
       }
     }
   };
