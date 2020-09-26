@@ -117,7 +117,7 @@ function CustomDrawer(props: Props): JSX.Element {
         <div onClick={() => handleLeftSideMenuItemClick('studyForInterview')}>
           <ListItem button>
             <ListItemIcon>
-              <ImportContactsIcon />
+              <ImportContactsIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Study for Interview" />
           </ListItem>
@@ -125,7 +125,7 @@ function CustomDrawer(props: Props): JSX.Element {
         <div onClick={() => handleLeftSideMenuItemClick('takeAMockInterview')}>
           <ListItem button>
             <ListItemIcon>
-              <LibraryBooksIcon />
+              <LibraryBooksIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Take a Mock Interview" />
           </ListItem>
@@ -133,7 +133,7 @@ function CustomDrawer(props: Props): JSX.Element {
         <div onClick={() => handleLeftSideMenuItemClick('interviewOthers')}>
           <ListItem button>
             <ListItemIcon>
-              <ChatIcon />
+              <ChatIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Interview Others" />
           </ListItem>
@@ -141,7 +141,7 @@ function CustomDrawer(props: Props): JSX.Element {
         <div onClick={() => handleLeftSideMenuItemClick('discussionBoard')}>
           <ListItem button>
             <ListItemIcon>
-              <ChatIcon />
+              <ChatIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Discussion board" />
           </ListItem>
@@ -149,7 +149,7 @@ function CustomDrawer(props: Props): JSX.Element {
         <div onClick={() => handleLeftSideMenuItemClick('applyForJobs')}>
           <ListItem button>
             <ListItemIcon>
-              <WorkIcon />
+              <WorkIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Apply for Jobs" />
           </ListItem>
@@ -157,7 +157,7 @@ function CustomDrawer(props: Props): JSX.Element {
         <div onClick={() => handleLeftSideMenuItemClick('participateInHackathons')}>
           <ListItem button>
             <ListItemIcon>
-              <ComputerIcon />
+              <ComputerIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Participate in Hackathons" />
           </ListItem>
@@ -165,7 +165,7 @@ function CustomDrawer(props: Props): JSX.Element {
         <div onClick={() => handleLeftSideMenuItemClick('inviteYourFriends')}>
           <ListItem button>
             <ListItemIcon>
-              <PeopleIcon />
+              <PeopleIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Invite your friends" />
           </ListItem>
@@ -173,7 +173,7 @@ function CustomDrawer(props: Props): JSX.Element {
         <div onClick={() => handleLeftSideMenuItemClick('becomeAStudentTechAmbassador')}>
           <ListItem button>
             <ListItemIcon>
-              <EmojiPeopleIcon />
+              <EmojiPeopleIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Become a Student Tech Ambassador" />
           </ListItem>
@@ -181,7 +181,7 @@ function CustomDrawer(props: Props): JSX.Element {
         <div onClick={() => handleLeftSideMenuItemClick('techBlog')}>
           <ListItem button>
             <ListItemIcon>
-              <PostAddIcon />
+              <PostAddIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Tech blog" />
           </ListItem>
