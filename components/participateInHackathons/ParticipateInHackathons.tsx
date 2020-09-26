@@ -33,20 +33,16 @@ function ParticipateInHackathons(): JSX.Element {
   const [hackathonsList, setHackathonsList] = useState<any[]>([]);
 
   useEffect(() => {
-    getHackathonsList();
-  }, []);
-
-  useEffect(() => {
-    if (hackathonsList) getSelectedHackathonList(hackathonsList);
-  }, [hackathonsList]);
-
-  useEffect(() => {
     if (!name) {
       getHackathonsList();
     } else {
       getHackathonsList(name);
     }
   }, [name]);
+
+  useEffect(() => {
+    if (hackathonsList) getSelectedHackathonList(hackathonsList);
+  }, [hackathonsList]);
 
   const getHackathonsList = async (name?: string) => {
     const token = localStorage.getItem('token');

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Card from '@material-ui/core/Card';
 import Select from 'react-select';
 import Button from '@material-ui/core/Button';
 import { DropzoneArea } from 'material-ui-dropzone';
@@ -183,74 +182,69 @@ function CreateTechBlog(props: any): JSX.Element {
   };
 
   return (
-    <div style={{ margin: '5em auto' }}>
+    <div>
       <NextHead />
 
-      <div className="container d-flex justify-content-center">
-        <Card style={{ width: window.innerWidth > 600 ? 600 : 370, padding: '3em' }} variant="outlined">
-          <div className="my-2 d-flex justify-content-center">
-            <img src="/logo.png" width="200" height="65" alt="" loading="lazy" />
-          </div>
+      <div className="form-group">
+        <input
+          style={{ border: '0em transparent' }}
+          type="text"
+          className="form-control"
+          placeholder="Title"
+          id="title"
+          onChange={(e) => handleTitleInputChange(e)}
+        />
+      </div>
 
-          <h4 className="text-center my-5 font-weight-bold">Create tech blog</h4>
+      <div className="form-group">
+        <textarea
+          style={{ border: '0em transparent' }}
+          className="form-control"
+          placeholder="Tell your story..."
+          id="exampleFormControlTextarea1"
+          rows={10}
+          onChange={(e) => handleDescriptionInputChange(e)}
+        ></textarea>
+      </div>
 
-          <div className="my-4">
-            <DropzoneArea
-              acceptedFiles={['image/*']}
-              dropzoneText={'Drag and drop an image here or click'}
-              filesLimit={1}
-              onChange={handleFilesUpload}
-              alertSnackbarProps={{
-                anchorOrigin: {
-                  horizontal: 'center',
-                  vertical: 'top',
-                },
-              }}
-            />
-          </div>
+      <div className="my-4">
+        <DropzoneArea
+          acceptedFiles={['image/*']}
+          dropzoneText={'Drag and drop an image here or click'}
+          filesLimit={1}
+          onChange={handleFilesUpload}
+          alertSnackbarProps={{
+            anchorOrigin: {
+              horizontal: 'center',
+              vertical: 'top',
+            },
+          }}
+        />
+      </div>
 
-          <div className="form-group">
-            <label htmlFor="title">Title</label>
-            <input type="text" className="form-control" id="title" onChange={(e) => handleTitleInputChange(e)} />
-          </div>
+      <div className="my-3">
+        <Select
+          styles={selectStyles}
+          placeholder={'Select tag'}
+          value={selectedTag}
+          onChange={handleTagDropdownChange}
+          options={selectedTagList}
+          isClearable={true}
+        />
+      </div>
 
-          <div className="form-group">
-            <label htmlFor="exampleFormControlTextarea1">Description</label>
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows={5}
-              onChange={(e) => handleDescriptionInputChange(e)}
-            ></textarea>
-          </div>
+      <div className="d-flex justify-content-end" style={{ display: 'flex', flexDirection: 'row' }}>
+        <Button className="mr-3" variant="contained" color="primary" onClick={() => handleBackClick()}>
+          Back
+        </Button>
 
-          <label>Tag</label>
-          <div className="mt-1 mb-3">
-            <Select
-              styles={selectStyles}
-              placeholder={'Select tag'}
-              value={selectedTag}
-              onChange={handleTagDropdownChange}
-              options={selectedTagList}
-              isClearable={true}
-            />
-          </div>
-
-          <Button
-            className="w-100 my-3"
-            variant="contained"
-            color="secondary"
-            onClick={() => handleSubmitButtonClick(title, description, tag, users_id)}
-          >
-            Submit
-          </Button>
-
-          <div className="d-flex justify-content-center mt-5">
-            <span className="pointer hover-item" onClick={() => handleBackClick()}>
-              Back
-            </span>
-          </div>
-        </Card>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => handleSubmitButtonClick(title, description, tag, users_id)}
+        >
+          Submit
+        </Button>
       </div>
 
       <CustomSnackBar

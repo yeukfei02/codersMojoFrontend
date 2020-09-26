@@ -68,7 +68,7 @@ function DiscussionBoard(props: any): JSX.Element {
                   <b>Discussion Thread {number}</b> - {title}
                 </div>
                 <div className="my-3" style={{ fontSize: '1.2em' }}>
-                  <b>Answer</b> - {description}
+                  <b>Description</b> - {description}
                 </div>
                 <div>{renderTag(tag)}</div>
               </div>
@@ -131,66 +131,85 @@ function DiscussionBoard(props: any): JSX.Element {
           <div className="col-sm-4">
             <div className="card">
               <div className="card-body">
-                <h6 className="mt-3 mb-4">
+                <div className="card">
+                  <div className="card-body text-center">
+                    <div>
+                      <b>Join the space</b>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="my-4">
                   <span className="pointer hover-item" onClick={() => handleFilterTextClick('Career')}>
-                    Career
+                    # Career
                   </span>
-                </h6>
-                <h6 className="my-4">
+                </div>
+
+                <div className="my-4">
                   <span className="pointer hover-item" onClick={() => handleFilterTextClick('Jobs')}>
-                    Jobs
+                    # Jobs
                   </span>
-                </h6>
-                <h6 className="my-4">
+                </div>
+
+                <div className="my-4">
                   <span className="pointer hover-item" onClick={() => handleFilterTextClick('Success Story')}>
-                    Success Story
+                    # Success Story
                   </span>
-                </h6>
-                <h6 className="my-4">
+                </div>
+
+                <div className="my-4">
                   <span className="pointer hover-item" onClick={() => handleFilterTextClick('Women Investor')}>
-                    Women Investor
+                    # Women Investor
                   </span>
-                </h6>
-                <h6 className="my-4">
+                </div>
+
+                <div className="my-4">
                   <span className="pointer hover-item" onClick={() => handleFilterTextClick('Job Board')}>
-                    Job Board
+                    # Job Board
                   </span>
-                </h6>
-                <h6 className="my-4">
+                </div>
+
+                <div className="my-4">
                   <span className="pointer hover-item" onClick={() => handleFilterTextClick('Tech')}>
-                    Tech
+                    # Tech
                   </span>
-                </h6>
-                <h6 className="my-4">
+                </div>
+
+                <div className="my-4">
                   <span className="pointer hover-item" onClick={() => handleFilterTextClick('Salary Negotiation')}>
-                    Salary Negotiation
+                    # Salary Negotiation
                   </span>
-                </h6>
-                <h6 className="my-4">
+                </div>
+
+                <div className="my-4">
                   <span className="pointer hover-item" onClick={() => handleFilterTextClick('Compensation')}>
-                    Compensation
+                    # Compensation
                   </span>
-                </h6>
-                <h6 className="my-4">
+                </div>
+
+                <div className="my-4">
                   <span className="pointer hover-item" onClick={() => handleFilterTextClick('Interview Experience')}>
-                    Interview Experience
+                    # Interview Experience
                   </span>
-                </h6>
-                <h6 className="my-4">
+                </div>
+
+                <div className="my-4">
                   <span className="pointer hover-item" onClick={() => handleFilterTextClick('Career Growth')}>
-                    Career Growth
+                    # Career Growth
                   </span>
-                </h6>
-                <h6 className="my-4">
+                </div>
+
+                <div className="my-4">
                   <span className="pointer hover-item" onClick={() => handleFilterTextClick('Students')}>
-                    Students
+                    # Students
                   </span>
-                </h6>
-                <h6 className="my-4">
+                </div>
+
+                <div className="my-4">
                   <span className="pointer hover-item" onClick={() => handleFilterTextClick('Introduce Yourself')}>
-                    Introduce Yourself
+                    # Introduce Yourself
                   </span>
-                </h6>
+                </div>
               </div>
             </div>
           </div>
