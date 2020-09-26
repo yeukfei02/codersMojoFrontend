@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Card from '@material-ui/core/Card';
 import Select from 'react-select';
 import Button from '@material-ui/core/Button';
 
@@ -166,59 +165,60 @@ function CreatePosts(props: any): JSX.Element {
   };
 
   return (
-    <div style={{ margin: '5em auto' }}>
+    <div>
       <NextHead />
 
-      <div className="container d-flex justify-content-center">
-        <Card style={{ width: window.innerWidth > 600 ? 600 : 370, padding: '3em' }} variant="outlined">
-          <div className="my-2 d-flex justify-content-center">
-            <img src="/logo.png" width="200" height="65" alt="" loading="lazy" />
+      <div className="d-flex justify-content-center my-4">
+        <div className="card">
+          <div className="card-body">
+            <h5 className="text-center">Write a Post</h5>
           </div>
+        </div>
+      </div>
 
-          <h4 className="text-center my-5 font-weight-bold">Create post</h4>
+      <div className="form-group">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Title"
+          id="title"
+          onChange={(e) => handleTitleInputChange(e)}
+        />
+      </div>
 
-          <div className="form-group">
-            <label htmlFor="title">Title</label>
-            <input type="text" className="form-control" id="title" onChange={(e) => handleTitleInputChange(e)} />
-          </div>
+      <div className="form-group">
+        <textarea
+          className="form-control"
+          id="exampleFormControlTextarea1"
+          placeholder="Write your post here..."
+          rows={10}
+          onChange={(e) => handleDescriptionInputChange(e)}
+        ></textarea>
+      </div>
 
-          <div className="form-group">
-            <label htmlFor="exampleFormControlTextarea1">Description</label>
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows={5}
-              onChange={(e) => handleDescriptionInputChange(e)}
-            ></textarea>
-          </div>
+      <div className="mt-1 mb-3">
+        <Select
+          styles={selectStyles}
+          placeholder={'Select tag'}
+          value={selectedTag}
+          onChange={handleTagDropdownChange}
+          options={selectedTagList}
+          isClearable={true}
+        />
+      </div>
 
-          <label>Tag</label>
-          <div className="mt-1 mb-3">
-            <Select
-              styles={selectStyles}
-              placeholder={'Select tag'}
-              value={selectedTag}
-              onChange={handleTagDropdownChange}
-              options={selectedTagList}
-              isClearable={true}
-            />
-          </div>
+      <div className="d-flex justify-content-end" style={{ display: 'flex', flexDirection: 'row' }}>
+        <Button className="mr-3" variant="contained" color="primary" onClick={() => handleBackClick()}>
+          Back
+        </Button>
 
-          <Button
-            className="w-100 my-3"
-            variant="contained"
-            color="secondary"
-            onClick={() => handleSubmitButtonClick(title, description, tag, users_id)}
-          >
-            Submit
-          </Button>
-
-          <div className="d-flex justify-content-center mt-5">
-            <span className="pointer hover-item" onClick={() => handleBackClick()}>
-              Back
-            </span>
-          </div>
-        </Card>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => handleSubmitButtonClick(title, description, tag, users_id)}
+        >
+          Submit
+        </Button>
       </div>
 
       <CustomSnackBar

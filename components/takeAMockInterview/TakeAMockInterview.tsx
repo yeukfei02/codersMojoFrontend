@@ -200,19 +200,19 @@ function TakeAMockInterview(): JSX.Element {
                   <b>Focus</b>
                 </h6>
                 <ul style={{ listStyleType: 'none' }}>
-                  <li className="my-4 hover-item pointer">Data Structures and Algorithms</li>
-                  <li className="my-4 hover-item pointer">System Design</li>
-                  <li className="my-4 hover-item pointer">Data Science</li>
-                  <li className="my-4 hover-item pointer">Front End Development</li>
-                  <li className="my-4 hover-item pointer">Behavioral</li>
+                  <li className="my-4 hover-item pointer"># Data Structures and Algorithms</li>
+                  <li className="my-4 hover-item pointer"># System Design</li>
+                  <li className="my-4 hover-item pointer"># Data Science</li>
+                  <li className="my-4 hover-item pointer"># Front End Development</li>
+                  <li className="my-4 hover-item pointer"># Behavioral</li>
                 </ul>
 
                 <h6 className="mt-5">
                   <b>Type of interview</b>
                 </h6>
                 <ul style={{ listStyleType: 'none' }}>
-                  <li className="my-4 hover-item pointer">Practice Session</li>
-                  <li className="my-4 hover-item pointer">Peer to Peer Mock Interview</li>
+                  <li className="my-4 hover-item pointer"># Practice Session</li>
+                  <li className="my-4 hover-item pointer"># Peer to Peer Mock Interview</li>
                 </ul>
 
                 <h6 className="mt-5 hover-item pointer">
