@@ -17,15 +17,11 @@ function TextEditorView(): JSX.Element {
   const [selectedModeList, setSelectedModeList] = useState<any[]>([]);
   const [selectedMode, setSelectedMode] = useState<any>({ label: 'javascript', value: 'javascript' });
 
-  const [selectedThemeList, setSelectedThemeList] = useState<any[]>([]);
-  const [selectedTheme, setSelectedTheme] = useState<any>({ label: 'monokai', value: 'monokai' });
-
   const [selectedFontSizeList, setSelectedFontSizeList] = useState<any[]>([]);
-  const [selectedFontSize, setSelectedFontSize] = useState<any>({ label: 18, value: 18 });
+  const [selectedFontSize, setSelectedFontSize] = useState<any>({ label: 20, value: 20 });
 
   const [mode, setMode] = useState('javascript');
-  const [theme, setTheme] = useState('monokai');
-  const [fontSize, setFontSize] = useState(18);
+  const [fontSize, setFontSize] = useState(20);
   const [value, setValue] = useState(`function test() {
   console.log(123);
 }
@@ -34,7 +30,6 @@ test();`);
 
   useEffect(() => {
     getSelectedModeList();
-    getSelectedThemeList();
     getSelectedFontSizeList();
   }, []);
 
@@ -108,52 +103,6 @@ test();`);
     setSelectedModeList(selectedModeList);
   };
 
-  const getSelectedThemeList = () => {
-    const selectedThemeList = [
-      {
-        label: 'monokai',
-        value: 'monokai',
-      },
-      {
-        label: 'github',
-        value: 'github',
-      },
-      {
-        label: 'tomorrow',
-        value: 'tomorrow',
-      },
-      {
-        label: 'kuroir',
-        value: 'kuroir',
-      },
-      {
-        label: 'twilight',
-        value: 'twilight',
-      },
-      {
-        label: 'xcode',
-        value: 'xcode',
-      },
-      {
-        label: 'textmate',
-        value: 'textmate',
-      },
-      {
-        label: 'solarized_dark',
-        value: 'solarized_dark',
-      },
-      {
-        label: 'solarized_light',
-        value: 'solarized_light',
-      },
-      {
-        label: 'terminal',
-        value: 'terminal',
-      },
-    ];
-    setSelectedThemeList(selectedThemeList);
-  };
-
   const getSelectedFontSizeList = () => {
     const selectedFontSizeList = [
       {
@@ -208,23 +157,13 @@ test();`);
     }
   };
 
-  const handleThemeDropdownChange = (selectedTheme: any) => {
-    if (selectedTheme) {
-      setSelectedTheme(selectedTheme);
-      setTheme(selectedTheme.value);
-    } else {
-      setSelectedTheme({ label: 'monokai', value: 'monokai' });
-      setTheme('monokai');
-    }
-  };
-
   const handleFontSizeDropdownChange = (selectedFontSize: any) => {
     if (selectedFontSize) {
       setSelectedFontSize(selectedFontSize);
       setFontSize(selectedFontSize.value);
     } else {
-      setSelectedFontSize({ label: 18, value: 18 });
-      setFontSize(18);
+      setSelectedFontSize({ label: 20, value: 20 });
+      setFontSize(20);
     }
   };
 
@@ -386,17 +325,6 @@ const user: User = {
               <Select
                 className="w-100"
                 styles={selectStyles}
-                placeholder={'Select theme'}
-                value={selectedTheme}
-                onChange={handleThemeDropdownChange}
-                options={selectedThemeList}
-                isClearable={true}
-              />
-            </div>
-            <div className="col-sm d-flex justify-content-center">
-              <Select
-                className="w-100"
-                styles={selectStyles}
                 placeholder={'Select font size'}
                 value={selectedFontSize}
                 onChange={handleFontSizeDropdownChange}
@@ -405,7 +333,7 @@ const user: User = {
               />
             </div>
           </div>
-          <CustomTextEditor mode={mode} theme={theme} fontSize={fontSize} value={value} />
+          <CustomTextEditor mode={mode} fontSize={fontSize} value={value} />
         </div>
       </div>
     </div>
