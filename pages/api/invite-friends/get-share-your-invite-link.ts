@@ -8,6 +8,9 @@ const ROOT_URL = getRootUrl();
 export default async (_req: NextApiRequest, res: NextApiResponse) => {
   try {
     const response = await axios.get(`${ROOT_URL}/invite-friends/get-share-your-invite-link/${_req.query.users_id}`, {
+      params: {
+        hostname: _req.query.hostname,
+      },
       headers: { Authorization: `Bearer ${_req.query.token}` },
     });
     if (response) {

@@ -69,6 +69,7 @@ function InviteYourFriends(): JSX.Element {
 
     if (token && usersId) {
       const queryString = new URLSearchParams({
+        hostname: window.location.href,
         token: token,
         users_id: usersId,
       });
