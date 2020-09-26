@@ -291,6 +291,7 @@ function TakeAMockInterview(props: any): JSX.Element {
         console.log('responseData = ', responseData);
 
         if (response.status === 200) {
+          localStorage.setItem('mockInterviewQuestionId', responseData.result.mockInterviewQuestionId);
           props.gotItClick();
         }
       }

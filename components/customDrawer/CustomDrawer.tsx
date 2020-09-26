@@ -298,6 +298,10 @@ function CustomDrawer(props: Props): JSX.Element {
     setCurrentPageValue('textEditorView');
   };
 
+  const handleTextEditorViewClick = () => {
+    setCurrentPageValue('textEditorView');
+  };
+
   const handleCreatePostButtonClick = () => {
     setCurrentPageValue('createPosts');
   };
@@ -358,7 +362,7 @@ function CustomDrawer(props: Props): JSX.Element {
         currentPage = <ReportABug />;
         break;
       case 'yourUpcomingInterviewSchedule':
-        currentPage = <YourUpcomingInterviewSchedule />;
+        currentPage = <YourUpcomingInterviewSchedule textEditorViewClick={() => handleTextEditorViewClick()} />;
         break;
       case 'viewPastInterviewPerformance':
         currentPage = <ViewPastInterviewPerformance />;

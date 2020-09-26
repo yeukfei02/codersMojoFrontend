@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 import NextHead from '../nextHead/NextHead';
 
-function YourUpcomingInterviewSchedule(): JSX.Element {
+function YourUpcomingInterviewSchedule(props: any): JSX.Element {
   const [upcomingInterviewList, setUpcomingInterviewList] = useState<any[]>([]);
 
   useEffect(() => {
@@ -78,11 +78,13 @@ function YourUpcomingInterviewSchedule(): JSX.Element {
 
     if (upcomingInterviewList) {
       upcomingListView = upcomingInterviewList.map((item: any, i: number) => {
+        const mockInterviewQuestionId = item.mock_interview_question_id;
+
         return (
           <tr key={i}>
             <td>
               <div className="d-flex justify-content-center" style={{ display: 'flex', flexDirection: 'row' }}>
-                <div className="mr-2">
+                <div className="mr-1">
                   <InsertInvitationIcon style={{ color: purple[500] }} />
                 </div>
                 <div className="d-flex align-items-center">
@@ -92,23 +94,19 @@ function YourUpcomingInterviewSchedule(): JSX.Element {
             </td>
             <td>
               <div className="d-flex justify-content-center">
-                <div>
-                  <b>{item.type}</b>
+                <div>{item.type}</div>
+              </div>
+            </td>
+            <td>
+              <div className="d-flex justify-content-center">
+                <div className="hover-item pointer" onClick={() => handleQuestionClick(mockInterviewQuestionId)}>
+                  {item.mock_interview_question ? item.mock_interview_question.question_title : ''}
                 </div>
               </div>
             </td>
             <td>
               <div className="d-flex justify-content-center">
-                <div>
-                  <b>{item.mock_interview_question ? item.mock_interview_question.question_title : ''}</b>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div className="d-flex justify-content-center">
-                <div>
-                  <b>{item.status}</b>
-                </div>
+                <div>{item.status}</div>
               </div>
             </td>
             <td>
@@ -127,6 +125,11 @@ function YourUpcomingInterviewSchedule(): JSX.Element {
     }
 
     return upcomingListView;
+  };
+
+  const handleQuestionClick = (mockInterviewQuestionId: number) => {
+    localStorage.setItem('mockInterviewQuestionId', mockInterviewQuestionId.toString());
+    props.textEditorViewClick();
   };
 
   return (
