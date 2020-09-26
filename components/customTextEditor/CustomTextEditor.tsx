@@ -20,15 +20,15 @@ import 'ace-builds/src-noconflict/mode-typescript';
 import 'ace-builds/src-noconflict/mode-css';
 
 import 'ace-builds/src-noconflict/theme-monokai';
-import 'ace-builds/src-noconflict/theme-github';
-import 'ace-builds/src-noconflict/theme-tomorrow';
-import 'ace-builds/src-noconflict/theme-kuroir';
-import 'ace-builds/src-noconflict/theme-twilight';
-import 'ace-builds/src-noconflict/theme-xcode';
-import 'ace-builds/src-noconflict/theme-textmate';
-import 'ace-builds/src-noconflict/theme-solarized_dark';
-import 'ace-builds/src-noconflict/theme-solarized_light';
-import 'ace-builds/src-noconflict/theme-terminal';
+// import 'ace-builds/src-noconflict/theme-github';
+// import 'ace-builds/src-noconflict/theme-tomorrow';
+// import 'ace-builds/src-noconflict/theme-kuroir';
+// import 'ace-builds/src-noconflict/theme-twilight';
+// import 'ace-builds/src-noconflict/theme-xcode';
+// import 'ace-builds/src-noconflict/theme-textmate';
+// import 'ace-builds/src-noconflict/theme-solarized_dark';
+// import 'ace-builds/src-noconflict/theme-solarized_light';
+// import 'ace-builds/src-noconflict/theme-terminal';
 
 import 'ace-builds/src-min-noconflict/snippets/javascript';
 import 'ace-builds/src-min-noconflict/snippets/java';
@@ -177,8 +177,8 @@ function CustomTextEditor(props: any): JSX.Element {
         height="100vh"
         placeholder="// your code here"
         mode={props.mode}
-        theme={props.theme}
-        name="blah2"
+        theme="monokai"
+        name="customTextEditor"
         onLoad={handleOnLoad}
         onChange={handleOnChange}
         fontSize={props.fontSize}
