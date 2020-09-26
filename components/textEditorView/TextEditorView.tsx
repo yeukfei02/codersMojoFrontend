@@ -14,6 +14,8 @@ const selectStyles = {
 };
 
 function TextEditorView(): JSX.Element {
+  const [questionTitle, setQuestionTitle] = useState('');
+  const [questionDescription, setQuestionDescription] = useState('');
   const [selectedModeList, setSelectedModeList] = useState<any[]>([]);
   const [selectedMode, setSelectedMode] = useState<any>({ label: 'javascript', value: 'javascript' });
 
@@ -29,9 +31,32 @@ function TextEditorView(): JSX.Element {
 test();`);
 
   useEffect(() => {
+    getQuestionTitleAndQuestionDescription();
     getSelectedModeList();
     getSelectedFontSizeList();
   }, []);
+
+  const getQuestionTitleAndQuestionDescription = async () => {
+    const mockInterviewQuestionId = localStorage.getItem('mockInterviewQuestionId');
+    const token = localStorage.getItem('token');
+    if (mockInterviewQuestionId && token) {
+      const queryString = new URLSearchParams({
+        mockInterviewQuestionId: mockInterviewQuestionId,
+        token: token,
+      });
+      const response = await fetch(`/api/mock-interview-question?${queryString}`);
+      if (response) {
+        const responseData = await response.json();
+        console.log('response.status = ', response.status);
+        console.log('responseData = ', responseData);
+
+        if (response.status === 200) {
+          setQuestionTitle(responseData.result.result.question_title);
+          setQuestionDescription(responseData.result.result.question_description);
+        }
+      }
+    }
+  };
 
   const getSelectedModeList = () => {
     const selectedModeList = [
@@ -305,7 +330,14 @@ const user: User = {
       <div className="row">
         <div className="col-sm-4">
           <div className="card">
-            <div className="card-body">question</div>
+            <div className="card-body">
+              <h4 className="my-2">
+                <b>{questionTitle}</b>
+              </h4>
+              <div className="my-4" style={{ fontSize: 16, whiteSpace: 'pre-line' }}>
+                {questionDescription}
+              </div>
+            </div>
           </div>
         </div>
         <div className="col-sm-8">

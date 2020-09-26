@@ -42,6 +42,8 @@ import InviteYourFriends from '../inviteYourFriends/InviteYourFriends';
 import BecomeAStudentTechAmbassador from '../becomeAStudentTechAmbassador/BecomeAStudentTechAmbassador';
 import TechBlogListView from '../techBlogListView/TechBlogListView';
 import CreateTechBlog from '../createTechBlog/CreateTechBlog';
+import YourUpcomingInterviewSchedule from '../yourUpcomingInterviewSchedule/YourUpcomingInterviewSchedule';
+import ViewPastInterviewPerformance from '../viewPastInterviewPerformance/ViewPastInterviewPerformance';
 import AccountSettings from '../accountSettings/AccountSettings';
 import ReportABug from '../reportABug/ReportABug';
 
@@ -296,6 +298,10 @@ function CustomDrawer(props: Props): JSX.Element {
     setCurrentPageValue('textEditorView');
   };
 
+  const handleTextEditorViewClick = () => {
+    setCurrentPageValue('textEditorView');
+  };
+
   const handleCreatePostButtonClick = () => {
     setCurrentPageValue('createPosts');
   };
@@ -356,10 +362,10 @@ function CustomDrawer(props: Props): JSX.Element {
         currentPage = <ReportABug />;
         break;
       case 'yourUpcomingInterviewSchedule':
-        currentPage = <div>yourUpcomingInterviewSchedule</div>;
+        currentPage = <YourUpcomingInterviewSchedule textEditorViewClick={() => handleTextEditorViewClick()} />;
         break;
       case 'viewPastInterviewPerformance':
-        currentPage = <div>viewPastInterviewPerformance</div>;
+        currentPage = <ViewPastInterviewPerformance />;
         break;
       default:
         break;
