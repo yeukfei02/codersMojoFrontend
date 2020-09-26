@@ -28,6 +28,8 @@ const Transition = React.forwardRef(function Transition(
 });
 
 function TakeAMockInterview(props: any): JSX.Element {
+  const [type, setType] = useState('Data Structures and Algorithms');
+
   const [currentTimezone, setCurrentTimezone] = useState('');
   const [currentTime, setCurrentTime] = useState('');
 
@@ -263,7 +265,40 @@ function TakeAMockInterview(props: any): JSX.Element {
 
   const handleGotItButtonClick = () => {
     setMockInterviewDialogOpen(false);
-    props.gotItClick();
+    createUpcomingInterview();
+  };
+
+  const createUpcomingInterview = async () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const dateTime = dialogTitleDate;
+      const upcomingInterviewStatus = 'scheduled';
+      const usersId = localStorage.getItem('usersId');
+
+      const response = await fetch(`/api/upcoming-interview/create-upcoming-interview`, {
+        method: 'POST',
+        body: JSON.stringify({
+          dateTime: dateTime,
+          type: type,
+          upcomingInterviewStatus: upcomingInterviewStatus,
+          users_id: usersId,
+          token: token,
+        }),
+      });
+      if (response) {
+        const responseData = await response.json();
+        console.log('response.status = ', response.status);
+        console.log('responseData = ', responseData);
+
+        if (response.status === 200) {
+          props.gotItClick();
+        }
+      }
+    }
+  };
+
+  const handleTypeItemClick = (type: string) => {
+    setType(type);
   };
 
   return (
@@ -279,11 +314,24 @@ function TakeAMockInterview(props: any): JSX.Element {
                   <b>Focus</b>
                 </h6>
                 <ul style={{ listStyleType: 'none' }}>
-                  <li className="my-4 hover-item pointer"># Data Structures and Algorithms</li>
-                  <li className="my-4 hover-item pointer"># System Design</li>
-                  <li className="my-4 hover-item pointer"># Data Science</li>
-                  <li className="my-4 hover-item pointer"># Front End Development</li>
-                  <li className="my-4 hover-item pointer"># Behavioral</li>
+                  <li
+                    className="my-4 hover-item pointer"
+                    onClick={() => handleTypeItemClick('Data Structures and Algorithms')}
+                  >
+                    # Data Structures and Algorithms
+                  </li>
+                  <li className="my-4 hover-item pointer" onClick={() => handleTypeItemClick('System Design')}>
+                    # System Design
+                  </li>
+                  <li className="my-4 hover-item pointer" onClick={() => handleTypeItemClick('Data Science')}>
+                    # Data Science
+                  </li>
+                  <li className="my-4 hover-item pointer" onClick={() => handleTypeItemClick('Front End Development')}>
+                    # Front End Development
+                  </li>
+                  <li className="my-4 hover-item pointer" onClick={() => handleTypeItemClick('Behavioral')}>
+                    # Behavioral
+                  </li>
                 </ul>
 
                 <h6 className="mt-5">
