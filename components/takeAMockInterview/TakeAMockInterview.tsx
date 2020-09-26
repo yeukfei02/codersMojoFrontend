@@ -14,6 +14,7 @@ import EventIcon from '@material-ui/icons/Event';
 import CodeIcon from '@material-ui/icons/Code';
 import OndemandVideoIcon from '@material-ui/icons/OndemandVideo';
 import { grey, purple } from '@material-ui/core/colors';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import moment from 'moment';
 import momenttz from 'moment-timezone';
 
@@ -33,6 +34,8 @@ function TakeAMockInterview(): JSX.Element {
   const [weekDaysList, setWeekDaysList] = useState<any[]>([]);
 
   const [dialogTitleDate, setDialogTitleDate] = useState('');
+
+  const [loadingDialogOpen, setLoadingDialogOpen] = useState(false);
   const [mockInterviewDialogOpen, setMockInterviewDialogOpen] = useState(false);
 
   useEffect(() => {
@@ -243,10 +246,18 @@ function TakeAMockInterview(): JSX.Element {
 
     const dialogTitleDate = `${isoWeekDayStr}, ${dateStr}, ${timeStr}`;
     setDialogTitleDate(dialogTitleDate);
-    setMockInterviewDialogOpen(true);
+    setLoadingDialogOpen(true);
+    setTimeout(() => {
+      setMockInterviewDialogOpen(true);
+      setLoadingDialogOpen(false);
+    }, 1500);
   };
 
-  const handleClose = () => {
+  // const handleLoadingDialogClose = () => {
+  //   setLoadingDialogOpen(false);
+  // };
+
+  const handleMockInterviewDialogClose = () => {
     setMockInterviewDialogOpen(false);
   };
 
@@ -324,10 +335,28 @@ function TakeAMockInterview(): JSX.Element {
       </div>
 
       <Dialog
+        open={loadingDialogOpen}
+        TransitionComponent={Transition}
+        keepMounted
+        // onClose={handleLoadingDialogClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title" style={{ background: '#6f42c1' }}>
+          <div className="font-weight-bold" style={{ fontSize: 25, color: 'white' }}>
+            Loading, we are matching...
+          </div>
+          <div className="d-flex justify-content-center my-3">
+            <CircularProgress />
+          </div>
+        </DialogTitle>
+      </Dialog>
+
+      <Dialog
         open={mockInterviewDialogOpen}
         TransitionComponent={Transition}
         keepMounted
-        onClose={handleClose}
+        onClose={handleMockInterviewDialogClose}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
@@ -336,7 +365,7 @@ function TakeAMockInterview(): JSX.Element {
             <div className="d-flex align-items-center">
               <ThumbUpIcon style={{ fontSize: 90, color: grey[50] }} />
             </div>
-            <div className="mx-3" style={{ color: 'white' }}>
+            <div className="ml-4" style={{ color: 'white' }}>
               <div className="font-weight-bold" style={{ fontSize: 20 }}>
                 You’re mock interview has been confirmed.
               </div>
