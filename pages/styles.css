@@ -4,19 +4,19 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 body {
-    background: linear-gradient(0deg, #eaeff5 0%, #fff 65%);
-    min-height: 100vh;
-    font-family: 'Inter', sans-serif;
+  background: linear-gradient(0deg, #eaeff5 0%, #fff 65%);
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
 }
 
 .hover-item:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .quantico {
-    font-family: 'Quantico', sans-serif;
+  font-family: 'Quantico', sans-serif;
 }
 
 .pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
