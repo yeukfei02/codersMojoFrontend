@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.11](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.10...v0.0.11) (2020-09-26)
+
+
+### Features
+
+* 🎸 add loading dialog ([7bb7993](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/7bb799357acd565f5c9b20c5645644ee222dbcfa))
+* 🎸 add mock interview dialog ([c335086](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/c335086ddecab1d2b3dde191b8530fd1dcc67c37))
+* 🎸 add text editor view ([62fc5df](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/62fc5df383a83e184c5034feb7315014b92b44c9))
+
+### [0.0.10](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.9...v0.0.10) (2020-09-25)
+
+
+### Features
+
+* 🎸 add send invite fd email and share invite link ([55ecdbf](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/55ecdbfa865bc8e5b88a0f9359cfc645ae34317a))
+
 ### [0.0.9](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.8...v0.0.9) (2020-09-25)
 
 ### [0.0.8](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.7...v0.0.8) (2020-09-24)
