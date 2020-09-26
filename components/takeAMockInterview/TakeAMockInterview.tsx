@@ -249,9 +249,12 @@ function TakeAMockInterview(props: any): JSX.Element {
     const dialogTitleDate = `${isoWeekDayStr}, ${dateStr}, ${timeStr}`;
     setDialogTitleDate(dialogTitleDate);
     setLoadingDialogOpen(true);
+
     setTimeout(() => {
       setMockInterviewDialogOpen(true);
       setLoadingDialogOpen(false);
+
+      createUpcomingInterview(dialogTitleDate);
     }, 1500);
   };
 
@@ -259,19 +262,18 @@ function TakeAMockInterview(props: any): JSX.Element {
   //   setLoadingDialogOpen(false);
   // };
 
-  const handleMockInterviewDialogClose = () => {
-    setMockInterviewDialogOpen(false);
-  };
+  // const handleMockInterviewDialogClose = () => {
+  //   setMockInterviewDialogOpen(false);
+  // };
 
   const handleGotItButtonClick = () => {
     setMockInterviewDialogOpen(false);
-    createUpcomingInterview();
+    props.gotItClick();
   };
 
-  const createUpcomingInterview = async () => {
+  const createUpcomingInterview = async (dateTime: string) => {
     const token = localStorage.getItem('token');
     if (token) {
-      const dateTime = dialogTitleDate;
       const upcomingInterviewStatus = 'scheduled';
       const usersId = localStorage.getItem('usersId');
 
@@ -292,7 +294,6 @@ function TakeAMockInterview(props: any): JSX.Element {
 
         if (response.status === 200) {
           localStorage.setItem('mockInterviewQuestionId', responseData.result.mockInterviewQuestionId);
-          props.gotItClick();
         }
       }
     }
@@ -406,7 +407,7 @@ function TakeAMockInterview(props: any): JSX.Element {
         open={mockInterviewDialogOpen}
         TransitionComponent={Transition}
         keepMounted
-        onClose={handleMockInterviewDialogClose}
+        // onClose={handleMockInterviewDialogClose}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
