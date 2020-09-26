@@ -13,6 +13,8 @@ import PeopleIcon from '@material-ui/icons/People';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import WorkIcon from '@material-ui/icons/Work';
 import ChatIcon from '@material-ui/icons/Chat';
+import ScheduleIcon from '@material-ui/icons/Schedule';
+import VideoCallIcon from '@material-ui/icons/VideoCall';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -186,6 +188,23 @@ function CustomDrawer(props: Props): JSX.Element {
             <ListItemText primary="Tech blog" />
           </ListItem>
         </div>
+        <Divider />
+        <div onClick={() => handleLeftSideMenuItemClick('yourUpcomingInterviewSchedule')}>
+          <ListItem button>
+            <ListItemIcon>
+              <ScheduleIcon color="secondary" />
+            </ListItemIcon>
+            <ListItemText primary="Your Upcoming Interview Schedule" />
+          </ListItem>
+        </div>
+        <div onClick={() => handleLeftSideMenuItemClick('viewPastInterviewPerformance')}>
+          <ListItem button>
+            <ListItemIcon>
+              <VideoCallIcon color="secondary" />
+            </ListItemIcon>
+            <ListItemText primary="View Past Interview Performance" />
+          </ListItem>
+        </div>
       </List>
     </div>
   );
@@ -327,6 +346,12 @@ function CustomDrawer(props: Props): JSX.Element {
         break;
       case 'reportABug':
         currentPage = <ReportABug />;
+        break;
+      case 'yourUpcomingInterviewSchedule':
+        currentPage = <div>yourUpcomingInterviewSchedule</div>;
+        break;
+      case 'viewPastInterviewPerformance':
+        currentPage = <div>viewPastInterviewPerformance</div>;
         break;
       default:
         break;
