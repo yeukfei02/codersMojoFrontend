@@ -32,6 +32,7 @@ import Button from '@material-ui/core/Button';
 import NextHead from '../nextHead/NextHead';
 import StudyForInterview from '../studyForInterview/StudyForInterview';
 import TakeAMockInterview from '../takeAMockInterview/TakeAMockInterview';
+import TextEditorView from '../textEditorView/TextEditorView';
 import InterviewOthers from '../interviewOthers/InterviewOthers';
 import DiscussionBoard from '../discussionBoard/DiscussionBoard';
 import CreatePosts from '../createPosts/CreatePosts';
@@ -291,6 +292,10 @@ function CustomDrawer(props: Props): JSX.Element {
     setCurrentPageValue('createTechBlog');
   };
 
+  const handleGotItButtonClick = () => {
+    setCurrentPageValue('textEditorView');
+  };
+
   const handleCreatePostButtonClick = () => {
     setCurrentPageValue('createPosts');
   };
@@ -303,7 +308,10 @@ function CustomDrawer(props: Props): JSX.Element {
         currentPage = <StudyForInterview />;
         break;
       case 'takeAMockInterview':
-        currentPage = <TakeAMockInterview />;
+        currentPage = <TakeAMockInterview gotItClick={() => handleGotItButtonClick()} />;
+        break;
+      case 'textEditorView':
+        currentPage = <TextEditorView />;
         break;
       case 'interviewOthers':
         currentPage = <InterviewOthers />;

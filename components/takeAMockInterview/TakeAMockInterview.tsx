@@ -27,7 +27,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-function TakeAMockInterview(): JSX.Element {
+function TakeAMockInterview(props: any): JSX.Element {
   const [currentTimezone, setCurrentTimezone] = useState('');
   const [currentTime, setCurrentTime] = useState('');
 
@@ -263,6 +263,7 @@ function TakeAMockInterview(): JSX.Element {
 
   const handleGotItButtonClick = () => {
     setMockInterviewDialogOpen(false);
+    props.gotItClick();
   };
 
   return (
