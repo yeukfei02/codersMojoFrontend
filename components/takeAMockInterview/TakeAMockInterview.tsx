@@ -1,18 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
+import { TransitionProps } from '@material-ui/core/transitions';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import EventIcon from '@material-ui/icons/Event';
+import CodeIcon from '@material-ui/icons/Code';
+import OndemandVideoIcon from '@material-ui/icons/OndemandVideo';
+import { grey, purple } from '@material-ui/core/colors';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import moment from 'moment';
 import momenttz from 'moment-timezone';
 
 import NextHead from '../nextHead/NextHead';
 
-function TakeAMockInterview(): JSX.Element {
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & { children?: React.ReactElement<any, any> },
+  ref: React.Ref<unknown>,
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+function TakeAMockInterview(props: any): JSX.Element {
   const [currentTimezone, setCurrentTimezone] = useState('');
   const [currentTime, setCurrentTime] = useState('');
 
   const [weekDaysList, setWeekDaysList] = useState<any[]>([]);
+
+  const [dialogTitleDate, setDialogTitleDate] = useState('');
+
+  const [loadingDialogOpen, setLoadingDialogOpen] = useState(false);
+  const [mockInterviewDialogOpen, setMockInterviewDialogOpen] = useState(false);
 
   useEffect(() => {
     getCurrentTimezone();
@@ -44,6 +68,7 @@ function TakeAMockInterview(): JSX.Element {
         const isoWeekdayNum = moment(item).isoWeekday();
         const isoWeekDayStr = getIsoWeekDayStr(isoWeekdayNum);
         const obj = {
+          fullDateStr: item,
           dateStr: moment(item).format('DD/MM'),
           isoWeekDayStr: isoWeekDayStr,
         };
@@ -97,6 +122,38 @@ function TakeAMockInterview(): JSX.Element {
     return result;
   };
 
+  const getISOWeekDayFullStr = (iosWeekDayStr: string) => {
+    let result = '';
+
+    switch (iosWeekDayStr) {
+      case 'MON':
+        result = 'Monday';
+        break;
+      case 'TUE':
+        result = 'Tuesday';
+        break;
+      case 'WED':
+        result = 'Wednesday';
+        break;
+      case 'THU':
+        result = 'Thursday';
+        break;
+      case 'FRI':
+        result = 'Friday';
+        break;
+      case 'SAT':
+        result = 'Saturday';
+        break;
+      case 'SUN':
+        result = 'Sunday';
+        break;
+      default:
+        break;
+    }
+
+    return result;
+  };
+
   const renderWeekDaysList = (weekDaysList: any[]) => {
     let weekDayListDiv = null;
 
@@ -106,7 +163,7 @@ function TakeAMockInterview(): JSX.Element {
           <div key={i} className="col-sm d-flex justify-content-center">
             <div className="text-center">
               {renderWeekDayDiv(item, i)}
-              <div className="my-2">{getAllAvailableTime('00:00', '23:59')}</div>
+              <div className="my-2">{getAllAvailableTime('00:00', '23:59', item)}</div>
             </div>
           </div>
         );
@@ -140,7 +197,7 @@ function TakeAMockInterview(): JSX.Element {
     return weekDayDiv;
   };
 
-  const getAllAvailableTime = (start: string, end: string) => {
+  const getAllAvailableTime = (start: string, end: string, weekDayObj: any) => {
     let allAvailableTimeDiv = null;
 
     const startTime = moment(start, 'HH:mm');
@@ -162,7 +219,7 @@ function TakeAMockInterview(): JSX.Element {
         const timeStr = moment(item, 'HH:mm').format('hh:mm a');
         return (
           <div key={i} className="my-3">
-            <Button variant="contained" color="primary" onClick={() => handleTimeButtonClick(timeStr)}>
+            <Button variant="contained" color="primary" onClick={() => handleTimeButtonClick(timeStr, weekDayObj)}>
               {timeStr}
             </Button>
           </div>
@@ -183,8 +240,30 @@ function TakeAMockInterview(): JSX.Element {
     setCurrentTime(previousCurrentTime);
   };
 
-  const handleTimeButtonClick = (timeStr: string) => {
-    console.log('timeStr = ', timeStr);
+  const handleTimeButtonClick = (timeStr: string, weekDayObj: any) => {
+    const dateStr = moment(weekDayObj.fullDateStr).format('MMMM Do');
+    const isoWeekDayStr = getISOWeekDayFullStr(weekDayObj.isoWeekDayStr);
+
+    const dialogTitleDate = `${isoWeekDayStr}, ${dateStr}, ${timeStr}`;
+    setDialogTitleDate(dialogTitleDate);
+    setLoadingDialogOpen(true);
+    setTimeout(() => {
+      setMockInterviewDialogOpen(true);
+      setLoadingDialogOpen(false);
+    }, 1500);
+  };
+
+  // const handleLoadingDialogClose = () => {
+  //   setLoadingDialogOpen(false);
+  // };
+
+  const handleMockInterviewDialogClose = () => {
+    setMockInterviewDialogOpen(false);
+  };
+
+  const handleGotItButtonClick = () => {
+    setMockInterviewDialogOpen(false);
+    props.gotItClick();
   };
 
   return (
@@ -255,6 +334,116 @@ function TakeAMockInterview(): JSX.Element {
           </div>
         </div>
       </div>
+
+      <Dialog
+        open={loadingDialogOpen}
+        TransitionComponent={Transition}
+        keepMounted
+        // onClose={handleLoadingDialogClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title" style={{ background: '#6f42c1' }}>
+          <div className="font-weight-bold" style={{ fontSize: 25, color: 'white' }}>
+            Loading, we are matching...
+          </div>
+          <div className="d-flex justify-content-center my-3">
+            <CircularProgress />
+          </div>
+        </DialogTitle>
+      </Dialog>
+
+      <Dialog
+        open={mockInterviewDialogOpen}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleMockInterviewDialogClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title" style={{ background: '#6f42c1' }}>
+          <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <div className="d-flex align-items-center">
+              <ThumbUpIcon style={{ fontSize: 90, color: grey[50] }} />
+            </div>
+            <div className="ml-4" style={{ color: 'white' }}>
+              <div className="font-weight-bold" style={{ fontSize: 20 }}>
+                You’re mock interview has been confirmed.
+              </div>
+              <div className="my-2">
+                <div style={{ fontSize: 16 }}>An awesome peer will be waiting to meet you for a</div>
+                <div style={{ fontSize: 16 }}>live Date Structures and Algorithms interview session</div>
+                <div style={{ fontSize: 16 }}>
+                  on <b style={{ textDecoration: 'underline' }}>{dialogTitleDate}</b>
+                </div>
+              </div>
+            </div>
+          </div>
+        </DialogTitle>
+        <DialogContent>
+          <div id="alert-dialog-slide-description">
+            <div className="my-4 px-3" style={{ display: 'flex', flexDirection: 'row' }}>
+              <div>
+                <EventIcon style={{ fontSize: 60, color: purple[500] }} />
+              </div>
+              <div
+                className="mx-4 d-flex justify-content-center"
+                style={{ display: 'flex', flexDirection: 'column', color: 'black', fontSize: 14 }}
+              >
+                <div>Please arrive on time and be respectful to your peer. If for any</div>
+                <div>reason you can&apos;t make it, you can easily cancel or reschedule</div>
+                <div>your session from the dashboard at any time.</div>
+              </div>
+            </div>
+
+            <div className="my-4 px-3" style={{ display: 'flex', flexDirection: 'row' }}>
+              <div>
+                <CodeIcon style={{ fontSize: 60, color: purple[500] }} />
+              </div>
+              <div
+                className="mx-4 d-flex justify-content-center"
+                style={{ display: 'flex', flexDirection: 'column', color: 'black', fontSize: 14 }}
+              >
+                <div>Check out your dashboard for content related to your session, so</div>
+                <div>you could come prepared. Your peer will do the same for you.</div>
+              </div>
+            </div>
+
+            <div className="my-4 px-3" style={{ display: 'flex', flexDirection: 'row' }}>
+              <div>
+                <OndemandVideoIcon style={{ fontSize: 60, color: purple[500] }} />
+              </div>
+              <div
+                className="mx-4 d-flex justify-content-center"
+                style={{ display: 'flex', flexDirection: 'column', color: 'black', fontSize: 14 }}
+              >
+                <div>We&apos;ll email you a link to join your session a few minutes before it</div>
+                <div>starts. The session takes place within the browser, all you need</div>
+                <div>
+                  is a <span style={{ color: '#6f42c1' }}>working camera and microphone available.</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="my-4 px-3" style={{ display: 'flex', flexDirection: 'row' }}>
+              <div>
+                <OndemandVideoIcon style={{ fontSize: 60, color: purple[500], visibility: 'hidden' }} />
+              </div>
+              <div
+                className="mx-4 d-flex justify-content-center"
+                style={{ display: 'flex', flexDirection: 'column', color: 'black', fontSize: 14 }}
+              >
+                <div>Good luck!</div>
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+        <DialogActions className="mb-2">
+          <Button variant="contained" onClick={handleGotItButtonClick} color="secondary">
+            GOT IT
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
