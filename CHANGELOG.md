@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.17](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.16...v0.0.17) (2020-09-27)
+
+
+### Features
+
+* 🎸 add reschedule button api ([6a9dc9f](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/6a9dc9f3f3f02a959d840e9c09c3c270b9308648))
+
 ### [0.0.16](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.15...v0.0.16) (2020-09-27)
 
 ### [0.0.15](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.14...v0.0.15) (2020-09-27)
