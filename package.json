@@ -1,6 +1,6 @@
 {
   "name": "with-typescript",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
