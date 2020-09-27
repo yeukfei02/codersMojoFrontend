@@ -88,7 +88,7 @@ function YourUpcomingInterviewSchedule(props: any): JSX.Element {
                   <InsertInvitationIcon style={{ color: purple[500] }} />
                 </div>
                 <div className="d-flex align-items-center">
-                  <b>{item.datetime}</b>
+                  <b>{item.date_time}</b>
                 </div>
               </div>
             </td>
