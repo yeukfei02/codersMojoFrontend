@@ -254,7 +254,8 @@ function TakeAMockInterview(props: any): JSX.Element {
       setMockInterviewDialogOpen(true);
       setLoadingDialogOpen(false);
 
-      createUpcomingInterview(dialogTitleDate);
+      const fullDateTime = moment(`${weekDayObj.fullDateStr} ${timeStr}`).format('YYYY-MM-DD HH:mm:ss');
+      createUpcomingInterview(fullDateTime, dialogTitleDate);
     }, 1500);
   };
 
@@ -271,7 +272,7 @@ function TakeAMockInterview(props: any): JSX.Element {
     props.gotItClick();
   };
 
-  const createUpcomingInterview = async (dateTime: string) => {
+  const createUpcomingInterview = async (fullDateTime: string, dateTime: string) => {
     const token = localStorage.getItem('token');
     if (token) {
       const upcomingInterviewStatus = 'scheduled';
@@ -280,6 +281,7 @@ function TakeAMockInterview(props: any): JSX.Element {
       const response = await fetch(`/api/upcoming-interview/create-upcoming-interview`, {
         method: 'POST',
         body: JSON.stringify({
+          fullDateTime: fullDateTime,
           dateTime: dateTime,
           type: type,
           upcomingInterviewStatus: upcomingInterviewStatus,

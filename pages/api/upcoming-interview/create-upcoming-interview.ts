@@ -11,6 +11,7 @@ export default async (_req: NextApiRequest, res: NextApiResponse) => {
     const response = await axios.post(
       `${ROOT_URL}/upcoming-interview`,
       {
+        fullDateTime: reqBody.fullDateTime,
         dateTime: reqBody.dateTime,
         type: reqBody.type,
         upcomingInterviewStatus: reqBody.upcomingInterviewStatus,
