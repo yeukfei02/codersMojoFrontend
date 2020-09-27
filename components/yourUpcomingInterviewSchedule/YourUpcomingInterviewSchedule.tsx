@@ -1,3 +1,4 @@
+import 'date-fns';
 import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -8,7 +9,10 @@ import { TransitionProps } from '@material-ui/core/transitions';
 import InsertInvitationIcon from '@material-ui/icons/InsertInvitation';
 import { purple } from '@material-ui/core/colors';
 import { Divider } from '@material-ui/core';
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from '@material-ui/pickers';
 import _ from 'lodash';
+import moment from 'moment';
 
 import NextHead from '../nextHead/NextHead';
 
@@ -23,8 +27,11 @@ function YourUpcomingInterviewSchedule(props: any): JSX.Element {
   const [upcomingInterviewList, setUpcomingInterviewList] = useState<any[]>([]);
 
   const [cancelDialogOpen, setCancelDialogOpen] = useState(false);
+  const [rescheduleDialogOpen, setRescheduleDialogOpen] = useState(false);
 
   const [upcomingInterviewId, setUpcomingInterviewId] = useState(0);
+
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
 
   useEffect(() => {
     getUpcomingInterviewList();
@@ -51,8 +58,10 @@ function YourUpcomingInterviewSchedule(props: any): JSX.Element {
     }
   };
 
-  const handleRescheduleButtonClick = (upcomingInterviewId: number) => {
+  const handleRescheduleButtonClick = (upcomingInterviewId: number, fullDateTime: string) => {
+    setRescheduleDialogOpen(true);
     setUpcomingInterviewId(upcomingInterviewId);
+    setSelectedDate(new Date(fullDateTime));
   };
 
   const handleCancelButtonClick = (upcomingInterviewId: number) => {
@@ -131,7 +140,7 @@ function YourUpcomingInterviewSchedule(props: any): JSX.Element {
             <td>
               <div className="d-flex justify-content-center" style={{ display: 'flex', flexDirection: 'row' }}>
                 {renderCancelButton(item.status, upcomingInterviewId)}
-                {renderRescheduleButton(item.status, upcomingInterviewId)}
+                {renderRescheduleButton(item.status, upcomingInterviewId, item.full_date_time)}
               </div>
             </td>
           </tr>
@@ -171,9 +180,13 @@ function YourUpcomingInterviewSchedule(props: any): JSX.Element {
     return cancelButton;
   };
 
-  const renderRescheduleButton = (status: string, upcomingInterviewId: number) => {
+  const renderRescheduleButton = (status: string, upcomingInterviewId: number, fullDateTime: string) => {
     let rescheduleButton = (
-      <Button variant="contained" color="secondary" onClick={() => handleRescheduleButtonClick(upcomingInterviewId)}>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={() => handleRescheduleButtonClick(upcomingInterviewId, fullDateTime)}
+      >
         Reschedule
       </Button>
     );
@@ -184,7 +197,7 @@ function YourUpcomingInterviewSchedule(props: any): JSX.Element {
           variant="contained"
           color="secondary"
           disabled={true}
-          onClick={() => handleRescheduleButtonClick(upcomingInterviewId)}
+          onClick={() => handleRescheduleButtonClick(upcomingInterviewId, fullDateTime)}
         >
           Reschedule
         </Button>
@@ -212,6 +225,26 @@ function YourUpcomingInterviewSchedule(props: any): JSX.Element {
     cancelUpcomingInterview(upcomingInterviewId);
   };
 
+  const handleRescheduleNoGoBackButtonClick = () => {
+    setRescheduleDialogOpen(false);
+  };
+
+  const handleYesRescheduleButtonClick = (upcomingInterviewId: number) => {
+    const fullDateTime = moment(selectedDate).format('YYYY-MM-DD HH:mm:ss');
+
+    const dateStr = moment(selectedDate).format('MMMM Do');
+    const isoWeekDayStr = moment(selectedDate).format('dddd');
+    const timeStr = moment(selectedDate, 'HH:mm').format('hh:mm a');
+    const dateTime = `${isoWeekDayStr}, ${dateStr}, ${timeStr}`;
+
+    setRescheduleDialogOpen(false);
+    rescheduleUpcomingInterview(upcomingInterviewId, fullDateTime, dateTime);
+  };
+
+  const handleDateChange = (date: Date | null) => {
+    setSelectedDate(date);
+  };
+
   const cancelUpcomingInterview = async (upcomingInterviewId: number) => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -221,6 +254,30 @@ function YourUpcomingInterviewSchedule(props: any): JSX.Element {
         body: JSON.stringify({
           upcomingInterviewId: upcomingInterviewId,
           upcomingInterviewStatus: upcomingInterviewStatus,
+          token: token,
+        }),
+      });
+      if (response) {
+        const responseData = await response.json();
+        console.log('response.status = ', response.status);
+        console.log('responseData = ', responseData);
+
+        if (response.status === 200) {
+          getUpcomingInterviewList();
+        }
+      }
+    }
+  };
+
+  const rescheduleUpcomingInterview = async (upcomingInterviewId: number, fullDateTime: string, dateTime: string) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const response = await fetch(`/api/upcoming-interview/reschedule-upcoming-interview`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          upcomingInterviewId: upcomingInterviewId,
+          fullDateTime: fullDateTime,
+          dateTime: dateTime,
           token: token,
         }),
       });
@@ -270,6 +327,55 @@ function YourUpcomingInterviewSchedule(props: any): JSX.Element {
               onClick={() => handleYesCancelButtonClick(upcomingInterviewId)}
             >
               Yes, cancel
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog
+        open={rescheduleDialogOpen}
+        TransitionComponent={Transition}
+        keepMounted
+        // onClose={handleCancelDialogClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle style={{ background: '#6f42c1' }} id="alert-dialog-slide-title">
+          <div className="d-flex justify-content-center" style={{ color: 'white', fontWeight: 'bold' }}>
+            RESCHEDULE SESSION
+          </div>
+        </DialogTitle>
+        <DialogContent>
+          <div className="my-3 p-4" style={{ color: 'black', fontSize: 20 }}>
+            <div className="d-flex justify-content-center" style={{ display: 'flex', flexDirection: 'column' }}>
+              <div>Are you sure to reschedule the session?</div>
+              <div className="mt-4 d-flex justify-content-center">
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <KeyboardDateTimePicker
+                    variant="inline"
+                    ampm={true}
+                    label="Date time picker"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                    autoOk={true}
+                    disablePast
+                    format="yyyy/MM/dd HH:mm"
+                  />
+                </MuiPickersUtilsProvider>
+              </div>
+            </div>
+          </div>
+          <Divider />
+          <div className="my-3" style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+            <Button variant="contained" color="primary" onClick={() => handleRescheduleNoGoBackButtonClick()}>
+              No, go back
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => handleYesRescheduleButtonClick(upcomingInterviewId)}
+            >
+              Yes, reschedule
             </Button>
           </div>
         </DialogContent>
