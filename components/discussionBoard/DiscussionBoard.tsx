@@ -122,6 +122,30 @@ function DiscussionBoard(props: any): JSX.Element {
     setFilterText(filterText);
   };
 
+  const renderLeftSideTagItem = (itemText: string) => {
+    const textToCompare = itemText.substring(1).trim();
+
+    let leftSideTagItem = (
+      <span className="pointer hover-item" onClick={() => handleFilterTextClick(textToCompare)}>
+        {itemText}
+      </span>
+    );
+
+    if (filterText === textToCompare) {
+      leftSideTagItem = (
+        <span
+          style={{ color: '#6f42c1', fontWeight: 'bold' }}
+          className="pointer hover-item"
+          onClick={() => handleFilterTextClick(textToCompare)}
+        >
+          {itemText}
+        </span>
+      );
+    }
+
+    return leftSideTagItem;
+  };
+
   return (
     <div>
       <NextHead />
@@ -139,77 +163,29 @@ function DiscussionBoard(props: any): JSX.Element {
                   </div>
                 </div>
 
-                <div className="my-4">
-                  <span className="pointer hover-item" onClick={() => handleFilterTextClick('Career')}>
-                    # Career
-                  </span>
-                </div>
+                <div className="my-4">{renderLeftSideTagItem('# Career')}</div>
 
-                <div className="my-4">
-                  <span className="pointer hover-item" onClick={() => handleFilterTextClick('Jobs')}>
-                    # Jobs
-                  </span>
-                </div>
+                <div className="my-4">{renderLeftSideTagItem('# Jobs')}</div>
 
-                <div className="my-4">
-                  <span className="pointer hover-item" onClick={() => handleFilterTextClick('Success Story')}>
-                    # Success Story
-                  </span>
-                </div>
+                <div className="my-4">{renderLeftSideTagItem('# Success Story')}</div>
 
-                <div className="my-4">
-                  <span className="pointer hover-item" onClick={() => handleFilterTextClick('Women Investor')}>
-                    # Women Investor
-                  </span>
-                </div>
+                <div className="my-4">{renderLeftSideTagItem('# Women Investor')}</div>
 
-                <div className="my-4">
-                  <span className="pointer hover-item" onClick={() => handleFilterTextClick('Job Board')}>
-                    # Job Board
-                  </span>
-                </div>
+                <div className="my-4">{renderLeftSideTagItem('# Job Board')}</div>
 
-                <div className="my-4">
-                  <span className="pointer hover-item" onClick={() => handleFilterTextClick('Tech')}>
-                    # Tech
-                  </span>
-                </div>
+                <div className="my-4">{renderLeftSideTagItem('# Tech')}</div>
 
-                <div className="my-4">
-                  <span className="pointer hover-item" onClick={() => handleFilterTextClick('Salary Negotiation')}>
-                    # Salary Negotiation
-                  </span>
-                </div>
+                <div className="my-4">{renderLeftSideTagItem('# Salary Negotiation')}</div>
 
-                <div className="my-4">
-                  <span className="pointer hover-item" onClick={() => handleFilterTextClick('Compensation')}>
-                    # Compensation
-                  </span>
-                </div>
+                <div className="my-4">{renderLeftSideTagItem('# Compensation')}</div>
 
-                <div className="my-4">
-                  <span className="pointer hover-item" onClick={() => handleFilterTextClick('Interview Experience')}>
-                    # Interview Experience
-                  </span>
-                </div>
+                <div className="my-4">{renderLeftSideTagItem('# Interview Experience')}</div>
 
-                <div className="my-4">
-                  <span className="pointer hover-item" onClick={() => handleFilterTextClick('Career Growth')}>
-                    # Career Growth
-                  </span>
-                </div>
+                <div className="my-4">{renderLeftSideTagItem('# Career Growth')}</div>
 
-                <div className="my-4">
-                  <span className="pointer hover-item" onClick={() => handleFilterTextClick('Students')}>
-                    # Students
-                  </span>
-                </div>
+                <div className="my-4">{renderLeftSideTagItem('# Students')}</div>
 
-                <div className="my-4">
-                  <span className="pointer hover-item" onClick={() => handleFilterTextClick('Introduce Yourself')}>
-                    # Introduce Yourself
-                  </span>
-                </div>
+                <div className="my-4">{renderLeftSideTagItem('# Introduce Yourself')}</div>
               </div>
             </div>
           </div>
