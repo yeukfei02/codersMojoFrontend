@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.15](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.14...v0.0.15) (2020-09-27)
+
+
+### Features
+
+* 🎸 add cancel upcoming interview api ([b246550](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/b2465505063a7695a21be6f63539af70df787abc))
+
 ### [0.0.14](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.13...v0.0.14) (2020-09-27)
 
 ### [0.0.13](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.12...v0.0.13) (2020-09-26)
