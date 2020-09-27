@@ -202,10 +202,10 @@ function TakeAMockInterview(props: any): JSX.Element {
     if (i === 2) {
       weekDayDiv = (
         <div>
-          <div style={{ color: 'red' }}>
+          <div style={{ color: '#6f42c1' }}>
             <b>{item.isoWeekDayStr}</b>
           </div>
-          <div style={{ color: 'red' }}>{item.dateStr}</div>
+          <div style={{ color: '#6f42c1' }}>{item.dateStr}</div>
         </div>
       );
     }
@@ -335,6 +335,30 @@ function TakeAMockInterview(props: any): JSX.Element {
     setType(type);
   };
 
+  const renderLeftSideTagItem = (itemText: string) => {
+    const textToCompare = itemText.substring(1).trim();
+
+    let leftSideTagItem = (
+      <li className="my-4 hover-item pointer" onClick={() => handleTypeItemClick(textToCompare)}>
+        {itemText}
+      </li>
+    );
+
+    if (type === textToCompare) {
+      leftSideTagItem = (
+        <li
+          style={{ color: '#6f42c1', fontWeight: 'bold' }}
+          className="my-4 hover-item pointer"
+          onClick={() => handleTypeItemClick(textToCompare)}
+        >
+          {itemText}
+        </li>
+      );
+    }
+
+    return leftSideTagItem;
+  };
+
   return (
     <div>
       <NextHead />
@@ -348,39 +372,26 @@ function TakeAMockInterview(props: any): JSX.Element {
                   <b>Focus</b>
                 </h6>
                 <ul style={{ listStyleType: 'none' }}>
-                  <li
-                    className="my-4 hover-item pointer"
-                    onClick={() => handleTypeItemClick('Data Structures and Algorithms')}
-                  >
-                    # Data Structures and Algorithms
-                  </li>
-                  <li className="my-4 hover-item pointer" onClick={() => handleTypeItemClick('System Design')}>
-                    # System Design
-                  </li>
-                  <li className="my-4 hover-item pointer" onClick={() => handleTypeItemClick('Data Science')}>
-                    # Data Science
-                  </li>
-                  <li className="my-4 hover-item pointer" onClick={() => handleTypeItemClick('Front End Development')}>
-                    # Front End Development
-                  </li>
-                  <li className="my-4 hover-item pointer" onClick={() => handleTypeItemClick('Behavioral')}>
-                    # Behavioral
-                  </li>
+                  {renderLeftSideTagItem('# Data Structures and Algorithms')}
+                  {renderLeftSideTagItem('# System Design')}
+                  {renderLeftSideTagItem('# Data Science')}
+                  {renderLeftSideTagItem('# Front End Development')}
+                  {renderLeftSideTagItem('# Behavioral')}
                 </ul>
 
                 <h6 className="mt-5">
                   <b>Type of interview</b>
                 </h6>
                 <ul style={{ listStyleType: 'none' }}>
-                  <li className="my-4 hover-item pointer"># Practice Session</li>
-                  <li className="my-4 hover-item pointer"># Peer to Peer Mock Interview</li>
+                  {renderLeftSideTagItem('# Practice Session')}
+                  {renderLeftSideTagItem('# Peer to Peer Mock Interview')}
                 </ul>
 
-                <h6 className="mt-5 hover-item pointer">
+                <h6 className="mt-5">
                   <b>Study for Interview</b>
                 </h6>
 
-                <h6 className="mt-5 hover-item pointer">
+                <h6 className="mt-5">
                   <b>Company wise Interview Questions</b>
                 </h6>
               </div>
