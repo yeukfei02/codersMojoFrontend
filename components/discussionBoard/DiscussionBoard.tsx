@@ -152,6 +152,22 @@ function DiscussionBoard(props: any): JSX.Element {
 
       <div className="container">
         <div className="row">
+          <div className="col-sm-8">
+            <div className="card">
+              <div className="card-body">
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                  <h5 className="my-2">CodersMojo Discussion Board</h5>
+                  <div style={{ marginLeft: 'auto' }}>
+                    <Button variant="contained" color="secondary" onClick={() => props.postsClick()}>
+                      Create post
+                    </Button>
+                  </div>
+                </div>
+
+                {renderPostsList(postsList)}
+              </div>
+            </div>
+          </div>
           <div className="col-sm-4">
             <div className="card">
               <div className="card-body">
@@ -186,22 +202,6 @@ function DiscussionBoard(props: any): JSX.Element {
                 <div className="my-4">{renderLeftSideTagItem('# Students')}</div>
 
                 <div className="my-4">{renderLeftSideTagItem('# Introduce Yourself')}</div>
-              </div>
-            </div>
-          </div>
-          <div className="col-sm-8">
-            <div className="card">
-              <div className="card-body">
-                <div style={{ display: 'flex', flexDirection: 'row' }}>
-                  <h5 className="my-2">CodersMojo Discussion Board</h5>
-                  <div style={{ marginLeft: 'auto' }}>
-                    <Button variant="contained" color="secondary" onClick={() => props.postsClick()}>
-                      Create post
-                    </Button>
-                  </div>
-                </div>
-
-                {renderPostsList(postsList)}
               </div>
             </div>
           </div>
