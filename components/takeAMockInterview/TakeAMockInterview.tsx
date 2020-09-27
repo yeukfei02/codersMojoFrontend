@@ -176,14 +176,28 @@ function TakeAMockInterview(props: any): JSX.Element {
   };
 
   const renderWeekDayDiv = (item: any, i: number) => {
+    const today = moment();
+    const itemDate = moment(item.fullDateStr).add(1, 'day');
+
     let weekDayDiv = (
       <div>
         <div>
-          <b>{item.isoWeekDayStr}</b>
+          <b style={{ color: 'gray' }}>{item.isoWeekDayStr}</b>
         </div>
-        <div>{item.dateStr}</div>
+        <div style={{ color: 'gray' }}>{item.dateStr}</div>
       </div>
     );
+
+    if (itemDate.isAfter(today)) {
+      weekDayDiv = (
+        <div>
+          <div>
+            <b>{item.isoWeekDayStr}</b>
+          </div>
+          <div>{item.dateStr}</div>
+        </div>
+      );
+    }
 
     if (i === 2) {
       weekDayDiv = (
@@ -217,15 +231,31 @@ function TakeAMockInterview(props: any): JSX.Element {
     }
 
     if (allAvailableTimeList) {
+      const today = moment();
+      const itemDate = moment(weekDayObj.fullDateStr).add(1, 'day');
+
       allAvailableTimeDiv = allAvailableTimeList.map((item: string, i: number) => {
         const timeStr = moment(item, 'HH:mm').format('hh:mm a');
-        return (
+
+        let button = (
           <div key={i} className="my-3">
-            <Button variant="contained" color="primary" onClick={() => handleTimeButtonClick(timeStr, weekDayObj)}>
+            <Button variant="contained" color="primary" disabled={true}>
               {timeStr}
             </Button>
           </div>
         );
+
+        if (itemDate.isAfter(today)) {
+          button = (
+            <div key={i} className="my-3">
+              <Button variant="contained" color="primary" onClick={() => handleTimeButtonClick(timeStr, weekDayObj)}>
+                {timeStr}
+              </Button>
+            </div>
+          );
+        }
+
+        return button;
       });
     }
 
@@ -254,7 +284,8 @@ function TakeAMockInterview(props: any): JSX.Element {
       setMockInterviewDialogOpen(true);
       setLoadingDialogOpen(false);
 
-      createUpcomingInterview(dialogTitleDate);
+      const fullDateTime = moment(`${weekDayObj.fullDateStr} ${timeStr}`).format('YYYY-MM-DD HH:mm:ss');
+      createUpcomingInterview(fullDateTime, dialogTitleDate);
     }, 1500);
   };
 
@@ -271,7 +302,7 @@ function TakeAMockInterview(props: any): JSX.Element {
     props.gotItClick();
   };
 
-  const createUpcomingInterview = async (dateTime: string) => {
+  const createUpcomingInterview = async (fullDateTime: string, dateTime: string) => {
     const token = localStorage.getItem('token');
     if (token) {
       const upcomingInterviewStatus = 'scheduled';
@@ -280,6 +311,7 @@ function TakeAMockInterview(props: any): JSX.Element {
       const response = await fetch(`/api/upcoming-interview/create-upcoming-interview`, {
         method: 'POST',
         body: JSON.stringify({
+          fullDateTime: fullDateTime,
           dateTime: dateTime,
           type: type,
           upcomingInterviewStatus: upcomingInterviewStatus,
