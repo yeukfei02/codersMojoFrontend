@@ -30,6 +30,8 @@ function CreateTechBlog(props: any): JSX.Element {
   const [tag, setTag] = useState('');
   const [users_id, setUsers_id] = useState(0);
 
+  const [submitButtonClicked, setSubmitButtonClicked] = useState(false);
+
   const [snackBarStatus, setSnackBarStatus] = useState(false);
   const [snackBarType, setSnackBarType] = useState('success');
   const [snackBarMessage, setSnackBarMessage] = useState('');
@@ -123,8 +125,11 @@ function CreateTechBlog(props: any): JSX.Element {
 
   const handleSubmitButtonClick = async (title: string, description: string, tag: string, users_id: number) => {
     if (imageFile && title && description && tag && users_id) {
+      setSubmitButtonClicked(true);
+
       const imageUrl = await uploadTechBlogFile(imageFile);
       await createTechBlog(imageUrl, title, description, tag, users_id);
+      setSubmitButtonClicked(false);
     }
   };
 
@@ -217,7 +222,6 @@ function CreateTechBlog(props: any): JSX.Element {
           id="exampleFormControlTextarea1"
           rows={10}
           onChange={(e) => handleDescriptionInputChange(e)}
-          onKeyUp={(e) => handleOnKeyUp(e)}
         ></textarea>
       </div>
 
@@ -255,6 +259,7 @@ function CreateTechBlog(props: any): JSX.Element {
         <Button
           variant="contained"
           color="secondary"
+          disabled={submitButtonClicked ? true : false}
           onClick={() => handleSubmitButtonClick(title, description, tag, users_id)}
         >
           Submit
