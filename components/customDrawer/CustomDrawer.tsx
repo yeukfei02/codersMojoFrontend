@@ -135,28 +135,12 @@ function CustomDrawer(props: Props): JSX.Element {
             <ListItemText primary="Take a Mock Interview" />
           </ListItem>
         </div>
-        <div onClick={() => handleLeftSideMenuItemClick('interviewOthers')}>
-          <ListItem button>
-            <ListItemIcon>
-              <ChatIcon color="secondary" />
-            </ListItemIcon>
-            <ListItemText primary="Interview Others" />
-          </ListItem>
-        </div>
         <div onClick={() => handleLeftSideMenuItemClick('discussionBoard')}>
           <ListItem button>
             <ListItemIcon>
               <ChatIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Discussion board" />
-          </ListItem>
-        </div>
-        <div onClick={() => handleLeftSideMenuItemClick('applyForJobs')}>
-          <ListItem button>
-            <ListItemIcon>
-              <WorkIcon color="secondary" />
-            </ListItemIcon>
-            <ListItemText primary="Apply for Jobs" />
           </ListItem>
         </div>
         <div onClick={() => handleLeftSideMenuItemClick('participateInHackathons')}>
@@ -167,12 +151,12 @@ function CustomDrawer(props: Props): JSX.Element {
             <ListItemText primary="Participate in Hackathons" />
           </ListItem>
         </div>
-        <div onClick={() => handleLeftSideMenuItemClick('inviteYourFriends')}>
+        <div onClick={() => handleLeftSideMenuItemClick('applyForJobs')}>
           <ListItem button>
             <ListItemIcon>
-              <PeopleIcon color="secondary" />
+              <WorkIcon color="secondary" />
             </ListItemIcon>
-            <ListItemText primary="Invite your friends" />
+            <ListItemText primary="Apply for Jobs" />
           </ListItem>
         </div>
         <div onClick={() => handleLeftSideMenuItemClick('becomeAStudentTechAmbassador')}>
@@ -189,6 +173,22 @@ function CustomDrawer(props: Props): JSX.Element {
               <PostAddIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Tech blog" />
+          </ListItem>
+        </div>
+        <div onClick={() => handleLeftSideMenuItemClick('inviteYourFriends')}>
+          <ListItem button>
+            <ListItemIcon>
+              <PeopleIcon color="secondary" />
+            </ListItemIcon>
+            <ListItemText primary="Invite your friends" />
+          </ListItem>
+        </div>
+        <div onClick={() => handleLeftSideMenuItemClick('interviewOthers')}>
+          <ListItem button>
+            <ListItemIcon>
+              <ChatIcon color="secondary" />
+            </ListItemIcon>
+            <ListItemText primary="Interview Others" />
           </ListItem>
         </div>
         <Divider />
