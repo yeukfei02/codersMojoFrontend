@@ -109,14 +109,14 @@ function TextEditorView(): JSX.Element {
         label: 'csharp',
         value: 'csharp',
       },
-      {
-        label: 'elixir',
-        value: 'elixir',
-      },
-      {
-        label: 'typescript',
-        value: 'typescript',
-      },
+      // {
+      //   label: 'elixir',
+      //   value: 'elixir',
+      // },
+      // {
+      //   label: 'typescript',
+      //   value: 'typescript',
+      // },
       // {
       //   label: 'css',
       //   value: 'css',
@@ -292,21 +292,21 @@ func main() {
   }
 }`);
         break;
-      case 'elixir':
-        setValue(`IO.puts("Hello, World!")`);
-        break;
-      case 'typescript':
-        setValue(`interface User {
-  name: string;
-  id: number;
-}
+      // case 'elixir':
+      //   setValue(`IO.puts("Hello, World!")`);
+      //   break;
+      //       case 'typescript':
+      //         setValue(`interface User {
+      //   name: string;
+      //   id: number;
+      // }
 
-const user: User = {
-  name: "Hayes",
-  id: 0,
-};
-`);
-        break;
+      // const user: User = {
+      //   name: "Hayes",
+      //   id: 0,
+      // };
+      // `);
+      //         break;
       case 'css':
         setValue(`body {
   background-color: lightblue;

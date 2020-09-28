@@ -15,8 +15,8 @@ import 'ace-builds/src-noconflict/mode-ruby';
 // import 'ace-builds/src-noconflict/mode-handlebars';
 import 'ace-builds/src-noconflict/mode-golang';
 import 'ace-builds/src-noconflict/mode-csharp';
-import 'ace-builds/src-noconflict/mode-elixir';
-import 'ace-builds/src-noconflict/mode-typescript';
+// import 'ace-builds/src-noconflict/mode-elixir';
+// import 'ace-builds/src-noconflict/mode-typescript';
 // import 'ace-builds/src-noconflict/mode-css';
 
 import 'ace-builds/src-noconflict/theme-monokai';
@@ -43,8 +43,8 @@ import 'ace-builds/src-min-noconflict/snippets/ruby';
 // import 'ace-builds/src-min-noconflict/snippets/handlebars';
 import 'ace-builds/src-min-noconflict/snippets/golang';
 import 'ace-builds/src-min-noconflict/snippets/csharp';
-import 'ace-builds/src-min-noconflict/snippets/elixir';
-import 'ace-builds/src-min-noconflict/snippets/typescript';
+// import 'ace-builds/src-min-noconflict/snippets/elixir';
+// import 'ace-builds/src-min-noconflict/snippets/typescript';
 // import 'ace-builds/src-min-noconflict/snippets/css';
 
 import 'ace-builds/src-noconflict/ext-language_tools';
@@ -147,18 +147,18 @@ function CustomTextEditor(props: any): JSX.Element {
           'https://cdn.jsdelivr.net/npm/ace-builds@1.4.12/src-noconflict/worker-csharp.js',
         );
         break;
-      case 'elixir':
-        ace.config.setModuleUrl(
-          'ace/mode/elixir_worker',
-          'https://cdn.jsdelivr.net/npm/ace-builds@1.4.12/src-noconflict/worker-elixir.js',
-        );
-        break;
-      case 'typescript':
-        ace.config.setModuleUrl(
-          'ace/mode/typescript_worker',
-          'https://cdn.jsdelivr.net/npm/ace-builds@1.4.12/src-noconflict/worker-typescript.js',
-        );
-        break;
+      // case 'elixir':
+      //   ace.config.setModuleUrl(
+      //     'ace/mode/elixir_worker',
+      //     'https://cdn.jsdelivr.net/npm/ace-builds@1.4.12/src-noconflict/worker-elixir.js',
+      //   );
+      //   break;
+      // case 'typescript':
+      //   ace.config.setModuleUrl(
+      //     'ace/mode/typescript_worker',
+      //     'https://cdn.jsdelivr.net/npm/ace-builds@1.4.12/src-noconflict/worker-typescript.js',
+      //   );
+      //   break;
       // case 'css':
       //   ace.config.setModuleUrl(
       //     'ace/mode/css_worker',
