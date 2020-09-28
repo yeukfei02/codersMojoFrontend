@@ -23,6 +23,8 @@ function CreatePosts(props: any): JSX.Element {
   const [tag, setTag] = useState('');
   const [users_id, setUsers_id] = useState(0);
 
+  const [submitButtonClicked, setSubmitButtonClicked] = useState(false);
+
   const [snackBarStatus, setSnackBarStatus] = useState(false);
   const [snackBarType, setSnackBarType] = useState('success');
   const [snackBarMessage, setSnackBarMessage] = useState('');
@@ -130,7 +132,10 @@ function CreatePosts(props: any): JSX.Element {
 
   const handleSubmitButtonClick = (title: string, description: string, tag: string, users_id: number) => {
     if (title && description && tag && users_id) {
+      setSubmitButtonClicked(true);
+
       createPosts(title, description, tag, users_id);
+      setSubmitButtonClicked(false);
     }
   };
 
@@ -206,7 +211,6 @@ function CreatePosts(props: any): JSX.Element {
           placeholder="Write your post here..."
           rows={10}
           onChange={(e) => handleDescriptionInputChange(e)}
-          onKeyUp={(e) => handleOnKeyUp(e)}
         ></textarea>
       </div>
 
@@ -229,6 +233,7 @@ function CreatePosts(props: any): JSX.Element {
         <Button
           variant="contained"
           color="secondary"
+          disabled={submitButtonClicked ? true : false}
           onClick={() => handleSubmitButtonClick(title, description, tag, users_id)}
         >
           Submit
