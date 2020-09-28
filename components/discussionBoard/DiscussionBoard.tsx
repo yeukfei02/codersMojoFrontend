@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { red } from '@material-ui/core/colors';
 
 import NextHead from '../nextHead/NextHead';
+import CustomSnackBar from '../customSnackBar/CustomSnackBar';
 
 function DiscussionBoard(props: any): JSX.Element {
   const [postsList, setPostsList] = useState<any[]>([]);
 
   const [filterText, setFilterText] = useState('');
+
+  const [snackBarStatus, setSnackBarStatus] = useState(false);
+  const [snackBarType, setSnackBarType] = useState('success');
+  const [snackBarMessage, setSnackBarMessage] = useState('');
 
   useEffect(() => {
     getPostsList();
@@ -50,6 +57,29 @@ function DiscussionBoard(props: any): JSX.Element {
     }
   };
 
+  const handleDeletePostById = async (postsId: number) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const response = await fetch(`/api/posts/delete-posts`, {
+        method: 'DELETE',
+        body: JSON.stringify({ postsId: postsId, token: token }),
+      });
+      if (response) {
+        const responseData = await response.json();
+        console.log('response.status = ', response.status);
+        console.log('responseData = ', responseData);
+
+        if (response.status === 200) {
+          setSnackBarStatus(true);
+          setSnackBarType('success');
+          setSnackBarMessage('Delete posts success');
+
+          getPostsList();
+        }
+      }
+    }
+  };
+
   const renderPostsList = (postsList: any[]) => {
     let postListView = null;
 
@@ -64,6 +94,12 @@ function DiscussionBoard(props: any): JSX.Element {
           <div key={i} className="my-3">
             <div className="card">
               <div className="card-body">
+                <div
+                  className="d-flex justify-content-end hover-item pointer"
+                  onClick={() => handleDeletePostById(item.posts_id)}
+                >
+                  <DeleteIcon style={{ color: red[500] }} />
+                </div>
                 <div className="mt-2 mb-3" style={{ fontSize: '1.2em' }}>
                   <b>Discussion Thread {number}</b> - {title}
                 </div>
@@ -150,6 +186,10 @@ function DiscussionBoard(props: any): JSX.Element {
     console.log(123);
   };
 
+  const handleCloseSnackBar = () => {
+    setSnackBarStatus(false);
+  };
+
   return (
     <div>
       <NextHead />
@@ -209,6 +249,13 @@ function DiscussionBoard(props: any): JSX.Element {
           </div>
         </div>
       </div>
+
+      <CustomSnackBar
+        snackBarStatus={snackBarStatus}
+        snackBarType={snackBarType}
+        snackBarMessage={snackBarMessage}
+        closeSnackBar={() => handleCloseSnackBar()}
+      />
     </div>
   );
 }
