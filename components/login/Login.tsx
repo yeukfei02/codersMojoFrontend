@@ -49,6 +49,18 @@ function Login(): JSX.Element {
     }
   };
 
+  const handleOnKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      if (email && password) {
+        handleLoginButtonClick(email, password);
+      } else {
+        setSnackBarStatus(true);
+        setSnackBarType('error');
+        setSnackBarMessage('Please enter email and password');
+      }
+    }
+  };
+
   const handleLoginButtonClick = (email: string, password: string) => {
     if (email && password) {
       const isEmail = validateEmail(email);
@@ -145,6 +157,7 @@ function Login(): JSX.Element {
                     id="exampleInputEmail1"
                     aria-describedby="emailHelp"
                     onChange={(e) => handleEmailInputChange(e)}
+                    onKeyUp={(e) => handleOnKeyUp(e)}
                   />
                 </div>
 
@@ -155,6 +168,7 @@ function Login(): JSX.Element {
                     className="form-control"
                     id="exampleInputPassword1"
                     onChange={(e) => handlePasswordInputChange(e)}
+                    onKeyUp={(e) => handleOnKeyUp(e)}
                   />
                 </div>
 

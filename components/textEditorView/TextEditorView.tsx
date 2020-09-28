@@ -17,18 +17,15 @@ function TextEditorView(): JSX.Element {
   const [questionTitle, setQuestionTitle] = useState('');
   const [questionDescription, setQuestionDescription] = useState('');
   const [selectedModeList, setSelectedModeList] = useState<any[]>([]);
-  const [selectedMode, setSelectedMode] = useState<any>({ label: 'javascript', value: 'javascript' });
+  const [selectedMode, setSelectedMode] = useState<any>({ label: 'python', value: 'python' });
 
   const [selectedFontSizeList, setSelectedFontSizeList] = useState<any[]>([]);
   const [selectedFontSize, setSelectedFontSize] = useState<any>({ label: 20, value: 20 });
 
-  const [mode, setMode] = useState('javascript');
+  const [mode, setMode] = useState('python');
   const [fontSize, setFontSize] = useState(20);
-  const [value, setValue] = useState(`function test() {
-  console.log(123);
-}
-
-test();`);
+  const [value, setValue] = useState(`def my_function():
+  print("Hello from a function")`);
 
   useEffect(() => {
     getQuestionTitleAndQuestionDescription();
@@ -72,38 +69,38 @@ test();`);
         label: 'python',
         value: 'python',
       },
-      {
-        label: 'xml',
-        value: 'xml',
-      },
+      // {
+      //   label: 'xml',
+      //   value: 'xml',
+      // },
       {
         label: 'ruby',
         value: 'ruby',
       },
-      {
-        label: 'sass',
-        value: 'sass',
-      },
-      {
-        label: 'markdown',
-        value: 'markdown',
-      },
-      {
-        label: 'mysql',
-        value: 'mysql',
-      },
-      {
-        label: 'json',
-        value: 'json',
-      },
-      {
-        label: 'html',
-        value: 'html',
-      },
-      {
-        label: 'handlebars',
-        value: 'handlebars',
-      },
+      // {
+      //   label: 'sass',
+      //   value: 'sass',
+      // },
+      // {
+      //   label: 'markdown',
+      //   value: 'markdown',
+      // },
+      // {
+      //   label: 'mysql',
+      //   value: 'mysql',
+      // },
+      // {
+      //   label: 'json',
+      //   value: 'json',
+      // },
+      // {
+      //   label: 'html',
+      //   value: 'html',
+      // },
+      // {
+      //   label: 'handlebars',
+      //   value: 'handlebars',
+      // },
       {
         label: 'golang',
         value: 'golang',
@@ -120,10 +117,10 @@ test();`);
         label: 'typescript',
         value: 'typescript',
       },
-      {
-        label: 'css',
-        value: 'css',
-      },
+      // {
+      //   label: 'css',
+      //   value: 'css',
+      // },
     ];
     setSelectedModeList(selectedModeList);
   };
@@ -172,13 +169,10 @@ test();`);
       setMode(selectedMode.value);
       setTextEditorDefaultValue(selectedMode.value);
     } else {
-      setSelectedMode({ label: 'javascript', value: 'javascript' });
-      setMode('javascript');
-      setValue(`function test() {
-  console.log(123);
-}
-
-test();`);
+      setSelectedMode({ label: 'python', value: 'python' });
+      setMode('python');
+      setValue(`def my_function():
+  print("Hello from a function")`);
     }
   };
 

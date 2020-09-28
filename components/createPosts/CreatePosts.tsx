@@ -106,6 +106,18 @@ function CreatePosts(props: any): JSX.Element {
     }
   };
 
+  const handleOnKeyUp = (e: any) => {
+    if (e.key === 'Enter') {
+      if (title && description && tag) {
+        handleSubmitButtonClick(title, description, tag, users_id);
+      } else {
+        setSnackBarStatus(true);
+        setSnackBarType('error');
+        setSnackBarMessage('Please enter title, description, tag');
+      }
+    }
+  };
+
   const handleTagDropdownChange = (selectedTag: any) => {
     if (selectedTag) {
       setSelectedTag(selectedTag);
@@ -183,6 +195,7 @@ function CreatePosts(props: any): JSX.Element {
           placeholder="Title"
           id="title"
           onChange={(e) => handleTitleInputChange(e)}
+          onKeyUp={(e) => handleOnKeyUp(e)}
         />
       </div>
 
@@ -193,6 +206,7 @@ function CreatePosts(props: any): JSX.Element {
           placeholder="Write your post here..."
           rows={10}
           onChange={(e) => handleDescriptionInputChange(e)}
+          onKeyUp={(e) => handleOnKeyUp(e)}
         ></textarea>
       </div>
 

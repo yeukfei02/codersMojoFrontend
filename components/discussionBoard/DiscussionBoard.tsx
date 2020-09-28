@@ -146,6 +146,10 @@ function DiscussionBoard(props: any): JSX.Element {
     return leftSideTagItem;
   };
 
+  const handleJoinTheSpace = () => {
+    console.log(123);
+  };
+
   return (
     <div>
       <NextHead />
@@ -169,17 +173,15 @@ function DiscussionBoard(props: any): JSX.Element {
             </div>
           </div>
           <div className="col-sm-4">
+            <div className="mb-3">
+              <Button className="w-100" variant="contained" color="secondary" onClick={() => handleJoinTheSpace()}>
+                Join the space
+              </Button>
+            </div>
+
             <div className="card">
               <div className="card-body">
-                <div className="card">
-                  <div className="card-body text-center">
-                    <div>
-                      <b>Join the space</b>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="my-4">{renderLeftSideTagItem('# Career')}</div>
+                <div className="mb-4">{renderLeftSideTagItem('# Career')}</div>
 
                 <div className="my-4">{renderLeftSideTagItem('# Jobs')}</div>
 

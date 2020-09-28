@@ -372,19 +372,19 @@ function TakeAMockInterview(props: any): JSX.Element {
                   <b>Focus</b>
                 </h6>
                 <ul style={{ listStyleType: 'none' }}>
-                  {renderLeftSideTagItem('# Data Structures and Algorithms')}
-                  {renderLeftSideTagItem('# System Design')}
-                  {renderLeftSideTagItem('# Data Science')}
-                  {renderLeftSideTagItem('# Front End Development')}
-                  {renderLeftSideTagItem('# Behavioral')}
+                  {renderLeftSideTagItem('Data Structures and Algorithms')}
+                  {renderLeftSideTagItem('System Design')}
+                  {renderLeftSideTagItem('Data Science')}
+                  {renderLeftSideTagItem('Front End Development')}
+                  {renderLeftSideTagItem('Behavioral')}
                 </ul>
 
                 <h6 className="mt-5">
                   <b>Type of interview</b>
                 </h6>
                 <ul style={{ listStyleType: 'none' }}>
-                  {renderLeftSideTagItem('# Practice Session')}
-                  {renderLeftSideTagItem('# Peer to Peer Mock Interview')}
+                  {renderLeftSideTagItem('Practice Session')}
+                  {renderLeftSideTagItem('Peer to Peer Mock Interview')}
                 </ul>
 
                 <h6 className="mt-5">

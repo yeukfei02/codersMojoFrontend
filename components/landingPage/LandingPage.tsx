@@ -103,9 +103,7 @@ function LandingPage(): JSX.Element {
     <div>
       <NextHead />
 
-      <div className="text-center font-weight-bold">Student Tech Ambassdor Applications are now open. Apply here</div>
-
-      <nav className="my-3 navbar navbar-expand-lg navbar-light">
+      <nav className="navbar navbar-expand-lg navbar-light">
         <a className="navbar-brand" href="/">
           <img src="/logo.png" width="200" height="65" alt="" loading="lazy" />
         </a>
