@@ -160,14 +160,16 @@ function TakeAMockInterview(props: any): JSX.Element {
     let weekDayListDiv = null;
 
     if (weekDaysList) {
-      const startTime = moment().add(1, 'hour').format('HH:00');
-
       weekDayListDiv = weekDaysList.map((item: any, i: number) => {
+        const todayStr = moment().format('DD/MM');
+        const currentTimeStr = moment(item.fullDateStr).format('DD/MM');
+        const startTime = todayStr === currentTimeStr ? moment().add(1, 'hour').format('HH:00') : '00:00';
+
         return (
           <div key={i} className="col-sm d-flex justify-content-center">
             <div className="text-center">
               {renderWeekDayDiv(item, i)}
-              <div className="my-2">{getAllAvailableTime(startTime, '23:59', item, i)}</div>
+              <div className="my-2">{getAllAvailableTime(startTime, '23:59', item)}</div>
             </div>
           </div>
         );
@@ -215,12 +217,8 @@ function TakeAMockInterview(props: any): JSX.Element {
     return weekDayDiv;
   };
 
-  const getAllAvailableTime = (start: string, end: string, weekDayObj: any, i: number) => {
+  const getAllAvailableTime = (start: string, end: string, weekDayObj: any) => {
     let allAvailableTimeDiv = null;
-
-    if (i > 0) {
-      start = '00:00';
-    }
 
     const startTime = moment(start, 'HH:mm');
     const endTime = moment(end, 'HH:mm');
