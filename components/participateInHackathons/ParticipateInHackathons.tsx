@@ -103,8 +103,8 @@ function ParticipateInHackathons(): JSX.Element {
     if (hackathonsList) {
       hackathonsDiv = hackathonsList.map((item: any, i: number) => {
         return (
-          <Grid key={i} item xs={12} sm={4}>
-            <div className="card">
+          <Grid key={i} item xs={12} sm={4} className="d-flex align-items-stretch">
+            <div className="card flex-grow-1">
               <div className="card-body">
                 {/* <img src={item.image} className="card-img-top" alt="" /> */}
 
