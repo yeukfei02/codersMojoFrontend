@@ -60,8 +60,8 @@ function TakeAMockInterview(props: any): JSX.Element {
   };
 
   const getWeekDaysList = (currentTime: string) => {
-    const startOfWeekDay = moment(currentTime).subtract(2, 'day').format('YYYY-MM-DD');
-    const endOfWeekDay = moment(currentTime).add(2, 'day').format('YYYY-MM-DD');
+    const startOfWeekDay = moment(currentTime).format('YYYY-MM-DD');
+    const endOfWeekDay = moment(currentTime).add(4, 'day').format('YYYY-MM-DD');
     const weekDayList = enumerateDaysBetweenDates(startOfWeekDay, endOfWeekDay);
 
     let resultList: any[] = [];
@@ -160,12 +160,14 @@ function TakeAMockInterview(props: any): JSX.Element {
     let weekDayListDiv = null;
 
     if (weekDaysList) {
+      const startTime = moment().add(1, 'hour').format('HH:00');
+
       weekDayListDiv = weekDaysList.map((item: any, i: number) => {
         return (
           <div key={i} className="col-sm d-flex justify-content-center">
             <div className="text-center">
               {renderWeekDayDiv(item, i)}
-              <div className="my-2">{getAllAvailableTime('00:00', '23:59', item)}</div>
+              <div className="my-2">{getAllAvailableTime(startTime, '23:59', item, i)}</div>
             </div>
           </div>
         );
@@ -199,7 +201,7 @@ function TakeAMockInterview(props: any): JSX.Element {
       );
     }
 
-    if (i === 2) {
+    if (i === 0) {
       weekDayDiv = (
         <div>
           <div style={{ color: '#6f42c1' }}>
@@ -213,8 +215,12 @@ function TakeAMockInterview(props: any): JSX.Element {
     return weekDayDiv;
   };
 
-  const getAllAvailableTime = (start: string, end: string, weekDayObj: any) => {
+  const getAllAvailableTime = (start: string, end: string, weekDayObj: any, i: number) => {
     let allAvailableTimeDiv = null;
+
+    if (i > 0) {
+      start = '00:00';
+    }
 
     const startTime = moment(start, 'HH:mm');
     const endTime = moment(end, 'HH:mm');
@@ -359,6 +365,34 @@ function TakeAMockInterview(props: any): JSX.Element {
     return leftSideTagItem;
   };
 
+  const renderPreviousButton = (currentTime: string) => {
+    let previousButton = (
+      <IconButton color="secondary" aria-label="previous" onClick={() => handlePreviousButtonClick()}>
+        <ArrowBackIcon />
+      </IconButton>
+    );
+
+    if (moment(currentTime).isBefore(moment())) {
+      previousButton = (
+        <IconButton color="secondary" aria-label="previous" disabled={true} onClick={() => handlePreviousButtonClick()}>
+          <ArrowBackIcon />
+        </IconButton>
+      );
+    }
+
+    return previousButton;
+  };
+
+  const renderNextButton = () => {
+    const nextButton = (
+      <IconButton color="secondary" aria-label="previous" onClick={() => handleNextButtonClick()}>
+        <ArrowForwardIcon />
+      </IconButton>
+    );
+
+    return nextButton;
+  };
+
   return (
     <div>
       <NextHead />
@@ -408,17 +442,13 @@ function TakeAMockInterview(props: any): JSX.Element {
                     alignItems: 'center',
                   }}
                 >
-                  <IconButton color="secondary" aria-label="previous" onClick={() => handlePreviousButtonClick()}>
-                    <ArrowBackIcon />
-                  </IconButton>
+                  {renderPreviousButton(currentTime)}
 
                   <div className="d-flex justify-content-center font-weight-bold" style={{ fontSize: 15 }}>
                     Current timezone: {currentTimezone}, Current time: {currentTime}
                   </div>
 
-                  <IconButton color="secondary" aria-label="previous" onClick={() => handleNextButtonClick()}>
-                    <ArrowForwardIcon />
-                  </IconButton>
+                  {renderNextButton()}
                 </div>
 
                 <div className="row mt-3">{renderWeekDaysList(weekDaysList)}</div>
