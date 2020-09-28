@@ -13,7 +13,7 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import EventIcon from '@material-ui/icons/Event';
 import CodeIcon from '@material-ui/icons/Code';
 import OndemandVideoIcon from '@material-ui/icons/OndemandVideo';
-import { grey, purple } from '@material-ui/core/colors';
+import { grey } from '@material-ui/core/colors';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import moment from 'moment';
 import momenttz from 'moment-timezone';
@@ -507,7 +507,7 @@ function TakeAMockInterview(props: any): JSX.Element {
           <div id="alert-dialog-slide-description">
             <div className="my-4 px-3" style={{ display: 'flex', flexDirection: 'row' }}>
               <div>
-                <EventIcon style={{ fontSize: 60, color: purple[500] }} />
+                <EventIcon style={{ fontSize: 60, color: '#6f42c1' }} />
               </div>
               <div
                 className="mx-4 d-flex justify-content-center"
@@ -521,7 +521,7 @@ function TakeAMockInterview(props: any): JSX.Element {
 
             <div className="my-4 px-3" style={{ display: 'flex', flexDirection: 'row' }}>
               <div>
-                <CodeIcon style={{ fontSize: 60, color: purple[500] }} />
+                <CodeIcon style={{ fontSize: 60, color: '#6f42c1' }} />
               </div>
               <div
                 className="mx-4 d-flex justify-content-center"
@@ -534,7 +534,7 @@ function TakeAMockInterview(props: any): JSX.Element {
 
             <div className="my-4 px-3" style={{ display: 'flex', flexDirection: 'row' }}>
               <div>
-                <OndemandVideoIcon style={{ fontSize: 60, color: purple[500] }} />
+                <OndemandVideoIcon style={{ fontSize: 60, color: '#6f42c1' }} />
               </div>
               <div
                 className="mx-4 d-flex justify-content-center"
@@ -550,7 +550,7 @@ function TakeAMockInterview(props: any): JSX.Element {
 
             <div className="my-4 px-3" style={{ display: 'flex', flexDirection: 'row' }}>
               <div>
-                <OndemandVideoIcon style={{ fontSize: 60, color: purple[500], visibility: 'hidden' }} />
+                <OndemandVideoIcon style={{ fontSize: 60, color: '#6f42c1', visibility: 'hidden' }} />
               </div>
               <div
                 className="mx-4 d-flex justify-content-center"
