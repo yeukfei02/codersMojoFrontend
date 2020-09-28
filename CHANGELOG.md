@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.18](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.17...v0.0.18) (2020-09-28)
+
+
+### Features
+
+* 🎸 add delete posts by id ([eb6f861](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/eb6f86143896326095b90d232f5915ee61b51a31))
+* 🎸 add google analytic ([b41861b](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/b41861b22cf9ede525a700a0a06a81e47c7b87eb))
+* 🎸 add tech salary and past interview page ([c885ce2](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/c885ce28d6ac66ebcdc026c55ab559ba3ced1590))
+
 ### [0.0.17](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.16...v0.0.17) (2020-09-27)
 
 
