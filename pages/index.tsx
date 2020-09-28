@@ -177,6 +177,18 @@ function MainPage(): JSX.Element {
           integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
           crossOrigin="anonymous"
         ></script>
+        {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-179040882-1"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-179040882-1');
+        `,
+          }}
+        />
       </Head>
       {renderDiv(users_id, token)}
     </MuiThemeProvider>
