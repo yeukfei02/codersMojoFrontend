@@ -15,6 +15,7 @@ import WorkIcon from '@material-ui/icons/Work';
 import ChatIcon from '@material-ui/icons/Chat';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import VideoCallIcon from '@material-ui/icons/VideoCall';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -37,6 +38,7 @@ import InterviewOthers from '../interviewOthers/InterviewOthers';
 import DiscussionBoard from '../discussionBoard/DiscussionBoard';
 import CreatePosts from '../createPosts/CreatePosts';
 import ApplyForJobs from '../applyForJobs/ApplyForJobs';
+import TechSalaries from '../techSalaries/TechSalaries';
 import ParticipateInHackathons from '../participateInHackathons/ParticipateInHackathons';
 import InviteYourFriends from '../inviteYourFriends/InviteYourFriends';
 import BecomeAStudentTechAmbassador from '../becomeAStudentTechAmbassador/BecomeAStudentTechAmbassador';
@@ -157,6 +159,14 @@ function CustomDrawer(props: Props): JSX.Element {
               <WorkIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Apply for Jobs" />
+          </ListItem>
+        </div>
+        <div onClick={() => handleLeftSideMenuItemClick('techSalaries')}>
+          <ListItem button>
+            <ListItemIcon>
+              <MonetizationOnIcon color="secondary" />
+            </ListItemIcon>
+            <ListItemText primary="Tech Salaries" />
           </ListItem>
         </div>
         <div onClick={() => handleLeftSideMenuItemClick('becomeAStudentTechAmbassador')}>
@@ -331,6 +341,9 @@ function CustomDrawer(props: Props): JSX.Element {
       case 'applyForJobs':
         currentPage = <ApplyForJobs />;
         break;
+      case 'techSalaries':
+        currentPage = <TechSalaries />;
+        break;
       case 'participateInHackathons':
         currentPage = <ParticipateInHackathons />;
         break;
@@ -365,7 +378,7 @@ function CustomDrawer(props: Props): JSX.Element {
         currentPage = <YourUpcomingInterviewSchedule textEditorViewClick={() => handleTextEditorViewClick()} />;
         break;
       case 'viewPastInterviewPerformance':
-        currentPage = <ViewPastInterviewPerformance />;
+        currentPage = <ViewPastInterviewPerformance textEditorViewClick={() => handleTextEditorViewClick()} />;
         break;
       default:
         break;

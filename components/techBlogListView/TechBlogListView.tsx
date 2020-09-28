@@ -162,37 +162,55 @@ function TechBlogListView(): JSX.Element {
           <div className="card-body">
             <div>
               <div className="row">
-                <div className="col-sm d-flex justify-content-center">
+                <div
+                  className="col-sm d-flex justify-content-center align-items-center"
+                  style={{ borderRight: '0.1em lightgray solid' }}
+                >
                   <span className="pointer hover-item" onClick={() => handleFilterTextClick('Machine Learning')}>
                     Machine Learning
                   </span>
                 </div>
-                <div className="col-sm d-flex justify-content-center">
+                <div
+                  className="col-sm d-flex justify-content-center align-items-center"
+                  style={{ borderRight: '0.1em lightgray solid' }}
+                >
                   <span className="pointer hover-item" onClick={() => handleFilterTextClick('Data Science')}>
                     Data Science
                   </span>
                 </div>
-                <div className="col-sm d-flex justify-content-center">
+                <div
+                  className="col-sm d-flex justify-content-center align-items-center"
+                  style={{ borderRight: '0.1em lightgray solid' }}
+                >
                   <span className="pointer hover-item" onClick={() => handleFilterTextClick('Programming')}>
                     Programming
                   </span>
                 </div>
-                <div className="col-sm d-flex justify-content-center">
+                <div
+                  className="col-sm d-flex justify-content-center align-items-center"
+                  style={{ borderRight: '0.1em lightgray solid' }}
+                >
                   <span className="pointer hover-item" onClick={() => handleFilterTextClick('Web Development')}>
                     Web Development
                   </span>
                 </div>
-                <div className="col-sm d-flex justify-content-center">
+                <div
+                  className="col-sm d-flex justify-content-center align-items-center"
+                  style={{ borderRight: '0.1em lightgray solid' }}
+                >
                   <span className="pointer hover-item" onClick={() => handleFilterTextClick('Cloud - AWS and GCP')}>
                     Cloud - AWS and GCP
                   </span>
                 </div>
-                <div className="col-sm d-flex justify-content-center">
+                <div
+                  className="col-sm d-flex justify-content-center align-items-center"
+                  style={{ borderRight: '0.1em lightgray solid' }}
+                >
                   <span className="pointer hover-item" onClick={() => handleFilterTextClick('Data Visualization')}>
                     Data Visualization
                   </span>
                 </div>
-                <div className="col-sm d-flex justify-content-center">
+                <div className="col-sm d-flex justify-content-center align-items-center">
                   <span
                     className="pointer hover-item"
                     onClick={() => handleFilterTextClick('Tech Interview Experiences')}
