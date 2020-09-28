@@ -140,8 +140,14 @@ function LandingPage(): JSX.Element {
           CodersMojo is an AI-based Peer-to-Peer Interactive Tech Interview Platform for Women
         </h4>
 
+        <div className="my-5">
+          <div className="text-center font-weight-bold quantico display-4" style={{ color: '#28ACEA' }}>
+            {weAreLaunchingSoonText}
+          </div>
+        </div>
+
         <div className="row">
-          <div className="col-sm">
+          <div className="col-sm d-flex align-items-stretch">
             <div className="card p-2">
               <div className="card-body">
                 <h5>For Developers</h5>
@@ -158,7 +164,7 @@ function LandingPage(): JSX.Element {
               </div>
             </div>
           </div>
-          <div className="col-sm">
+          <div className="col-sm d-flex align-items-stretch">
             <div className="card p-2">
               <div className="card-body">
                 <h5>For Women Tech Leaders</h5>
@@ -176,7 +182,7 @@ function LandingPage(): JSX.Element {
               </div>
             </div>
           </div>
-          <div className="col-sm">
+          <div className="col-sm d-flex align-items-stretch">
             <div className="card p-2">
               <div className="card-body">
                 <h5>For Companies</h5>
@@ -194,14 +200,9 @@ function LandingPage(): JSX.Element {
               </div>
             </div>
           </div>
-          <div className="col-sm">
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div className="col-sm d-flex align-items-stretch">
+            <div className="d-flex justify-content-center align-items-center">
               <img src="/landing-page-image.png" style={{ width: '100%', borderRadius: '0.5em' }} alt="" />
-              <div className="my-3">
-                <h2 className="text-center font-weight-bold quantico" style={{ color: '#28ACEA' }}>
-                  {weAreLaunchingSoonText}
-                </h2>
-              </div>
             </div>
           </div>
         </div>
