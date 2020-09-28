@@ -137,92 +137,83 @@ function LandingPage(): JSX.Element {
         </div>
       </nav>
 
-      <div style={{ margin: '2em 4em' }}>
+      <div style={{ margin: '3em' }}>
+        <h4 className="text-center font-weight-bold my-5">
+          CodersMojo is an AI-based Peer-to-Peer Interactive Tech Interview Platform for Women
+        </h4>
+
         <div className="row">
-          <div className="col-sm-8 d-flex justify-content-center">
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <h4 className="text-center font-weight-bold my-3">
-                CodersMojo is an AI-based Peer-to-Peer Interactive Tech Interview Platform for Women
-              </h4>
+          <div className="col-sm">
+            <div className="card p-2">
+              <div className="card-body">
+                <h5>For Developers</h5>
 
-              <div className="text-center font-weight-bold quantico display-4" style={{ color: '#28ACEA' }}>
-                {weAreLaunchingSoonText}
-              </div>
-
-              <div className="my-4" style={{ display: 'flex', flexDirection: 'row' }}>
-                <div className="row">
-                  <div className="col-sm-4">
-                    <div className="card p-3">
-                      <div className="card-body">
-                        <h5>For Developers</h5>
-
-                        <h6 className="my-4">Community</h6>
-                        <div className="my-3">
-                          Practice programming, prepare for interviews, and level up your coding skills with a community
-                          of 4M+ developers
-                        </div>
-                        <Button
-                          className="my-3"
-                          variant="contained"
-                          color="secondary"
-                          onClick={() => handleLearnMoreButtonClick()}
-                        >
-                          Learn more
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-sm-8">
-                    <div className="card p-3">
-                      <div className="card-body">
-                        <h5>For Businesses</h5>
-
-                        <div className="row">
-                          <div className="col-sm">
-                            <h6 className="my-4">Assessments</h6>
-                            <div className="my-3">
-                              Remotely assess, interview, and hire developers across all roles based on skills and
-                              nothing else
-                            </div>
-                            <Button
-                              className="my-3"
-                              variant="contained"
-                              color="secondary"
-                              onClick={() => handleLearnMoreButtonClick()}
-                            >
-                              Learn more
-                            </Button>
-                          </div>
-                          <div className="col-sm">
-                            <h6 className="my-4">Hackathons</h6>
-                            <div className="my-3">
-                              Host virtual hackathons and bring together people with diverse skills and solve business
-                              challenges
-                            </div>
-                            <Button
-                              className="my-3"
-                              variant="contained"
-                              color="secondary"
-                              onClick={() => handleLearnMoreButtonClick()}
-                            >
-                              Learn more
-                            </Button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div className="my-3">
+                  Study, practice and take mock tech interviews with peers Participate in amazing hackathons and Connect
+                  with Women Tech Leaders Community.
+                </div>
+                <div className="d-flex justify-content-end">
+                  <Button variant="contained" color="secondary" onClick={() => handleLearnMoreButtonClick()}>
+                    Learn more
+                  </Button>
                 </div>
               </div>
             </div>
           </div>
-          <div className="col-sm-4 d-flex justify-content-center align-items-center">
-            <img src="/landing-page-image.png" style={{ width: '100%', borderRadius: '0.5em' }} alt="" />
+          <div className="col-sm">
+            <div className="card p-2">
+              <div className="card-body">
+                <h5>For Women Tech Leaders</h5>
+
+                <div className="my-3">
+                  Connect with other amazing women leaders and software engineers. Conduct mock Interview and help other
+                  budding engineers to get into tech industry. Read and Contribute Amazing Tech Articles
+                </div>
+
+                <div className="d-flex justify-content-end">
+                  <Button variant="contained" color="secondary" onClick={() => handleLearnMoreButtonClick()}>
+                    Learn more
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-sm">
+            <div className="card p-2">
+              <div className="card-body">
+                <h5>For Companies</h5>
+
+                <div className="my-3">
+                  Hire best and brightest Female tech engineers Host virtual hackathons and bring together people with
+                  diverse skills and solve business challenges
+                </div>
+
+                <div className="d-flex justify-content-end">
+                  <Button variant="contained" color="secondary" onClick={() => handleLearnMoreButtonClick()}>
+                    Learn more
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-sm">
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <img src="/landing-page-image.png" style={{ width: '100%', borderRadius: '0.5em' }} alt="" />
+              <div className="my-3">
+                <h2 className="text-center font-weight-bold quantico" style={{ color: '#28ACEA' }}>
+                  {weAreLaunchingSoonText}
+                </h2>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="d-flex justify-content-center" style={{ marginTop: '3em' }}>
+      <div className="d-flex justify-content-center" style={{ marginTop: '5em' }}>
+        <div>Girls, let’s break the tech glass ceiling. Subscribe/ Join us for updates</div>
+      </div>
+
+      <div className="d-flex justify-content-center" style={{ marginTop: '1em' }}>
         <div className="w-50">
           <div className="form-group">
             <input
