@@ -174,7 +174,7 @@ function CustomDrawer(props: Props): JSX.Element {
             <ListItemIcon>
               <EmojiPeopleIcon color="secondary" />
             </ListItemIcon>
-            <ListItemText primary="Become a Student Tech Ambassador" />
+            <ListItemText primary="Become a Student/Company Ambassador" />
           </ListItem>
         </div>
         <div onClick={() => handleLeftSideMenuItemClick('techBlog')}>
