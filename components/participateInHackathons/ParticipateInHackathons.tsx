@@ -123,7 +123,8 @@ function ParticipateInHackathons(): JSX.Element {
                 <h6 className="my-4">
                   <b>Date:</b> {item.date_time}
                 </h6>
-
+              </div>
+              <div className="card-footer" style={{ borderTop: 'none', backgroundColor: 'transparent' }}>
                 <div className="d-flex justify-content-end">
                   <Button
                     variant="contained"
