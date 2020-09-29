@@ -511,9 +511,10 @@ function TakeAMockInterview(props: any): JSX.Element {
                 className="mx-4 d-flex justify-content-center"
                 style={{ display: 'flex', flexDirection: 'column', color: 'black', fontSize: 14 }}
               >
-                <div>Please arrive on time and be respectful to your peer. If for any</div>
-                <div>reason you can&apos;t make it, you can easily cancel or reschedule</div>
-                <div>your session from the dashboard at any time.</div>
+                <div>
+                  Please be on time and respectful to your peer. Please reschedule or cancel if you cannot make it for
+                  any reasons.
+                </div>
               </div>
             </div>
 
@@ -525,8 +526,10 @@ function TakeAMockInterview(props: any): JSX.Element {
                 className="mx-4 d-flex justify-content-center"
                 style={{ display: 'flex', flexDirection: 'column', color: 'black', fontSize: 14 }}
               >
-                <div>Check out your dashboard for content related to your session, so</div>
-                <div>you could come prepared. Your peer will do the same for you.</div>
+                <div>
+                  We’ll email you a link to join your session a few minutes before it starts. The session takes place
+                  within the browser, all you need is a working camera and microphone available.
+                </div>
               </div>
             </div>
 
@@ -538,10 +541,9 @@ function TakeAMockInterview(props: any): JSX.Element {
                 className="mx-4 d-flex justify-content-center"
                 style={{ display: 'flex', flexDirection: 'column', color: 'black', fontSize: 14 }}
               >
-                <div>We&apos;ll email you a link to join your session a few minutes before it</div>
-                <div>starts. The session takes place within the browser, all you need</div>
                 <div>
-                  is a <span style={{ color: '#6f42c1' }}>working camera and microphone available.</span>
+                  Please take a look at your dashboard for content related to your session and be prepared. Your peer
+                  will do the same.
                 </div>
               </div>
             </div>

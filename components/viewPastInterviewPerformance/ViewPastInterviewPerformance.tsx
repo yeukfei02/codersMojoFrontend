@@ -113,7 +113,7 @@ function ViewPastInterviewPerformance(props: any): JSX.Element {
             </td>
             <td>
               <div className="d-flex justify-content-center">
-                <div>{item.status}</div>
+                <div className="text-capitalize">{item.status}</div>
               </div>
             </td>
             <td>

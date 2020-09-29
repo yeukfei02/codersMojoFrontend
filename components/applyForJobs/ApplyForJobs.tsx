@@ -187,7 +187,7 @@ function ApplyForJobs(): JSX.Element {
           <tr key={i}>
             <td>
               <div className="my-2 hover-item pointer" onClick={() => handleCompanyNameClick(companyUrl)}>
-                <b>{item.company}</b>
+                {item.company}
               </div>
             </td>
             <td>

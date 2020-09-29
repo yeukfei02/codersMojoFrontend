@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { red } from '@material-ui/core/colors';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
@@ -98,7 +97,7 @@ function DiscussionBoard(props: any): JSX.Element {
                   className="d-flex justify-content-end hover-item pointer"
                   onClick={() => handleDeletePostById(item.posts_id)}
                 >
-                  <DeleteIcon style={{ color: red[500] }} />
+                  <DeleteIcon style={{ color: 'gray' }} />
                 </div>
                 <div className="mt-2 mb-3" style={{ fontSize: '1.2em' }}>
                   <b>Discussion Thread {number}</b> - {title}
