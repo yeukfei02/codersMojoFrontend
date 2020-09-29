@@ -63,6 +63,18 @@ function Signup(): JSX.Element {
     }
   };
 
+  const handleOnKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      if (firstName && lastName && email && password) {
+        handleSignupButtonClick(firstName, lastName, email, password);
+      } else {
+        setSnackBarStatus(true);
+        setSnackBarType('error');
+        setSnackBarMessage('Please enter first name, last name, email, password');
+      }
+    }
+  };
+
   const handleSignupButtonClick = (firstName: string, lastName: string, email: string, password: string) => {
     if (firstName && lastName && email && password) {
       const isEmail = validateEmail(email);
@@ -135,6 +147,7 @@ function Signup(): JSX.Element {
                 className="form-control"
                 id="firstName"
                 onChange={(e) => handleFirstNameInputChange(e)}
+                onKeyUp={(e) => handleOnKeyUp(e)}
               />
             </div>
             <div className="form-group">
@@ -144,6 +157,7 @@ function Signup(): JSX.Element {
                 className="form-control"
                 id="lastName"
                 onChange={(e) => handleLastNameInputChange(e)}
+                onKeyUp={(e) => handleOnKeyUp(e)}
               />
             </div>
             <div className="form-group">
@@ -154,6 +168,7 @@ function Signup(): JSX.Element {
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 onChange={(e) => handleEmailInputChange(e)}
+                onKeyUp={(e) => handleOnKeyUp(e)}
               />
             </div>
             <div className="form-group">
@@ -163,6 +178,7 @@ function Signup(): JSX.Element {
                 className="form-control"
                 id="exampleInputPassword1"
                 onChange={(e) => handlePasswordInputChange(e)}
+                onKeyUp={(e) => handleOnKeyUp(e)}
               />
             </div>
             <Button

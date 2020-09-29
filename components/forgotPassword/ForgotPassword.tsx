@@ -42,6 +42,18 @@ function ForgotPassword(): JSX.Element {
     }
   };
 
+  const handleOnKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      if (email) {
+        handleSubmitButtonClick(email);
+      } else {
+        setSnackBarStatus(true);
+        setSnackBarType('error');
+        setSnackBarMessage('Please enter email');
+      }
+    }
+  };
+
   const handleSubmitButtonClick = (email: string) => {
     if (email) {
       const isEmail = validateEmail(email);
@@ -106,6 +118,7 @@ function ForgotPassword(): JSX.Element {
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 onChange={(e) => handleEmailInputChange(e)}
+                onKeyUp={(e) => handleOnKeyUp(e)}
               />
             </div>
             <Button
