@@ -156,6 +156,8 @@ function LandingPage(): JSX.Element {
                   Study, practice and take mock tech interviews with peers Participate in amazing hackathons and Connect
                   with Women Tech Leaders Community.
                 </div>
+              </div>
+              <div className="card-footer" style={{ borderTop: 'none', backgroundColor: 'transparent' }}>
                 <div className="d-flex justify-content-end">
                   <Button variant="contained" color="secondary" onClick={() => handleLearnMoreButtonClick()}>
                     Learn more
@@ -173,7 +175,8 @@ function LandingPage(): JSX.Element {
                   Connect with other amazing women leaders and software engineers. Conduct mock Interview and help other
                   budding engineers to get into tech industry. Read and Contribute Amazing Tech Articles
                 </div>
-
+              </div>
+              <div className="card-footer" style={{ borderTop: 'none', backgroundColor: 'transparent' }}>
                 <div className="d-flex justify-content-end">
                   <Button variant="contained" color="secondary" onClick={() => handleLearnMoreButtonClick()}>
                     Learn more
@@ -191,7 +194,8 @@ function LandingPage(): JSX.Element {
                   Hire best and brightest Female tech engineers Host virtual hackathons and bring together people with
                   diverse skills and solve business challenges
                 </div>
-
+              </div>
+              <div className="card-footer" style={{ borderTop: 'none', backgroundColor: 'transparent' }}>
                 <div className="d-flex justify-content-end">
                   <Button variant="contained" color="secondary" onClick={() => handleLearnMoreButtonClick()}>
                     Learn more
