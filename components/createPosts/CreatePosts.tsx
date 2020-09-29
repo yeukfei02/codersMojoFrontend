@@ -186,11 +186,7 @@ function CreatePosts(props: any): JSX.Element {
       <NextHead />
 
       <div className="d-flex justify-content-center my-4">
-        <div className="card">
-          <div className="card-body">
-            <h5 className="text-center">Write a Post</h5>
-          </div>
-        </div>
+        <h5 className="text-center">Write a Post</h5>
       </div>
 
       <div className="form-group">
