@@ -64,7 +64,7 @@ function TechBlogListView(): JSX.Element {
                   <div className="card-title" style={{ fontSize: 18, fontWeight: 'bold' }}>
                     {item.title}
                   </div>
-                  <div className="card-text" style={{ whiteSpace: 'pre-line' }}>
+                  <div className="card-text my-3" style={{ whiteSpace: 'pre-line' }}>
                     {item.description}
                   </div>
                   <div className="mt-3">{renderTag(item.tag)}</div>
