@@ -324,6 +324,10 @@ function CustomDrawer(props: Props): JSX.Element {
     setCurrentPageValue('studyForInterview');
   };
 
+  const handleRescheduleButtonClick = () => {
+    setCurrentPageValue('takeAMockInterview');
+  };
+
   const renderCurrentPage = (currentPageValue: string) => {
     let currentPage = null;
 
@@ -383,7 +387,12 @@ function CustomDrawer(props: Props): JSX.Element {
         currentPage = <ReportABug />;
         break;
       case 'yourUpcomingInterviewSchedule':
-        currentPage = <YourUpcomingInterviewSchedule textEditorViewClick={() => handleTextEditorViewClick()} />;
+        currentPage = (
+          <YourUpcomingInterviewSchedule
+            textEditorViewClick={() => handleTextEditorViewClick()}
+            rescheduleButtonClick={() => handleRescheduleButtonClick()}
+          />
+        );
         break;
       case 'viewPastInterviewPerformance':
         currentPage = <ViewPastInterviewPerformance textEditorViewClick={() => handleTextEditorViewClick()} />;

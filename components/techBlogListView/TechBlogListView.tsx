@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import ShareIcon from '@material-ui/icons/Share';
 
 import NextHead from '../nextHead/NextHead';
 
@@ -50,6 +51,10 @@ function TechBlogListView(): JSX.Element {
     }
   };
 
+  const handleShareButtonClick = () => {
+    console.log(123);
+  };
+
   const renderTechBlogList = (techBlogList: any[]) => {
     let techBlogListView = null;
 
@@ -59,6 +64,14 @@ function TechBlogListView(): JSX.Element {
           <Grid key={i} item xs={12} sm={4} className="d-flex align-items-stretch">
             <div className="card flex-grow-1">
               <div className="card-body">
+                <div className="mb-3 d-flex justify-content-end">
+                  <ShareIcon
+                    className="hover-item pointer"
+                    style={{ color: 'gray' }}
+                    onClick={() => handleShareButtonClick()}
+                  />
+                </div>
+
                 <img src={item.image} className="card-img-top" alt="" />
                 <div className="card-body">
                   <div className="card-title" style={{ fontSize: 18, fontWeight: 'bold' }}>

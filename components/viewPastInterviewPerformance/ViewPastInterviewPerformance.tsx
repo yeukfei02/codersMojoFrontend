@@ -186,8 +186,9 @@ function ViewPastInterviewPerformance(props: any): JSX.Element {
           <div className="my-3 p-4" style={{ color: 'black', fontSize: 20 }}>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <div className="d-flex justify-content-center">Here is your feedback</div>
-              <div className="mt-4 d-flex justify-content-center">
-                <div>test test test test test test test</div>
+              <div className="mt-4" style={{ display: 'flex', flexDirection: 'column' }}>
+                <div className="d-flex justify-content-center">You have performed well in the mock interview.</div>
+                <div className="d-flex justify-content-center">Keep it up</div>
               </div>
             </div>
           </div>

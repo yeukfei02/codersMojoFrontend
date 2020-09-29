@@ -7,15 +7,15 @@ function StudyForInterview(): JSX.Element {
     <div>
       <NextHead />
 
-      <div className="my-5">
+      <div>
         <h5 className="text-center">
           Take our mini crash courses to help you prepare for the Interviews and Earn a Certificate
         </h5>
 
-        <div className="d-flex justify-content-center my-5">
+        <div className="my-5">
           <div className="card w-100">
             <div className="card-body">
-              <div className="mb-3" style={{ fontWeight: 'bold', textDecoration: 'underline' }}>
+              <div className="mb-3" style={{ fontWeight: 'bold', fontSize: 18, textDecoration: 'underline' }}>
                 Courses
               </div>
 
