@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Button from '@material-ui/core/Button';
 import Select from 'react-select';
 import CustomTextEditor from '../customTextEditor/CustomTextEditor';
 
@@ -13,7 +14,7 @@ const selectStyles = {
   }),
 };
 
-function TextEditorView(): JSX.Element {
+function TextEditorView(props: any): JSX.Element {
   const [questionTitle, setQuestionTitle] = useState('');
   const [questionDescription, setQuestionDescription] = useState('');
   const [selectedModeList, setSelectedModeList] = useState<any[]>([]);
@@ -317,6 +318,14 @@ func main() {
     }
   };
 
+  const handleBackToDashBoardButtonClick = () => {
+    props.backToDashBoardClick();
+  };
+
+  const handleRunButtonClick = () => {
+    console.log(123);
+  };
+
   return (
     <div>
       <NextHead />
@@ -360,6 +369,19 @@ func main() {
             </div>
           </div>
           <CustomTextEditor mode={mode} fontSize={fontSize} value={value} />
+          <div className="my-3 d-flex justify-content-end">
+            <Button
+              className="mr-3"
+              variant="contained"
+              color="primary"
+              onClick={() => handleBackToDashBoardButtonClick()}
+            >
+              Back to dashboard
+            </Button>
+            <Button variant="contained" color="secondary" onClick={() => handleRunButtonClick()}>
+              Run
+            </Button>
+          </div>
         </div>
       </div>
     </div>
