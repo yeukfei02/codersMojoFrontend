@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles, createStyles, withStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import TwitterIcon from '@material-ui/icons/Twitter';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import Grid from '@material-ui/core/Grid';
-import { lightBlue, blue, indigo } from '@material-ui/core/colors';
+import { Twitter, Linkedin, Facebook } from 'react-social-sharing';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
@@ -18,36 +15,6 @@ const useStyles = makeStyles(() =>
     },
   }),
 );
-
-const TwitterColorButton = withStyles(() => ({
-  root: {
-    color: 'white',
-    backgroundColor: lightBlue[500],
-    '&:hover': {
-      backgroundColor: lightBlue[700],
-    },
-  },
-}))(Button);
-
-const LinkedInColorButton = withStyles((theme: Theme) => ({
-  root: {
-    color: theme.palette.getContrastText(indigo[500]),
-    backgroundColor: indigo[500],
-    '&:hover': {
-      backgroundColor: indigo[700],
-    },
-  },
-}))(Button);
-
-const FacebookColorButton = withStyles((theme: Theme) => ({
-  root: {
-    color: theme.palette.getContrastText(blue[500]),
-    backgroundColor: blue[500],
-    '&:hover': {
-      backgroundColor: blue[700],
-    },
-  },
-}))(Button);
 
 function InviteYourFriends(): JSX.Element {
   const classes = useStyles();
@@ -207,39 +174,21 @@ function InviteYourFriends(): JSX.Element {
           <div className={classes.root} style={{ marginTop: '3em', marginBottom: '1em' }}>
             <Grid container spacing={3}>
               <Grid item xs={12} sm={4}>
-                <TwitterColorButton
-                  className="w-100"
-                  variant="contained"
-                  color="primary"
-                  size="large"
-                  startIcon={<TwitterIcon />}
-                >
-                  Twitter
-                </TwitterColorButton>
+                <div className="d-flex justify-content-center">
+                  <Twitter solid big message="CodersMojo" link="https://coders-mojo-frontend.vercel.app/" />
+                </div>
               </Grid>
 
               <Grid item xs={12} sm={4}>
-                <LinkedInColorButton
-                  className="w-100"
-                  variant="contained"
-                  color="primary"
-                  size="large"
-                  startIcon={<LinkedInIcon />}
-                >
-                  LinkedIn
-                </LinkedInColorButton>
+                <div className="d-flex justify-content-center">
+                  <Linkedin solid big message="I am so cool" link="https://coders-mojo-frontend.vercel.app/" />
+                </div>
               </Grid>
 
               <Grid item xs={12} sm={4}>
-                <FacebookColorButton
-                  className="w-100"
-                  variant="contained"
-                  color="primary"
-                  size="large"
-                  startIcon={<FacebookIcon />}
-                >
-                  Facebook
-                </FacebookColorButton>
+                <div className="d-flex justify-content-center">
+                  <Facebook solid big link="https://coders-mojo-frontend.vercel.app/" />
+                </div>
               </Grid>
             </Grid>
           </div>
