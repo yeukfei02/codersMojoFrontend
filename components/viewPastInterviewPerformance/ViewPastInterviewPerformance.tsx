@@ -6,7 +6,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import { TransitionProps } from '@material-ui/core/transitions';
 import InsertInvitationIcon from '@material-ui/icons/InsertInvitation';
-import { purple } from '@material-ui/core/colors';
 import { Divider } from '@material-ui/core';
 import _ from 'lodash';
 
@@ -93,7 +92,7 @@ function ViewPastInterviewPerformance(props: any): JSX.Element {
             <td>
               <div className="d-flex justify-content-center" style={{ display: 'flex', flexDirection: 'row' }}>
                 <div className="mr-1">
-                  <InsertInvitationIcon style={{ color: purple[500] }} />
+                  <InsertInvitationIcon style={{ color: '#6f42c1' }} />
                 </div>
                 <div className="d-flex align-items-center">
                   <b>{item.date_time}</b>
