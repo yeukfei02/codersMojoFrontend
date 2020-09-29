@@ -152,10 +152,10 @@ function ParticipateInHackathons(): JSX.Element {
     <div>
       <NextHead />
 
-      <div className="my-5">
+      <div>
         <h5 className="text-center">Let’s hack and build together</h5>
 
-        <div className="my-4">
+        <div className="mt-4">
           <Select
             styles={selectStyles}
             placeholder={'Search hackathon'}
