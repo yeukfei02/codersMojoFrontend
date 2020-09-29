@@ -31,7 +31,7 @@ function StudyForInterview(): JSX.Element {
               >
                 <img src="/python.png" className="rounded" width="100" height="100" alt="" />
                 <div className="ml-4" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                  <div className="mb-2" style={{ fontWeight: 'bold' }}>
+                  <div className="mb-2" style={{ fontWeight: 'bold', fontSize: 16 }}>
                     Python
                   </div>
                   <div>Learn the most important language for data science.</div>
@@ -50,7 +50,7 @@ function StudyForInterview(): JSX.Element {
               >
                 <img src="/machine-learning.png" className="rounded" width="100" height="100" alt="" />
                 <div className="ml-4" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                  <div className="mb-2" style={{ fontWeight: 'bold' }}>
+                  <div className="mb-2" style={{ fontWeight: 'bold', fontSize: 16 }}>
                     Intro to Machine Learning
                   </div>
                   <div>Learn the core ideas in machine learning, and build your first models.</div>
@@ -69,7 +69,7 @@ function StudyForInterview(): JSX.Element {
               >
                 <img src="/intermediate-machine-learning.png" className="rounded" width="100" height="100" alt="" />
                 <div className="ml-4" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                  <div className="mb-2" style={{ fontWeight: 'bold' }}>
+                  <div className="mb-2" style={{ fontWeight: 'bold', fontSize: 16 }}>
                     Intermidate Machine Learning
                   </div>
                   <div>
@@ -91,7 +91,7 @@ function StudyForInterview(): JSX.Element {
               >
                 <img src="/data-visualization.png" className="rounded" width="100" height="100" alt="" />
                 <div className="ml-4" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                  <div className="mb-2" style={{ fontWeight: 'bold' }}>
+                  <div className="mb-2" style={{ fontWeight: 'bold', fontSize: 16 }}>
                     Data Visualization
                   </div>
                   <div>Make great data visualizations. A great way to see the power of coding!</div>
@@ -110,7 +110,7 @@ function StudyForInterview(): JSX.Element {
               >
                 <img src="/pandas.png" className="rounded" width="100" height="100" alt="" />
                 <div className="ml-4" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                  <div className="mb-2" style={{ fontWeight: 'bold' }}>
+                  <div className="mb-2" style={{ fontWeight: 'bold', fontSize: 16 }}>
                     Pandas
                   </div>
                   <div>Solve short hands-on challenges to prefect your data manipulation skills.</div>
@@ -129,7 +129,7 @@ function StudyForInterview(): JSX.Element {
               >
                 <img src="/feature-engineering.png" className="rounded" width="100" height="100" alt="" />
                 <div className="ml-4" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                  <div className="mb-2" style={{ fontWeight: 'bold' }}>
+                  <div className="mb-2" style={{ fontWeight: 'bold', fontSize: 16 }}>
                     Feature Engineering
                   </div>
                   <div>Divcover the most effective way to improve your models.</div>
@@ -146,7 +146,7 @@ function StudyForInterview(): JSX.Element {
               >
                 <img src="/deep-learning.png" className="rounded" width="100" height="100" alt="" />
                 <div className="ml-4" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                  <div className="mb-2" style={{ fontWeight: 'bold' }}>
+                  <div className="mb-2" style={{ fontWeight: 'bold', fontSize: 16 }}>
                     Deep Learning
                   </div>
                   <div>User TensorFlow to take machine learning to the next level. Your new skills will amaze you.</div>

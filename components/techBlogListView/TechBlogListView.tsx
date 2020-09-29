@@ -1,8 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { makeStyles, Theme } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 
 import NextHead from '../nextHead/NextHead';
 
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    padding: theme.spacing(3, 2),
+    flexGrow: 1,
+  },
+}));
+
 function TechBlogListView(): JSX.Element {
+  const classes = useStyles();
+
   const [techBlogList, setTechBlogList] = useState<any[]>([]);
   const [filterText, setFilterText] = useState('');
 
@@ -39,77 +50,28 @@ function TechBlogListView(): JSX.Element {
     }
   };
 
-  const renderLeftOddTechBlogList = (techBlogList: any[]) => {
+  const renderTechBlogList = (techBlogList: any[]) => {
     let techBlogListView = null;
 
     if (techBlogList) {
-      const filteredTechBlogList = techBlogList.filter((_: any, i: number) => {
-        return i % 5 != 0;
-      });
-      const leftOddTechBlogList = filteredTechBlogList.filter((_: any, i: number) => {
-        return i % 2 != 0;
-      });
-      techBlogListView = leftOddTechBlogList.map((item: any, i: number) => {
+      techBlogListView = techBlogList.map((item: any, i: number) => {
         return (
-          <div key={i} className="card my-3">
-            <img src={item.image} className="card-img-top" alt="" />
-            <div className="card-body">
-              <h5 className="card-title">{item.title}</h5>
-              <p className="card-text">{item.description}</p>
-              {renderTag(item.tag)}
+          <Grid key={i} item xs={12} sm={4} className="d-flex align-items-stretch">
+            <div className="card flex-grow-1">
+              <div className="card-body">
+                <img src={item.image} className="card-img-top" alt="" />
+                <div className="card-body">
+                  <div className="card-title" style={{ fontSize: 18, fontWeight: 'bold' }}>
+                    {item.title}
+                  </div>
+                  <div className="card-text my-3" style={{ whiteSpace: 'pre-line' }}>
+                    {item.description}
+                  </div>
+                  <div className="mt-3">{renderTag(item.tag)}</div>
+                </div>
+              </div>
             </div>
-          </div>
-        );
-      });
-    }
-
-    return techBlogListView;
-  };
-
-  const renderLeftEvenTechBlogList = (techBlogList: any[]) => {
-    let techBlogListView = null;
-
-    if (techBlogList) {
-      const filteredTechBlogList = techBlogList.filter((_: any, i: number) => {
-        return i % 5 != 0;
-      });
-      const leftOddTechBlogList = filteredTechBlogList.filter((_: any, i: number) => {
-        return i % 2 == 0;
-      });
-      techBlogListView = leftOddTechBlogList.map((item: any, i: number) => {
-        return (
-          <div key={i} className="card my-3">
-            <img src={item.image} className="card-img-top" alt="" />
-            <div className="card-body">
-              <h5 className="card-title">{item.title}</h5>
-              <p className="card-text">{item.description}</p>
-              {renderTag(item.tag)}
-            </div>
-          </div>
-        );
-      });
-    }
-
-    return techBlogListView;
-  };
-
-  const renderRightTechBlogList = (techBlogList: any[]) => {
-    let techBlogListView = null;
-
-    if (techBlogList) {
-      const filteredTechBlogList = techBlogList.filter((_: any, i: number) => {
-        return i % 5 == 0;
-      });
-      techBlogListView = filteredTechBlogList.map((item: any, i: number) => {
-        return (
-          <div key={i} className="card my-3">
-            <img src={item.image} className="card-img-top" alt="" />
-            <div className="card-body">
-              <h5 className="card-title">{item.title}</h5>
-              <p className="card-text">{item.description}</p>
-              {renderTag(item.tag)}
-            </div>
-          </div>
+          </Grid>
         );
       });
     }
@@ -166,13 +128,24 @@ function TechBlogListView(): JSX.Element {
                   className="col-sm d-flex justify-content-center align-items-center"
                   style={{ borderRight: '0.1em lightgray solid' }}
                 >
-                  <span className="pointer hover-item" onClick={() => handleFilterTextClick('Machine Learning')}>
+                  <span
+                    className="pointer hover-item"
+                    style={{
+                      color: filterText === 'Machine Learning' ? '#6f42c1' : '',
+                      fontWeight: filterText === 'Machine Learning' ? 'bold' : 'normal',
+                    }}
+                    onClick={() => handleFilterTextClick('Machine Learning')}
+                  >
                     Machine Learning
                   </span>
                 </div>
                 <div
                   className="col-sm d-flex justify-content-center align-items-center"
-                  style={{ borderRight: '0.1em lightgray solid' }}
+                  style={{
+                    borderRight: '0.1em lightgray solid',
+                    color: filterText === 'Data Science' ? '#6f42c1' : '',
+                    fontWeight: filterText === 'Data Science' ? 'bold' : 'normal',
+                  }}
                 >
                   <span className="pointer hover-item" onClick={() => handleFilterTextClick('Data Science')}>
                     Data Science
@@ -180,7 +153,11 @@ function TechBlogListView(): JSX.Element {
                 </div>
                 <div
                   className="col-sm d-flex justify-content-center align-items-center"
-                  style={{ borderRight: '0.1em lightgray solid' }}
+                  style={{
+                    borderRight: '0.1em lightgray solid',
+                    color: filterText === 'Programming' ? '#6f42c1' : '',
+                    fontWeight: filterText === 'Programming' ? 'bold' : 'normal',
+                  }}
                 >
                   <span className="pointer hover-item" onClick={() => handleFilterTextClick('Programming')}>
                     Programming
@@ -188,7 +165,11 @@ function TechBlogListView(): JSX.Element {
                 </div>
                 <div
                   className="col-sm d-flex justify-content-center align-items-center"
-                  style={{ borderRight: '0.1em lightgray solid' }}
+                  style={{
+                    borderRight: '0.1em lightgray solid',
+                    color: filterText === 'Web Development' ? '#6f42c1' : '',
+                    fontWeight: filterText === 'Web Development' ? 'bold' : 'normal',
+                  }}
                 >
                   <span className="pointer hover-item" onClick={() => handleFilterTextClick('Web Development')}>
                     Web Development
@@ -196,7 +177,11 @@ function TechBlogListView(): JSX.Element {
                 </div>
                 <div
                   className="col-sm d-flex justify-content-center align-items-center"
-                  style={{ borderRight: '0.1em lightgray solid' }}
+                  style={{
+                    borderRight: '0.1em lightgray solid',
+                    color: filterText === 'Cloud - AWS and GCP' ? '#6f42c1' : '',
+                    fontWeight: filterText === 'Cloud - AWS and GCP' ? 'bold' : 'normal',
+                  }}
                 >
                   <span className="pointer hover-item" onClick={() => handleFilterTextClick('Cloud - AWS and GCP')}>
                     Cloud - AWS and GCP
@@ -204,7 +189,11 @@ function TechBlogListView(): JSX.Element {
                 </div>
                 <div
                   className="col-sm d-flex justify-content-center align-items-center"
-                  style={{ borderRight: '0.1em lightgray solid' }}
+                  style={{
+                    borderRight: '0.1em lightgray solid',
+                    color: filterText === 'Data Visualization' ? '#6f42c1' : '',
+                    fontWeight: filterText === 'Data Visualization' ? 'bold' : 'normal',
+                  }}
                 >
                   <span className="pointer hover-item" onClick={() => handleFilterTextClick('Data Visualization')}>
                     Data Visualization
@@ -213,6 +202,10 @@ function TechBlogListView(): JSX.Element {
                 <div className="col-sm d-flex justify-content-center align-items-center">
                   <span
                     className="pointer hover-item"
+                    style={{
+                      color: filterText === 'Tech Interview Experiences' ? '#6f42c1' : '',
+                      fontWeight: filterText === 'Tech Interview Experiences' ? 'bold' : 'normal',
+                    }}
                     onClick={() => handleFilterTextClick('Tech Interview Experiences')}
                   >
                     Tech Interview Experiences
@@ -223,18 +216,10 @@ function TechBlogListView(): JSX.Element {
           </div>
         </div>
 
-        <div style={{ overflowX: 'hidden' }}>
-          <div className="row">
-            <div className="col-sm">
-              <div className="container">
-                <div className="row">
-                  <div className="col-sm">{renderLeftOddTechBlogList(techBlogList)}</div>
-                  <div className="col-sm">{renderLeftEvenTechBlogList(techBlogList)}</div>
-                </div>
-              </div>
-            </div>
-            <div className="col-sm">{renderRightTechBlogList(techBlogList)}</div>
-          </div>
+        <div className={classes.root}>
+          <Grid container spacing={3}>
+            {renderTechBlogList(techBlogList)}
+          </Grid>
         </div>
       </div>
     </div>
