@@ -154,7 +154,7 @@ function LandingPage(): JSX.Element {
 
                 <div className="my-3">
                   Study, practice and take mock tech interviews with peers Participate in amazing hackathons and Connect
-                  with Women Tech Leaders Community.
+                  with Women Developers.
                 </div>
               </div>
               <div className="card-footer" style={{ borderTop: 'none', backgroundColor: 'transparent' }}>
