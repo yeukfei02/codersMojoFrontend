@@ -229,6 +229,10 @@ function CustomDrawer(props: Props): JSX.Element {
     getAvatarText();
   }, []);
 
+  useEffect(() => {
+    setIcon();
+  }, [currentPageValue]);
+
   const setIcon = () => {
     const div = document.querySelector('.MuiPaper-root.MuiDrawer-paper > div > div');
     if (div) {
@@ -305,7 +309,7 @@ function CustomDrawer(props: Props): JSX.Element {
   };
 
   const handleGotItButtonClick = () => {
-    setCurrentPageValue('textEditorView');
+    setCurrentPageValue('yourUpcomingInterviewSchedule');
   };
 
   const handleTextEditorViewClick = () => {
@@ -314,6 +318,10 @@ function CustomDrawer(props: Props): JSX.Element {
 
   const handleCreatePostButtonClick = () => {
     setCurrentPageValue('createPosts');
+  };
+
+  const handleBackToDashBoardButtonClick = () => {
+    setCurrentPageValue('studyForInterview');
   };
 
   const renderCurrentPage = (currentPageValue: string) => {
@@ -327,7 +335,7 @@ function CustomDrawer(props: Props): JSX.Element {
         currentPage = <TakeAMockInterview gotItClick={() => handleGotItButtonClick()} />;
         break;
       case 'textEditorView':
-        currentPage = <TextEditorView />;
+        currentPage = <TextEditorView backToDashBoardClick={() => handleBackToDashBoardButtonClick()} />;
         break;
       case 'interviewOthers':
         currentPage = <InterviewOthers />;
@@ -401,10 +409,8 @@ function CustomDrawer(props: Props): JSX.Element {
     return appBarIcon;
   };
 
-  return (
-    <div>
-      <NextHead />
-
+  const renderView = (currentPageValue: string) => {
+    let resultView = (
       <div className={classes.root}>
         <CssBaseline />
         <AppBar position="fixed" className={classes.appBar}>
@@ -492,6 +498,24 @@ function CustomDrawer(props: Props): JSX.Element {
           <div className="mx-3 my-4">{renderCurrentPage(currentPageValue)}</div>
         </main>
       </div>
+    );
+
+    if (currentPageValue === 'textEditorView') {
+      resultView = (
+        <div className="m-4">
+          <TextEditorView backToDashBoardClick={() => handleBackToDashBoardButtonClick()} />
+        </div>
+      );
+    }
+
+    return resultView;
+  };
+
+  return (
+    <div>
+      <NextHead />
+
+      {renderView(currentPageValue)}
     </div>
   );
 }
