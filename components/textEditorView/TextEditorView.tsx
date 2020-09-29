@@ -26,12 +26,18 @@ function TextEditorView(props: any): JSX.Element {
   const [mode, setMode] = useState('python');
   const [fontSize, setFontSize] = useState(20);
   const [value, setValue] = useState(`def my_function():
-  print("Hello from a function")`);
+  print("Hello from a function")
+
+my_function()`);
+
+  const [runCodeOutput, setRunCodeOutput] = useState('');
+  const [runCodeError, setRunCodeError] = useState('');
 
   useEffect(() => {
     getQuestionTitleAndQuestionDescription();
     getSelectedModeList();
     getSelectedFontSizeList();
+    localStorage.setItem('source', value);
   }, []);
 
   const getQuestionTitleAndQuestionDescription = async () => {
@@ -173,7 +179,9 @@ function TextEditorView(props: any): JSX.Element {
       setSelectedMode({ label: 'python', value: 'python' });
       setMode('python');
       setValue(`def my_function():
-  print("Hello from a function")`);
+  print("Hello from a function")
+          
+my_function()`);
     }
   };
 
@@ -197,15 +205,17 @@ function TextEditorView(props: any): JSX.Element {
 test();`);
         break;
       case 'java':
-        setValue(`class Simple {  
-  public static void main(String args[]){  
-    System.out.println("Hello Java");  
+        setValue(`class Simple {
+  public static void main(String args[]) {
+    System.out.println("Hello Java");
   }
 }`);
         break;
       case 'python':
         setValue(`def my_function():
-  print("Hello from a function")`);
+  print("Hello from a function")
+      
+my_function()`);
         break;
       case 'xml':
         setValue(`<note>
@@ -323,7 +333,99 @@ func main() {
   };
 
   const handleRunButtonClick = () => {
-    console.log(123);
+    runCode();
+  };
+
+  const runCode = async () => {
+    const source = localStorage.getItem('source');
+    const lang = getLang(mode);
+    const token = localStorage.getItem('token');
+
+    if (source && lang && token) {
+      const response = await fetch(`/api/code/run`, {
+        method: 'POST',
+        body: JSON.stringify({ source: source, lang: lang, token: token }),
+      });
+      if (response) {
+        const responseData = await response.json();
+        console.log('response.status = ', response.status);
+        console.log('responseData = ', responseData);
+
+        if (response.status === 200 && responseData.result.result.compile_status === 'OK') {
+          const runCodeOutput = responseData.result.result.run_status.output;
+          const runCodeError = responseData.result.result.run_status.stderr;
+          setRunCodeOutput(runCodeOutput);
+          setRunCodeError(runCodeError);
+        } else {
+          setRunCodeOutput('');
+          setRunCodeError(responseData.result.result.run_status.status_detail);
+        }
+      }
+    }
+  };
+
+  const getLang = (mode: string) => {
+    let lang = '';
+
+    switch (mode) {
+      case 'javascript':
+        lang = 'JAVASCRIPT_NODE';
+        break;
+      case 'java':
+        lang = 'JAVA';
+        break;
+      case 'python':
+        lang = 'PYTHON3';
+        break;
+      case 'ruby':
+        lang = 'RUBY';
+        break;
+      case 'golang':
+        lang = 'GO';
+        break;
+      case 'csharp':
+        lang = 'CSHARP';
+        break;
+      default:
+        break;
+    }
+
+    return lang;
+  };
+
+  const renderRunCodeResult = (runCodeOutput: string, runCodeError: string) => {
+    let runCodeResultDiv = null;
+
+    if (runCodeOutput) {
+      runCodeResultDiv = (
+        <div className="card text-white bg-dark">
+          <div className="card-header">RESULT</div>
+          <div className="card-body">
+            <div className="card-title">
+              <div>OUTPUT:</div>
+              <div className="my-3">{runCodeOutput}</div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    if (runCodeError) {
+      runCodeResultDiv = (
+        <div className="card text-white bg-dark">
+          <div className="card-header">RESULT</div>
+          <div className="card-body">
+            <div className="card-title">
+              <div style={{ color: 'red' }}>ERROR:</div>
+              <div className="my-3" style={{ color: 'red' }}>
+                {runCodeError}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    return runCodeResultDiv;
   };
 
   return (
@@ -368,7 +470,9 @@ func main() {
               />
             </div>
           </div>
+
           <CustomTextEditor mode={mode} fontSize={fontSize} value={value} />
+
           <div className="my-3 d-flex justify-content-end">
             <Button
               className="mr-3"
@@ -382,6 +486,8 @@ func main() {
               Run
             </Button>
           </div>
+
+          {renderRunCodeResult(runCodeOutput, runCodeError)}
         </div>
       </div>
     </div>
