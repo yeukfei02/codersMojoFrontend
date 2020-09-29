@@ -65,6 +65,7 @@ function CustomTextEditor(props: any): JSX.Element {
 
   const handleOnChange = (newValue: string) => {
     console.log('newValue = ', newValue);
+    localStorage.setItem('source', newValue);
   };
 
   const setAceConfigUrl = (mode: string) => {
