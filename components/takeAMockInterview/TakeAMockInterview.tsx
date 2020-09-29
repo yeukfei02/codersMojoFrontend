@@ -342,25 +342,68 @@ function TakeAMockInterview(props: any): JSX.Element {
   const renderLeftSideTagItem = (itemText: string) => {
     const textToCompare = itemText.substring(1).trim();
 
+    const iconImage = getIconImage(itemText);
+
     let leftSideTagItem = (
-      <li className="my-4 hover-item pointer" onClick={() => handleTypeItemClick(textToCompare)}>
-        {itemText}
-      </li>
+      <div className="my-3" style={{ display: 'flex', flexDirection: 'row' }}>
+        {iconImage}
+        <div
+          className="ml-3 hover-item pointer d-flex align-items-center"
+          onClick={() => handleTypeItemClick(textToCompare)}
+        >
+          {itemText}
+        </div>
+      </div>
     );
 
     if (type === textToCompare) {
       leftSideTagItem = (
-        <li
-          style={{ color: '#6f42c1', fontWeight: 'bold' }}
-          className="my-4 hover-item pointer"
-          onClick={() => handleTypeItemClick(textToCompare)}
-        >
-          {itemText}
-        </li>
+        <div className="my-3" style={{ display: 'flex', flexDirection: 'row' }}>
+          {iconImage}
+          <div
+            className="ml-3 hover-item pointer d-flex align-items-center"
+            style={{ color: '#6f42c1', fontWeight: 'bold' }}
+            onClick={() => handleTypeItemClick(textToCompare)}
+          >
+            {itemText}
+          </div>
+        </div>
       );
     }
 
     return leftSideTagItem;
+  };
+
+  const getIconImage = (itemText: string) => {
+    let iconImage = null;
+
+    switch (itemText) {
+      case 'Data Structures and Algorithms':
+        iconImage = <img src="/algorithm-small.png" width="25" height="25" alt="" />;
+        break;
+      case 'System Design':
+        iconImage = <img src="/system-design-small.png" width="25" height="25" alt="" />;
+        break;
+      case 'Data Science':
+        iconImage = <img src="/data-science-small.png" width="25" height="25" alt="" />;
+        break;
+      case 'Front End Development':
+        iconImage = <img src="/front-end-development-small.png" width="25" height="25" alt="" />;
+        break;
+      case 'Behavioral':
+        iconImage = <img src="/behavioral-small.png" width="25" height="25" alt="" />;
+        break;
+      case 'Practice Session':
+        iconImage = <img src="/practice-session-small.png" width="25" height="25" alt="" />;
+        break;
+      case 'Peer to Peer Mock Interview':
+        iconImage = <img src="/peer-to-peer-mock-interview-small.png" width="25" height="25" alt="" />;
+        break;
+      default:
+        break;
+    }
+
+    return iconImage;
   };
 
   const renderPreviousButton = (currentTime: string) => {
@@ -403,21 +446,21 @@ function TakeAMockInterview(props: any): JSX.Element {
                 <h6>
                   <b>Focus</b>
                 </h6>
-                <ul style={{ listStyleType: 'none' }}>
+                <div>
                   {renderLeftSideTagItem('Data Structures and Algorithms')}
                   {renderLeftSideTagItem('System Design')}
                   {renderLeftSideTagItem('Data Science')}
                   {renderLeftSideTagItem('Front End Development')}
                   {renderLeftSideTagItem('Behavioral')}
-                </ul>
+                </div>
 
                 <h6 className="mt-5">
                   <b>Type of interview</b>
                 </h6>
-                <ul style={{ listStyleType: 'none' }}>
+                <div>
                   {renderLeftSideTagItem('Practice Session')}
                   {renderLeftSideTagItem('Peer to Peer Mock Interview')}
-                </ul>
+                </div>
 
                 <h6 className="mt-5">
                   <b>Study for Interview</b>
