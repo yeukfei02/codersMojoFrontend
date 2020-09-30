@@ -93,11 +93,12 @@ function DiscussionBoard(props: any): JSX.Element {
           <div key={i} className="my-3">
             <div className="card">
               <div className="card-body">
-                <div
-                  className="d-flex justify-content-end hover-item pointer"
-                  onClick={() => handleDeletePostById(item.posts_id)}
-                >
-                  <DeleteIcon style={{ color: 'gray' }} />
+                <div className="d-flex justify-content-end">
+                  <DeleteIcon
+                    className="hover-item pointer"
+                    style={{ color: 'gray' }}
+                    onClick={() => handleDeletePostById(item.posts_id)}
+                  />
                 </div>
                 <div className="mt-2 mb-3" style={{ fontSize: '1.2em' }}>
                   <b>Discussion Thread {number}</b> - {title}
