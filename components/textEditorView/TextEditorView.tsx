@@ -358,7 +358,7 @@ func main() {
           setRunCodeError(runCodeError);
         } else {
           setRunCodeOutput('');
-          setRunCodeError(responseData.result.result.run_status.status_detail);
+          setRunCodeError(responseData.result.result.compile_status);
         }
       }
     }
