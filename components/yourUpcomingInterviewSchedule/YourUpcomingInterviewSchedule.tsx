@@ -1,4 +1,3 @@
-import 'date-fns';
 import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -8,10 +7,25 @@ import Slide from '@material-ui/core/Slide';
 import { TransitionProps } from '@material-ui/core/transitions';
 import InsertInvitationIcon from '@material-ui/icons/InsertInvitation';
 import { Divider } from '@material-ui/core';
-// import DateFnsUtils from '@date-io/date-fns';
-// import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from '@material-ui/pickers';
+import clsx from 'clsx';
+import { createStyles, lighten, makeStyles, Theme } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TablePagination from '@material-ui/core/TablePagination';
+import TableRow from '@material-ui/core/TableRow';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
+import Checkbox from '@material-ui/core/Checkbox';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
+import DeleteIcon from '@material-ui/icons/Delete';
+import FilterListIcon from '@material-ui/icons/FilterList';
 import _ from 'lodash';
-// import moment from 'moment';
 
 import NextHead from '../nextHead/NextHead';
 
@@ -22,15 +36,222 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+interface Data {
+  date_time: string;
+  type: string;
+  status: string;
+  mock_interview_question: MockInterviewQuestion;
+  action: string;
+}
+
+interface MockInterviewQuestion {
+  mock_interview_question_id: number;
+  question_title: string;
+}
+
+function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+  return 0;
+}
+
+type Order = 'asc' | 'desc';
+
+function getComparator<Key extends keyof any>(
+  order: Order,
+  orderBy: Key,
+): (a: { [key in Key]: number | string }, b: { [key in Key]: number | string }) => number {
+  return order === 'desc'
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy);
+}
+
+function stableSort<T>(array: T[], comparator: (a: T, b: T) => number) {
+  const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
+  stabilizedThis.sort((a, b) => {
+    const order = comparator(a[0], b[0]);
+    if (order !== 0) return order;
+    return a[1] - b[1];
+  });
+  return stabilizedThis.map((el) => el[0]);
+}
+
+interface HeadCell {
+  disablePadding: boolean;
+  id: keyof Data;
+  label: string;
+  numeric: boolean;
+}
+
+const headCells: HeadCell[] = [
+  { id: 'date_time', numeric: true, disablePadding: false, label: 'When' },
+  { id: 'type', numeric: true, disablePadding: false, label: 'Type' },
+  { id: 'mock_interview_question', numeric: true, disablePadding: false, label: 'Question' },
+  { id: 'status', numeric: true, disablePadding: false, label: 'Status' },
+  { id: 'action', numeric: true, disablePadding: false, label: 'Action' },
+];
+
+interface EnhancedTableProps {
+  classes: ReturnType<typeof useStyles>;
+  numSelected: number;
+  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
+  onSelectAllClick: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  order: Order;
+  orderBy: string;
+  rowCount: number;
+}
+
+function EnhancedTableHead(props: EnhancedTableProps) {
+  const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
+  const createSortHandler = (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
+    onRequestSort(event, property);
+  };
+
+  return (
+    <TableHead>
+      <TableRow>
+        <TableCell padding="checkbox">
+          <Checkbox
+            indeterminate={numSelected > 0 && numSelected < rowCount}
+            checked={rowCount > 0 && numSelected === rowCount}
+            onChange={onSelectAllClick}
+            inputProps={{ 'aria-label': 'select all desserts' }}
+          />
+        </TableCell>
+        {headCells.map((headCell) => (
+          <TableCell
+            key={headCell.id}
+            align={headCell.numeric ? 'right' : 'left'}
+            padding={headCell.disablePadding ? 'none' : 'default'}
+            sortDirection={orderBy === headCell.id ? order : false}
+          >
+            <TableSortLabel
+              active={orderBy === headCell.id}
+              direction={orderBy === headCell.id ? order : 'asc'}
+              onClick={createSortHandler(headCell.id)}
+            >
+              {headCell.label}
+              {orderBy === headCell.id ? (
+                <span className={classes.visuallyHidden}>
+                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                </span>
+              ) : null}
+            </TableSortLabel>
+          </TableCell>
+        ))}
+      </TableRow>
+    </TableHead>
+  );
+}
+
+const useToolbarStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(1),
+    },
+    highlight:
+      theme.palette.type === 'light'
+        ? {
+            color: theme.palette.secondary.main,
+            backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+          }
+        : {
+            color: theme.palette.text.primary,
+            backgroundColor: theme.palette.secondary.dark,
+          },
+    title: {
+      flex: '1 1 100%',
+    },
+  }),
+);
+
+interface EnhancedTableToolbarProps {
+  numSelected: number;
+}
+
+const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
+  const classes = useToolbarStyles();
+  const { numSelected } = props;
+
+  return (
+    <Toolbar
+      className={clsx(classes.root, {
+        [classes.highlight]: numSelected > 0,
+      })}
+    >
+      {numSelected > 0 ? (
+        <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
+          {numSelected} selected
+        </Typography>
+      ) : (
+        <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
+          Your upcoming interview schedule
+        </Typography>
+      )}
+      {numSelected > 0 ? (
+        <Tooltip title="Delete">
+          <IconButton aria-label="delete">
+            <DeleteIcon />
+          </IconButton>
+        </Tooltip>
+      ) : (
+        <Tooltip title="Filter list">
+          <IconButton aria-label="filter list">
+            <FilterListIcon />
+          </IconButton>
+        </Tooltip>
+      )}
+    </Toolbar>
+  );
+};
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      width: '100%',
+    },
+    paper: {
+      width: '100%',
+      marginBottom: theme.spacing(2),
+    },
+    table: {
+      minWidth: 750,
+    },
+    visuallyHidden: {
+      border: 0,
+      clip: 'rect(0 0 0 0)',
+      height: 1,
+      margin: -1,
+      overflow: 'hidden',
+      padding: 0,
+      position: 'absolute',
+      top: 20,
+      width: 1,
+    },
+  }),
+);
+
 function YourUpcomingInterviewSchedule(props: any): JSX.Element {
+  const classes = useStyles();
+
   const [upcomingInterviewList, setUpcomingInterviewList] = useState<any[]>([]);
+  const [rows, setRows] = useState<any[]>([]);
 
   const [cancelDialogOpen, setCancelDialogOpen] = useState(false);
   const [rescheduleDialogOpen, setRescheduleDialogOpen] = useState(false);
 
   const [upcomingInterviewId, setUpcomingInterviewId] = useState(0);
 
-  // const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [order, setOrder] = useState<Order>('asc');
+  const [orderBy, setOrderBy] = useState<keyof Data>('date_time');
+  const [selected, setSelected] = useState<number[]>([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   useEffect(() => {
     getUpcomingInterviewList();
@@ -52,6 +273,7 @@ function YourUpcomingInterviewSchedule(props: any): JSX.Element {
 
         if (responseData.result) {
           setUpcomingInterviewList(responseData.result.result);
+          setRows(responseData.result.result);
         }
       }
     }
@@ -60,7 +282,6 @@ function YourUpcomingInterviewSchedule(props: any): JSX.Element {
   const handleRescheduleButtonClick = (upcomingInterviewId: number) => {
     setRescheduleDialogOpen(true);
     setUpcomingInterviewId(upcomingInterviewId);
-    // setSelectedDate(new Date(fullDateTime));
   };
 
   const handleCancelButtonClick = (upcomingInterviewId: number) => {
@@ -81,73 +302,92 @@ function YourUpcomingInterviewSchedule(props: any): JSX.Element {
 
     if (!_.isEmpty(upcomingInterviewList)) {
       resultView = (
-        <table className="table table-bordered text-center">
-          <thead>
-            <tr>
-              <th scope="col">When</th>
-              <th scope="col">Type</th>
-              <th scope="col">Question</th>
-              <th scope="col">Status</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>{renderUpcomingListItems(upcomingInterviewList)}</tbody>
-        </table>
+        <Paper className={classes.paper}>
+          <EnhancedTableToolbar numSelected={selected.length} />
+          <TableContainer>
+            <Table className={classes.table} aria-labelledby="tableTitle" size={'medium'} aria-label="enhanced table">
+              <EnhancedTableHead
+                classes={classes}
+                numSelected={selected.length}
+                order={order}
+                orderBy={orderBy}
+                onSelectAllClick={handleSelectAllClick}
+                onRequestSort={handleRequestSort}
+                rowCount={rows.length}
+              />
+              <TableBody>
+                {stableSort(rows, getComparator(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row: any, index: number) => {
+                    const isItemSelected = isSelected(row.upcoming_interview_id);
+                    const labelId = `enhanced-table-checkbox-${index}`;
+
+                    return (
+                      <TableRow
+                        hover
+                        onClick={(event) => handleClick(event, row.upcoming_interview_id)}
+                        role="checkbox"
+                        aria-checked={isItemSelected}
+                        tabIndex={-1}
+                        key={index}
+                        selected={isItemSelected}
+                      >
+                        <TableCell padding="checkbox">
+                          <Checkbox checked={isItemSelected} inputProps={{ 'aria-labelledby': labelId }} />
+                        </TableCell>
+                        <TableCell align="right">
+                          <div className="d-flex justify-content-end" style={{ display: 'flex', flexDirection: 'row' }}>
+                            <div className="mr-1">
+                              <InsertInvitationIcon style={{ color: '#6f42c1' }} />
+                            </div>
+                            <div>
+                              <b>{row.date_time}</b>
+                            </div>
+                          </div>
+                        </TableCell>
+                        <TableCell align="right">{row.type}</TableCell>
+                        <TableCell align="right">
+                          <span
+                            className="hover-item pointer"
+                            onClick={() => handleQuestionClick(row.mock_interview_question.mock_interview_question_id)}
+                          >
+                            {row.mock_interview_question.question_title}
+                          </span>
+                        </TableCell>
+                        <TableCell align="right">
+                          <div className="text-capitalize">{row.status}</div>
+                        </TableCell>
+                        <TableCell align="right">
+                          <div className="d-flex justify-content-end" style={{ display: 'flex', flexDirection: 'row' }}>
+                            {renderCancelButton(row.status, row.upcoming_interview_id)}
+                            {renderRescheduleButton(row.status, row.upcoming_interview_id)}
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                {emptyRows > 0 && (
+                  <TableRow style={{ height: 53 * emptyRows }}>
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
+        </Paper>
       );
     }
 
     return resultView;
-  };
-
-  const renderUpcomingListItems = (upcomingInterviewList: any[]) => {
-    let upcomingListView = null;
-
-    if (upcomingInterviewList) {
-      upcomingListView = upcomingInterviewList.map((item: any, i: number) => {
-        const mockInterviewQuestionId = item.mock_interview_question_id;
-        const upcomingInterviewId = item.upcoming_interview_id;
-
-        return (
-          <tr key={i}>
-            <td>
-              <div className="d-flex justify-content-center" style={{ display: 'flex', flexDirection: 'row' }}>
-                <div className="mr-1">
-                  <InsertInvitationIcon style={{ color: '#6f42c1' }} />
-                </div>
-                <div className="d-flex align-items-center">
-                  <b>{item.date_time}</b>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div className="d-flex justify-content-center">
-                <div>{item.type}</div>
-              </div>
-            </td>
-            <td>
-              <div className="d-flex justify-content-center">
-                <div className="hover-item pointer" onClick={() => handleQuestionClick(mockInterviewQuestionId)}>
-                  {item.mock_interview_question ? item.mock_interview_question.question_title : ''}
-                </div>
-              </div>
-            </td>
-            <td>
-              <div className="d-flex justify-content-center">
-                <div className="text-capitalize">{item.status}</div>
-              </div>
-            </td>
-            <td>
-              <div className="d-flex justify-content-center" style={{ display: 'flex', flexDirection: 'row' }}>
-                {renderCancelButton(item.status, upcomingInterviewId)}
-                {renderRescheduleButton(item.status, upcomingInterviewId)}
-              </div>
-            </td>
-          </tr>
-        );
-      });
-    }
-
-    return upcomingListView;
   };
 
   const renderCancelButton = (status: string, upcomingInterviewId: number) => {
@@ -225,23 +465,9 @@ function YourUpcomingInterviewSchedule(props: any): JSX.Element {
   };
 
   const handleYesRescheduleButtonClick = () => {
-    // const fullDateTime = moment(selectedDate).format('YYYY-MM-DD HH:mm:ss');
-
-    // const dateStr = moment(selectedDate).format('MMMM Do');
-    // const isoWeekDayStr = moment(selectedDate).format('dddd');
-    // const timeStr = moment(selectedDate, 'HH:mm').format('hh:mm a');
-    // const dateTime = `${isoWeekDayStr}, ${dateStr}, ${timeStr}`;
-
-    // setRescheduleDialogOpen(false);
-    // rescheduleUpcomingInterview(upcomingInterviewId, fullDateTime, dateTime);
-
     setRescheduleDialogOpen(false);
     props.rescheduleButtonClick();
   };
-
-  // const handleDateChange = (date: Date | null) => {
-  //   setSelectedDate(date);
-  // };
 
   const cancelUpcomingInterview = async (upcomingInterviewId: number) => {
     const token = localStorage.getItem('token');
@@ -267,29 +493,50 @@ function YourUpcomingInterviewSchedule(props: any): JSX.Element {
     }
   };
 
-  // const rescheduleUpcomingInterview = async (upcomingInterviewId: number, fullDateTime: string, dateTime: string) => {
-  //   const token = localStorage.getItem('token');
-  //   if (token) {
-  //     const response = await fetch(`/api/upcoming-interview/reschedule-upcoming-interview`, {
-  //       method: 'PUT',
-  //       body: JSON.stringify({
-  //         upcomingInterviewId: upcomingInterviewId,
-  //         fullDateTime: fullDateTime,
-  //         dateTime: dateTime,
-  //         token: token,
-  //       }),
-  //     });
-  //     if (response) {
-  //       const responseData = await response.json();
-  //       console.log('response.status = ', response.status);
-  //       console.log('responseData = ', responseData);
+  const handleRequestSort = (_: React.MouseEvent<unknown>, property: keyof Data) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
+  };
 
-  //       if (response.status === 200) {
-  //         getUpcomingInterviewList();
-  //       }
-  //     }
-  //   }
-  // };
+  const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.checked) {
+      const newSelecteds = rows.map((n) => n.upcoming_interview_id);
+      setSelected(newSelecteds);
+      return;
+    }
+    setSelected([]);
+  };
+
+  const handleClick = (_: React.MouseEvent<unknown>, id: number) => {
+    const selectedIndex = selected.indexOf(id);
+    let newSelected: number[] = [];
+
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, id);
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1));
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(selected.slice(0, selectedIndex), selected.slice(selectedIndex + 1));
+    }
+
+    setSelected(newSelected);
+  };
+
+  const handleChangePage = (_: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const isSelected = (upcomingInterviewId: number) => selected.indexOf(upcomingInterviewId) !== -1;
+
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
     <div>
@@ -347,20 +594,6 @@ function YourUpcomingInterviewSchedule(props: any): JSX.Element {
           <div className="my-3 p-4" style={{ color: 'black', fontSize: 20 }}>
             <div className="d-flex justify-content-center" style={{ display: 'flex', flexDirection: 'column' }}>
               <div>Are you sure to reschedule the session?</div>
-              {/* <div className="mt-4 d-flex justify-content-center">
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <KeyboardDateTimePicker
-                    variant="inline"
-                    ampm={true}
-                    label="Date time picker"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    autoOk={true}
-                    disablePast
-                    format="yyyy/MM/dd HH:mm"
-                  />
-                </MuiPickersUtilsProvider>
-              </div> */}
             </div>
           </div>
           <Divider />
