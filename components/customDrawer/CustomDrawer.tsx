@@ -27,7 +27,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { purple } from '@material-ui/core/colors';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme, Theme, createStyles, withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
 import NextHead from '../nextHead/NextHead';
@@ -94,6 +94,15 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+const CustomListItem = withStyles({
+  root: {
+    '&:hover': {
+      backgroundColor: '#DBC0F9',
+      color: 'black',
+    },
+  },
+})(ListItem);
+
 interface Props {
   /**
    * Injected by the documentation to work in an iframe.
@@ -122,101 +131,101 @@ function CustomDrawer(props: Props): JSX.Element {
       <Divider />
       <List>
         <div onClick={() => handleLeftSideMenuItemClick('studyForInterview')}>
-          <ListItem button>
+          <CustomListItem button>
             <ListItemIcon>
               <ImportContactsIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Study for Interview" />
-          </ListItem>
+          </CustomListItem>
         </div>
         <div onClick={() => handleLeftSideMenuItemClick('takeAMockInterview')}>
-          <ListItem button>
+          <CustomListItem button>
             <ListItemIcon>
               <LibraryBooksIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Take a Mock Interview" />
-          </ListItem>
+          </CustomListItem>
         </div>
         <div onClick={() => handleLeftSideMenuItemClick('discussionBoard')}>
-          <ListItem button>
+          <CustomListItem button>
             <ListItemIcon>
               <ChatIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Discussion board" />
-          </ListItem>
+          </CustomListItem>
         </div>
         <div onClick={() => handleLeftSideMenuItemClick('participateInHackathons')}>
-          <ListItem button>
+          <CustomListItem button>
             <ListItemIcon>
               <ComputerIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Participate in Hackathons" />
-          </ListItem>
+          </CustomListItem>
         </div>
         <div onClick={() => handleLeftSideMenuItemClick('applyForJobs')}>
-          <ListItem button>
+          <CustomListItem button>
             <ListItemIcon>
               <WorkIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Apply for Jobs" />
-          </ListItem>
+          </CustomListItem>
         </div>
         <div onClick={() => handleLeftSideMenuItemClick('techSalaries')}>
-          <ListItem button>
+          <CustomListItem button>
             <ListItemIcon>
               <MonetizationOnIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Tech Salaries" />
-          </ListItem>
+          </CustomListItem>
         </div>
         <div onClick={() => handleLeftSideMenuItemClick('becomeAStudentTechAmbassador')}>
-          <ListItem button>
+          <CustomListItem button>
             <ListItemIcon>
               <EmojiPeopleIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Become a Student/Company Ambassador" />
-          </ListItem>
+          </CustomListItem>
         </div>
         <div onClick={() => handleLeftSideMenuItemClick('techBlog')}>
-          <ListItem button>
+          <CustomListItem button>
             <ListItemIcon>
               <PostAddIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Tech blog" />
-          </ListItem>
+          </CustomListItem>
         </div>
         <div onClick={() => handleLeftSideMenuItemClick('inviteYourFriends')}>
-          <ListItem button>
+          <CustomListItem button>
             <ListItemIcon>
               <PeopleIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Invite your friends" />
-          </ListItem>
+          </CustomListItem>
         </div>
         <div onClick={() => handleLeftSideMenuItemClick('interviewOthers')}>
-          <ListItem button>
+          <CustomListItem button>
             <ListItemIcon>
               <ChatIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Interview Others" />
-          </ListItem>
+          </CustomListItem>
         </div>
         <Divider />
         <div onClick={() => handleLeftSideMenuItemClick('yourUpcomingInterviewSchedule')}>
-          <ListItem button>
+          <CustomListItem button>
             <ListItemIcon>
               <ScheduleIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Your Upcoming Interview Schedule" />
-          </ListItem>
+          </CustomListItem>
         </div>
         <div onClick={() => handleLeftSideMenuItemClick('viewPastInterviewPerformance')}>
-          <ListItem button>
+          <CustomListItem button>
             <ListItemIcon>
               <VideoCallIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="View Past Interview Performance" />
-          </ListItem>
+          </CustomListItem>
         </div>
       </List>
     </div>

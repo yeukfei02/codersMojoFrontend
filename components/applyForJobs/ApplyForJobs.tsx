@@ -78,10 +78,10 @@ interface HeadCell {
 }
 
 const headCells: HeadCell[] = [
-  { id: 'company', numeric: true, disablePadding: false, label: 'Company' },
-  { id: 'title', numeric: true, disablePadding: false, label: 'Title' },
-  { id: 'type', numeric: true, disablePadding: false, label: 'Type' },
-  { id: 'location', numeric: true, disablePadding: false, label: 'Location' },
+  { id: 'company', numeric: false, disablePadding: false, label: 'Company' },
+  { id: 'title', numeric: false, disablePadding: false, label: 'Title' },
+  { id: 'type', numeric: false, disablePadding: false, label: 'Type' },
+  { id: 'location', numeric: false, disablePadding: false, label: 'Location' },
 ];
 
 interface EnhancedTableProps {
@@ -228,8 +228,6 @@ const useStyles = makeStyles((theme: Theme) =>
 function ApplyForJobs(): JSX.Element {
   const classes = useStyles();
 
-  // const [countryList, setCountryList] = useState<any[]>([]);
-
   const [selectedTypeList, setSelectedTypeList] = useState<any[]>([]);
   const [selectedType, setSelectedType] = useState<any>(null);
 
@@ -253,8 +251,6 @@ function ApplyForJobs(): JSX.Element {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   useEffect(() => {
-    // getCountryList();
-
     getSelectedTypeList();
 
     getJobsList(type, department, location);
@@ -266,19 +262,6 @@ function ApplyForJobs(): JSX.Element {
       getSelectedLocationList(jobsList);
     }
   }, [jobsList]);
-
-  // const getCountryList = async () => {
-  //   const response = await fetch(`/api/country`);
-  //   if (response) {
-  //     const responseData = await response.json();
-  //     console.log('response.status = ', response.status);
-  //     console.log('responseData = ', responseData);
-
-  //     if (responseData) {
-  //       setCountryList(responseData.result.result);
-  //     }
-  //   }
-  // };
 
   const getSelectedTypeList = () => {
     const typeList = [
@@ -447,6 +430,79 @@ function ApplyForJobs(): JSX.Element {
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
+  const renderJobsListView = (jobsList: any[]) => {
+    let jobsListView = null;
+
+    if (jobsList) {
+      jobsListView = (
+        <Paper className={classes.paper}>
+          <EnhancedTableToolbar numSelected={selected.length} />
+          <TableContainer>
+            <Table className={classes.table} aria-labelledby="tableTitle" size={'medium'} aria-label="enhanced table">
+              <EnhancedTableHead
+                classes={classes}
+                numSelected={selected.length}
+                order={order}
+                orderBy={orderBy}
+                onSelectAllClick={handleSelectAllClick}
+                onRequestSort={handleRequestSort}
+                rowCount={rows.length}
+              />
+              <TableBody>
+                {stableSort(rows, getComparator(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row: any, index: number) => {
+                    const isItemSelected = isSelected(row.jobs_id);
+                    const labelId = `enhanced-table-checkbox-${index}`;
+
+                    return (
+                      <TableRow
+                        hover
+                        onClick={(event) => handleClick(event, row.jobs_id)}
+                        role="checkbox"
+                        aria-checked={isItemSelected}
+                        tabIndex={-1}
+                        key={index}
+                        selected={isItemSelected}
+                      >
+                        <TableCell padding="checkbox">
+                          <Checkbox checked={isItemSelected} inputProps={{ 'aria-labelledby': labelId }} />
+                        </TableCell>
+                        <TableCell align="left">
+                          <span className="hover-item pointer" onClick={() => handleCompanyNameClick(row.company_url)}>
+                            {row.company}
+                          </span>
+                        </TableCell>
+                        <TableCell align="left">{row.title}</TableCell>
+                        <TableCell align="left">{row.type}</TableCell>
+                        <TableCell align="left">{row.location}</TableCell>
+                      </TableRow>
+                    );
+                  })}
+                {emptyRows > 0 && (
+                  <TableRow style={{ height: 53 * emptyRows }}>
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
+        </Paper>
+      );
+    }
+
+    return jobsListView;
+  };
+
   return (
     <div>
       <NextHead />
@@ -503,68 +559,7 @@ function ApplyForJobs(): JSX.Element {
           </div>
         </div>
 
-        <Paper className={classes.paper}>
-          <EnhancedTableToolbar numSelected={selected.length} />
-          <TableContainer>
-            <Table className={classes.table} aria-labelledby="tableTitle" size={'medium'} aria-label="enhanced table">
-              <EnhancedTableHead
-                classes={classes}
-                numSelected={selected.length}
-                order={order}
-                orderBy={orderBy}
-                onSelectAllClick={handleSelectAllClick}
-                onRequestSort={handleRequestSort}
-                rowCount={rows.length}
-              />
-              <TableBody>
-                {stableSort(rows, getComparator(order, orderBy))
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row: any, index: number) => {
-                    const isItemSelected = isSelected(row.jobs_id);
-                    const labelId = `enhanced-table-checkbox-${index}`;
-
-                    return (
-                      <TableRow
-                        hover
-                        onClick={(event) => handleClick(event, row.jobs_id)}
-                        role="checkbox"
-                        aria-checked={isItemSelected}
-                        tabIndex={-1}
-                        key={index}
-                        selected={isItemSelected}
-                      >
-                        <TableCell padding="checkbox">
-                          <Checkbox checked={isItemSelected} inputProps={{ 'aria-labelledby': labelId }} />
-                        </TableCell>
-                        <TableCell align="right">
-                          <span className="hover-item pointer" onClick={() => handleCompanyNameClick(row.company_url)}>
-                            {row.company}
-                          </span>
-                        </TableCell>
-                        <TableCell align="right">{row.title}</TableCell>
-                        <TableCell align="right">{row.type}</TableCell>
-                        <TableCell align="right">{row.location}</TableCell>
-                      </TableRow>
-                    );
-                  })}
-                {emptyRows > 0 && (
-                  <TableRow style={{ height: 53 * emptyRows }}>
-                    <TableCell colSpan={6} />
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={rows.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
-          />
-        </Paper>
+        {renderJobsListView(jobsList)}
       </div>
     </div>
   );

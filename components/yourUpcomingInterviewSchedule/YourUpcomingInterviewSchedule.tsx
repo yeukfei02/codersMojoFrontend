@@ -88,11 +88,11 @@ interface HeadCell {
 }
 
 const headCells: HeadCell[] = [
-  { id: 'date_time', numeric: true, disablePadding: false, label: 'When' },
-  { id: 'type', numeric: true, disablePadding: false, label: 'Type' },
-  { id: 'mock_interview_question', numeric: true, disablePadding: false, label: 'Question' },
-  { id: 'status', numeric: true, disablePadding: false, label: 'Status' },
-  { id: 'action', numeric: true, disablePadding: false, label: 'Action' },
+  { id: 'date_time', numeric: false, disablePadding: false, label: 'When' },
+  { id: 'type', numeric: false, disablePadding: false, label: 'Type' },
+  { id: 'mock_interview_question', numeric: false, disablePadding: false, label: 'Question' },
+  { id: 'status', numeric: false, disablePadding: false, label: 'Status' },
+  { id: 'action', numeric: false, disablePadding: false, label: 'Action' },
 ];
 
 interface EnhancedTableProps {
@@ -335,8 +335,11 @@ function YourUpcomingInterviewSchedule(props: any): JSX.Element {
                         <TableCell padding="checkbox">
                           <Checkbox checked={isItemSelected} inputProps={{ 'aria-labelledby': labelId }} />
                         </TableCell>
-                        <TableCell align="right">
-                          <div className="d-flex justify-content-end" style={{ display: 'flex', flexDirection: 'row' }}>
+                        <TableCell align="left">
+                          <div
+                            className="d-flex justify-content-start"
+                            style={{ display: 'flex', flexDirection: 'row' }}
+                          >
                             <div className="mr-1">
                               <InsertInvitationIcon style={{ color: '#6f42c1' }} />
                             </div>
@@ -345,8 +348,8 @@ function YourUpcomingInterviewSchedule(props: any): JSX.Element {
                             </div>
                           </div>
                         </TableCell>
-                        <TableCell align="right">{row.type}</TableCell>
-                        <TableCell align="right">
+                        <TableCell align="left">{row.type}</TableCell>
+                        <TableCell align="left">
                           <span
                             className="hover-item pointer"
                             onClick={() => handleQuestionClick(row.mock_interview_question.mock_interview_question_id)}
@@ -354,11 +357,14 @@ function YourUpcomingInterviewSchedule(props: any): JSX.Element {
                             {row.mock_interview_question.question_title}
                           </span>
                         </TableCell>
-                        <TableCell align="right">
+                        <TableCell align="left">
                           <div className="text-capitalize">{row.status}</div>
                         </TableCell>
-                        <TableCell align="right">
-                          <div className="d-flex justify-content-end" style={{ display: 'flex', flexDirection: 'row' }}>
+                        <TableCell align="left">
+                          <div
+                            className="d-flex justify-content-start"
+                            style={{ display: 'flex', flexDirection: 'row' }}
+                          >
                             {renderCancelButton(row.status, row.upcoming_interview_id)}
                             {renderRescheduleButton(row.status, row.upcoming_interview_id)}
                           </div>
