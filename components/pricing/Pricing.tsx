@@ -31,6 +31,10 @@ function Pricing(): JSX.Element {
     console.log(123);
   };
 
+  const handleLoginOrSignupClick = () => {
+    router.push(`/login`);
+  };
+
   return (
     <MuiThemeProvider theme={theme}>
       <div>
@@ -61,18 +65,21 @@ function Pricing(): JSX.Element {
               <div onClick={() => handleInviteYourFriendsClick()} className="mx-3 pointer hover-item">
                 Invite Your Friends
               </div>
+              <div onClick={() => handleLoginOrSignupClick()} className="mx-3 pointer hover-item">
+                Login/Signup
+              </div>
             </form>
           </div>
         </nav>
 
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <div className="my-3" style={{ display: 'flex', flexDirection: 'column' }}>
           <div className="d-flex justify-content-center mb-5" style={{ fontSize: 25 }}>
             Get started with a CodersMojo subscription that works for you.
           </div>
 
           <div className="row mx-5">
-            <div className="col-sm d-flex align-items-stretch">
-              <div className="card flex-grow-1">
+            <div className="col-sm d-flex justify-content-center align-items-stretch">
+              <div className="card" style={{ width: 500, height: 350 }}>
                 <div className="card-header" style={{ backgroundColor: '#eaeff5', color: 'black' }}>
                   <div>
                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -99,13 +106,13 @@ function Pricing(): JSX.Element {
                 </div>
               </div>
             </div>
-            <div className="col-sm d-flex align-items-stretch">
-              <div className="card flex-grow-1">
+            <div className="col-sm d-flex justify-content-center align-items-stretch">
+              <div className="card" style={{ width: 500, height: 350 }}>
                 <div className="card-header" style={{ backgroundColor: '#6f42c1', color: 'white' }}>
                   <div>
                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                       <div style={{ fontSize: 35 }}>Yearly</div>
-                      <div className="d-flex align-items-center">$120/yr</div>
+                      <div className="d-flex align-items-center">$119.99/yr</div>
                     </div>
                     <div className="my-1">Subscription</div>
                   </div>
