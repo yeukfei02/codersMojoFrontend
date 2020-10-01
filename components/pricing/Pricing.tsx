@@ -79,7 +79,7 @@ function Pricing(): JSX.Element {
 
           <div className="row mx-5">
             <div className="col-sm d-flex justify-content-center align-items-stretch">
-              <div className="card" style={{ width: 500, height: 350 }}>
+              <div className="card" style={{ width: 450, height: 350 }}>
                 <div className="card-header" style={{ backgroundColor: '#eaeff5', color: 'black' }}>
                   <div>
                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -107,7 +107,7 @@ function Pricing(): JSX.Element {
               </div>
             </div>
             <div className="col-sm d-flex justify-content-center align-items-stretch">
-              <div className="card" style={{ width: 500, height: 350 }}>
+              <div className="card" style={{ width: 450, height: 350 }}>
                 <div className="card-header" style={{ backgroundColor: '#6f42c1', color: 'white' }}>
                   <div>
                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
