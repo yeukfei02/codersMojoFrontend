@@ -433,7 +433,7 @@ function ApplyForJobs(): JSX.Element {
   const renderJobsListView = (jobsList: any[]) => {
     let jobsListView = null;
 
-    if (jobsList) {
+    if (!_.isEmpty(jobsList)) {
       jobsListView = (
         <Paper className={classes.paper}>
           <EnhancedTableToolbar numSelected={selected.length} />
