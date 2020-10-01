@@ -30,6 +30,10 @@ function LandingPage(): JSX.Element {
     window.open(`https://forms.gle/gCJGap2dpENuwhYi8`);
   };
 
+  // const handlePricingClick = () => {
+  //   router.push(`/pricing`);
+  // };
+
   const handleLoginOrSignupClick = () => {
     router.push(`/login`);
   };
@@ -128,6 +132,9 @@ function LandingPage(): JSX.Element {
             <div onClick={() => handleBecomeAStudentTechAmbassadorClick()} className="mx-3 pointer hover-item">
               Become a Student Tech Ambassador
             </div>
+            {/* <div onClick={() => handlePricingClick()} className="mx-3 pointer hover-item">
+              Pricing
+            </div> */}
             <div onClick={() => handleLoginOrSignupClick()} className="mx-3 pointer hover-item">
               Login/Signup
             </div>
