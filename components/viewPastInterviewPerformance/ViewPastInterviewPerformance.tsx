@@ -330,7 +330,7 @@ function ViewPastInterviewPerformance(props: any): JSX.Element {
                             <div className="mr-1">
                               <InsertInvitationIcon style={{ color: '#6f42c1' }} />
                             </div>
-                            <div>
+                            <div className="d-flex align-items-center">
                               <b>{row.date_time}</b>
                             </div>
                           </div>
