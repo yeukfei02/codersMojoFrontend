@@ -19,7 +19,7 @@ function TechBlog(): JSX.Element {
     <div>
       <NextHead />
 
-      <nav className="my-4 navbar navbar-expand-lg navbar-light">
+      <nav className="navbar navbar-expand-lg navbar-light">
         <a className="navbar-brand" href="/">
           <img src="/logo.png" width="200" height="65" alt="" loading="lazy" />
         </a>
