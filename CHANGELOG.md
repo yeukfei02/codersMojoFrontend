@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.26](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.25...v0.0.26) (2020-10-01)
+
+
+### Features
+
+* 🎸 add pricing page ([a998d4b](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/a998d4b7127cfe8eb6fb335153c8f5b773401b73))
+
 ### [0.0.25](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.24...v0.0.25) (2020-10-01)
 
 ### [0.0.24](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.23...v0.0.24) (2020-09-30)
