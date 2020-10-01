@@ -16,6 +16,7 @@ import ChatIcon from '@material-ui/icons/Chat';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import VideoCallIcon from '@material-ui/icons/VideoCall';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import ForwardIcon from '@material-ui/icons/Forward';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -39,6 +40,7 @@ import DiscussionBoard from '../discussionBoard/DiscussionBoard';
 import CreatePosts from '../createPosts/CreatePosts';
 import ApplyForJobs from '../applyForJobs/ApplyForJobs';
 import TechSalaries from '../techSalaries/TechSalaries';
+import GetTechReferrals from '../getTechReferrals/GetTechReferrals';
 import ParticipateInHackathons from '../participateInHackathons/ParticipateInHackathons';
 import InviteYourFriends from '../inviteYourFriends/InviteYourFriends';
 import BecomeAStudentTechAmbassador from '../becomeAStudentTechAmbassador/BecomeAStudentTechAmbassador';
@@ -176,6 +178,14 @@ function CustomDrawer(props: Props): JSX.Element {
               <MonetizationOnIcon color="secondary" />
             </ListItemIcon>
             <ListItemText primary="Tech Salaries" />
+          </CustomListItem>
+        </div>
+        <div onClick={() => handleLeftSideMenuItemClick('getTechReferrals')}>
+          <CustomListItem button>
+            <ListItemIcon>
+              <ForwardIcon color="secondary" />
+            </ListItemIcon>
+            <ListItemText primary="Get Tech Referrals" />
           </CustomListItem>
         </div>
         <div onClick={() => handleLeftSideMenuItemClick('becomeAStudentTechAmbassador')}>
@@ -364,6 +374,9 @@ function CustomDrawer(props: Props): JSX.Element {
         break;
       case 'techSalaries':
         currentPage = <TechSalaries />;
+        break;
+      case 'getTechReferrals':
+        currentPage = <GetTechReferrals />;
         break;
       case 'participateInHackathons':
         currentPage = <ParticipateInHackathons />;
