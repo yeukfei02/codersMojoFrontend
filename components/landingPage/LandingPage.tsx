@@ -213,7 +213,7 @@ function LandingPage(): JSX.Element {
       </div>
 
       <div className="d-flex justify-content-center" style={{ marginTop: '5em' }}>
-        <div>Girls, let’s break the tech glass ceiling. Subscribe/ Join us for updates</div>
+        <div>Girls, let’s break the tech glass ceiling. Subscribe / Join us for updates</div>
       </div>
 
       <div className="d-flex justify-content-center" style={{ marginTop: '1em' }}>
