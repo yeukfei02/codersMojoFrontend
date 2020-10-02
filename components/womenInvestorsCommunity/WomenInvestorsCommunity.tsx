@@ -33,10 +33,11 @@ const selectStyles = {
 };
 
 interface Data {
-  company: string;
-  jobTitle: string;
-  description: string;
-  totalCompensation: string;
+  name: string;
+  investorType: string;
+  areasOfInvestment: string;
+  status: string;
+  action: string;
 }
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -78,10 +79,11 @@ interface HeadCell {
 }
 
 const headCells: HeadCell[] = [
-  { id: 'company', numeric: false, disablePadding: false, label: 'Company' },
-  { id: 'jobTitle', numeric: false, disablePadding: false, label: 'Job Title' },
-  { id: 'description', numeric: false, disablePadding: false, label: 'Description' },
-  { id: 'totalCompensation', numeric: false, disablePadding: false, label: 'Total Compensation' },
+  { id: 'name', numeric: false, disablePadding: false, label: 'Name' },
+  { id: 'investorType', numeric: false, disablePadding: false, label: 'Investor Type' },
+  { id: 'areasOfInvestment', numeric: false, disablePadding: false, label: 'Areas of Investment' },
+  { id: 'status', numeric: false, disablePadding: false, label: 'Status' },
+  { id: 'action', numeric: false, disablePadding: false, label: 'Action' },
 ];
 
 interface EnhancedTableProps {
@@ -179,7 +181,7 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
         </Typography>
       ) : (
         <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-          Tech salary
+          Women Investors Community
         </Typography>
       )}
       {numSelected > 0 ? (
@@ -225,96 +227,96 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-function TechSalaries(props: any): JSX.Element {
+function WomenInvestorsCommunity(props: any): JSX.Element {
   const classes = useStyles();
 
-  const [selectedCompanyList, setSelectedCompanyList] = useState<any[]>([]);
-  const [selectedCompany, setSelectedCompany] = useState<any>(null);
+  const [selectedExpertiseList, setSelectedExpertiseList] = useState<any[]>([]);
+  const [selectedExpertise, setSelectedExpertise] = useState<any>(null);
 
-  const [selectedJobTitleList, setSelectedJobTitleList] = useState<any[]>([]);
-  const [selectedJobTitle, setSelectedJobTitle] = useState<any>(null);
+  const [selectedLocationList, setSelectedLocationList] = useState<any[]>([]);
+  const [selectedLocation, setSelectedLocation] = useState<any>(null);
 
-  const [company, setCompany] = useState('');
-  const [jobTitle, setJobTitle] = useState('');
+  const [expertise, setExpertise] = useState('');
+  const [location, setLocation] = useState('');
 
-  const [techSalaryList, setTechSalaryList] = useState<any[]>([]);
+  const [womenInvestorCommunityList, setWomenInvestorCommunityList] = useState<any[]>([]);
   const [rows, setRows] = useState<any[]>([]);
 
   const [order, setOrder] = useState<Order>('asc');
-  const [orderBy, setOrderBy] = useState<keyof Data>('company');
+  const [orderBy, setOrderBy] = useState<keyof Data>('name');
   const [selected, setSelected] = useState<number[]>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   useEffect(() => {
-    getTechSalaryList(jobTitle, company);
+    getWomenInvestorCommunityList(expertise, location);
   }, []);
 
   useEffect(() => {
-    if (techSalaryList) {
-      getSelectedJobTitleList(techSalaryList);
-      getSelectedCompanyList(techSalaryList);
+    if (womenInvestorCommunityList) {
+      getSelectedExpertiseList(womenInvestorCommunityList);
+      getSelectedLocationList(womenInvestorCommunityList);
     }
-  }, [techSalaryList]);
+  }, [womenInvestorCommunityList]);
 
-  const getSelectedJobTitleList = (techSalaryList: any[]) => {
-    let selectedJobTitleList: any[] = [];
+  const getSelectedLocationList = (womenInvestorCommunityList: any[]) => {
+    let selectedLocationList: any[] = [];
 
-    if (techSalaryList) {
-      selectedJobTitleList = techSalaryList.map((item: any, _: number) => {
+    if (womenInvestorCommunityList) {
+      selectedLocationList = womenInvestorCommunityList.map((item: any, _: number) => {
         const obj = {
-          label: item.job_title,
-          value: item.job_title,
+          label: item.location,
+          value: item.location,
         };
         return obj;
       });
     }
 
-    setSelectedJobTitleList(selectedJobTitleList);
+    setSelectedLocationList(selectedLocationList);
   };
 
-  const getSelectedCompanyList = (techSalaryList: any[]) => {
-    let selectedCompanyList: any[] = [];
+  const getSelectedExpertiseList = (womenInvestorCommunityList: any[]) => {
+    let selectedExpertiseList: any[] = [];
 
-    if (techSalaryList) {
-      selectedCompanyList = techSalaryList.map((item: any, _: number) => {
+    if (womenInvestorCommunityList) {
+      selectedExpertiseList = womenInvestorCommunityList.map((item: any, _: number) => {
         const obj = {
-          label: item.company,
-          value: item.company,
+          label: item.expertise,
+          value: item.expertise,
         };
         return obj;
       });
     }
 
-    setSelectedCompanyList(selectedCompanyList);
+    setSelectedExpertiseList(selectedExpertiseList);
   };
 
-  const handleJobTitleDropdownChange = (selectedJobTitle: any) => {
-    if (selectedJobTitle) {
-      setSelectedJobTitle(selectedJobTitle);
-      setJobTitle(selectedJobTitle.value);
+  const handleLocationDropdownChange = (selectedLocation: any) => {
+    if (selectedLocation) {
+      setSelectedLocation(selectedLocation);
+      setLocation(selectedLocation.value);
     } else {
-      setSelectedJobTitle(null);
-      setJobTitle('');
+      setSelectedLocation(null);
+      setLocation('');
     }
   };
 
-  const handleCompanyDropdownChange = (selectedCompany: any) => {
-    if (selectedCompany) {
-      setSelectedCompany(selectedCompany);
-      setCompany(selectedCompany.value);
+  const handleExpertiseDropdownChange = (selectedExpertise: any) => {
+    if (selectedExpertise) {
+      setSelectedExpertise(selectedExpertise);
+      setExpertise(selectedExpertise.value);
     } else {
-      setSelectedCompany(null);
-      setCompany('');
+      setSelectedExpertise(null);
+      setExpertise('');
     }
   };
 
-  const handleSearchButtonClick = (jobTitle: string, company: string) => {
-    getTechSalaryList(jobTitle, company);
+  const handleSearchButtonClick = (location: string, company: string) => {
+    getWomenInvestorCommunityList(location, company);
   };
 
-  const handleCreateTechSalaryButtonClick = () => {
-    props.createTechSalaryClick();
+  const handleAddWomenInvestorCommunityButtonClick = () => {
+    props.joinOurWomenInvestorNetWorkClick();
   };
 
   const handleRequestSort = (_: React.MouseEvent<unknown>, property: keyof Data) => {
@@ -325,7 +327,7 @@ function TechSalaries(props: any): JSX.Element {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.tech_salary_id);
+      const newSelecteds = rows.map((n) => n.women_investor_community_id);
       setSelected(newSelecteds);
       return;
     }
@@ -358,45 +360,45 @@ function TechSalaries(props: any): JSX.Element {
     setPage(0);
   };
 
-  const isSelected = (techSalaryId: number) => selected.indexOf(techSalaryId) !== -1;
+  const isSelected = (womenInvestorCommunityId: number) => selected.indexOf(womenInvestorCommunityId) !== -1;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
-  const getTechSalaryList = async (jobTitle: string, company: string) => {
+  const getWomenInvestorCommunityList = async (expertise: string, location: string) => {
     const token = localStorage.getItem('token');
     if (token) {
       let queryString = null;
-      if (!jobTitle && !company) {
+      if (!expertise && !location) {
         queryString = new URLSearchParams({
           token: token,
         });
       } else {
         queryString = new URLSearchParams({
-          jobTitle: jobTitle,
-          company: company,
+          expertise: expertise,
+          location: location,
           token: token,
         });
       }
 
-      const response = await fetch(`/api/tech-salary?${queryString}`);
+      const response = await fetch(`/api/women-investor-community?${queryString}`);
       if (response) {
         const responseData = await response.json();
         console.log('response.status = ', response.status);
         console.log('responseData = ', responseData);
 
         if (response.status === 200) {
-          setTechSalaryList(responseData.result.result);
+          setWomenInvestorCommunityList(responseData.result.result);
           setRows(responseData.result.result);
         }
       }
     }
   };
 
-  const renderTechSalaryListView = (techSalaryList: any[]) => {
-    let techSalaryListView = null;
+  const renderWomenInvestorCommunityListView = (womenInvestorCommunityList: any[]) => {
+    let womenInvestorCommunityListView = null;
 
-    if (!_.isEmpty(techSalaryList)) {
-      techSalaryListView = (
+    if (!_.isEmpty(womenInvestorCommunityList)) {
+      womenInvestorCommunityListView = (
         <Paper className={classes.paper}>
           <EnhancedTableToolbar numSelected={selected.length} />
           <TableContainer>
@@ -414,13 +416,13 @@ function TechSalaries(props: any): JSX.Element {
                 {stableSort(rows, getComparator(order, orderBy))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row: any, index: number) => {
-                    const isItemSelected = isSelected(row.tech_salary_id);
+                    const isItemSelected = isSelected(row.women_investor_community_id);
                     const labelId = `enhanced-table-checkbox-${index}`;
 
                     return (
                       <TableRow
                         hover
-                        onClick={(event) => handleClick(event, row.tech_salary_id)}
+                        onClick={(event) => handleClick(event, row.women_investor_community_id)}
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
@@ -430,10 +432,15 @@ function TechSalaries(props: any): JSX.Element {
                         <TableCell padding="checkbox">
                           <Checkbox checked={isItemSelected} inputProps={{ 'aria-labelledby': labelId }} />
                         </TableCell>
-                        <TableCell align="left">{row.company}</TableCell>
-                        <TableCell align="left">{row.job_title}</TableCell>
-                        <TableCell align="left">{row.description}</TableCell>
-                        <TableCell align="left">{row.total_compensation}</TableCell>
+                        <TableCell align="left">{row.name}</TableCell>
+                        <TableCell align="left">{row.investor_type}</TableCell>
+                        <TableCell align="left">{row.areas_of_investment}</TableCell>
+                        <TableCell align="left">{row.status}</TableCell>
+                        <TableCell align="left">
+                          <Button variant="contained" color="secondary" onClick={() => handleConnectButtonClick()}>
+                            Connect
+                          </Button>
+                        </TableCell>
                       </TableRow>
                     );
                   })}
@@ -458,7 +465,11 @@ function TechSalaries(props: any): JSX.Element {
       );
     }
 
-    return techSalaryListView;
+    return womenInvestorCommunityListView;
+  };
+
+  const handleConnectButtonClick = () => {
+    console.log(123);
   };
 
   return (
@@ -467,8 +478,8 @@ function TechSalaries(props: any): JSX.Element {
 
       <div className="mx-3">
         <div className="d-flex justify-content-end">
-          <Button variant="contained" color="secondary" onClick={() => handleCreateTechSalaryButtonClick()}>
-            Create Tech Salary
+          <Button variant="contained" color="secondary" onClick={() => handleAddWomenInvestorCommunityButtonClick()}>
+            JOIN OUR WOMEN INVESTOR NETWORK
           </Button>
         </div>
 
@@ -477,20 +488,20 @@ function TechSalaries(props: any): JSX.Element {
             <div className="col-sm p-3">
               <Select
                 styles={selectStyles}
-                placeholder={'Select company'}
-                value={selectedCompany}
-                onChange={handleCompanyDropdownChange}
-                options={selectedCompanyList}
+                placeholder={'Select expertise'}
+                value={selectedExpertise}
+                onChange={handleExpertiseDropdownChange}
+                options={selectedExpertiseList}
                 isClearable={true}
               />
             </div>
             <div className="col-sm p-3">
               <Select
                 styles={selectStyles}
-                placeholder={'Select job title'}
-                value={selectedJobTitle}
-                onChange={handleJobTitleDropdownChange}
-                options={selectedJobTitleList}
+                placeholder={'Select location'}
+                value={selectedLocation}
+                onChange={handleLocationDropdownChange}
+                options={selectedLocationList}
                 isClearable={true}
               />
             </div>
@@ -499,7 +510,7 @@ function TechSalaries(props: any): JSX.Element {
                 className="w-100 my-3"
                 variant="contained"
                 color="secondary"
-                onClick={() => handleSearchButtonClick(jobTitle, company)}
+                onClick={() => handleSearchButtonClick(expertise, location)}
               >
                 Search
               </Button>
@@ -508,9 +519,9 @@ function TechSalaries(props: any): JSX.Element {
         </div>
       </div>
 
-      {renderTechSalaryListView(techSalaryList)}
+      {renderWomenInvestorCommunityListView(womenInvestorCommunityList)}
     </div>
   );
 }
 
-export default TechSalaries;
+export default WomenInvestorsCommunity;
