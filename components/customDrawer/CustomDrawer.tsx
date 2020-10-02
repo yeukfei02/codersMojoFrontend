@@ -17,6 +17,7 @@ import ScheduleIcon from '@material-ui/icons/Schedule';
 import VideoCallIcon from '@material-ui/icons/VideoCall';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import ForwardIcon from '@material-ui/icons/Forward';
+import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -40,9 +41,12 @@ import DiscussionBoard from '../discussionBoard/DiscussionBoard';
 import CreatePosts from '../createPosts/CreatePosts';
 import ApplyForJobs from '../applyForJobs/ApplyForJobs';
 import TechSalaries from '../techSalaries/TechSalaries';
+import CreateTechSalary from '../createTechSalary/CreateTechSalary';
 import GetTechReferrals from '../getTechReferrals/GetTechReferrals';
 import ParticipateInHackathons from '../participateInHackathons/ParticipateInHackathons';
 import InviteYourFriends from '../inviteYourFriends/InviteYourFriends';
+import WomenInvestorsCommunity from '../womenInvestorsCommunity/WomenInvestorsCommunity';
+import CreateWomenInvestorsCommunity from '../createWomenInvestorsCommunity/CreateWomenInvestorsCommunity';
 import BecomeAStudentTechAmbassador from '../becomeAStudentTechAmbassador/BecomeAStudentTechAmbassador';
 import TechBlogListView from '../techBlogListView/TechBlogListView';
 import CreateTechBlog from '../createTechBlog/CreateTechBlog';
@@ -51,7 +55,7 @@ import ViewPastInterviewPerformance from '../viewPastInterviewPerformance/ViewPa
 import AccountSettings from '../accountSettings/AccountSettings';
 import ReportABug from '../reportABug/ReportABug';
 
-const drawerWidth = 280;
+const drawerWidth = 320;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -212,6 +216,14 @@ function CustomDrawer(props: Props): JSX.Element {
             <ListItemText primary="Invite your friends" />
           </CustomListItem>
         </div>
+        <div onClick={() => handleLeftSideMenuItemClick('womenInvestorsCommunity')}>
+          <CustomListItem button>
+            <ListItemIcon>
+              <SupervisedUserCircleIcon color="secondary" />
+            </ListItemIcon>
+            <ListItemText primary="Women Investors Community" />
+          </CustomListItem>
+        </div>
         <div onClick={() => handleLeftSideMenuItemClick('interviewOthers')}>
           <CustomListItem button>
             <ListItemIcon>
@@ -347,6 +359,14 @@ function CustomDrawer(props: Props): JSX.Element {
     setCurrentPageValue('takeAMockInterview');
   };
 
+  const handleCreateTechSalaryClick = () => {
+    setCurrentPageValue('createTechSalary');
+  };
+
+  const handleJoinOurWomenInvestorNetWorkClick = () => {
+    setCurrentPageValue('createWomenInvestorsCommunity');
+  };
+
   const renderCurrentPage = (currentPageValue: string) => {
     let currentPage = null;
 
@@ -373,7 +393,10 @@ function CustomDrawer(props: Props): JSX.Element {
         currentPage = <ApplyForJobs />;
         break;
       case 'techSalaries':
-        currentPage = <TechSalaries />;
+        currentPage = <TechSalaries createTechSalaryClick={() => handleCreateTechSalaryClick()} />;
+        break;
+      case 'createTechSalary':
+        currentPage = <CreateTechSalary techSalariesClick={() => handleLeftSideMenuItemClick('techSalaries')} />;
         break;
       case 'getTechReferrals':
         currentPage = <GetTechReferrals />;
@@ -383,6 +406,18 @@ function CustomDrawer(props: Props): JSX.Element {
         break;
       case 'inviteYourFriends':
         currentPage = <InviteYourFriends />;
+        break;
+      case 'womenInvestorsCommunity':
+        currentPage = (
+          <WomenInvestorsCommunity joinOurWomenInvestorNetWorkClick={() => handleJoinOurWomenInvestorNetWorkClick()} />
+        );
+        break;
+      case 'createWomenInvestorsCommunity':
+        currentPage = (
+          <CreateWomenInvestorsCommunity
+            womenInvestorsCommunityClick={() => handleLeftSideMenuItemClick('womenInvestorsCommunity')}
+          />
+        );
         break;
       case 'becomeAStudentTechAmbassador':
         currentPage = <BecomeAStudentTechAmbassador />;
