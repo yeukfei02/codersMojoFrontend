@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.29](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.28...v0.0.29) (2020-10-02)
+
+
+### Features
+
+* 🎸 add create tech salary and create women investor page ([bbed8bd](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/bbed8bd9cddba656569d01ab54eb02c520f67332))
+* 🎸 add get tech referral page ([aa21033](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/aa210334d216cf5df35e56be67c0ba1befe2a28d))
+* 🎸 temp add tech salary ui ([e8da6b0](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/e8da6b099e526d619f099deab57c2a66a3c16c0b))
+
 ### [0.0.28](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.27...v0.0.28) (2020-10-01)
 
 ### [0.0.27](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.26...v0.0.27) (2020-10-01)
