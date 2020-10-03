@@ -175,19 +175,19 @@ function InviteYourFriends(): JSX.Element {
             <Grid container spacing={3}>
               <Grid item xs={12} sm={4}>
                 <div className="d-flex justify-content-center">
-                  <Twitter solid big message="CodersMojo" link="https://coders-mojo-frontend.vercel.app/" />
+                  <Twitter solid big message="CodersMojo" link="https://codersmojo.com/" />
                 </div>
               </Grid>
 
               <Grid item xs={12} sm={4}>
                 <div className="d-flex justify-content-center">
-                  <Linkedin solid big message="I am so cool" link="https://coders-mojo-frontend.vercel.app/" />
+                  <Linkedin solid big message="CodersMojo" link="https://codersmojo.com/" />
                 </div>
               </Grid>
 
               <Grid item xs={12} sm={4}>
                 <div className="d-flex justify-content-center">
-                  <Facebook solid big link="https://coders-mojo-frontend.vercel.app/" />
+                  <Facebook solid big link="https://codersmojo.com/" />
                 </div>
               </Grid>
             </Grid>
