@@ -437,9 +437,19 @@ function WomenInvestorsCommunity(props: any): JSX.Element {
                         <TableCell align="left">{row.areas_of_investment}</TableCell>
                         <TableCell align="left">{row.status}</TableCell>
                         <TableCell align="left">
-                          <Button variant="contained" color="secondary" onClick={() => handleConnectButtonClick()}>
-                            Connect
-                          </Button>
+                          <div style={{ display: 'flex', flexDirection: 'row' }}>
+                            <Button
+                              className="mr-3"
+                              variant="contained"
+                              color="primary"
+                              onClick={() => handleFollowButtonClick()}
+                            >
+                              Follow
+                            </Button>
+                            <Button variant="contained" color="secondary" onClick={() => handleMessageButtonClick()}>
+                              Message
+                            </Button>
+                          </div>
                         </TableCell>
                       </TableRow>
                     );
@@ -468,7 +478,11 @@ function WomenInvestorsCommunity(props: any): JSX.Element {
     return womenInvestorCommunityListView;
   };
 
-  const handleConnectButtonClick = () => {
+  const handleFollowButtonClick = () => {
+    console.log(123);
+  };
+
+  const handleMessageButtonClick = () => {
     console.log(123);
   };
 
