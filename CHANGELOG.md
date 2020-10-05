@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.30](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.29...v0.0.30) (2020-10-05)
+
+
+### Features
+
+* 🎸 add location dropdown in tech salary ([478b104](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/478b10476c21b7feda9b3cfcec129ca2fe246a70))
+
 ### [0.0.29](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.28...v0.0.29) (2020-10-02)
 
 
