@@ -9,6 +9,7 @@ export default async (_req: NextApiRequest, res: NextApiResponse) => {
   try {
     const jobTitle = _req.query.jobTitle;
     const company = _req.query.company;
+    const location = _req.query.location;
     const token = _req.query.token;
 
     let response = null;
@@ -29,6 +30,12 @@ export default async (_req: NextApiRequest, res: NextApiResponse) => {
       if (company) {
         const obj = {
           company: company,
+        };
+        paramsObj = Object.assign(paramsObj, obj);
+      }
+      if (location) {
+        const obj = {
+          location: location,
         };
         paramsObj = Object.assign(paramsObj, obj);
       }

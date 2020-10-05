@@ -15,6 +15,7 @@ export default async (_req: NextApiRequest, res: NextApiResponse) => {
         company: reqBody.company,
         description: reqBody.description,
         totalCompensation: reqBody.totalCompensation,
+        location: reqBody.location,
       },
       {
         headers: {
