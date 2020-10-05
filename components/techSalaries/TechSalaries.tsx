@@ -37,6 +37,7 @@ interface Data {
   jobTitle: string;
   description: string;
   totalCompensation: string;
+  location: string;
 }
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -82,6 +83,7 @@ const headCells: HeadCell[] = [
   { id: 'jobTitle', numeric: false, disablePadding: false, label: 'Job Title' },
   { id: 'description', numeric: false, disablePadding: false, label: 'Description' },
   { id: 'totalCompensation', numeric: false, disablePadding: false, label: 'Total Compensation' },
+  { id: 'location', numeric: false, disablePadding: false, label: 'Location' },
 ];
 
 interface EnhancedTableProps {
@@ -252,26 +254,10 @@ function TechSalaries(props: any): JSX.Element {
 
   useEffect(() => {
     if (techSalaryList) {
-      getSelectedJobTitleList(techSalaryList);
       getSelectedCompanyList(techSalaryList);
+      getSelectedJobTitleList(techSalaryList);
     }
   }, [techSalaryList]);
-
-  const getSelectedJobTitleList = (techSalaryList: any[]) => {
-    let selectedJobTitleList: any[] = [];
-
-    if (techSalaryList) {
-      selectedJobTitleList = techSalaryList.map((item: any, _: number) => {
-        const obj = {
-          label: item.job_title,
-          value: item.job_title,
-        };
-        return obj;
-      });
-    }
-
-    setSelectedJobTitleList(selectedJobTitleList);
-  };
 
   const getSelectedCompanyList = (techSalaryList: any[]) => {
     let selectedCompanyList: any[] = [];
@@ -286,7 +272,25 @@ function TechSalaries(props: any): JSX.Element {
       });
     }
 
-    setSelectedCompanyList(selectedCompanyList);
+    const uniqSelectedCompanyList = _.uniqBy(selectedCompanyList, 'label');
+    setSelectedCompanyList(uniqSelectedCompanyList);
+  };
+
+  const getSelectedJobTitleList = (techSalaryList: any[]) => {
+    let selectedJobTitleList: any[] = [];
+
+    if (techSalaryList) {
+      selectedJobTitleList = techSalaryList.map((item: any, _: number) => {
+        const obj = {
+          label: item.job_title,
+          value: item.job_title,
+        };
+        return obj;
+      });
+    }
+
+    const uniqSelectedJobTitleList = _.uniqBy(selectedJobTitleList, 'label');
+    setSelectedJobTitleList(uniqSelectedJobTitleList);
   };
 
   const handleJobTitleDropdownChange = (selectedJobTitle: any) => {
@@ -434,6 +438,7 @@ function TechSalaries(props: any): JSX.Element {
                         <TableCell align="left">{row.job_title}</TableCell>
                         <TableCell align="left">{row.description}</TableCell>
                         <TableCell align="left">{row.total_compensation}</TableCell>
+                        <TableCell align="left">{row.location}</TableCell>
                       </TableRow>
                     );
                   })}
