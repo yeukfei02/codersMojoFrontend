@@ -236,8 +236,12 @@ function TechSalaries(props: any): JSX.Element {
   const [selectedJobTitleList, setSelectedJobTitleList] = useState<any[]>([]);
   const [selectedJobTitle, setSelectedJobTitle] = useState<any>(null);
 
+  const [selectedLocationList, setSelectedLocationList] = useState<any[]>([]);
+  const [selectedLocation, setSelectedLocation] = useState<any>(null);
+
   const [company, setCompany] = useState('');
   const [jobTitle, setJobTitle] = useState('');
+  const [location, setLocation] = useState('');
 
   const [techSalaryList, setTechSalaryList] = useState<any[]>([]);
   const [rows, setRows] = useState<any[]>([]);
@@ -249,13 +253,14 @@ function TechSalaries(props: any): JSX.Element {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   useEffect(() => {
-    getTechSalaryList(jobTitle, company);
+    getTechSalaryList(jobTitle, company, location);
   }, []);
 
   useEffect(() => {
     if (techSalaryList) {
       getSelectedCompanyList(techSalaryList);
       getSelectedJobTitleList(techSalaryList);
+      getSelectedLocationList(techSalaryList);
     }
   }, [techSalaryList]);
 
@@ -293,6 +298,23 @@ function TechSalaries(props: any): JSX.Element {
     setSelectedJobTitleList(uniqSelectedJobTitleList);
   };
 
+  const getSelectedLocationList = (techSalaryList: any[]) => {
+    let selectedLocationList: any[] = [];
+
+    if (techSalaryList) {
+      selectedLocationList = techSalaryList.map((item: any, _: number) => {
+        const obj = {
+          label: item.location,
+          value: item.location,
+        };
+        return obj;
+      });
+    }
+
+    const uniqSelectedLocationList = _.uniqBy(selectedLocationList, 'label');
+    setSelectedLocationList(uniqSelectedLocationList);
+  };
+
   const handleJobTitleDropdownChange = (selectedJobTitle: any) => {
     if (selectedJobTitle) {
       setSelectedJobTitle(selectedJobTitle);
@@ -300,6 +322,16 @@ function TechSalaries(props: any): JSX.Element {
     } else {
       setSelectedJobTitle(null);
       setJobTitle('');
+    }
+  };
+
+  const handleLocationDropdownChange = (selectedLocation: any) => {
+    if (selectedLocation) {
+      setSelectedLocation(selectedLocation);
+      setLocation(selectedLocation.value);
+    } else {
+      setSelectedLocation(null);
+      setLocation('');
     }
   };
 
@@ -313,8 +345,8 @@ function TechSalaries(props: any): JSX.Element {
     }
   };
 
-  const handleSearchButtonClick = (jobTitle: string, company: string) => {
-    getTechSalaryList(jobTitle, company);
+  const handleSearchButtonClick = (jobTitle: string, company: string, location: string) => {
+    getTechSalaryList(jobTitle, company, location);
   };
 
   const handleCreateTechSalaryButtonClick = () => {
@@ -366,11 +398,11 @@ function TechSalaries(props: any): JSX.Element {
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
-  const getTechSalaryList = async (jobTitle: string, company: string) => {
+  const getTechSalaryList = async (jobTitle: string, company: string, location: string) => {
     const token = localStorage.getItem('token');
     if (token) {
       let queryString = null;
-      if (!jobTitle && !company) {
+      if (!jobTitle && !company && !location) {
         queryString = new URLSearchParams({
           token: token,
         });
@@ -378,6 +410,7 @@ function TechSalaries(props: any): JSX.Element {
         queryString = new URLSearchParams({
           jobTitle: jobTitle,
           company: company,
+          location: location,
           token: token,
         });
       }
@@ -499,12 +532,22 @@ function TechSalaries(props: any): JSX.Element {
                 isClearable={true}
               />
             </div>
+            <div className="col-sm p-3">
+              <Select
+                styles={selectStyles}
+                placeholder={'Select location'}
+                value={selectedLocation}
+                onChange={handleLocationDropdownChange}
+                options={selectedLocationList}
+                isClearable={true}
+              />
+            </div>
             <div className="col-sm">
               <Button
                 className="w-100 my-3"
                 variant="contained"
                 color="secondary"
-                onClick={() => handleSearchButtonClick(jobTitle, company)}
+                onClick={() => handleSearchButtonClick(jobTitle, company, location)}
               >
                 Search
               </Button>
