@@ -144,7 +144,7 @@ function LandingPage(): JSX.Element {
 
       <div style={{ margin: '3em' }}>
         <h4 className="text-center font-weight-bold my-5">
-          CodersMojo is an AI-based Peer-to-Peer Interactive Tech Interview Platform for Women
+          CodersMojo is an AI-based Global Tech &amp; Investment Ecosystem for Women in Tech and Business
         </h4>
 
         <div className="my-5">
