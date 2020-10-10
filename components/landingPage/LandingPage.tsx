@@ -159,7 +159,7 @@ function LandingPage(): JSX.Element {
               <div className="card-body">
                 <h5>For Developers</h5>
 
-                <div className="my-3">
+                <div className="my-4">
                   Study, practice and take mock tech interviews with peers Participate in amazing hackathons and Connect
                   with Women Developers.
                 </div>
@@ -178,7 +178,7 @@ function LandingPage(): JSX.Element {
               <div className="card-body">
                 <h5>For Women Tech Leaders</h5>
 
-                <div className="my-3">
+                <div className="my-4">
                   Connect with other amazing women leaders and software engineers. Conduct mock Interview and help other
                   budding engineers to get into tech industry. Read and Contribute Amazing Tech Articles
                 </div>
@@ -197,7 +197,7 @@ function LandingPage(): JSX.Element {
               <div className="card-body">
                 <h5>For Companies</h5>
 
-                <div className="my-3">
+                <div className="my-4">
                   Hire best and brightest Female tech engineers Host virtual hackathons and bring together people with
                   diverse skills and solve business challenges
                 </div>
@@ -211,8 +211,8 @@ function LandingPage(): JSX.Element {
               </div>
             </div>
           </div>
-          <div className="col-sm d-flex align-items-stretch">
-            <div className="d-flex justify-content-center align-items-center">
+          <div className="col-sm">
+            <div>
               <img src="/landing-page-image.png" style={{ width: '100%', borderRadius: '0.5em' }} alt="" />
             </div>
           </div>
