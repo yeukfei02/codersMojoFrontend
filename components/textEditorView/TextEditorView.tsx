@@ -30,6 +30,7 @@ function TextEditorView(props: any): JSX.Element {
 
 my_function()`);
 
+  const [runButtonLoading, setRunButtonLoading] = useState(false);
   const [runCodeOutput, setRunCodeOutput] = useState('');
   const [runCodeError, setRunCodeError] = useState('');
 
@@ -76,38 +77,10 @@ my_function()`);
         label: 'python',
         value: 'python',
       },
-      // {
-      //   label: 'xml',
-      //   value: 'xml',
-      // },
       {
         label: 'ruby',
         value: 'ruby',
       },
-      // {
-      //   label: 'sass',
-      //   value: 'sass',
-      // },
-      // {
-      //   label: 'markdown',
-      //   value: 'markdown',
-      // },
-      // {
-      //   label: 'mysql',
-      //   value: 'mysql',
-      // },
-      // {
-      //   label: 'json',
-      //   value: 'json',
-      // },
-      // {
-      //   label: 'html',
-      //   value: 'html',
-      // },
-      // {
-      //   label: 'handlebars',
-      //   value: 'handlebars',
-      // },
       {
         label: 'golang',
         value: 'golang',
@@ -116,18 +89,6 @@ my_function()`);
         label: 'csharp',
         value: 'csharp',
       },
-      // {
-      //   label: 'elixir',
-      //   value: 'elixir',
-      // },
-      // {
-      //   label: 'typescript',
-      //   value: 'typescript',
-      // },
-      // {
-      //   label: 'css',
-      //   value: 'css',
-      // },
     ];
     setSelectedModeList(selectedModeList);
   };
@@ -182,6 +143,13 @@ my_function()`);
   print("Hello from a function")
           
 my_function()`);
+      localStorage.setItem(
+        'source',
+        `def my_function():
+  print("Hello from a function")
+          
+my_function()`,
+      );
     }
   };
 
@@ -203,6 +171,14 @@ my_function()`);
 }
 
 test();`);
+        localStorage.setItem(
+          'source',
+          `function test() {
+  console.log(123);
+}
+
+test();`,
+        );
         break;
       case 'java':
         setValue(`class Simple {
@@ -210,20 +186,27 @@ test();`);
     System.out.println("Hello Java");
   }
 }`);
+        localStorage.setItem(
+          'source',
+          `class Simple {
+  public static void main(String args[]) {
+    System.out.println("Hello Java");
+  }
+}`,
+        );
         break;
       case 'python':
         setValue(`def my_function():
   print("Hello from a function")
       
 my_function()`);
-        break;
-      case 'xml':
-        setValue(`<note>
-  <to>Tove</to>
-  <from>Jani</from>
-  <heading>Reminder</heading>
-  <body>Don't forget me this weekend!</body>
-</note>`);
+        localStorage.setItem(
+          'source',
+          `def my_function():
+  print("Hello from a function")
+      
+my_function()`,
+        );
         break;
       case 'ruby':
         setValue(`def test()
@@ -231,61 +214,14 @@ my_function()`);
 end
 
 test`);
-        break;
-      case 'sass':
-        setValue(`$font-stack: Helvetica, sans-serif
-$primary-color: #333
+        localStorage.setItem(
+          'source',
+          `def test()
+  puts "Hello from test"
+end
 
-body
-  font: 100% $font-stack
-  color: $primary-color
-`);
-        break;
-      case 'markdown':
-        setValue(`# h1 Heading 8-)
-## h2 Heading
-### h3 Heading
-#### h4 Heading
-##### h5 Heading
-###### h6 Heading
-
-
-## Horizontal Rules
-
-___
-
----
-
-***
-
-
-## Typographic replacements
-
-Enable typographer option to see result.`);
-        break;
-      case 'mysql':
-        setValue(`select * from users;`);
-        break;
-      case 'json':
-        setValue(`{
-  "menu": {
-    "id": "file",
-    "value": "File",
-    "popup": {
-      "menuitem": [
-        {"value": "New", "onclick": "CreateNewDoc()"},
-        {"value": "Open", "onclick": "OpenDoc()"},
-        {"value": "Close", "onclick": "CloseDoc()"}
-      ]
-    }
-  }
-}`);
-        break;
-      case 'html':
-        setValue(`<h1>test</h1>`);
-        break;
-      case 'handlebars':
-        setValue(`<p>{{firstname}} {{lastname}}</p>`);
+test`,
+        );
         break;
       case 'golang':
         setValue(`package main
@@ -295,6 +231,16 @@ import "fmt"
 func main() {
   fmt.Println("hello world")
 }`);
+        localStorage.setItem(
+          'source',
+          `package main
+
+import "fmt"
+
+func main() {
+  fmt.Println("hello world")
+}`,
+        );
         break;
       case 'csharp':
         setValue(`class Hello {         
@@ -302,26 +248,14 @@ func main() {
     System.Console.WriteLine("Hello World!");
   }
 }`);
-        break;
-      // case 'elixir':
-      //   setValue(`IO.puts("Hello, World!")`);
-      //   break;
-      //       case 'typescript':
-      //         setValue(`interface User {
-      //   name: string;
-      //   id: number;
-      // }
-
-      // const user: User = {
-      //   name: "Hayes",
-      //   id: 0,
-      // };
-      // `);
-      //         break;
-      case 'css':
-        setValue(`body {
-  background-color: lightblue;
-}`);
+        localStorage.setItem(
+          'source',
+          `class Hello {         
+    static void Main(string[] args) {
+      System.Console.WriteLine("Hello World!");
+    }
+  }`,
+        );
         break;
       default:
         break;
@@ -337,6 +271,10 @@ func main() {
   };
 
   const runCode = async () => {
+    setRunButtonLoading(true);
+    setRunCodeOutput('');
+    setRunCodeError('');
+
     const source = localStorage.getItem('source');
     const lang = getLang(mode);
     const token = localStorage.getItem('token');
@@ -351,14 +289,16 @@ func main() {
         console.log('response.status = ', response.status);
         console.log('responseData = ', responseData);
 
-        if (response.status === 200 && responseData.result.result.compile_status === 'OK') {
-          const runCodeOutput = responseData.result.result.run_status.output;
-          const runCodeError = responseData.result.result.run_status.stderr;
+        if (response.status === 200) {
+          const runCodeOutput = responseData.result.result.stdout;
+          const runCodeError = responseData.result.result.stderr;
+          setRunButtonLoading(false);
           setRunCodeOutput(runCodeOutput);
           setRunCodeError(runCodeError);
         } else {
+          setRunButtonLoading(false);
           setRunCodeOutput('');
-          setRunCodeError(responseData.result.result.compile_status);
+          setRunCodeError(responseData.result.result.stderr);
         }
       }
     }
@@ -369,13 +309,13 @@ func main() {
 
     switch (mode) {
       case 'javascript':
-        lang = 'JAVASCRIPT_NODE';
+        lang = 'JAVASCRIPT';
         break;
       case 'java':
         lang = 'JAVA';
         break;
       case 'python':
-        lang = 'PYTHON3';
+        lang = 'PYTHON';
         break;
       case 'ruby':
         lang = 'RUBY';
@@ -384,13 +324,31 @@ func main() {
         lang = 'GO';
         break;
       case 'csharp':
-        lang = 'CSHARP';
+        lang = 'C#';
         break;
       default:
         break;
     }
 
     return lang;
+  };
+
+  const renderRunButton = (runButtonLoading: boolean) => {
+    let runButton = (
+      <Button variant="contained" color="secondary" onClick={() => handleRunButtonClick()}>
+        Run
+      </Button>
+    );
+
+    if (runButtonLoading) {
+      runButton = (
+        <Button variant="contained" color="secondary" disabled={true} onClick={() => handleRunButtonClick()}>
+          Loading...
+        </Button>
+      );
+    }
+
+    return runButton;
   };
 
   const renderRunCodeResult = (runCodeOutput: string, runCodeError: string) => {
@@ -403,7 +361,9 @@ func main() {
           <div className="card-body">
             <div className="card-title">
               <div>OUTPUT:</div>
-              <div className="my-3">{runCodeOutput}</div>
+              <div className="my-3" style={{ whiteSpace: 'pre-line' }}>
+                {runCodeOutput}
+              </div>
             </div>
           </div>
         </div>
@@ -416,7 +376,7 @@ func main() {
           <div className="card-body">
             <div className="card-title">
               <div style={{ color: 'red' }}>ERROR:</div>
-              <div className="my-3" style={{ color: 'red' }}>
+              <div className="my-3" style={{ color: 'red', whiteSpace: 'pre-line' }}>
                 {runCodeError}
               </div>
             </div>
@@ -482,9 +442,7 @@ func main() {
             >
               Back to dashboard
             </Button>
-            <Button variant="contained" color="secondary" onClick={() => handleRunButtonClick()}>
-              Run
-            </Button>
+            {renderRunButton(runButtonLoading)}
           </div>
 
           {renderRunCodeResult(runCodeOutput, runCodeError)}
