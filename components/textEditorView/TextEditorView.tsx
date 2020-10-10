@@ -291,14 +291,14 @@ func main() {
 
         if (response.status === 200) {
           const runCodeOutput = responseData.result.result.stdout;
-          const runCodeError = responseData.result.result.stderr;
+          const runCodeError = responseData.result.result.stderr || responseData.result.result.compile_output;
           setRunButtonLoading(false);
           setRunCodeOutput(runCodeOutput);
           setRunCodeError(runCodeError);
         } else {
           setRunButtonLoading(false);
           setRunCodeOutput('');
-          setRunCodeError(responseData.result.result.stderr);
+          setRunCodeError(responseData.result.result.stderr || responseData.result.result.compile_output);
         }
       }
     }
