@@ -232,12 +232,16 @@ const useStyles = makeStyles((theme: Theme) =>
 function WomenInvestorsCommunity(props: any): JSX.Element {
   const classes = useStyles();
 
+  const [selectedNameList, setSelectedNameList] = useState<any[]>([]);
+  const [selectedName, setSelectedName] = useState<any>(null);
+
   const [selectedExpertiseList, setSelectedExpertiseList] = useState<any[]>([]);
   const [selectedExpertise, setSelectedExpertise] = useState<any>(null);
 
   const [selectedLocationList, setSelectedLocationList] = useState<any[]>([]);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
 
+  const [name, setName] = useState('');
   const [expertise, setExpertise] = useState('');
   const [location, setLocation] = useState('');
 
@@ -251,30 +255,31 @@ function WomenInvestorsCommunity(props: any): JSX.Element {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   useEffect(() => {
-    getWomenInvestorCommunityList(expertise, location);
+    getWomenInvestorCommunityList(name, expertise, location);
   }, []);
 
   useEffect(() => {
     if (womenInvestorCommunityList) {
+      getSelectedNameList(womenInvestorCommunityList);
       getSelectedExpertiseList(womenInvestorCommunityList);
       getSelectedLocationList(womenInvestorCommunityList);
     }
   }, [womenInvestorCommunityList]);
 
-  const getSelectedLocationList = (womenInvestorCommunityList: any[]) => {
-    let selectedLocationList: any[] = [];
+  const getSelectedNameList = (womenInvestorCommunityList: any[]) => {
+    let selectedNameList: any[] = [];
 
     if (womenInvestorCommunityList) {
-      selectedLocationList = womenInvestorCommunityList.map((item: any, _: number) => {
+      selectedNameList = womenInvestorCommunityList.map((item: any, _: number) => {
         const obj = {
-          label: item.location,
-          value: item.location,
+          label: item.name,
+          value: item.name,
         };
         return obj;
       });
     }
 
-    setSelectedLocationList(selectedLocationList);
+    setSelectedNameList(selectedNameList);
   };
 
   const getSelectedExpertiseList = (womenInvestorCommunityList: any[]) => {
@@ -293,6 +298,22 @@ function WomenInvestorsCommunity(props: any): JSX.Element {
     setSelectedExpertiseList(selectedExpertiseList);
   };
 
+  const getSelectedLocationList = (womenInvestorCommunityList: any[]) => {
+    let selectedLocationList: any[] = [];
+
+    if (womenInvestorCommunityList) {
+      selectedLocationList = womenInvestorCommunityList.map((item: any, _: number) => {
+        const obj = {
+          label: item.location,
+          value: item.location,
+        };
+        return obj;
+      });
+    }
+
+    setSelectedLocationList(selectedLocationList);
+  };
+
   const handleLocationDropdownChange = (selectedLocation: any) => {
     if (selectedLocation) {
       setSelectedLocation(selectedLocation);
@@ -300,6 +321,16 @@ function WomenInvestorsCommunity(props: any): JSX.Element {
     } else {
       setSelectedLocation(null);
       setLocation('');
+    }
+  };
+
+  const handleNameDropdownChange = (selectedName: any) => {
+    if (selectedName) {
+      setSelectedName(selectedName);
+      setName(selectedName.value);
+    } else {
+      setSelectedName(null);
+      setName('');
     }
   };
 
@@ -313,8 +344,8 @@ function WomenInvestorsCommunity(props: any): JSX.Element {
     }
   };
 
-  const handleSearchButtonClick = (location: string, company: string) => {
-    getWomenInvestorCommunityList(location, company);
+  const handleSearchButtonClick = (name: string, location: string, company: string) => {
+    getWomenInvestorCommunityList(name, location, company);
   };
 
   const handleAddWomenInvestorCommunityButtonClick = () => {
@@ -366,16 +397,17 @@ function WomenInvestorsCommunity(props: any): JSX.Element {
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
-  const getWomenInvestorCommunityList = async (expertise: string, location: string) => {
+  const getWomenInvestorCommunityList = async (name: string, expertise: string, location: string) => {
     const token = localStorage.getItem('token');
     if (token) {
       let queryString = null;
-      if (!expertise && !location) {
+      if (!name && !expertise && !location) {
         queryString = new URLSearchParams({
           token: token,
         });
       } else {
         queryString = new URLSearchParams({
+          name: name,
           expertise: expertise,
           location: location,
           token: token,
@@ -507,6 +539,16 @@ function WomenInvestorsCommunity(props: any): JSX.Element {
             <div className="col-sm p-3">
               <Select
                 styles={selectStyles}
+                placeholder={'Select name'}
+                value={selectedName}
+                onChange={handleNameDropdownChange}
+                options={selectedNameList}
+                isClearable={true}
+              />
+            </div>
+            <div className="col-sm p-3">
+              <Select
+                styles={selectStyles}
                 placeholder={'Select expertise'}
                 value={selectedExpertise}
                 onChange={handleExpertiseDropdownChange}
@@ -529,7 +571,7 @@ function WomenInvestorsCommunity(props: any): JSX.Element {
                 className="w-100 my-3"
                 variant="contained"
                 color="secondary"
-                onClick={() => handleSearchButtonClick(expertise, location)}
+                onClick={() => handleSearchButtonClick(name, expertise, location)}
               >
                 Search
               </Button>
