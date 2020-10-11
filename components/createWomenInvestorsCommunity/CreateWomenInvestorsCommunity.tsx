@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import Button from '@material-ui/core/Button';
+import { DropzoneArea } from 'material-ui-dropzone';
+import axios from 'axios';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
+
+import { getRootUrl } from '../../common/common';
+
+const ROOT_URL = getRootUrl();
 
 const selectStyles = {
   container: (base: any, state: any) => ({
@@ -15,6 +21,7 @@ const selectStyles = {
 };
 
 function CreateWomenInvestorsCommunity(props: any): JSX.Element {
+  const [imageFile, setImageFile] = useState(null);
   const [name, setName] = useState('');
   const [investorType, setInvestorType] = useState('');
   const [areaOfInvestment, setAreaOfInvestment] = useState('');
@@ -73,6 +80,12 @@ function CreateWomenInvestorsCommunity(props: any): JSX.Element {
     setSelectedConnectStatusList(selectedConnectStatusList);
   };
 
+  const handleFilesUpload = (files: any[]) => {
+    if (files && files.length === 1) {
+      setImageFile(files[0]);
+    }
+  };
+
   const handleNameInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) {
       setName(e.target.value);
@@ -99,8 +112,8 @@ function CreateWomenInvestorsCommunity(props: any): JSX.Element {
 
   const handleOnKeyUp = (e: any) => {
     if (e.key === 'Enter') {
-      if (name && investorType && areaOfInvestment && expertise && location && connectStatus) {
-        handleSubmitButtonClick(name, investorType, areaOfInvestment, expertise, location, connectStatus);
+      if (imageFile && name && investorType && areaOfInvestment && expertise && location && connectStatus) {
+        handleSubmitButtonClick(imageFile, name, investorType, areaOfInvestment, expertise, location, connectStatus);
       } else {
         setSnackBarStatus(true);
         setSnackBarType('error');
@@ -129,7 +142,8 @@ function CreateWomenInvestorsCommunity(props: any): JSX.Element {
     }
   };
 
-  const handleSubmitButtonClick = (
+  const handleSubmitButtonClick = async (
+    imageFile: any,
     name: string,
     investorType: string,
     areaOfInvestment: string,
@@ -137,15 +151,47 @@ function CreateWomenInvestorsCommunity(props: any): JSX.Element {
     location: string,
     connectStatus: string,
   ) => {
-    if (name && investorType && areaOfInvestment && expertise && location && connectStatus) {
+    if (imageFile && name && investorType && areaOfInvestment && expertise && location && connectStatus) {
       setSubmitButtonClicked(true);
 
-      createWomenInvestorCommunity(name, investorType, areaOfInvestment, expertise, location, connectStatus);
+      const imageUrl = await uploadWomenInvestorCommunityFile(imageFile);
+      await createWomenInvestorCommunity(
+        imageUrl,
+        name,
+        investorType,
+        areaOfInvestment,
+        expertise,
+        location,
+        connectStatus,
+      );
       setSubmitButtonClicked(false);
     }
   };
 
+  const uploadWomenInvestorCommunityFile = async (imageFile: any) => {
+    const token = localStorage.getItem('token');
+
+    const bodyFormData = new FormData();
+    bodyFormData.append('file', imageFile);
+
+    const response = await axios({
+      method: 'post',
+      url: `${ROOT_URL}/women-investor-community/upload-file`,
+      data: bodyFormData,
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' },
+    });
+
+    let imageUrl = '';
+    if (response.status === 201) {
+      const responseData = response.data;
+      imageUrl = responseData.imageUrl;
+    }
+
+    return imageUrl;
+  };
+
   const createWomenInvestorCommunity = async (
+    image: string,
     name: string,
     investorType: string,
     areaOfInvestment: string,
@@ -158,6 +204,7 @@ function CreateWomenInvestorsCommunity(props: any): JSX.Element {
     const response = await fetch(`/api/women-investor-community/create-women-investor-community`, {
       method: 'POST',
       body: JSON.stringify({
+        image: image,
         name: name,
         investorType: investorType,
         areaOfInvestment: areaOfInvestment,
@@ -202,6 +249,21 @@ function CreateWomenInvestorsCommunity(props: any): JSX.Element {
 
       <div className="d-flex justify-content-center my-4">
         <h5 className="text-center">Create women investor community</h5>
+      </div>
+
+      <div className="my-4">
+        <DropzoneArea
+          acceptedFiles={['image/*']}
+          dropzoneText={'Drag and drop an image here or click'}
+          filesLimit={1}
+          onChange={handleFilesUpload}
+          alertSnackbarProps={{
+            anchorOrigin: {
+              horizontal: 'center',
+              vertical: 'top',
+            },
+          }}
+        />
       </div>
 
       <div className="form-group">
@@ -280,7 +342,7 @@ function CreateWomenInvestorsCommunity(props: any): JSX.Element {
           color="secondary"
           disabled={submitButtonClicked ? true : false}
           onClick={() =>
-            handleSubmitButtonClick(name, investorType, areaOfInvestment, expertise, location, connectStatus)
+            handleSubmitButtonClick(imageFile, name, investorType, areaOfInvestment, expertise, location, connectStatus)
           }
         >
           Submit

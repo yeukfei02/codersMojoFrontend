@@ -109,7 +109,7 @@ function Signup(): JSX.Element {
         setSnackBarMessage('create account success');
 
         setTimeout(() => {
-          router.push(`/login`);
+          router.push(`/`);
         }, 1000);
       } else {
         setSnackBarStatus(true);

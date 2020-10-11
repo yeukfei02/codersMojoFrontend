@@ -7,6 +7,7 @@ const ROOT_URL = getRootUrl();
 
 export default async (_req: NextApiRequest, res: NextApiResponse) => {
   try {
+    const name = _req.query.name;
     const expertise = _req.query.expertise;
     const location = _req.query.location;
     const token = _req.query.token;
@@ -20,6 +21,12 @@ export default async (_req: NextApiRequest, res: NextApiResponse) => {
       });
     } else {
       let paramsObj = {};
+      if (name) {
+        const obj = {
+          name: name,
+        };
+        paramsObj = Object.assign(paramsObj, obj);
+      }
       if (expertise) {
         const obj = {
           expertise: expertise,

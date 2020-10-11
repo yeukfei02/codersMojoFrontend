@@ -11,6 +11,7 @@ export default async (_req: NextApiRequest, res: NextApiResponse) => {
     const response = await axios.post(
       `${ROOT_URL}/women-investor-community`,
       {
+        image: reqBody.image,
         name: reqBody.name,
         investorType: reqBody.investorType,
         areaOfInvestment: reqBody.areaOfInvestment,

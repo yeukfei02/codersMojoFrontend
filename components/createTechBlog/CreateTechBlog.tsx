@@ -103,8 +103,8 @@ function CreateTechBlog(props: any): JSX.Element {
 
   const handleOnKeyUp = (e: any) => {
     if (e.key === 'Enter') {
-      if (title && description && tag) {
-        handleSubmitButtonClick(title, description, tag, users_id);
+      if (imageFile && title && description && tag) {
+        handleSubmitButtonClick(imageFile, title, description, tag, users_id);
       } else {
         setSnackBarStatus(true);
         setSnackBarType('error');
@@ -123,7 +123,13 @@ function CreateTechBlog(props: any): JSX.Element {
     }
   };
 
-  const handleSubmitButtonClick = async (title: string, description: string, tag: string, users_id: number) => {
+  const handleSubmitButtonClick = async (
+    imageFile: any,
+    title: string,
+    description: string,
+    tag: string,
+    users_id: number,
+  ) => {
     if (imageFile && title && description && tag && users_id) {
       setSubmitButtonClicked(true);
 
@@ -260,7 +266,7 @@ function CreateTechBlog(props: any): JSX.Element {
           variant="contained"
           color="secondary"
           disabled={submitButtonClicked ? true : false}
-          onClick={() => handleSubmitButtonClick(title, description, tag, users_id)}
+          onClick={() => handleSubmitButtonClick(imageFile, title, description, tag, users_id)}
         >
           Submit
         </Button>
