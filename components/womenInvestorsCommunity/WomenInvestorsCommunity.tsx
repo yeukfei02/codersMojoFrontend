@@ -467,7 +467,7 @@ function WomenInvestorsCommunity(props: any): JSX.Element {
                           <Checkbox checked={isItemSelected} inputProps={{ 'aria-labelledby': labelId }} />
                         </TableCell>
                         <TableCell align="left">
-                          <img className="rounded" src={row.image} alt="" width="100" height="100" />
+                          <img className="rounded" src={row.image} alt="" width="120" height="120" />
                         </TableCell>
                         <TableCell align="left">{row.name}</TableCell>
                         <TableCell align="left">{row.investor_type}</TableCell>
