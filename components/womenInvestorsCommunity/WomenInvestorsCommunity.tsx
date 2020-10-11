@@ -33,6 +33,7 @@ const selectStyles = {
 };
 
 interface Data {
+  image: string;
   name: string;
   investorType: string;
   areasOfInvestment: string;
@@ -79,6 +80,7 @@ interface HeadCell {
 }
 
 const headCells: HeadCell[] = [
+  { id: 'image', numeric: false, disablePadding: false, label: 'Image' },
   { id: 'name', numeric: false, disablePadding: false, label: 'Name' },
   { id: 'investorType', numeric: false, disablePadding: false, label: 'Investor Type' },
   { id: 'areasOfInvestment', numeric: false, disablePadding: false, label: 'Areas of Investment' },
@@ -431,6 +433,9 @@ function WomenInvestorsCommunity(props: any): JSX.Element {
                       >
                         <TableCell padding="checkbox">
                           <Checkbox checked={isItemSelected} inputProps={{ 'aria-labelledby': labelId }} />
+                        </TableCell>
+                        <TableCell align="left">
+                          <img className="rounded" src={row.image} alt="" width="100" height="100" />
                         </TableCell>
                         <TableCell align="left">{row.name}</TableCell>
                         <TableCell align="left">{row.investor_type}</TableCell>
