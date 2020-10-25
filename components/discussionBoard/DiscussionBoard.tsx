@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import _ from 'lodash';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
@@ -221,7 +222,7 @@ function DiscussionBoard(props: any): JSX.Element {
   const renderCommentsResultListDiv = (commentsResultList: any[]) => {
     let commentsResultListDiv = null;
 
-    if (commentsResultList) {
+    if (!_.isEmpty(commentsResultList)) {
       const commentsResultListView = commentsResultList.map((item: any, i: number) => {
         return (
           <div key={i} className="my-2">
