@@ -11,7 +11,7 @@ export default async (_req: NextApiRequest, res: NextApiResponse) => {
     const response = await axios.post(
       `${ROOT_URL}/comments`,
       {
-        commentText: reqBody.commentText,
+        commentsText: reqBody.commentsText,
         posts_id: reqBody.posts_id,
         users_id: reqBody.users_id,
       },

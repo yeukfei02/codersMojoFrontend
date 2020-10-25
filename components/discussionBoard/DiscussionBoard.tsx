@@ -11,7 +11,7 @@ function DiscussionBoard(props: any): JSX.Element {
 
   const [filterText, setFilterText] = useState('');
 
-  const [commentText, setCommentText] = useState('');
+  const [commentsText, setCommentsText] = useState('');
 
   const [snackBarStatus, setSnackBarStatus] = useState(false);
   const [snackBarType, setSnackBarType] = useState('success');
@@ -134,7 +134,7 @@ function DiscussionBoard(props: any): JSX.Element {
                       className="form-control"
                       id="exampleFormControlTextarea1"
                       rows={3}
-                      onChange={(e) => handleCommentTextareaChange(e)}
+                      onChange={(e) => handleCommentsTextareaChange(e)}
                     ></textarea>
                     <div className="mt-3">
                       <Button
@@ -250,24 +250,24 @@ function DiscussionBoard(props: any): JSX.Element {
     }
   };
 
-  const handleCommentTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setCommentText(e.target.value);
+  const handleCommentsTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setCommentsText(e.target.value);
   };
 
   const handleSubmitCommentButtonClick = async (posts_id: number) => {
     const users_id = localStorage.getItem('usersId');
     const token = localStorage.getItem('token');
-    if (commentText && posts_id && users_id && token) {
+    if (commentsText && posts_id && users_id && token) {
       const users_id_int = parseInt(users_id, 10);
-      await createComments(commentText, posts_id, users_id_int, token);
+      await createComments(commentsText, posts_id, users_id_int, token);
     }
   };
 
-  const createComments = async (commentText: string, posts_id: number, users_id: number, token: string) => {
+  const createComments = async (commentsText: string, posts_id: number, users_id: number, token: string) => {
     const response = await fetch(`/api/comments/create-comments`, {
       method: 'POST',
       body: JSON.stringify({
-        commentText: commentText,
+        commentsText: commentsText,
         posts_id: posts_id,
         users_id: users_id,
         token: token,
