@@ -76,7 +76,7 @@ function DiscussionBoard(props: any): JSX.Element {
           setSnackBarType('success');
           setSnackBarMessage('Delete posts success');
 
-          getPostsList();
+          await getPostsList();
         }
       }
     }
@@ -93,6 +93,7 @@ function DiscussionBoard(props: any): JSX.Element {
         const description = item.description;
         const tag = item.tag;
         const likeCount = item.like_count;
+        const commentResultList = item.commentResultList;
 
         return (
           <div key={i} className="my-3">
@@ -121,10 +122,13 @@ function DiscussionBoard(props: any): JSX.Element {
                   />
                   <div className="ml-2 hover-item pointer">{likeCount} likes</div>
                 </div>
+                <div className="my-3 p-3" style={{ border: '0.1em lightgray solid', borderRadius: '0.3em' }}>
+                  {renderCommentsResultListDiv(commentResultList)}
+                </div>
                 <div className="mt-3">
-                  <span className="hover-item pointer" onClick={() => handleCommentClick(posts_id)}>
+                  <Button variant="contained" color="primary" onClick={() => handleCommentClick(posts_id)}>
                     Comment
-                  </span>
+                  </Button>
                   <div id={`comments-${posts_id}`} className="form-group mt-3" style={{ display: 'none' }}>
                     <textarea
                       className="form-control"
@@ -214,6 +218,22 @@ function DiscussionBoard(props: any): JSX.Element {
         }
       }
     }
+  };
+
+  const renderCommentsResultListDiv = (commentsResultList: any[]) => {
+    let commentsResultListDiv = null;
+
+    if (commentsResultList) {
+      commentsResultListDiv = commentsResultList.map((item: any, i: number) => {
+        return (
+          <div key={i} className="my-2">
+            <b>{item.name}:</b> {item.commentText}
+          </div>
+        );
+      });
+    }
+
+    return commentsResultListDiv;
   };
 
   const handleCommentClick = (posts_id: number) => {
