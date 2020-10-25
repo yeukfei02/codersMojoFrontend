@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
@@ -9,6 +10,8 @@ function DiscussionBoard(props: any): JSX.Element {
   const [postsList, setPostsList] = useState<any[]>([]);
 
   const [filterText, setFilterText] = useState('');
+
+  const [commentsText, setCommentsText] = useState('');
 
   const [snackBarStatus, setSnackBarStatus] = useState(false);
   const [snackBarType, setSnackBarType] = useState('success');
@@ -73,7 +76,7 @@ function DiscussionBoard(props: any): JSX.Element {
           setSnackBarType('success');
           setSnackBarMessage('Delete posts success');
 
-          getPostsList();
+          await getPostsList();
         }
       }
     }
@@ -84,10 +87,13 @@ function DiscussionBoard(props: any): JSX.Element {
 
     if (postsList) {
       postListView = postsList.map((item: any, i: number) => {
+        const posts_id = item.posts_id;
         const number = i + 1;
         const title = item.title;
         const description = item.description;
         const tag = item.tag;
+        const likeCount = item.like_count;
+        const commentResultList = item.commentResultList;
 
         return (
           <div key={i} className="my-3">
@@ -107,6 +113,40 @@ function DiscussionBoard(props: any): JSX.Element {
                   <b>Description</b> - {description}
                 </div>
                 <div>{renderTag(tag)}</div>
+                <div className="mt-3" style={{ display: 'flex', flexDirection: 'row' }}>
+                  <ThumbUpIcon
+                    className="hover-item pointer"
+                    fontSize="small"
+                    color="secondary"
+                    onClick={() => handleLikeIconClick(posts_id)}
+                  />
+                  <div className="ml-2 hover-item pointer">{likeCount} likes</div>
+                </div>
+                <div className="my-3 p-3" style={{ border: '0.1em lightgray solid', borderRadius: '0.3em' }}>
+                  {renderCommentsResultListDiv(commentResultList)}
+                </div>
+                <div className="mt-3">
+                  <Button variant="contained" color="primary" onClick={() => handleCommentClick(posts_id)}>
+                    Comment
+                  </Button>
+                  <div id={`comments-${posts_id}`} className="form-group mt-3" style={{ display: 'none' }}>
+                    <textarea
+                      className="form-control"
+                      id="exampleFormControlTextarea1"
+                      rows={3}
+                      onChange={(e) => handleCommentsTextareaChange(e)}
+                    ></textarea>
+                    <div className="mt-3">
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={() => handleSubmitCommentButtonClick(posts_id)}
+                      >
+                        Submit comment
+                      </Button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -152,6 +192,96 @@ function DiscussionBoard(props: any): JSX.Element {
     }
 
     return tagView;
+  };
+
+  const handleLikeIconClick = async (posts_id: number) => {
+    await addLikeCountToPost(posts_id);
+  };
+
+  const addLikeCountToPost = async (posts_id: number) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const response = await fetch(`/api/posts/add-like-count`, {
+        method: 'PATCH',
+        body: JSON.stringify({
+          posts_id: posts_id,
+          token: token,
+        }),
+      });
+      if (response) {
+        const responseData = await response.json();
+        console.log('response status = ', response.status);
+        console.log('responseData = ', responseData);
+
+        if (response.status === 200) {
+          await getPostsList();
+        }
+      }
+    }
+  };
+
+  const renderCommentsResultListDiv = (commentsResultList: any[]) => {
+    let commentsResultListDiv = null;
+
+    if (commentsResultList) {
+      commentsResultListDiv = commentsResultList.map((item: any, i: number) => {
+        return (
+          <div key={i} className="my-2">
+            <b>{item.name}:</b> {item.commentText}
+          </div>
+        );
+      });
+    }
+
+    return commentsResultListDiv;
+  };
+
+  const handleCommentClick = (posts_id: number) => {
+    const commentsDiv = document.querySelector(`#comments-${posts_id}`);
+    if (commentsDiv) {
+      const commentsDivStyleValue = commentsDiv.getAttribute('style');
+      if (commentsDivStyleValue) {
+        if (!commentsDivStyleValue.includes('block')) {
+          commentsDiv.setAttribute('style', 'display: block');
+        } else {
+          commentsDiv.setAttribute('style', 'display: none');
+        }
+      }
+    }
+  };
+
+  const handleCommentsTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setCommentsText(e.target.value);
+  };
+
+  const handleSubmitCommentButtonClick = async (posts_id: number) => {
+    const users_id = localStorage.getItem('usersId');
+    const token = localStorage.getItem('token');
+    if (commentsText && posts_id && users_id && token) {
+      const users_id_int = parseInt(users_id, 10);
+      await createComments(commentsText, posts_id, users_id_int, token);
+    }
+  };
+
+  const createComments = async (commentsText: string, posts_id: number, users_id: number, token: string) => {
+    const response = await fetch(`/api/comments/create-comments`, {
+      method: 'POST',
+      body: JSON.stringify({
+        commentsText: commentsText,
+        posts_id: posts_id,
+        users_id: users_id,
+        token: token,
+      }),
+    });
+    if (response) {
+      const responseData = await response.json();
+      console.log('response status = ', response.status);
+      console.log('responseData = ', responseData);
+
+      if (response.status === 200) {
+        await getPostsList();
+      }
+    }
   };
 
   const handleFilterTextClick = (filterText: string) => {

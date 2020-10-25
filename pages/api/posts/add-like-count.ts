@@ -8,11 +8,15 @@ const ROOT_URL = getRootUrl();
 export default async (_req: NextApiRequest, res: NextApiResponse) => {
   try {
     const reqBody = JSON.parse(_req.body);
-    const response = await axios.delete(`${ROOT_URL}/posts/${reqBody.postsId}`, {
-      headers: {
-        Authorization: `Bearer ${reqBody.token}`,
+    const response = await axios.patch(
+      `${ROOT_URL}/posts/${reqBody.posts_id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${reqBody.token}`,
+        },
       },
-    });
+    );
     if (response) {
       const responseData = response.data;
       res.status(200).json({
@@ -20,8 +24,6 @@ export default async (_req: NextApiRequest, res: NextApiResponse) => {
       });
     }
   } catch (e) {
-    console.log('error = ', e);
-
     res.status(400).json({
       message: e.message,
     });
