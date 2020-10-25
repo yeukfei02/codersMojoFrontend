@@ -122,9 +122,7 @@ function DiscussionBoard(props: any): JSX.Element {
                   />
                   <div className="ml-2 hover-item pointer">{likeCount} likes</div>
                 </div>
-                <div className="my-3 p-3" style={{ border: '0.1em lightgray solid', borderRadius: '0.3em' }}>
-                  {renderCommentsResultListDiv(commentResultList)}
-                </div>
+                {renderCommentsResultListDiv(commentResultList)}
                 <div className="mt-3">
                   <Button variant="contained" color="primary" onClick={() => handleCommentClick(posts_id)}>
                     Comment
@@ -224,13 +222,18 @@ function DiscussionBoard(props: any): JSX.Element {
     let commentsResultListDiv = null;
 
     if (commentsResultList) {
-      commentsResultListDiv = commentsResultList.map((item: any, i: number) => {
+      const commentsResultListView = commentsResultList.map((item: any, i: number) => {
         return (
           <div key={i} className="my-2">
             <b>{item.name}:</b> {item.commentText}
           </div>
         );
       });
+      commentsResultListDiv = (
+        <div className="my-3 p-3" style={{ border: '0.1em lightgray solid', borderRadius: '0.3em' }}>
+          {commentsResultListView}
+        </div>
+      );
     }
 
     return commentsResultListDiv;
