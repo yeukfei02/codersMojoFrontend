@@ -8,11 +8,19 @@ const ROOT_URL = getRootUrl();
 export default async (_req: NextApiRequest, res: NextApiResponse) => {
   try {
     const reqBody = JSON.parse(_req.body);
-    const response = await axios.delete(`${ROOT_URL}/posts/${reqBody.postsId}`, {
-      headers: {
-        Authorization: `Bearer ${reqBody.token}`,
+    const response = await axios.post(
+      `${ROOT_URL}/comments`,
+      {
+        commentsText: reqBody.commentsText,
+        posts_id: reqBody.posts_id,
+        users_id: reqBody.users_id,
       },
-    });
+      {
+        headers: {
+          Authorization: `Bearer ${reqBody.token}`,
+        },
+      },
+    );
     if (response) {
       const responseData = response.data;
       res.status(200).json({
