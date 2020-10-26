@@ -248,7 +248,7 @@ function YourUpcomingInterviewSchedule(props: any): JSX.Element {
   const [upcomingInterviewId, setUpcomingInterviewId] = useState(0);
 
   const [order, setOrder] = useState<Order>('asc');
-  const [orderBy, setOrderBy] = useState<keyof Data>('date_time');
+  const [orderBy, setOrderBy] = useState<keyof Data>('type');
   const [selected, setSelected] = useState<number[]>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
