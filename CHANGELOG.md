@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.37](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.36...v0.0.37) (2020-10-26)
+
+
+### Features
+
+* 🎸 add like and comment section ([14958f8](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/14958f87c6b4e08c3dc000842c396a0b90a81806))
+* 🎸 add renderCommentsResultListDiv ([307b2ae](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/307b2ae1c7c0dc307a72fda88657e0e12b70cd3e))
+
 ### [0.0.36](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.35...v0.0.36) (2020-10-11)
 
 ### [0.0.35](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.34...v0.0.35) (2020-10-10)
