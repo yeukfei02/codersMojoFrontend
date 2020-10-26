@@ -245,7 +245,7 @@ function ViewPastInterviewPerformance(props: any): JSX.Element {
   const [feedbackDialogOpen, setFeedbackDialogOpen] = useState(false);
 
   const [order, setOrder] = useState<Order>('asc');
-  const [orderBy, setOrderBy] = useState<keyof Data>('date_time');
+  const [orderBy, setOrderBy] = useState<keyof Data>('type');
   const [selected, setSelected] = useState<number[]>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
