@@ -277,15 +277,16 @@ function ViewPastInterviewPerformance(props: any): JSX.Element {
   };
 
   const renderPastListView = (pastInterviewList: any[]) => {
-    let resultView = (
-      <div className="card">
-        <div className="card-body">
-          <h5 className="d-flex justify-content-center">
-            <b>Your dont have past interview</b>
-          </h5>
-        </div>
-      </div>
-    );
+    // let resultView = (
+    //   <div className="card">
+    //     <div className="card-body">
+    //       <h5 className="d-flex justify-content-center">
+    //         <b>Your dont have past interview</b>
+    //       </h5>
+    //     </div>
+    //   </div>
+    // );
+    let resultView = null;
 
     if (!_.isEmpty(pastInterviewList)) {
       resultView = (
