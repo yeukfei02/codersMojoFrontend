@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.38](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.37...v0.0.38) (2020-10-31)
+
+
+### Features
+
+* 🎸 add match peer name ([4ec627a](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/4ec627aae5ff07d301cb9b507e9e1b1bdbe4e14c))
+
 ### [0.0.37](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.36...v0.0.37) (2020-10-26)
 
 
