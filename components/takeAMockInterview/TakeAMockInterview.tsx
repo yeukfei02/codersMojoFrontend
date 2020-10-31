@@ -40,6 +40,8 @@ function TakeAMockInterview(props: any): JSX.Element {
   const [loadingDialogOpen, setLoadingDialogOpen] = useState(false);
   const [mockInterviewDialogOpen, setMockInterviewDialogOpen] = useState(false);
 
+  const [matchPeerName, setMatchPeerName] = useState('');
+
   useEffect(() => {
     getCurrentTimezone();
     getCurrentTime();
@@ -284,12 +286,12 @@ function TakeAMockInterview(props: any): JSX.Element {
     setDialogTitleDate(dialogTitleDate);
     setLoadingDialogOpen(true);
 
-    setTimeout(() => {
+    setTimeout(async () => {
+      const fullDateTime = moment(`${weekDayObj.fullDateStr} ${timeStr}`).format('YYYY-MM-DD HH:mm:ss');
+      await createUpcomingInterview(fullDateTime, dialogTitleDate);
+
       setMockInterviewDialogOpen(true);
       setLoadingDialogOpen(false);
-
-      const fullDateTime = moment(`${weekDayObj.fullDateStr} ${timeStr}`).format('YYYY-MM-DD HH:mm:ss');
-      createUpcomingInterview(fullDateTime, dialogTitleDate);
     }, 1500);
   };
 
@@ -330,9 +332,28 @@ function TakeAMockInterview(props: any): JSX.Element {
 
         if (response.status === 200) {
           localStorage.setItem('mockInterviewQuestionId', responseData.result.mockInterviewQuestionId);
+          setMatchPeerName(responseData.result.matchPeerName);
         }
       }
     }
+  };
+
+  const renderMatchPeerNameDiv = (matchPeerName: string) => {
+    let matchPeerNameDiv = (
+      <div style={{ fontSize: 16 }}>
+        <b style={{ textDecoration: 'underline' }}>No match peer</b> will be waiting to meet you
+      </div>
+    );
+
+    if (matchPeerName) {
+      matchPeerNameDiv = (
+        <div style={{ fontSize: 16 }}>
+          An awesome peer <b style={{ textDecoration: 'underline' }}>{matchPeerName}</b> will be waiting to meet you
+        </div>
+      );
+    }
+
+    return matchPeerNameDiv;
   };
 
   const handleTypeItemClick = (type: string) => {
@@ -535,8 +556,8 @@ function TakeAMockInterview(props: any): JSX.Element {
                 You’re mock interview has been confirmed.
               </div>
               <div className="my-2">
-                <div style={{ fontSize: 16 }}>An awesome peer will be waiting to meet you for a</div>
-                <div style={{ fontSize: 16 }}>live Date Structures and Algorithms interview session</div>
+                {renderMatchPeerNameDiv(matchPeerName)}
+                <div style={{ fontSize: 16 }}>for a live Date Structures and Algorithms interview session</div>
                 <div style={{ fontSize: 16 }}>
                   on <b style={{ textDecoration: 'underline' }}>{dialogTitleDate}</b>
                 </div>
