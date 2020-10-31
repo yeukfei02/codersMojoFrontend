@@ -221,29 +221,20 @@ function DiscussionBoard(props: any): JSX.Element {
   };
 
   const renderCommentsResultListDiv = (commentsResultList: any[], posts_id: number) => {
-    let commentsResultListDiv = null;
+    let commentsResultListView = null;
 
     if (!_.isEmpty(commentsResultList)) {
       const showMoreStatus = localStorage.getItem(`showMore-${posts_id}`);
       if (showMoreStatus === 'true') {
-        const commentsResultListView = commentsResultList.map((item: any, i: number) => {
+        commentsResultListView = commentsResultList.map((item: any, i: number) => {
           return (
             <div key={i} className="my-2">
               <b>{item.name}:</b> {item.commentText}
             </div>
           );
         });
-
-        commentsResultListDiv = (
-          <div className="my-3 p-3" style={{ border: '0.1em lightgray solid', borderRadius: '0.3em' }}>
-            {commentsResultListView}
-            <Button variant="contained" color="primary" onClick={() => handleShowMoreClick(posts_id)}>
-              Show more
-            </Button>
-          </div>
-        );
       } else {
-        const commentsResultListView = commentsResultList.map((item: any, i: number) => {
+        commentsResultListView = commentsResultList.map((item: any, i: number) => {
           if (i === commentsResultList.length - 1) {
             return (
               <div key={i} className="my-2">
@@ -252,17 +243,17 @@ function DiscussionBoard(props: any): JSX.Element {
             );
           }
         });
-
-        commentsResultListDiv = (
-          <div className="my-3 p-3" style={{ border: '0.1em lightgray solid', borderRadius: '0.3em' }}>
-            {commentsResultListView}
-            <Button variant="contained" color="primary" onClick={() => handleShowMoreClick(posts_id)}>
-              Show more
-            </Button>
-          </div>
-        );
       }
     }
+
+    const commentsResultListDiv = (
+      <div className="my-3 p-3" style={{ border: '0.1em lightgray solid', borderRadius: '0.3em' }}>
+        {commentsResultListView}
+        <Button variant="contained" color="primary" onClick={() => handleShowMoreClick(posts_id)}>
+          Show more
+        </Button>
+      </div>
+    );
 
     return commentsResultListDiv;
   };
