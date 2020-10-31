@@ -123,15 +123,16 @@ function DiscussionBoard(props: any): JSX.Element {
                   />
                   <div className="ml-2 hover-item pointer">{likeCount} likes</div>
                 </div>
-                {renderCommentsResultListDiv(commentResultList)}
+                {renderCommentsResultListDiv(commentResultList, posts_id)}
                 <div className="mt-3">
                   <Button variant="contained" color="primary" onClick={() => handleCommentClick(posts_id)}>
-                    Comment
+                    Reply
                   </Button>
                   <div id={`comments-${posts_id}`} className="form-group mt-3" style={{ display: 'none' }}>
                     <textarea
                       className="form-control"
                       id="exampleFormControlTextarea1"
+                      placeholder="Enter your comment..."
                       rows={3}
                       onChange={(e) => handleCommentsTextareaChange(e)}
                     ></textarea>
@@ -219,25 +220,59 @@ function DiscussionBoard(props: any): JSX.Element {
     }
   };
 
-  const renderCommentsResultListDiv = (commentsResultList: any[]) => {
+  const renderCommentsResultListDiv = (commentsResultList: any[], posts_id: number) => {
     let commentsResultListDiv = null;
 
     if (!_.isEmpty(commentsResultList)) {
-      const commentsResultListView = commentsResultList.map((item: any, i: number) => {
-        return (
-          <div key={i} className="my-2">
-            <b>{item.name}:</b> {item.commentText}
+      const showMoreStatus = localStorage.getItem(`showMore-${posts_id}`);
+      if (showMoreStatus === 'true') {
+        const commentsResultListView = commentsResultList.map((item: any, i: number) => {
+          return (
+            <div key={i} className="my-2">
+              <b>{item.name}:</b> {item.commentText}
+            </div>
+          );
+        });
+
+        commentsResultListDiv = (
+          <div className="my-3 p-3" style={{ border: '0.1em lightgray solid', borderRadius: '0.3em' }}>
+            {commentsResultListView}
+            <Button variant="contained" color="primary" onClick={() => handleShowMoreClick(posts_id)}>
+              Show more
+            </Button>
           </div>
         );
-      });
-      commentsResultListDiv = (
-        <div className="my-3 p-3" style={{ border: '0.1em lightgray solid', borderRadius: '0.3em' }}>
-          {commentsResultListView}
-        </div>
-      );
+      } else {
+        const commentsResultListView = commentsResultList.map((item: any, i: number) => {
+          if (i === commentsResultList.length - 1) {
+            return (
+              <div key={i} className="my-2">
+                <b>{item.name}:</b> {item.commentText}
+              </div>
+            );
+          }
+        });
+
+        commentsResultListDiv = (
+          <div className="my-3 p-3" style={{ border: '0.1em lightgray solid', borderRadius: '0.3em' }}>
+            {commentsResultListView}
+            <Button variant="contained" color="primary" onClick={() => handleShowMoreClick(posts_id)}>
+              Show more
+            </Button>
+          </div>
+        );
+      }
     }
 
     return commentsResultListDiv;
+  };
+
+  const handleShowMoreClick = (posts_id: number) => {
+    const showMoreStatus = localStorage.getItem(`showMore-${posts_id}`);
+    if (!showMoreStatus || showMoreStatus === 'false') {
+      localStorage.setItem(`showMore-${posts_id}`, 'true');
+      getPostsList();
+    }
   };
 
   const handleCommentClick = (posts_id: number) => {
