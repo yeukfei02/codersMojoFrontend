@@ -11,6 +11,7 @@ export default async (_req: NextApiRequest, res: NextApiResponse) => {
     const response = await axios.post(`${ROOT_URL}/user/signup`, {
       firstName: reqBody.firstName,
       lastName: reqBody.lastName,
+      phone: reqBody.phone,
       email: reqBody.email,
       password: reqBody.password,
     });

@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { makeStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Select from 'react-select';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
 import { validateEmail } from '../../common/common';
+
+const selectStyles = {
+  container: (base: any, state: any) => ({
+    ...base,
+    opacity: state.isDisabled ? '.5' : '1',
+    backgroundColor: 'transparent',
+    zIndex: '999',
+  }),
+};
 
 const theme = createMuiTheme({
   palette: {
@@ -30,14 +40,43 @@ function Signup(): JSX.Element {
   const classes = useStyles();
   const router = useRouter();
 
+  const [selectedMobilePhoneCountryCodeList, setSelectedMobilePhoneCountryCodeList] = useState<any[]>([]);
+  const [selectedMobilePhoneCountryCode, setSelectedMobilePhoneCountryCode] = useState<any>(null);
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [mobilePhoneCountryCode, setMobilePhoneCountryCode] = useState('');
+  const [mobilePhone, setMobilePhone] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const [snackBarStatus, setSnackBarStatus] = useState(false);
   const [snackBarType, setSnackBarType] = useState('success');
   const [snackBarMessage, setSnackBarMessage] = useState('');
+
+  useEffect(() => {
+    getSelectedMobilePhoneCountryCodeList();
+  }, []);
+
+  const getSelectedMobilePhoneCountryCodeList = async () => {
+    const response = await fetch(`/api/country`);
+    if (response) {
+      const responseData = await response.json();
+      console.log('response.status = ', response.status);
+      console.log('responseData = ', responseData);
+
+      const formattedMobilePhoneCountryCodeList = responseData.result.result.map((item: any, _: number) => {
+        const nicename = `${item.nicename} (+${item.phonecode})`;
+        const phonecode = `+${item.phonecode}`;
+        const obj = {
+          label: nicename,
+          value: phonecode,
+        };
+        return obj;
+      });
+      setSelectedMobilePhoneCountryCodeList(formattedMobilePhoneCountryCodeList);
+    }
+  };
 
   const handleFirstNameInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) {
@@ -48,6 +87,22 @@ function Signup(): JSX.Element {
   const handleLastNameInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value) {
       setLastName(e.target.value);
+    }
+  };
+
+  const handleMobilePhoneCountryCodeDropdownChange = (selectedMobilePhoneCountryCode: any) => {
+    if (selectedMobilePhoneCountryCode) {
+      setSelectedMobilePhoneCountryCode(selectedMobilePhoneCountryCode);
+      setMobilePhoneCountryCode(selectedMobilePhoneCountryCode.value);
+    } else {
+      setSelectedMobilePhoneCountryCode(null);
+      setMobilePhoneCountryCode('');
+    }
+  };
+
+  const handlePhoneInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value) {
+      setMobilePhone(e.target.value);
     }
   };
 
@@ -76,10 +131,12 @@ function Signup(): JSX.Element {
   };
 
   const handleSignupButtonClick = (firstName: string, lastName: string, email: string, password: string) => {
-    if (firstName && lastName && email && password) {
+    const phone = `${mobilePhoneCountryCode}${mobilePhone}`;
+
+    if (firstName && lastName && phone && email && password) {
       const isEmail = validateEmail(email);
       if (isEmail) {
-        signup(firstName, lastName, email, password);
+        signup(firstName, lastName, phone, email, password);
       } else {
         setSnackBarStatus(true);
         setSnackBarType('error');
@@ -88,12 +145,13 @@ function Signup(): JSX.Element {
     }
   };
 
-  const signup = async (firstName: string, lastName: string, email: string, password: string) => {
+  const signup = async (firstName: string, lastName: string, phone: string, email: string, password: string) => {
     const response = await fetch(`/api/user/signup`, {
       method: 'POST',
       body: JSON.stringify({
         firstName: firstName,
         lastName: lastName,
+        phone: phone,
         email: email,
         password: password,
       }),
@@ -150,6 +208,7 @@ function Signup(): JSX.Element {
                 onKeyUp={(e) => handleOnKeyUp(e)}
               />
             </div>
+
             <div className="form-group">
               <label htmlFor="lastName">Last Name</label>
               <input
@@ -160,6 +219,28 @@ function Signup(): JSX.Element {
                 onKeyUp={(e) => handleOnKeyUp(e)}
               />
             </div>
+
+            <div className="form-group">
+              <label htmlFor="exampleInputEmail1">Phone</label>
+              <Select
+                styles={selectStyles}
+                placeholder={'Select mobile phone country code'}
+                value={selectedMobilePhoneCountryCode}
+                onChange={handleMobilePhoneCountryCodeDropdownChange}
+                options={selectedMobilePhoneCountryCodeList}
+                isClearable={true}
+              />
+              <div className="my-3">
+                <input
+                  type="number"
+                  className="form-control"
+                  id="exampleInputPhone1"
+                  onChange={(e) => handlePhoneInputChange(e)}
+                  onKeyUp={(e) => handleOnKeyUp(e)}
+                />
+              </div>
+            </div>
+
             <div className="form-group">
               <label htmlFor="exampleInputEmail1">Email</label>
               <input
@@ -171,6 +252,7 @@ function Signup(): JSX.Element {
                 onKeyUp={(e) => handleOnKeyUp(e)}
               />
             </div>
+
             <div className="form-group">
               <label htmlFor="exampleInputPassword1">Password</label>
               <input
@@ -181,6 +263,7 @@ function Signup(): JSX.Element {
                 onKeyUp={(e) => handleOnKeyUp(e)}
               />
             </div>
+
             <Button
               className="w-100 my-3"
               variant="contained"
