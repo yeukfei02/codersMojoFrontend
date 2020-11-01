@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.39](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.38...v0.0.39) (2020-11-01)
+
+
+### Features
+
+* 🎸 add phone in signup ([72d7589](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/72d7589bac166a718e1cbf2570a2b159d35fd88b))
+
 ### [0.0.38](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.37...v0.0.38) (2020-10-31)
 
 
