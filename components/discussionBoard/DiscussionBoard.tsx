@@ -221,9 +221,11 @@ function DiscussionBoard(props: any): JSX.Element {
   };
 
   const renderCommentsResultListDiv = (commentsResultList: any[], posts_id: number) => {
-    let commentsResultListView = null;
+    let commentsResultListDiv = null;
 
     if (!_.isEmpty(commentsResultList)) {
+      let commentsResultListView = null;
+
       const showMoreStatus = localStorage.getItem(`showMore-${posts_id}`);
       if (showMoreStatus === 'true') {
         commentsResultListView = commentsResultList.map((item: any, i: number) => {
@@ -244,16 +246,16 @@ function DiscussionBoard(props: any): JSX.Element {
           }
         });
       }
-    }
 
-    const commentsResultListDiv = (
-      <div className="my-3 p-3" style={{ border: '0.1em lightgray solid', borderRadius: '0.3em' }}>
-        {commentsResultListView}
-        <Button variant="contained" color="primary" onClick={() => handleShowMoreClick(posts_id)}>
-          Show more
-        </Button>
-      </div>
-    );
+      commentsResultListDiv = (
+        <div className="my-3 p-3" style={{ border: '0.1em lightgray solid', borderRadius: '0.3em' }}>
+          {commentsResultListView}
+          <Button variant="contained" color="primary" onClick={() => handleShowMoreClick(posts_id)}>
+            Show more
+          </Button>
+        </div>
+      );
+    }
 
     return commentsResultListDiv;
   };
