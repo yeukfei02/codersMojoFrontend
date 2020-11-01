@@ -125,7 +125,7 @@ function Signup(): JSX.Element {
       } else {
         setSnackBarStatus(true);
         setSnackBarType('error');
-        setSnackBarMessage('Please enter first name, last name, email, password');
+        setSnackBarMessage('Please enter first name, last name, phone, email, password');
       }
     }
   };
