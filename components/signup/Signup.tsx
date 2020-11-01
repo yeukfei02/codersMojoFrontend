@@ -65,7 +65,7 @@ function Signup(): JSX.Element {
       console.log('response.status = ', response.status);
       console.log('responseData = ', responseData);
 
-      const formattedMobilePhoneCountryCodeList = responseData.result.result.map((item: any, i: number) => {
+      const formattedMobilePhoneCountryCodeList = responseData.result.result.map((item: any, _: number) => {
         const nicename = `${item.nicename} (+${item.phonecode})`;
         const phonecode = `+${item.phonecode}`;
         const obj = {
