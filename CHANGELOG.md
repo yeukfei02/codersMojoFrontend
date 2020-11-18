@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.40](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.39...v0.0.40) (2020-11-18)
+
+
+### Features
+
+* 🎸 add Sign in as University Student button ([8068d2c](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/8068d2c75295de6773aedbd66cc6812cd35f576a))
+
 ### [0.0.39](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.38...v0.0.39) (2020-11-01)
 
 
