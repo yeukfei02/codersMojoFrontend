@@ -74,6 +74,19 @@ function Login(): JSX.Element {
     }
   };
 
+  const handleSignInAsUniversityStudentButtonClick = (email: string, password: string) => {
+    if (email && password) {
+      const isEmail = validateEmail(email);
+      if (isEmail) {
+        login(email, password);
+      } else {
+        setSnackBarStatus(true);
+        setSnackBarType('error');
+        setSnackBarMessage('Wrong email format');
+      }
+    }
+  };
+
   const login = async (email: string, password: string) => {
     const response = await fetch(`/api/user/login`, {
       method: 'POST',
@@ -186,6 +199,17 @@ function Login(): JSX.Element {
                 <div className="d-flex justify-content-center my-3">
                   <span className="pointer hover-item" onClick={() => handleForgotPasswordClick()}>
                     Forgot Password?
+                  </span>
+                </div>
+
+                <hr />
+
+                <div className="d-flex justify-content-center my-3">
+                  <span
+                    className="pointer hover-item"
+                    onClick={() => handleSignInAsUniversityStudentButtonClick(email, password)}
+                  >
+                    Sign in as University Student
                   </span>
                 </div>
 
