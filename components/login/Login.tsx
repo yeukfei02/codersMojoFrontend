@@ -207,6 +207,7 @@ function Login(): JSX.Element {
                 <div className="d-flex justify-content-center my-3">
                   <span
                     className="pointer hover-item"
+                    style={{ color: '#2b9093' }}
                     onClick={() => handleSignInAsUniversityStudentButtonClick(email, password)}
                   >
                     Sign in as University Student
