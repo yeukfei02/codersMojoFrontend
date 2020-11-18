@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.40](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.39...v0.0.40) (2020-11-18)
+
+
+### Features
+
+* 🎸 add Sign in as University Student button ([8068d2c](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/8068d2c75295de6773aedbd66cc6812cd35f576a))
+
+### [0.0.39](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.38...v0.0.39) (2020-11-01)
+
+
+### Features
+
+* 🎸 add phone in signup ([72d7589](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/72d7589bac166a718e1cbf2570a2b159d35fd88b))
+
+### [0.0.38](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.37...v0.0.38) (2020-10-31)
+
+
+### Features
+
+* 🎸 add match peer name ([4ec627a](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/4ec627aae5ff07d301cb9b507e9e1b1bdbe4e14c))
+
 ### [0.0.37](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.36...v0.0.37) (2020-10-26)
 
 
