@@ -2,8 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import ShareIcon from '@material-ui/icons/Share';
+import axios from 'axios';
 
 import NextHead from '../nextHead/NextHead';
+
+import { getRootUrl } from '../../common/common';
+
+const ROOT_URL = getRootUrl();
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -31,22 +36,22 @@ function TechBlogListView(): JSX.Element {
   const getTechBlogList = async (filterText?: string) => {
     let response = null;
     if (!filterText) {
-      response = await fetch(`/api/tech-blog`, {
-        method: 'GET',
-      });
+      response = await axios.get(`${ROOT_URL}/tech-blog`);
     } else {
-      response = await fetch(`/api/tech-blog?tag=${filterText}`, {
-        method: 'GET',
+      response = await axios.get(`${ROOT_URL}/tech-blog`, {
+        params: {
+          tag: filterText,
+        },
       });
     }
 
     if (response) {
-      const responseData = await response.json();
+      const responseData = response.data;
       console.log('response status = ', response.status);
       console.log('responseData = ', responseData);
 
       if (response.status === 200) {
-        setTechBlogList(responseData.result.result);
+        setTechBlogList(responseData.result);
       }
     }
   };

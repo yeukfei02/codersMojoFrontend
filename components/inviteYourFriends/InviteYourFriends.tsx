@@ -3,10 +3,15 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { Twitter, Linkedin, Facebook } from 'react-social-sharing';
+import axios from 'axios';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
 import { validateEmail } from '../../common/common';
+
+import { getRootUrl } from '../../common/common';
+
+const ROOT_URL = getRootUrl();
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -35,18 +40,18 @@ function InviteYourFriends(): JSX.Element {
     const usersId = localStorage.getItem('usersId');
 
     if (token && usersId) {
-      const queryString = new URLSearchParams({
-        hostname: window.location.href,
-        token: token,
-        users_id: usersId,
+      const response = await axios.get(`${ROOT_URL}/invite-friends/get-share-your-invite-link/${usersId}`, {
+        params: {
+          hostname: window.location.href,
+        },
+        headers: { Authorization: `Bearer ${token}` },
       });
-      const response = await fetch(`/api/invite-friends/get-share-your-invite-link?${queryString}`);
       if (response) {
-        const responseData = await response.json();
+        const responseData = response.data;
         console.log('response.status = ', response.status);
         console.log('responseData = ', responseData);
 
-        setInviteLink(responseData.result.inviteLink);
+        setInviteLink(responseData.inviteLink);
       }
     }
   };
@@ -73,16 +78,18 @@ function InviteYourFriends(): JSX.Element {
   };
 
   const sendInviteFriendsEmail = async (inviteYourFriendsEmail: string, usersId: string, token: string) => {
-    const response = await fetch(`/api/invite-friends/send-invite-friends-email`, {
-      method: 'POST',
-      body: JSON.stringify({
+    const response = await axios.post(
+      `${ROOT_URL}/invite-friends`,
+      {
         email: inviteYourFriendsEmail,
         users_id: usersId,
-        token: token,
-      }),
-    });
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
     if (response) {
-      const responseData = await response.json();
+      const responseData = response.data;
       console.log('response.status = ', response.status);
       console.log('responseData = ', responseData);
 

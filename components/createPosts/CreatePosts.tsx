@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
+
+import { getRootUrl } from '../../common/common';
+
+const ROOT_URL = getRootUrl();
 
 const selectStyles = {
   container: (base: any, state: any) => ({
@@ -142,22 +147,26 @@ function CreatePosts(props: any): JSX.Element {
   const createPosts = async (title: string, description: string, tag: string, users_id: number) => {
     const token = localStorage.getItem('token');
 
-    const response = await fetch(`/api/posts/create-posts`, {
-      method: 'POST',
-      body: JSON.stringify({
+    const response = await axios.post(
+      `${ROOT_URL}/posts`,
+      {
         title: title,
         description: description,
         tag: tag,
         users_id: users_id,
-        token: token,
-      }),
-    });
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
     if (response) {
-      const responseData = await response.json();
+      const responseData = response.data;
       console.log('response status = ', response.status);
       console.log('responseData = ', responseData);
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         setSnackBarStatus(true);
         setSnackBarType('success');
         setSnackBarMessage('create post success');

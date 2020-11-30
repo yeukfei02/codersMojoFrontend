@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
+
+import { getRootUrl } from '../../common/common';
+
+const ROOT_URL = getRootUrl();
 
 const selectStyles = {
   container: (base: any, state: any) => ({
@@ -35,14 +40,14 @@ function CreateTechSalary(props: any): JSX.Element {
   }, []);
 
   const getSelectedLocationList = async () => {
-    const response = await fetch(`/api/country`);
+    const response = await axios.get(`${ROOT_URL}/country`);
     if (response) {
-      const responseData = await response.json();
+      const responseData = response.data;
       console.log('response.status = ', response.status);
       console.log('responseData = ', responseData);
 
       if (response.status === 200) {
-        const selectedLocationList = responseData.result.result.map((item: any, _: number) => {
+        const selectedLocationList = responseData.result.map((item: any, _: number) => {
           const obj = {
             label: item.nicename,
             value: item.nicename,
@@ -124,23 +129,27 @@ function CreateTechSalary(props: any): JSX.Element {
   ) => {
     const token = localStorage.getItem('token');
 
-    const response = await fetch(`/api/tech-salary/create-tech-salary`, {
-      method: 'POST',
-      body: JSON.stringify({
+    const response = await axios.post(
+      `${ROOT_URL}/tech-salary`,
+      {
         jobTitle: jobTitle,
         company: company,
         description: description,
         totalCompensation: totalCompensation,
         location: location,
-        token: token,
-      }),
-    });
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
     if (response) {
-      const responseData = await response.json();
+      const responseData = response.data;
       console.log('response status = ', response.status);
       console.log('responseData = ', responseData);
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         setSnackBarStatus(true);
         setSnackBarType('success');
         setSnackBarMessage('create tech salary success');

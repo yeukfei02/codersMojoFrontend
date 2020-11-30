@@ -4,10 +4,15 @@ import { makeStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/
 import Select from 'react-select';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
 import { validateEmail } from '../../common/common';
+
+import { getRootUrl } from '../../common/common';
+
+const ROOT_URL = getRootUrl();
 
 const selectStyles = {
   container: (base: any, state: any) => ({
@@ -59,13 +64,13 @@ function Signup(): JSX.Element {
   }, []);
 
   const getSelectedMobilePhoneCountryCodeList = async () => {
-    const response = await fetch(`/api/country`);
+    const response = await axios.get(`${ROOT_URL}/country`);
     if (response) {
-      const responseData = await response.json();
+      const responseData = response.data;
       console.log('response.status = ', response.status);
       console.log('responseData = ', responseData);
 
-      const formattedMobilePhoneCountryCodeList = responseData.result.result.map((item: any, _: number) => {
+      const formattedMobilePhoneCountryCodeList = responseData.result.map((item: any, _: number) => {
         const nicename = `${item.nicename} (+${item.phonecode})`;
         const phonecode = `+${item.phonecode}`;
         const obj = {
@@ -146,22 +151,19 @@ function Signup(): JSX.Element {
   };
 
   const signup = async (firstName: string, lastName: string, phone: string, email: string, password: string) => {
-    const response = await fetch(`/api/user/signup`, {
-      method: 'POST',
-      body: JSON.stringify({
-        firstName: firstName,
-        lastName: lastName,
-        phone: phone,
-        email: email,
-        password: password,
-      }),
+    const response = await axios.post(`${ROOT_URL}/user/signup`, {
+      firstName: firstName,
+      lastName: lastName,
+      phone: phone,
+      email: email,
+      password: password,
     });
     if (response) {
-      const responseData = await response.json();
+      const responseData = response.data;
       console.log('response status = ', response.status);
       console.log('responseData = ', responseData);
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         setSnackBarStatus(true);
         setSnackBarType('success');
         setSnackBarMessage('create account success');
