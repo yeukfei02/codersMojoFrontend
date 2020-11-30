@@ -3,10 +3,15 @@ import { useRouter } from 'next/router';
 import { makeStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
 import { validateEmail } from '../../common/common';
+
+import { getRootUrl } from '../../common/common';
+
+const ROOT_URL = getRootUrl();
 
 const theme = createMuiTheme({
   palette: {
@@ -68,12 +73,11 @@ function ForgotPassword(): JSX.Element {
   };
 
   const forgotPassword = async (email: string) => {
-    const response = await fetch(`/api/user/forgot-password`, {
-      method: 'POST',
-      body: JSON.stringify({ email: email }),
+    const response = await axios.post(`${ROOT_URL}/user/forgot-password`, {
+      email: email,
     });
     if (response) {
-      const responseData = await response.json();
+      const responseData = response.data;
       console.log('response status = ', response.status);
       console.log('responseData = ', responseData);
 

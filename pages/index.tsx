@@ -5,11 +5,14 @@ import * as firebase from 'firebase/app';
 import 'firebase/analytics';
 import 'firebase/messaging';
 import is from 'is_js';
+import axios from 'axios';
 
-import { getFirebaseConfig } from '../common/common';
+import { getFirebaseConfig, getRootUrl } from '../common/common';
 
 import LandingPage from '../components/landingPage/LandingPage';
 import MainView from '../components/mainView/MainView';
+
+const ROOT_URL = getRootUrl();
 
 const theme = createMuiTheme({
   palette: {
@@ -109,16 +112,13 @@ function MainPage(): JSX.Element {
 
   const addTokenToFirebaseDetails = async (firebaseCurrentToken: string, firebaseRefreshedToken: string) => {
     if (users_id) {
-      const response = await fetch(`/api/firebase/add-token-to-firebase-details`, {
-        method: 'POST',
-        body: JSON.stringify({
-          currentToken: firebaseCurrentToken,
-          refreshedToken: firebaseRefreshedToken,
-          users_id: users_id,
-        }),
+      const response = await axios.post(`${ROOT_URL}/firebase/add-token-to-firebase-details`, {
+        currentToken: firebaseCurrentToken,
+        refreshedToken: firebaseRefreshedToken,
+        users_id: users_id,
       });
       if (response) {
-        const responseData = await response.json();
+        const responseData = response.data;
         console.log('response.status = ', response.status);
         console.log('responseData = ', responseData);
       }
@@ -127,21 +127,15 @@ function MainPage(): JSX.Element {
 
   const subscribeTopic = async () => {
     if (users_id) {
-      const response = await fetch(`/api/firebase/subscribe-topic`, {
-        method: 'POST',
-        body: JSON.stringify({
-          registrationTokenList: [firebaseCurrentToken],
-          topic: 'all',
-          users_id: users_id,
-        }),
+      const response = await axios.post(`${ROOT_URL}/firebase/subscribe-topic`, {
+        registrationTokenList: [firebaseCurrentToken],
+        topic: 'all',
+        users_id: users_id,
       });
       if (response) {
-        const responseData = await response.json();
+        const responseData = response.data;
         console.log('response.status = ', response.status);
         console.log('responseData = ', responseData);
-
-        if (response.status === 200) {
-        }
       }
     }
   };

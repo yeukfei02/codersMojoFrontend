@@ -20,8 +20,13 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import _ from 'lodash';
+import axios from 'axios';
 
 import NextHead from '../nextHead/NextHead';
+
+import { getRootUrl } from '../../common/common';
+
+const ROOT_URL = getRootUrl();
 
 const selectStyles = {
   container: (base: any, state: any) => ({
@@ -401,29 +406,50 @@ function TechSalaries(props: any): JSX.Element {
   const getTechSalaryList = async (jobTitle: string, company: string, location: string) => {
     const token = localStorage.getItem('token');
     if (token) {
-      let queryString = null;
-      if (!jobTitle && !company && !location) {
-        queryString = new URLSearchParams({
-          token: token,
+      let response = null;
+      if (!jobTitle && !company) {
+        response = await axios.get(`${ROOT_URL}/tech-salary`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
       } else {
-        queryString = new URLSearchParams({
-          jobTitle: jobTitle,
-          company: company,
-          location: location,
-          token: token,
+        let paramsObj = {};
+        if (jobTitle) {
+          const obj = {
+            jobTitle: jobTitle,
+          };
+          paramsObj = Object.assign(paramsObj, obj);
+        }
+        if (company) {
+          const obj = {
+            company: company,
+          };
+          paramsObj = Object.assign(paramsObj, obj);
+        }
+        if (location) {
+          const obj = {
+            location: location,
+          };
+          paramsObj = Object.assign(paramsObj, obj);
+        }
+
+        response = await axios.get(`${ROOT_URL}/tech-salary`, {
+          params: paramsObj,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
       }
 
-      const response = await fetch(`/api/tech-salary?${queryString}`);
       if (response) {
-        const responseData = await response.json();
+        const responseData = response.data;
         console.log('response.status = ', response.status);
         console.log('responseData = ', responseData);
 
         if (response.status === 200) {
-          setTechSalaryList(responseData.result.result);
-          setRows(responseData.result.result);
+          setTechSalaryList(responseData.result);
+          setRows(responseData.result);
         }
       }
     }

@@ -26,8 +26,13 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import _ from 'lodash';
+import axios from 'axios';
 
 import NextHead from '../nextHead/NextHead';
+
+import { getRootUrl } from '../../common/common';
+
+const ROOT_URL = getRootUrl();
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement<any, any> },
@@ -258,19 +263,32 @@ function ViewPastInterviewPerformance(props: any): JSX.Element {
     const token = localStorage.getItem('token');
     const users_id = localStorage.getItem('usersId');
     if (token && users_id) {
-      const queryString = new URLSearchParams({
-        token: token,
-        users_id: users_id,
-      });
-      const response = await fetch(`/api/past-interview?${queryString}`);
+      let response = null;
+      if (!users_id) {
+        response = await axios.get(`${ROOT_URL}/past-interview`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      } else {
+        response = await axios.get(`${ROOT_URL}/past-interview`, {
+          params: {
+            users_id: users_id,
+          },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+
       if (response) {
-        const responseData = await response.json();
+        const responseData = response.data;
         console.log('response.status = ', response.status);
         console.log('responseData = ', responseData);
 
         if (responseData.result) {
-          setPastInterviewList(responseData.result.result);
-          setRows(responseData.result.result);
+          setPastInterviewList(responseData.result);
+          setRows(responseData.result);
         }
       }
     }

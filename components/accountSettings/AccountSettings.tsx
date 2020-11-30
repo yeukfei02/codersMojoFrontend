@@ -4,9 +4,14 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
+
+import { getRootUrl } from '../../common/common';
+
+const ROOT_URL = getRootUrl();
 
 function AccountSettings(): JSX.Element {
   const [firstName, setFirstName] = useState('');
@@ -42,20 +47,17 @@ function AccountSettings(): JSX.Element {
     const users_id = localStorage.getItem('usersId');
 
     if (users_id) {
-      const response = await fetch(`/api/firebase/subscribe-topic`, {
-        method: 'POST',
-        body: JSON.stringify({
-          registrationTokenList: [firebaseCurrentToken],
-          topic: 'all',
-          users_id: users_id,
-        }),
+      const response = await axios.post(`${ROOT_URL}/firebase/subscribe-topic`, {
+        registrationTokenList: [firebaseCurrentToken],
+        topic: 'all',
+        users_id: users_id,
       });
       if (response) {
-        const responseData = await response.json();
+        const responseData = response.data;
         console.log('response.status = ', response.status);
         console.log('responseData = ', responseData);
 
-        if (response.status === 200) {
+        if (response.status === 201) {
           setSnackBarStatus(true);
           setSnackBarType('success');
           setSnackBarMessage('subscribe topic success');
@@ -73,20 +75,17 @@ function AccountSettings(): JSX.Element {
     const users_id = localStorage.getItem('usersId');
 
     if (users_id) {
-      const response = await fetch(`/api/firebase/unsubscribe-topic`, {
-        method: 'POST',
-        body: JSON.stringify({
-          registrationTokenList: [firebaseCurrentToken],
-          topic: 'all',
-          users_id: users_id,
-        }),
+      const response = await axios.post(`${ROOT_URL}/firebase/unsubscribe-topic`, {
+        registrationTokenList: [firebaseCurrentToken],
+        topic: 'all',
+        users_id: users_id,
       });
       if (response) {
-        const responseData = await response.json();
+        const responseData = response.data;
         console.log('response.status = ', response.status);
         console.log('responseData = ', responseData);
 
-        if (response.status === 200) {
+        if (response.status === 201) {
           setSnackBarStatus(true);
           setSnackBarType('success');
           setSnackBarMessage('unsubscribe topic success');
@@ -128,17 +127,20 @@ function AccountSettings(): JSX.Element {
       const usersId = localStorage.getItem('usersId');
       const token = localStorage.getItem('token');
 
-      const response = await fetch(`/api/user/change-user-credentials`, {
-        method: 'PUT',
-        body: JSON.stringify({
+      const response = await axios.put(
+        `${ROOT_URL}/user/change-user-credentials/${usersId}`,
+        {
           firstName: firstName,
           lastName: lastName,
-          usersId: usersId,
-          token: token,
-        }),
-      });
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
       if (response) {
-        const responseData = await response.json();
+        const responseData = response.data;
         console.log('response.status = ', response.status);
         console.log('responseData = ', responseData);
 
@@ -160,17 +162,20 @@ function AccountSettings(): JSX.Element {
       const usersId = localStorage.getItem('usersId');
       const token = localStorage.getItem('token');
 
-      const response = await fetch(`/api/user/change-password`, {
-        method: 'PUT',
-        body: JSON.stringify({
+      const response = await axios.put(
+        `${ROOT_URL}/user/change-password/${usersId}`,
+        {
           oldPassword: oldPassword,
           newPassword: newPassword,
-          usersId: usersId,
-          token: token,
-        }),
-      });
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
       if (response) {
-        const responseData = await response.json();
+        const responseData = response.data;
         console.log('response.status = ', response.status);
         console.log('responseData = ', responseData);
 

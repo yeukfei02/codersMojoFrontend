@@ -20,8 +20,13 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import _ from 'lodash';
+import axios from 'axios';
 
 import NextHead from '../nextHead/NextHead';
+
+import { getRootUrl } from '../../common/common';
+
+const ROOT_URL = getRootUrl();
 
 const selectStyles = {
   container: (base: any, state: any) => ({
@@ -351,32 +356,48 @@ function ApplyForJobs(): JSX.Element {
 
     const token = localStorage.getItem('token');
     if (!type && !department && !location) {
-      if (token) {
-        const queryString = new URLSearchParams({
-          token: token,
-        });
-        response = await fetch(`/api/jobs?${queryString}`);
-      }
+      response = await axios.get(`${ROOT_URL}/jobs`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
     } else {
-      if (token) {
-        const queryString = new URLSearchParams({
+      let paramsObj = {};
+      if (type) {
+        const obj = {
           type: type,
-          department: department,
-          location: location,
-          token: token,
-        });
-        response = await fetch(`/api/jobs?${queryString}`);
+        };
+        paramsObj = Object.assign(paramsObj, obj);
       }
+      if (department) {
+        const obj = {
+          department: department,
+        };
+        paramsObj = Object.assign(paramsObj, obj);
+      }
+      if (location) {
+        const obj = {
+          location: location,
+        };
+        paramsObj = Object.assign(paramsObj, obj);
+      }
+
+      response = await axios.get(`${ROOT_URL}/jobs`, {
+        params: paramsObj,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
     }
 
     if (response) {
-      const responseData = await response.json();
+      const responseData = response.data;
       console.log('response.status = ', response.status);
       console.log('responseData = ', responseData);
 
       if (responseData) {
-        setJobsList(responseData.result.result);
-        setRows(responseData.result.result);
+        setJobsList(responseData.result);
+        setRows(responseData.result);
       }
     }
   };
