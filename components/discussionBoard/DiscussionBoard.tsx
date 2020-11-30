@@ -3,9 +3,14 @@ import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import _ from 'lodash';
+import axios from 'axios';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
+
+import { getRootUrl } from '../../common/common';
+
+const ROOT_URL = getRootUrl();
 
 function DiscussionBoard(props: any): JSX.Element {
   const [postsList, setPostsList] = useState<any[]>([]);
@@ -33,29 +38,29 @@ function DiscussionBoard(props: any): JSX.Element {
 
     let response = null;
     if (!tag) {
-      if (token) {
-        const queryString = new URLSearchParams({
-          token: token,
-        });
-        response = await fetch(`/api/posts?${queryString}`);
-      }
+      response = await axios.get(`${ROOT_URL}/posts`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
     } else {
-      if (token) {
-        const queryString = new URLSearchParams({
+      response = await axios.get(`${ROOT_URL}/posts`, {
+        params: {
           tag: tag,
-          token: token,
-        });
-        response = await fetch(`/api/posts?${queryString}`);
-      }
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
     }
 
     if (response) {
-      const responseData = await response.json();
+      const responseData = response.data;
       console.log('response status = ', response.status);
       console.log('responseData = ', responseData);
 
       if (responseData) {
-        setPostsList(responseData.result.result);
+        setPostsList(responseData.result);
       }
     }
   };
@@ -63,12 +68,13 @@ function DiscussionBoard(props: any): JSX.Element {
   const handleDeletePostById = async (postsId: number) => {
     const token = localStorage.getItem('token');
     if (token) {
-      const response = await fetch(`/api/posts/delete-posts`, {
-        method: 'DELETE',
-        body: JSON.stringify({ postsId: postsId, token: token }),
+      const response = await axios.delete(`${ROOT_URL}/posts/${postsId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       if (response) {
-        const responseData = await response.json();
+        const responseData = response.data;
         console.log('response.status = ', response.status);
         console.log('responseData = ', responseData);
 
@@ -201,15 +207,17 @@ function DiscussionBoard(props: any): JSX.Element {
   const addLikeCountToPost = async (posts_id: number) => {
     const token = localStorage.getItem('token');
     if (token) {
-      const response = await fetch(`/api/posts/add-like-count`, {
-        method: 'PATCH',
-        body: JSON.stringify({
-          posts_id: posts_id,
-          token: token,
-        }),
-      });
+      const response = await axios.patch(
+        `${ROOT_URL}/posts/${posts_id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
       if (response) {
-        const responseData = await response.json();
+        const responseData = response.data;
         console.log('response status = ', response.status);
         console.log('responseData = ', responseData);
 
@@ -296,21 +304,25 @@ function DiscussionBoard(props: any): JSX.Element {
   };
 
   const createComments = async (commentsText: string, posts_id: number, users_id: number, token: string) => {
-    const response = await fetch(`/api/comments/create-comments`, {
-      method: 'POST',
-      body: JSON.stringify({
+    const response = await axios.post(
+      `${ROOT_URL}/comments`,
+      {
         commentsText: commentsText,
         posts_id: posts_id,
         users_id: users_id,
-        token: token,
-      }),
-    });
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
     if (response) {
-      const responseData = await response.json();
+      const responseData = response.data;
       console.log('response status = ', response.status);
       console.log('responseData = ', responseData);
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         await getPostsList();
       }
     }

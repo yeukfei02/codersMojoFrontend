@@ -6,10 +6,13 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import { pink, blue, red } from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
-import { validateEmail } from '../../common/common';
+import { validateEmail, getRootUrl } from '../../common/common';
+
+const ROOT_URL = getRootUrl();
 
 function LandingPage(): JSX.Element {
   const router = useRouter();
@@ -62,16 +65,15 @@ function LandingPage(): JSX.Element {
   };
 
   const subscribeContactInMailchimp = async (email: string) => {
-    const response = await fetch('/api/mailchimp/add-contact-to-audience', {
-      method: 'POST',
-      body: JSON.stringify({ email: email }),
+    const response = await axios.post(`${ROOT_URL}/mailchimp/add-contact-to-audience`, {
+      email: email,
     });
     if (response) {
-      const responseData = await response.json();
+      const responseData = response.data;
       console.log('response status = ', response.status);
       console.log('responseData = ', responseData);
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         setSnackBarStatus(true);
         setSnackBarType('success');
         setSnackBarMessage('Already subscribe');

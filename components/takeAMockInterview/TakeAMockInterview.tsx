@@ -17,8 +17,13 @@ import { grey } from '@material-ui/core/colors';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import moment from 'moment';
 import momenttz from 'moment-timezone';
+import axios from 'axios';
 
 import NextHead from '../nextHead/NextHead';
+
+import { getRootUrl } from '../../common/common';
+
+const ROOT_URL = getRootUrl();
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement<any, any> },
@@ -314,25 +319,29 @@ function TakeAMockInterview(props: any): JSX.Element {
       const upcomingInterviewStatus = 'scheduled';
       const usersId = localStorage.getItem('usersId');
 
-      const response = await fetch(`/api/upcoming-interview/create-upcoming-interview`, {
-        method: 'POST',
-        body: JSON.stringify({
+      const response = await axios.post(
+        `${ROOT_URL}/upcoming-interview`,
+        {
           fullDateTime: fullDateTime,
           dateTime: dateTime,
           type: type,
           upcomingInterviewStatus: upcomingInterviewStatus,
           users_id: usersId,
-          token: token,
-        }),
-      });
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
       if (response) {
-        const responseData = await response.json();
+        const responseData = response.data;
         console.log('response.status = ', response.status);
         console.log('responseData = ', responseData);
 
-        if (response.status === 200) {
-          localStorage.setItem('mockInterviewQuestionId', responseData.result.mockInterviewQuestionId);
-          setMatchPeerName(responseData.result.matchPeerName);
+        if (response.status === 201) {
+          localStorage.setItem('mockInterviewQuestionId', responseData.mockInterviewQuestionId);
+          setMatchPeerName(responseData.matchPeerName);
         }
       }
     }

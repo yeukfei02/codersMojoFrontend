@@ -2,8 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import Select from 'react-select';
 import CustomTextEditor from '../customTextEditor/CustomTextEditor';
+import axios from 'axios';
 
 import NextHead from '../nextHead/NextHead';
+
+import { getRootUrl } from '../../common/common';
+
+const ROOT_URL = getRootUrl();
 
 const selectStyles = {
   container: (base: any, state: any) => ({
@@ -45,19 +50,19 @@ my_function()`);
     const mockInterviewQuestionId = localStorage.getItem('mockInterviewQuestionId');
     const token = localStorage.getItem('token');
     if (mockInterviewQuestionId && token) {
-      const queryString = new URLSearchParams({
-        mockInterviewQuestionId: mockInterviewQuestionId,
-        token: token,
+      const response = await axios.get(`${ROOT_URL}/mock-interview-question/${mockInterviewQuestionId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
-      const response = await fetch(`/api/mock-interview-question?${queryString}`);
       if (response) {
-        const responseData = await response.json();
+        const responseData = response.data;
         console.log('response.status = ', response.status);
         console.log('responseData = ', responseData);
 
         if (response.status === 200) {
-          setQuestionTitle(responseData.result.result.question_title);
-          setQuestionDescription(responseData.result.result.question_description);
+          setQuestionTitle(responseData.result.question_title);
+          setQuestionDescription(responseData.result.question_description);
         }
       }
     }
@@ -280,25 +285,33 @@ func main() {
     const token = localStorage.getItem('token');
 
     if (source && lang && token) {
-      const response = await fetch(`/api/code/run`, {
-        method: 'POST',
-        body: JSON.stringify({ source: source, lang: lang, token: token }),
-      });
+      const response = await axios.post(
+        `${ROOT_URL}/code/run`,
+        {
+          source: source,
+          lang: lang,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
       if (response) {
-        const responseData = await response.json();
+        const responseData = response.data;
         console.log('response.status = ', response.status);
         console.log('responseData = ', responseData);
 
-        if (response.status === 200) {
-          const runCodeOutput = responseData.result.result.stdout;
-          const runCodeError = responseData.result.result.stderr || responseData.result.result.compile_output;
+        if (response.status === 201) {
+          const runCodeOutput = responseData.result.stdout;
+          const runCodeError = responseData.result.stderr || responseData.result.compile_output;
           setRunButtonLoading(false);
           setRunCodeOutput(runCodeOutput);
           setRunCodeError(runCodeError);
         } else {
           setRunButtonLoading(false);
           setRunCodeOutput('');
-          setRunCodeError(responseData.result.result.stderr || responseData.result.result.compile_output);
+          setRunCodeError(responseData.result.stderr || responseData.result.compile_output);
         }
       }
     }

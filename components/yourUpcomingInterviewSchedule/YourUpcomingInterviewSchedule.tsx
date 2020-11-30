@@ -26,8 +26,13 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import _ from 'lodash';
+import axios from 'axios';
 
 import NextHead from '../nextHead/NextHead';
+
+import { getRootUrl } from '../../common/common';
+
+const ROOT_URL = getRootUrl();
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement<any, any> },
@@ -260,20 +265,33 @@ function YourUpcomingInterviewSchedule(props: any): JSX.Element {
   const getUpcomingInterviewList = async () => {
     const token = localStorage.getItem('token');
     const users_id = localStorage.getItem('usersId');
-    if (token && users_id) {
-      const queryString = new URLSearchParams({
-        token: token,
-        users_id: users_id,
-      });
-      const response = await fetch(`/api/upcoming-interview?${queryString}`);
+    if (token) {
+      let response = null;
+      if (!users_id) {
+        response = await axios.get(`${ROOT_URL}/upcoming-interview`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      } else {
+        response = await axios.get(`${ROOT_URL}/upcoming-interview`, {
+          params: {
+            users_id: users_id,
+          },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+
       if (response) {
-        const responseData = await response.json();
+        const responseData = response.data;
         console.log('response.status = ', response.status);
         console.log('responseData = ', responseData);
 
         if (responseData.result) {
-          setUpcomingInterviewList(responseData.result.result);
-          setRows(responseData.result.result);
+          setUpcomingInterviewList(responseData.result);
+          setRows(responseData.result);
         }
       }
     }
@@ -480,16 +498,19 @@ function YourUpcomingInterviewSchedule(props: any): JSX.Element {
     const token = localStorage.getItem('token');
     if (token) {
       const upcomingInterviewStatus = 'cancelled';
-      const response = await fetch(`/api/upcoming-interview/cancel-upcoming-interview`, {
-        method: 'PUT',
-        body: JSON.stringify({
-          upcomingInterviewId: upcomingInterviewId,
+      const response = await axios.put(
+        `${ROOT_URL}/upcoming-interview/cancel-upcoming-interview/${upcomingInterviewId}`,
+        {
           upcomingInterviewStatus: upcomingInterviewStatus,
-          token: token,
-        }),
-      });
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
       if (response) {
-        const responseData = await response.json();
+        const responseData = response.data;
         console.log('response.status = ', response.status);
         console.log('responseData = ', responseData);
 

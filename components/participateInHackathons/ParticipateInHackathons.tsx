@@ -3,8 +3,13 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Select from 'react-select';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 import NextHead from '../nextHead/NextHead';
+
+import { getRootUrl } from '../../common/common';
+
+const ROOT_URL = getRootUrl();
 
 const selectStyles = {
   container: (base: any, state: any) => ({
@@ -50,26 +55,30 @@ function ParticipateInHackathons(): JSX.Element {
     let response = null;
     if (token) {
       if (!name) {
-        const queryString = new URLSearchParams({
-          token: token,
+        response = await axios.get(`${ROOT_URL}/hackathons`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
-        response = await fetch(`/api/hackathons?${queryString}`);
       } else {
-        const queryString = new URLSearchParams({
-          name: name,
-          token: token,
+        response = await axios.get(`${ROOT_URL}/hackathons`, {
+          params: {
+            name: name,
+          },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
-        response = await fetch(`/api/hackathons?${queryString}`);
       }
     }
 
     if (response) {
-      const responseData = await response.json();
+      const responseData = response.data;
       console.log('response.status = ', response.status);
       console.log('responseData = ', responseData);
 
       if (response.status === 200) {
-        setHackathonsList(responseData.result.result);
+        setHackathonsList(responseData.result);
       }
     }
   };

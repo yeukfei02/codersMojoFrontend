@@ -3,10 +3,13 @@ import { useRouter } from 'next/router';
 import { makeStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 import NextHead from '../nextHead/NextHead';
 import CustomSnackBar from '../customSnackBar/CustomSnackBar';
-import { validateEmail } from '../../common/common';
+import { validateEmail, getRootUrl } from '../../common/common';
+
+const ROOT_URL = getRootUrl();
 
 const theme = createMuiTheme({
   palette: {
@@ -88,30 +91,30 @@ function Login(): JSX.Element {
   };
 
   const login = async (email: string, password: string) => {
-    const response = await fetch(`/api/user/login`, {
-      method: 'POST',
-      body: JSON.stringify({ email: email, password: password }),
+    const response = await axios.post(`${ROOT_URL}/user/login`, {
+      email: email,
+      password: password,
     });
     if (response) {
-      const responseData = await response.json();
+      const responseData = response.data;
       console.log('response status = ', response.status);
       console.log('responseData = ', responseData);
 
       if (response.status === 200) {
-        if (responseData && responseData.result) {
-          const usersId = responseData.result.user.users_id;
+        if (responseData) {
+          const usersId = responseData.user.users_id;
           localStorage.setItem('usersId', usersId);
 
-          const firstName = responseData.result.user.firstName;
+          const firstName = responseData.user.firstName;
           localStorage.setItem('firstName', firstName);
 
-          const lastName = responseData.result.user.lastName;
+          const lastName = responseData.user.lastName;
           localStorage.setItem('lastName', lastName);
 
-          const email = responseData.result.user.email;
+          const email = responseData.user.email;
           localStorage.setItem('email', email);
 
-          const token = responseData.result.token;
+          const token = responseData.token;
           localStorage.setItem('token', token);
         }
 

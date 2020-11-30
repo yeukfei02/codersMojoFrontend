@@ -47,14 +47,14 @@ function CreateWomenInvestorsCommunity(props: any): JSX.Element {
   }, []);
 
   const getSelectedLocationList = async () => {
-    const response = await fetch(`/api/country`);
+    const response = await axios.get(`${ROOT_URL}/country`);
     if (response) {
-      const responseData = await response.json();
+      const responseData = response.data;
       console.log('response.status = ', response.status);
       console.log('responseData = ', responseData);
 
       if (response.status === 200) {
-        const selectedLocationList = responseData.result.result.map((item: any, _: number) => {
+        const selectedLocationList = responseData.result.map((item: any, _: number) => {
           const obj = {
             label: item.nicename,
             value: item.nicename,
@@ -201,9 +201,9 @@ function CreateWomenInvestorsCommunity(props: any): JSX.Element {
   ) => {
     const token = localStorage.getItem('token');
 
-    const response = await fetch(`/api/women-investor-community/create-women-investor-community`, {
-      method: 'POST',
-      body: JSON.stringify({
+    const response = await axios.post(
+      `${ROOT_URL}/women-investor-community`,
+      {
         image: image,
         name: name,
         investorType: investorType,
@@ -211,15 +211,19 @@ function CreateWomenInvestorsCommunity(props: any): JSX.Element {
         expertise: expertise,
         location: location,
         connectStatus: connectStatus,
-        token: token,
-      }),
-    });
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
     if (response) {
-      const responseData = await response.json();
+      const responseData = response.data;
       console.log('response status = ', response.status);
       console.log('responseData = ', responseData);
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         setSnackBarStatus(true);
         setSnackBarType('success');
         setSnackBarMessage('create women investor community success');

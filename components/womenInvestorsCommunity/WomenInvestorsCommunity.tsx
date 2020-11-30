@@ -20,8 +20,13 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import _ from 'lodash';
+import axios from 'axios';
 
 import NextHead from '../nextHead/NextHead';
+
+import { getRootUrl } from '../../common/common';
+
+const ROOT_URL = getRootUrl();
 
 const selectStyles = {
   container: (base: any, state: any) => ({
@@ -400,29 +405,50 @@ function WomenInvestorsCommunity(props: any): JSX.Element {
   const getWomenInvestorCommunityList = async (name: string, expertise: string, location: string) => {
     const token = localStorage.getItem('token');
     if (token) {
-      let queryString = null;
-      if (!name && !expertise && !location) {
-        queryString = new URLSearchParams({
-          token: token,
+      let response = null;
+      if (!expertise && !location) {
+        response = await axios.get(`${ROOT_URL}/women-investor-community`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
       } else {
-        queryString = new URLSearchParams({
-          name: name,
-          expertise: expertise,
-          location: location,
-          token: token,
+        let paramsObj = {};
+        if (name) {
+          const obj = {
+            name: name,
+          };
+          paramsObj = Object.assign(paramsObj, obj);
+        }
+        if (expertise) {
+          const obj = {
+            expertise: expertise,
+          };
+          paramsObj = Object.assign(paramsObj, obj);
+        }
+        if (location) {
+          const obj = {
+            location: location,
+          };
+          paramsObj = Object.assign(paramsObj, obj);
+        }
+
+        response = await axios.get(`${ROOT_URL}/women-investor-community`, {
+          params: paramsObj,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
       }
 
-      const response = await fetch(`/api/women-investor-community?${queryString}`);
       if (response) {
-        const responseData = await response.json();
+        const responseData = response.data;
         console.log('response.status = ', response.status);
         console.log('responseData = ', responseData);
 
         if (response.status === 200) {
-          setWomenInvestorCommunityList(responseData.result.result);
-          setRows(responseData.result.result);
+          setWomenInvestorCommunityList(responseData.result);
+          setRows(responseData.result);
         }
       }
     }

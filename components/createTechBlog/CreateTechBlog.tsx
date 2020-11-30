@@ -164,23 +164,27 @@ function CreateTechBlog(props: any): JSX.Element {
   const createTechBlog = async (image: string, title: string, description: string, tag: string, users_id: number) => {
     const token = localStorage.getItem('token');
 
-    const response = await fetch(`/api/tech-blog/create-tech-blog`, {
-      method: 'POST',
-      body: JSON.stringify({
+    const response = await axios.post(
+      `${ROOT_URL}/tech-blog`,
+      {
         image: image,
         title: title,
         description: description,
         tag: tag,
         users_id: users_id,
-        token: token,
-      }),
-    });
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
     if (response) {
-      const responseData = await response.json();
+      const responseData = response.data;
       console.log('response status = ', response.status);
       console.log('responseData = ', responseData);
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         setSnackBarStatus(true);
         setSnackBarType('success');
         setSnackBarMessage('create tech blog success');
