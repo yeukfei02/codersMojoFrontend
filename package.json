@@ -30,11 +30,11 @@
     "react-social-sharing": "^3.3.0"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.165",
+    "@types/moment-timezone": "^0.5.30",
     "@types/node": "^12.12.21",
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
-    "@types/lodash": "^4.14.161",
-    "@types/moment-timezone": "^0.5.30",
     "@types/react-select": "^3.0.19",
     "@typescript-eslint/eslint-plugin": "^4.1.0",
     "@typescript-eslint/parser": "^4.1.0",
@@ -44,9 +44,9 @@
     "eslint-plugin-react": "^7.20.6",
     "git-cz": "^4.7.1",
     "husky": "^4.3.0",
+    "next-on-netlify": "^2.4.0",
     "prettier": "^2.1.1",
     "standard-version": "^9.0.0",
-    "next-on-netlify": "^2.4.0",
     "typescript": "4.0"
   },
   "scripts": {
