@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import YouTubeIcon from '@material-ui/icons/YouTube';
@@ -87,10 +86,6 @@ function LandingPage(): JSX.Element {
 
   const handleCloseSnackBar = () => {
     setSnackBarStatus(false);
-  };
-
-  const handleFacebookClick = () => {
-    window.open('https://www.google.com.hk');
   };
 
   const handleInstagramClick = () => {
@@ -246,15 +241,38 @@ function LandingPage(): JSX.Element {
         </Button>
       </div>
 
-      <div className="d-flex justify-content-center" style={{ marginTop: '5em' }}>
+      <div className="d-flex justify-content-center" style={{ marginTop: '8em' }}>
+        <div className="d-flex align-items-center" style={{ display: 'flex', flexDirection: 'row' }}>
+          <span>Partner :</span>
+          <div className="mx-3">
+            <img className="img-fluid" src="/partner.png" width="280" height="120" alt="" loading="lazy" />
+          </div>
+          <div className="mx-3">
+            <img className="img-fluid" src="/partner2.png" width="280" height="120" alt="" loading="lazy" />
+          </div>
+        </div>
+      </div>
+
+      <div className="d-flex justify-content-center" style={{ marginTop: '3em' }}>
+        <div className="d-flex align-items-center" style={{ display: 'flex', flexDirection: 'row' }}>
+          <span>Start Up Contest Runner Ups :</span>
+          <div className="mx-2">
+            <img
+              className="img-fluid"
+              src="/start-up-contest-runner-ups.png"
+              width="350"
+              height="80"
+              alt=""
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="d-flex justify-content-center" style={{ marginTop: '3em' }}>
         <div className="mb-3" style={{ display: 'flex', flexDirection: 'row' }}>
           <span>Follow us :</span>
           <div style={{ display: 'flex', flexDirection: 'row' }}>
-            <FacebookIcon
-              className="mx-2 pointer"
-              style={{ fontSize: 25, color: blue[700] }}
-              onClick={() => handleFacebookClick()}
-            />
             <InstagramIcon
               className="mx-2 pointer"
               style={{ fontSize: 25, color: pink[500] }}
