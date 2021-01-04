@@ -7,7 +7,6 @@ function MainView(): JSX.Element {
   return (
     <div>
       <NextHead />
-
       <CustomDrawer />
     </div>
   );
