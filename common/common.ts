@@ -16,7 +16,7 @@ export const validateEmail = (email: string): boolean => {
   return regex.test(email);
 };
 
-export const getFirebaseConfig = () => {
+export const getFirebaseConfig = (): any => {
   const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
     authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
