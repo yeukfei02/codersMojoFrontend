@@ -6,23 +6,17 @@ staging:
 
 https://coders-mojo-frontend-staging.vercel.app/
 
-https://coders-mojo-frontend-staging.netlify.app/
-
-https://coders-mojo-frontend-staging.herokuapp.com/
-
 prod:
 
 https://coders-mojo-frontend.vercel.app/
 
-https://coders-mojo-frontend.netlify.app/
-
-https://coders-mojo-frontend.herokuapp.com/
-
 ## Requirement:
- - install yarn
- - install node (v12+)
+
+- install yarn
+- install node (v12+)
 
 ## Testing and run:
+
 ```
 $ yarn
 
