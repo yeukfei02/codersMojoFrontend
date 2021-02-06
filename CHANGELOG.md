@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.1](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.42...v0.5.1) (2021-02-06)
+
+
+### Features
+
+* 🎸 add icon in landing page ([1b6729f](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/1b6729f596824e23004fda58b2f239ddc939b82c))
+
+
+### Bug Fixes
+
+* 🐛 remove not used deploy file ([dd39006](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/dd39006bb58d1cc725b6ed277a2b82c51938efb2))
+
 ### [0.0.42](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.41...v0.0.42) (2020-12-09)
 
 ### [0.0.41](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.40...v0.0.41) (2020-11-30)
