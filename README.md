@@ -2,22 +2,18 @@
 
 CodersMojo is an AI-based peer-to-peer interactive tech interview platform for Women to connect with great tech companies and prepare them well for their tech interview.
 
-staging:
+staging: <https://coders-mojo-frontend-staging.vercel.app/>
 
-https://coders-mojo-frontend-staging.vercel.app/
+prod: <https://coders-mojo-frontend.vercel.app/>
 
-prod:
-
-https://coders-mojo-frontend.vercel.app/
-
-## Requirement:
+## Requirement
 
 - install yarn
 - install node (v12+)
 
-## Testing and run:
+## Testing and run
 
-```
+```zsh
 $ yarn
 
 // development
@@ -33,9 +29,9 @@ $ yarn run type-check
 $ yarn run lint
 ```
 
-## Docker:
+## Docker
 
-```
+```zsh
 // build images and start container in one line
 docker-compose up -d --build
 
