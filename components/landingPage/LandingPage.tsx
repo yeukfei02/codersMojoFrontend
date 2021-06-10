@@ -250,6 +250,9 @@ function LandingPage(): JSX.Element {
           <div className="mx-3">
             <img className="img-fluid" src="/partner2.png" width="280" height="120" alt="" loading="lazy" />
           </div>
+          <div className="mx-3">
+            <img className="img-fluid" src="/partner3.png" width="280" height="120" alt="" loading="lazy" />
+          </div>
         </div>
       </div>
 
