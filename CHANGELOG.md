@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.3](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.5.2...v0.5.3) (2021-06-10)
+
+
+### Features
+
+* 🎸 add ebizstart image ([30758aa](https://github.com/CodersMojoPlatform/codersMojoFrontend/commit/30758aa44b7757134c13fdb7bfe06daebaf9ec60))
+
 ### [0.5.2](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.5.1...v0.5.2) (2021-04-17)
 
 ### [0.5.1](https://github.com/CodersMojoPlatform/codersMojoFrontend/compare/v0.0.42...v0.5.1) (2021-02-06)
