@@ -242,23 +242,37 @@ function LandingPage(): JSX.Element {
       </div>
 
       <div className="d-flex justify-content-center" style={{ marginTop: '8em' }}>
+        <span>Partner :</span>
+      </div>
+
+      <div className="d-flex justify-content-center" style={{ marginTop: '2em' }}>
         <div className="d-flex align-items-center" style={{ display: 'flex', flexDirection: 'row' }}>
-          <span>Partner :</span>
           <div className="mx-3">
             <img className="img-fluid" src="/partner.png" width="280" height="120" alt="" loading="lazy" />
           </div>
           <div className="mx-3">
             <img className="img-fluid" src="/partner2.png" width="280" height="120" alt="" loading="lazy" />
           </div>
+        </div>
+      </div>
+
+      <div className="d-flex justify-content-center" style={{ marginTop: '2em' }}>
+        <div className="d-flex align-items-center" style={{ display: 'flex', flexDirection: 'row' }}>
           <div className="mx-3">
             <img className="img-fluid" src="/partner3.png" width="280" height="120" alt="" loading="lazy" />
+          </div>
+          <div className="mx-3">
+            <img className="img-fluid" src="/partner4.png" width="280" height="120" alt="" loading="lazy" />
           </div>
         </div>
       </div>
 
       <div className="d-flex justify-content-center" style={{ marginTop: '3em' }}>
+        <span>Start Up Contest Runner Ups :</span>
+      </div>
+
+      <div className="d-flex justify-content-center" style={{ marginTop: '2em' }}>
         <div className="d-flex align-items-center" style={{ display: 'flex', flexDirection: 'row' }}>
-          <span>Start Up Contest Runner Ups :</span>
           <div className="mx-2">
             <img
               className="img-fluid"
