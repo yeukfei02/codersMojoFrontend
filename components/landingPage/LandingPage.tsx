@@ -22,7 +22,7 @@ function LandingPage(): JSX.Element {
   const [snackBarType, setSnackBarType] = useState('success');
   const [snackBarMessage, setSnackBarMessage] = useState('');
 
-  const weAreLaunchingSoonText = `<We are Launching Soon>`;
+  const weAreLaunchingSoonText = `<We are now Eduwingly and Launching Soon>`;
 
   const handleTechBlogClick = () => {
     router.push(`/tech-blog`);
