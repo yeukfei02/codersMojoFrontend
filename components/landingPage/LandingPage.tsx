@@ -22,14 +22,14 @@ function LandingPage(): JSX.Element {
   const [snackBarType, setSnackBarType] = useState('success');
   const [snackBarMessage, setSnackBarMessage] = useState('');
 
-  const weAreLaunchingSoonText = `<We are now Eduwingly and Launching Soon>`;
+  const weAreLaunchingSoonText = `<We are Launching Soon>`;
 
   const handleTechBlogClick = () => {
     router.push(`/tech-blog`);
   };
 
-  const handleBecomeAStudentTechAmbassadorClick = () => {
-    window.open(`https://forms.gle/gCJGap2dpENuwhYi8`);
+  const handleBecomeAProjectMentorClick = () => {
+    window.open(`https://docs.google.com/forms/d/e/1FAIpQLSfYwWOUWDMidNSejVKu_et0kbBhZszMZsA23k_BegBOnfk1Qw/viewform`);
   };
 
   // const handlePricingClick = () => {
@@ -46,9 +46,9 @@ function LandingPage(): JSX.Element {
     }
   };
 
-  const handleLearnMoreButtonClick = () => {
-    console.log(123);
-  };
+  // const handleLearnMoreButtonClick = () => {
+  //   console.log(123);
+  // };
 
   const handleSubscribeButtonClick = () => {
     if (email) {
@@ -124,10 +124,10 @@ function LandingPage(): JSX.Element {
           <ul className="navbar-nav mr-auto"></ul>
           <form className="form-inline my-2 my-lg-0">
             <div onClick={() => handleTechBlogClick()} className="mx-3 pointer hover-item">
-              Tech Blog
+              Blogly - The learning Tree
             </div>
-            <div onClick={() => handleBecomeAStudentTechAmbassadorClick()} className="mx-3 pointer hover-item">
-              Become a Student Tech Ambassador
+            <div onClick={() => handleBecomeAProjectMentorClick()} className="mx-3 pointer hover-item">
+              Become a Project Mentor
             </div>
             {/* <div onClick={() => handlePricingClick()} className="mx-3 pointer hover-item">
               Pricing
@@ -140,10 +140,6 @@ function LandingPage(): JSX.Element {
       </nav>
 
       <div style={{ margin: '3em' }}>
-        <h4 className="text-center font-weight-bold my-5">
-          CodersMojo is an AI-based Global Tech &amp; Investment Ecosystem for Women in Tech and Business
-        </h4>
-
         <div className="my-5">
           <div className="text-center font-weight-bold quantico display-4" style={{ color: '#28ACEA' }}>
             {weAreLaunchingSoonText}
@@ -154,70 +150,92 @@ function LandingPage(): JSX.Element {
           <div className="col-sm d-flex align-items-stretch">
             <div className="card p-2">
               <div className="card-body">
-                <h5>For Developers</h5>
+                <h5>For Students</h5>
 
                 <div className="my-4">
-                  Study, practice and take mock tech interviews with peers Participate in amazing hackathons and Connect
-                  with Women Developers.
+                  <ul>
+                    <li>Live Classes : Build Tech Projects ( based on skill) with Project Instructors</li>
+                    <li>Share/Upload your work/project</li>
+                    <li>Write Tech articles and get Paid Practice Coding on Codersmojo</li>
+                    <li>Join Global Tech Commmunity based on skill</li>
+                    <li>Participate in Hackathons</li>
+                    <li>Earn certifications</li>
+                    <li>Connect with Tech Companies</li>
+                    <li>Share your profile</li>
+                    <li>Q&A Community</li>
+                  </ul>
                 </div>
               </div>
-              <div className="card-footer" style={{ borderTop: 'none', backgroundColor: 'transparent' }}>
+              {/* <div className="card-footer" style={{ borderTop: 'none', backgroundColor: 'transparent' }}>
                 <div className="d-flex justify-content-end">
                   <Button variant="contained" color="secondary" onClick={() => handleLearnMoreButtonClick()}>
                     Learn more
                   </Button>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="col-sm d-flex align-items-stretch">
             <div className="card p-2">
               <div className="card-body">
-                <h5>For Women Tech Leaders</h5>
+                <h5>For Instructors</h5>
 
                 <div className="my-4">
-                  Connect with other amazing women leaders and software engineers. Conduct mock Interview and help other
-                  budding engineers to get into tech industry. Read and Contribute Amazing Tech Articles
+                  <li>Deliver live project classes and Earn money</li>
+                  <li>Mentor the group</li>
+                  <li>Refer the well performing students</li>
+                  <li>Teach Anyone, Anywhere, Anything, Anytime </li>
+                  <li>Share Tips and Techniques( Coding Interviews)</li>
+                  <li>Help in Resume Building</li>
+                  <li>Connect with other Instructors</li>
+                  <li>Q & A community</li>
                 </div>
               </div>
-              <div className="card-footer" style={{ borderTop: 'none', backgroundColor: 'transparent' }}>
+              {/* <div className="card-footer" style={{ borderTop: 'none', backgroundColor: 'transparent' }}>
                 <div className="d-flex justify-content-end">
                   <Button variant="contained" color="secondary" onClick={() => handleLearnMoreButtonClick()}>
                     Learn more
                   </Button>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="col-sm d-flex align-items-stretch">
             <div className="card p-2">
               <div className="card-body">
-                <h5>For Companies</h5>
+                <h5>For Recruiters and Tech Companies</h5>
 
                 <div className="my-4">
-                  Hire best and brightest Female tech engineers Host virtual hackathons and bring together people with
-                  diverse skills and solve business challenges
+                  <li>Directly connect with Students based on the built projects/hackathons</li>
+                  <li>Create Company Profile</li>
+                  <li>Conduct Recruitment drives/Tech Events Online</li>
+                  <li>Launch Targetted Courses</li>
+                  <li>Directly connect with Instructors</li>
+                  <li>Hire through Eduwingly</li>
+                  <li>
+                    Host virtual hackathons and bring together people with diverse skills and solve business challenges
+                  </li>
                 </div>
               </div>
-              <div className="card-footer" style={{ borderTop: 'none', backgroundColor: 'transparent' }}>
+              {/* <div className="card-footer" style={{ borderTop: 'none', backgroundColor: 'transparent' }}>
                 <div className="d-flex justify-content-end">
                   <Button variant="contained" color="secondary" onClick={() => handleLearnMoreButtonClick()}>
                     Learn more
                   </Button>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
-          <div className="col-sm">
+          {/* <div className="col-sm">
             <div>
               <img src="/landing-page-image.png" style={{ width: '100%', borderRadius: '0.5em' }} alt="" />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
       <div className="d-flex justify-content-center" style={{ marginTop: '5em' }}>
-        <div>Girls, let’s break the tech glass ceiling. Subscribe / Join us for updates</div>
+        <div>Let’s build great things together. Subscribe / Join us for updates</div>
       </div>
 
       <div className="d-flex justify-content-center" style={{ marginTop: '1em' }}>
