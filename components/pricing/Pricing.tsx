@@ -74,7 +74,7 @@ function Pricing(): JSX.Element {
 
         <div className="my-3" style={{ display: 'flex', flexDirection: 'column' }}>
           <div className="d-flex justify-content-center mb-5" style={{ fontSize: 25 }}>
-            Get started with a CodersMojo subscription that works for you.
+            Get started with a Eduwingly subscription that works for you.
           </div>
 
           <div className="row mx-5">

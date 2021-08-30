@@ -163,7 +163,7 @@ function Login(): JSX.Element {
                 </div>
               </div>
               <div className="col-sm p-3">
-                <h4 className="text-center mb-5 font-weight-bold">Welcome to Coders Mojo</h4>
+                <h4 className="text-center mb-5 font-weight-bold">Welcome to Eduwingly</h4>
 
                 <div className="form-group">
                   <label htmlFor="exampleInputEmail1">Email</label>

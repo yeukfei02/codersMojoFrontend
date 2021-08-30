@@ -531,7 +531,7 @@ function ApplyForJobs(): JSX.Element {
       <div className="mx-3">
         <div className="card">
           <div className="card-body">
-            <h5 className="text-center my-1">Find a Job With CodersMojo</h5>
+            <h5 className="text-center my-1">Find a Job With Eduwingly</h5>
           </div>
         </div>
 
