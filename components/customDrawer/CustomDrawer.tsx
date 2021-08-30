@@ -47,7 +47,7 @@ import ParticipateInHackathons from '../participateInHackathons/ParticipateInHac
 import InviteYourFriends from '../inviteYourFriends/InviteYourFriends';
 import WomenInvestorsCommunity from '../womenInvestorsCommunity/WomenInvestorsCommunity';
 import CreateWomenInvestorsCommunity from '../createWomenInvestorsCommunity/CreateWomenInvestorsCommunity';
-import BecomeAStudentTechAmbassador from '../becomeAStudentTechAmbassador/BecomeAStudentTechAmbassador';
+import BecomeAProjectMentor from '../becomeAProjectMentor/BecomeAProjectMentor';
 import TechBlogListView from '../techBlogListView/TechBlogListView';
 import CreateTechBlog from '../createTechBlog/CreateTechBlog';
 import YourUpcomingInterviewSchedule from '../yourUpcomingInterviewSchedule/YourUpcomingInterviewSchedule';
@@ -192,12 +192,12 @@ function CustomDrawer(props: Props): JSX.Element {
             <ListItemText primary="Get Tech Referrals" />
           </CustomListItem>
         </div>
-        <div onClick={() => handleLeftSideMenuItemClick('becomeAStudentTechAmbassador')}>
+        <div onClick={() => handleLeftSideMenuItemClick('becomeAProjectMentor')}>
           <CustomListItem button>
             <ListItemIcon>
               <EmojiPeopleIcon color="secondary" />
             </ListItemIcon>
-            <ListItemText primary="Become a Student/Company Ambassador" />
+            <ListItemText primary="Become a Project Mentor" />
           </CustomListItem>
         </div>
         <div onClick={() => handleLeftSideMenuItemClick('techBlog')}>
@@ -419,8 +419,8 @@ function CustomDrawer(props: Props): JSX.Element {
           />
         );
         break;
-      case 'becomeAStudentTechAmbassador':
-        currentPage = <BecomeAStudentTechAmbassador />;
+      case 'becomeAProjectMentor':
+        currentPage = <BecomeAProjectMentor />;
         break;
       case 'techBlog':
         currentPage = (

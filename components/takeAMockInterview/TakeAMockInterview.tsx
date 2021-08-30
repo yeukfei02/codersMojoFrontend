@@ -370,8 +370,6 @@ function TakeAMockInterview(props: any): JSX.Element {
   };
 
   const renderLeftSideTagItem = (itemText: string) => {
-    const textToCompare = itemText.substring(1).trim();
-
     const iconImage = getIconImage(itemText);
 
     let leftSideTagItem = (
@@ -379,21 +377,21 @@ function TakeAMockInterview(props: any): JSX.Element {
         {iconImage}
         <div
           className="ml-3 hover-item pointer d-flex align-items-center"
-          onClick={() => handleTypeItemClick(textToCompare)}
+          onClick={() => handleTypeItemClick(itemText)}
         >
           {itemText}
         </div>
       </div>
     );
 
-    if (type === textToCompare) {
+    if (type === itemText) {
       leftSideTagItem = (
         <div className="my-3" style={{ display: 'flex', flexDirection: 'row' }}>
           {iconImage}
           <div
             className="ml-3 hover-item pointer d-flex align-items-center"
             style={{ color: '#6f42c1', fontWeight: 'bold' }}
-            onClick={() => handleTypeItemClick(textToCompare)}
+            onClick={() => handleTypeItemClick(itemText)}
           >
             {itemText}
           </div>
