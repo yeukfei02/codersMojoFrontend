@@ -153,17 +153,16 @@ function LandingPage(): JSX.Element {
                 <h5>For Students</h5>
 
                 <div className="my-4">
-                  <ul>
-                    <li>Live Classes : Build Tech Projects ( based on skill) with Project Instructors</li>
-                    <li>Share/Upload your work/project</li>
-                    <li>Write Tech articles and get Paid Practice Coding on Codersmojo</li>
-                    <li>Join Global Tech Commmunity based on skill</li>
-                    <li>Participate in Hackathons</li>
-                    <li>Earn certifications</li>
-                    <li>Connect with Tech Companies</li>
-                    <li>Share your profile</li>
-                    <li>Q&A Community</li>
-                  </ul>
+                  <div>- Live Classes : Build Tech Projects ( based on skill) with Project Instructors</div>
+                  <div>- Share/Upload your work/project</div>
+                  <div>- Write Tech articles and get Paid</div>
+                  <div>- Practice Coding on Codersmojo</div>
+                  <div>- Join Global Tech Commmunity based on skill</div>
+                  <div>- Participate in Hackathons</div>
+                  <div>- Earn certifications</div>
+                  <div>- Connect with Tech Companies</div>
+                  <div>- Share your profile</div>
+                  <div>- Q&A Community</div>
                 </div>
               </div>
               <div className="card-footer" style={{ borderTop: 'none', backgroundColor: 'transparent' }}>
@@ -181,14 +180,14 @@ function LandingPage(): JSX.Element {
                 <h5>For Instructors</h5>
 
                 <div className="my-4">
-                  <li>Deliver live project classes and Earn money</li>
-                  <li>Mentor the group</li>
-                  <li>Refer the well performing students</li>
-                  <li>Teach Anyone, Anywhere, Anything, Anytime </li>
-                  <li>Share Tips and Techniques( Coding Interviews)</li>
-                  <li>Help in Resume Building</li>
-                  <li>Connect with other Instructors</li>
-                  <li>Q & A community</li>
+                  <div>- Deliver live project classes and Earn money</div>
+                  <div>- Mentor the group</div>
+                  <div>- Refer the well performing students</div>
+                  <div>- Teach Anyone, Anywhere, Anything, Anytime </div>
+                  <div>- Share Tips and Techniques( Coding Interviews)</div>
+                  <div>- Help in Resume Building</div>
+                  <div>- Connect with other Instructors</div>
+                  <div>- Q & A community</div>
                 </div>
               </div>
               <div className="card-footer" style={{ borderTop: 'none', backgroundColor: 'transparent' }}>
@@ -206,15 +205,16 @@ function LandingPage(): JSX.Element {
                 <h5>For Recruiters and Tech Companies</h5>
 
                 <div className="my-4">
-                  <li>Directly connect with Students based on the built projects/hackathons</li>
-                  <li>Create Company Profile</li>
-                  <li>Conduct Recruitment drives/Tech Events Online</li>
-                  <li>Launch Targetted Courses</li>
-                  <li>Directly connect with Instructors</li>
-                  <li>Hire through Eduwingly</li>
-                  <li>
-                    Host virtual hackathons and bring together people with diverse skills and solve business challenges
-                  </li>
+                  <div>- Directly connect with Students based on the built projects/hackathons</div>
+                  <div>- Create Company Profile</div>
+                  <div>- Conduct Recruitment drives/Tech Events Online</div>
+                  <div>- Launch Targetted Courses</div>
+                  <div>- Directly connect with Instructors</div>
+                  <div>- Hire through Eduwingly</div>
+                  <div>
+                    - Host virtual hackathons and bring together people with diverse skills and solve business
+                    challenges
+                  </div>
                 </div>
               </div>
               <div className="card-footer" style={{ borderTop: 'none', backgroundColor: 'transparent' }}>
