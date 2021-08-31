@@ -46,9 +46,9 @@ function LandingPage(): JSX.Element {
     }
   };
 
-  // const handleLearnMoreButtonClick = () => {
-  //   console.log(123);
-  // };
+  const handleLearnMoreButtonClick = () => {
+    console.log(123);
+  };
 
   const handleSubscribeButtonClick = () => {
     if (email) {
@@ -89,11 +89,11 @@ function LandingPage(): JSX.Element {
   };
 
   const handleInstagramClick = () => {
-    window.open('https://www.instagram.com/codersmojo');
+    window.open('https://www.instagram.com/eduwingly');
   };
 
   const handleTwitterClick = () => {
-    window.open('https://twitter.com/CodersMojo');
+    window.open('https://twitter.com/eduwingly');
   };
 
   const handleYoutubeClick = () => {
@@ -166,13 +166,13 @@ function LandingPage(): JSX.Element {
                   </ul>
                 </div>
               </div>
-              {/* <div className="card-footer" style={{ borderTop: 'none', backgroundColor: 'transparent' }}>
+              <div className="card-footer" style={{ borderTop: 'none', backgroundColor: 'transparent' }}>
                 <div className="d-flex justify-content-end">
                   <Button variant="contained" color="secondary" onClick={() => handleLearnMoreButtonClick()}>
                     Learn more
                   </Button>
                 </div>
-              </div> */}
+              </div>
             </div>
           </div>
           <div className="col-sm d-flex align-items-stretch">
@@ -191,13 +191,13 @@ function LandingPage(): JSX.Element {
                   <li>Q & A community</li>
                 </div>
               </div>
-              {/* <div className="card-footer" style={{ borderTop: 'none', backgroundColor: 'transparent' }}>
+              <div className="card-footer" style={{ borderTop: 'none', backgroundColor: 'transparent' }}>
                 <div className="d-flex justify-content-end">
                   <Button variant="contained" color="secondary" onClick={() => handleLearnMoreButtonClick()}>
                     Learn more
                   </Button>
                 </div>
-              </div> */}
+              </div>
             </div>
           </div>
           <div className="col-sm d-flex align-items-stretch">
@@ -217,20 +217,20 @@ function LandingPage(): JSX.Element {
                   </li>
                 </div>
               </div>
-              {/* <div className="card-footer" style={{ borderTop: 'none', backgroundColor: 'transparent' }}>
+              <div className="card-footer" style={{ borderTop: 'none', backgroundColor: 'transparent' }}>
                 <div className="d-flex justify-content-end">
                   <Button variant="contained" color="secondary" onClick={() => handleLearnMoreButtonClick()}>
                     Learn more
                   </Button>
                 </div>
-              </div> */}
+              </div>
             </div>
           </div>
-          {/* <div className="col-sm">
+          <div className="col-sm">
             <div>
               <img src="/landing-page-image.png" style={{ width: '100%', borderRadius: '0.5em' }} alt="" />
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
 
@@ -286,7 +286,7 @@ function LandingPage(): JSX.Element {
       </div>
 
       <div className="d-flex justify-content-center" style={{ marginTop: '3em' }}>
-        <span>Start Up Contest Runner Ups :</span>
+        <span>Start Up Contest Runner Ups and conferences :</span>
       </div>
 
       <div className="d-flex justify-content-center" style={{ marginTop: '2em' }}>
@@ -300,6 +300,9 @@ function LandingPage(): JSX.Element {
               alt=""
               loading="lazy"
             />
+          </div>
+          <div className="mx-2">
+            <img className="img-fluid" src="/wild-digital.png" width="280" height="80" alt="" loading="lazy" />
           </div>
         </div>
       </div>

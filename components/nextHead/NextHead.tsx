@@ -5,7 +5,7 @@ function NextHead(): JSX.Element {
   return (
     <Head>
       <title>Eduwingly</title>
-      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="shortcut icon" href="/favicon.png" />
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
       <link
         rel="stylesheet"
