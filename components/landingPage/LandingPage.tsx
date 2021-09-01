@@ -307,6 +307,24 @@ function LandingPage(): JSX.Element {
         </div>
       </div>
 
+      <div className="d-flex justify-content-center" style={{ marginTop: '2em' }}>
+        <div className="d-flex align-items-center" style={{ display: 'flex', flexDirection: 'row' }}>
+          <div className="mx-2">
+            <img className="img-fluid" src="/startup-summit.png" width="330" height="80" alt="" loading="lazy" />
+          </div>
+          <div className="mx-2">
+            <img
+              className="img-fluid"
+              src="/google-cloud-for-startup.png"
+              width="330"
+              height="80"
+              alt=""
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+
       <div className="d-flex justify-content-center" style={{ marginTop: '3em' }}>
         <div className="mb-3" style={{ display: 'flex', flexDirection: 'row' }}>
           <span>Follow us :</span>
